@@ -197,8 +197,8 @@ a .logo {
 }
 
 .addbtn {
-    background-color: var(--yellow) !important;
-    color: var(--darkblue) !important;
+    background-color: var(--levendar) !important;
+    color: var(--white) !important;
 }
 
 .addbtn:hover {
