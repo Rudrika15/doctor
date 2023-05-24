@@ -1,0 +1,283 @@
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #01b9f1;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #01b9f1;
+}
+
+.home-banner {
+    background: linear-gradient(90deg, rgba(241, 29, 135, .8980392156862745), rgba(138, 92, 246, .8980392156862745));
+    color: white;
+}
+
+.btn1 {
+    height: 50px;
+    width: 200px;
+    border-radius: 50px;
+    background-color: white;
+}
+
+
+
+.home-banner1 {
+    background-color: white;
+}
+
+.home-banner2 {
+    background: linear-gradient(90deg, rgba(241, 29, 135, .8980392156862745), rgba(138, 92, 246, .8980392156862745));
+}
+
+.home-banner3 {
+    background-color: #F2F4F6;
+}
+
+.img {
+    margin-top: 25px;
+}
+
+.banner {
+    margin-left: 90px;
+}
+
+.reletive {
+    padding-left: 52px;
+}
+
+.imgs {
+    background: linear-gradient(90deg, rgba(241, 29, 135, .8980392156862745), rgba(138, 92, 246, .8980392156862745));
+    border-radius: 100%;
+    color: white;
+    height: 50px;
+    width: 50px;
+}
+
+.icons {
+    background: linear-gradient(90deg, rgba(241, 29, 135, .8980392156862745), rgba(138, 92, 246, .8980392156862745));
+    font-size: 26px;
+    padding: 7px 9px 7px 9px;
+    border-radius: 100%;
+    color: white;
+}
+
+.abc {
+    border-radius: 15px;
+    text-align: center;
+    background-color: #F2F4F6;
+}
+
+.iconss {
+    background: linear-gradient(90deg, rgba(241, 29, 135, .8980392156862745), rgba(138, 92, 246, .8980392156862745));
+    font-size: 23px;
+    padding: 7px 9px 7px 9px;
+    border-radius: 100%;
+    color: white;
+    height: 50px;
+    width: 50px;
+}
+
+.cards {
+    padding-top: 10px;
+}
+
+/* .section1{
+    padding-left: 12px;
+} */
+.section {
+    height: 130px;
+    width: 170px;
+}
+
+.home-banner3 {
+    background-color: #F2F4F6;
+}
+
+.hb1 {
+    text-align: center;
+}
+
+.home-banner4 {
+    background-color: white;
+}
+
+.header {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Droid Serif", sans-serif !important;
+    padding-right: 100px;
+}
+
+.logo {
+    padding-left: 100px;
+    width: 300px;
+}
+
+.nav1 {
+    margin: 5px;
+}
+
+.active:hover {
+    color: #F6D105 !important;
+
+}
+
+.mainbtn {
+    background: linear-gradient(90deg, rgba(241, 29, 135, .8980392156862745), rgba(138, 92, 246, .8980392156862745));
+    color: white;
+    font-size: 20px;
+}
+
+/* .hb4{
+    height: 150px;
+    width: 180px;
+    border-radius: 100%;
+} */
+
+@media only screen and (max-width: 375px) {}
+
+@media only screen and (max-width: 414px) {}
+
+@media only screen and (max-width: 390px) {}
+
+@media only screen and (max-width: 393px) {}
+
+@media only screen and (max-width: 360px) {
+    .img {
+        width: 300px;
+    }
+
+    .img1 {
+        width: 300px;
+        margin-top: 15px;
+        margin-left: 20px;
+    }
+
+    .abc {
+        margin-top: 10px;
+    }
+
+    .fea-1 {
+        margin-left: 2px;
+    }
+}
+
+@media only screen and (max-width: 412px) {
+    .img {
+        width: 300px;
+    }
+
+    .img1 {
+        width: 300px;
+        margin-top: 15px;
+        margin-left: 20px;
+    }
+
+    .abc {
+        margin-top: 10px;
+    }
+
+    .fea-1 {
+        margin-left: 2px;
+    }
+
+}
+
+@media only screen and (min-width: 820px) {}
+
+@media only screen and (min-width: 768px) {}
+
+@media only screen and (max-width: 912px) {}
+
+@media only screen and (max-width: 540px) {}
+
+@media only screen and (max-width: 280px) {
+    .img {
+        width: 250px;
+    }
+
+    .img1 {
+        width: 250px;
+        margin-top: 15px;
+        margin-left: 5px;
+    }
+
+    .abc {
+        margin-top: 10px;
+    }
+
+    .fea-1 {
+        margin-left: 2px;
+    }
+
+    .banner {
+        margin-left: 12px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {}
+
+@media only screen and (max-width: 1280px) {}
+
+
+
+/* pricing page css */
+
+
+
+/*Business page css */
+.bus1 {
+    background-color: #F2F4F6;
+}
+
+.bcard {
+    box-shadow: 5px 10px 8px 10px #888888;
+}
+
+
+
+/* feature */
+
+
+a:link {
+    text-decoration: none;
+    color: black !important;
+    line-height: 2.5;
+}
+
+.feature {
+    /* padding: 5px; */
+    background-color: #F2F4F6;
+    color: black !important;
+    overflow: scroll;
+    height: 500px;
+    font-size: 18px;
+
+
+}
+
+.featu:hover {
+    color: black;
+
+}
+
+.features1 {
+    box-shadow: 5px 10px 8px 10px #888888;
+
+}
+
+/* .fdesk{
+    width: 500px;
+} */

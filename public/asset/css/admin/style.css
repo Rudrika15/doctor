@@ -1,0 +1,36 @@
+.accordion-button:hover {
+    color: white !important;
+    font-weight: bold;
+    background-color: #44494b !important;
+    text-decoration: none !important;
+}
+
+.accordion-button {
+    font-weight: bold;
+}
+
+.accordion-button:not(.collapsed) {
+    color: white !important;
+}
+
+.accordion-button:focus {
+    color: white;
+    font-weight: bold;
+    background-color: #44494b !important;
+    text-decoration: none !important;
+}
+
+.save {
+    color: white !important;
+    font-weight: bold !important;
+    padding-left: 20px !important;
+    padding-right: 30px !important;
+    width: 80px !important;
+    margin-left: 20px;
+
+}
+
+element.style {
+    background-color: #D4D4D4;
+    color: #7a1a1a !important;
+}
