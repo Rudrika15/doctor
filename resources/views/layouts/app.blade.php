@@ -68,7 +68,7 @@
             </a>
             <button type="button" class="button-close fa fa-times js__menu_close" style="color: #03ACF0;"></button>
             <div class="user">
-                <h5 class="name"><a class="text-white fs-2" href="#">{{ Auth::user()->name }}</a></h5>
+                <h5 class="name"><a class="text-white fs-2" href="#"></a></h5>
                 <!-- /.name -->
                 <div class="control-wrap js__drop_down">
                     <i class="fa fa-aret-down "></i>
