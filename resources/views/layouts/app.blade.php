@@ -108,6 +108,9 @@
                         <a class="text-white waves-effect" href="{{route('hospital.index')}}"><i class="text-white menu-icon fa fa-city"></i><span>Hospital</span></a>
                     </li>
                     
+                        <a class="text-white waves-effect" href="{{route('doctor.create')}}"><i class="text-white menu-icon "></i><span>Doctor</span></a>
+                    </li>
+
                     <li>
                         <a class="text-white waves-effect parent-item js__control" href="#"><i class="text-white menu-icon fa fa-cog"></i><span>Settings</span><span class="menu-arrow fa fa-angle-down"></span></a>
                         <ul class="sub-menu js__content ">
