@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Hospital\DoctorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,8 +28,21 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
-<<<<<<< HEAD
 });
-=======
+
+
+// Route::controller(OrderController::class)->group(function () {
+//     Route::get('/orders/{id}', 'show');
+//     Route::post('/orders', 'store');
+// });
+
+Route::controller(DoctorController::class)->group(function () {
+    Route::get('doctor-index','index')->name('doctor.index');
+
+    Route::get('doctor-create', 'create')->name('doctor.create');
+    Route::post('doctor-store','store')->name('doctor.store');
+
+    Route::get('doctor-edit-{id?}','edit')->name('doctor.edit');
+
+    Route::get('doctor-destroy-{id?}','destroy')->name('doctor.destroy');
 });
->>>>>>> 34077553cbbf4a271e441c884d6ebb41a33a2c72

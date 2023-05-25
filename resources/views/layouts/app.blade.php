@@ -98,6 +98,9 @@
                     <li>
                         <a class="text-white waves-effect" href="/home"><i class="text-white menu-icon fa fa-product-hunt"></i><span>Dashboard</span></a>
                     </li>
+                    <li>
+                        <a class="text-white waves-effect" href="{{route('doctor.create')}}"><i class="text-white menu-icon "></i><span>Doctor</span></a>
+                    </li>
 
                     <li>
                         <a class="text-white waves-effect parent-item js__control" href="#"><i class="text-white menu-icon fa fa-cog"></i><span>Settings</span><span class="menu-arrow fa fa-angle-down"></span></a>
