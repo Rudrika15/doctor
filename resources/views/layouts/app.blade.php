@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('assets/styles/style.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/styles/color.css') }}">
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"> -->
-
+    <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
     <!-- bootstrap 5 css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -54,6 +54,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
+
+    {{-- For Icon  --}}
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
 </head>
 
@@ -98,7 +101,13 @@
                     <li>
                         <a class="text-white waves-effect" href="/home"><i class="text-white menu-icon fa fa-product-hunt"></i><span>Dashboard</span></a>
                     </li>
-
+                    <li>
+                        <a class="text-white waves-effect" href="{{route('city.index')}}"><i class="text-white menu-icon fa fa-city"></i><span>City</span></a>
+                    </li>
+                    <li>
+                        <a class="text-white waves-effect" href="{{route('hospital.index')}}"><i class="text-white menu-icon fa fa-city"></i><span>Hospital</span></a>
+                    </li>
+                    
                     <li>
                         <a class="text-white waves-effect parent-item js__control" href="#"><i class="text-white menu-icon fa fa-cog"></i><span>Settings</span><span class="menu-arrow fa fa-angle-down"></span></a>
                         <ul class="sub-menu js__content ">
@@ -197,7 +206,11 @@
     <script src="{{ asset('assets/scripts/fileUpload.demo.min.js') }}"></script>
 
     <script src="{{ asset('assets/scripts/main.min.js') }}"></script>
-
+    <script>
+        // Replace the <textarea id="editor1"> with a CKEditor 4
+        // instance, using default configuration.
+        CKEDITOR.replace( 'editor1' );
+    </script>
 
 
 </body>
