@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Hospital\DoctorController;
+use App\Http\Controllers\Hospital\GalleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HospitalController;
 use App\Http\Controllers\Admin\HospitalTypeController;
@@ -35,7 +36,7 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 
-// Admin Side
+// ----------------------------------------Admin Side-------------------------------------------------
 
 Route::controller(CityController::class)->group(function () {
     Route::get('admin/city-create', 'create')->name('city.create');
@@ -55,32 +56,25 @@ Route::controller(HospitalController::class)->group(function () {
     Route::get('admin/hospital-delete-{id?}', 'delete')->name('hospital.delete');
 });
 
-Route::controller(HospitalTypeController::class)->group(function(){
-    Route::get('admin/hospitaltype-index','index')->name('hospitaltype.index');
-    Route::get('admin/hospitaltype-create','create')->name('hospitaltype.create');
-    Route::post('admin/hospitaltype-store','store')->name('hospitaltype.store');
-    Route::get('admin/hospitaltype-edit-{id?}','edit')->name('hospitaltype.edit');
-    Route::post('admin/hospitaltype-update','update')->name('hospitaltype.update');
-    Route::get('admin/hospitaltype-delete-{id?}','delete')->name('hospitaltype.delete');
+Route::controller(HospitalTypeController::class)->group(function () {
+    Route::get('admin/hospitaltype-index', 'index')->name('hospitaltype.index');
+    Route::get('admin/hospitaltype-create', 'create')->name('hospitaltype.create');
+    Route::post('admin/hospitaltype-store', 'store')->name('hospitaltype.store');
+    Route::get('admin/hospitaltype-edit-{id?}', 'edit')->name('hospitaltype.edit');
+    Route::post('admin/hospitaltype-update', 'update')->name('hospitaltype.update');
+    Route::get('admin/hospitaltype-delete-{id?}', 'delete')->name('hospitaltype.delete');
 });
 
-Route::controller(DoctorController::class)->group(function(){
-    Route::get('admin-doctor-create','create');
+Route::controller(DoctorController::class)->group(function () {
+    Route::get('admin-doctor-create', 'create');
 });
 
-// -------------------------------------------------------
 
 
 
 
 
-// Hospital Side
-
-
-// Doctor Side
-
-
-
+//-------------------------------------- Hospital Side------------------------------------------
 
 // Route::controller(OrderController::class)->group(function () {
 //     Route::get('/orders/{id}', 'show');
@@ -89,6 +83,7 @@ Route::controller(DoctorController::class)->group(function(){
 
 Route::controller(DoctorController::class)->group(function () {
     Route::get('doctor-index', 'index')->name('doctor.index');
+    Route::get('hospital/doctor-index', 'index')->name('doctor.index');
 
     Route::get('doctor-create', 'create')->name('doctor.create');
     Route::post('doctor-store', 'store')->name('doctor.store');
@@ -97,3 +92,19 @@ Route::controller(DoctorController::class)->group(function () {
 
     Route::get('doctor-destroy-{id?}', 'destroy')->name('doctor.destroy');
 });
+
+
+Route::controller(GalleryController::class)->group(function () {
+    // Route::get('hospital/doctor-index','index')->name('doctor.index');
+
+    Route::get('gallery-create', 'create')->name('gallery.create');
+    // Route::post('doctor-store','store')->name('doctor.store');
+
+    // Route::get('doctor-edit-{id?}','edit')->name('doctor.edit');
+    // Route::post('doctor-update','update')->name('doctor.update');
+
+    // Route::get('doctor-destroy-{id?}','destroy')->name('doctor.destroy');
+});
+
+
+// --------------------------------------Doctor Side---------------------------------------------
