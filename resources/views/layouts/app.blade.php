@@ -111,11 +111,11 @@
                         <a class="text-white waves-effect" href="{{route('hospitaltype.index')}}"><i class="text-white menu-icon "></i><span>Hoapital Type</span></a>
                     </li>
                     <li>
-                        <a class="text-white waves-effect" href="{{route('gallery.create')}}"><i class="text-white menu-icon "></i><span>Gallery</span></a>
+                        <a class="text-white waves-effect" href="{{route('gallery.create')}}"><i class="text-white menu-icon bi bi-images"></i><span>Gallery</span></a>
                     </li>
 
                     <li>
-                        <a class="text-white waves-effect" href="{{route('doctor.create')}}"><i class="text-white menu-icon "></i><span>Doctor</span></a>
+                        <a class="text-white waves-effect" href="{{route('doctor.create')}}"><i class="text-white menu-icon bi bi-person-circle "></i><span>Doctor</span></a>
                     </li>
                     
                     <li>
