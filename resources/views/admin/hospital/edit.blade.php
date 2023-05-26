@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
-        <h2 class="p-3">City Management</h2>
+        <h2 class="p-3">Hospital Management</h2>
         <div class="pt-2"><a class="btn addbtn" href="{{ route('hospital.index') }}"> Back</a></div>
     </div>
     <div class="card-body">

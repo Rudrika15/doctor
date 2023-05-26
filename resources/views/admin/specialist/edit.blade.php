@@ -1,12 +1,10 @@
 @extends('layouts.app')
 @section('content')
 
-
-
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
-        <h2 class="p-3">City Management</h2>
-        <div class="pt-2"><a class="btn addbtn" href="{{ route('city.index') }}"> Back</a></div>
+        <h2 class="p-3">Specialist Management</h2>
+        <div class="pt-2"><a class="btn addbtn" href="{{route('specialist.index')}}"> Back</a></div>
     </div>
     <div class="card-body">
 
@@ -16,14 +14,14 @@
         </div>
         @endif
 
-        <form action="{{route('city.update')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('specialist.update')}}" method="POST" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="id" value="{{$city->id}}">
+        <input type="hidden" name="specialistId" value="{{$specialist->id}}">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Name:</strong>
-                <input type="text" name="name" value="{{$city->name}}" class="form-control @error('name') is-invalid @enderror">
-                @error('name')
+                <strong>Specialist Name:</strong>
+                <input type="text" name="specialistName" value="{{$specialist->specialistName}}" class="form-control @error('specialistName') is-invalid @enderror">
+                @error('specialistName')
                 <sapn class="text-danger">{{ $message }}</sapn>
                 @enderror
             </div>

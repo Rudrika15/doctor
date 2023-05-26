@@ -3,12 +3,13 @@
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\Hospital\DoctorController;
+use App\Http\Controllers\Admin\DoctorController;
 use App\Http\Controllers\Hospital\GalleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HospitalController;
 use App\Http\Controllers\Admin\HospitalTypeController;
 use App\Http\Controllers\Hospital\FacalityController;
+use App\Http\Controllers\Admin\SpecialistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,9 +68,22 @@ Route::controller(HospitalTypeController::class)->group(function () {
 });
 
 Route::controller(DoctorController::class)->group(function () {
-    Route::get('admin-doctor-create', 'create');
+    Route::get('admin/doctor-index','index')->name('admin.doctor.index');
+    Route::get('admin/doctor-create', 'create')->name('admin.doctor.create');
+    Route::post('admin/doctor-store','store')->name('admin.doctor.store');
+    Route::get('admin/doctor-edit-{id?}','edit')->name('admin.doctor.edit');
+    Route::post('admin/doctor-update','update')->name('admin.doctor.update');
+    Route::get('admin/doctor-delete-{id?}','delete')->name('admin.doctor.delete');
 });
 
+Route::controller(SpecialistController::class)->group(function(){
+    Route::get('admin/specialist-index','index')->name('specialist.index');
+    Route::get('admin/specialist-create','create')->name('specialist.create');
+    Route::post('admin/specialist-store','store')->name('specialist.store');
+    Route::get('admin/specialist-edit-{id?}','edit')->name('specialist.edit');
+    Route::post('admin/specialist-update','update')->name('specialist.update');
+    Route::get('admin/specialist-delete-{id?}','delete')->name('specialist.delete');
+});
 
 
 
