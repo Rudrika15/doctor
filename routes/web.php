@@ -43,6 +43,7 @@ Route::controller(DoctorController::class)->group(function () {
     Route::post('doctor-store','store')->name('doctor.store');
 
     Route::get('doctor-edit-{id?}','edit')->name('doctor.edit');
+    Route::post('doctor-update-{id?}','update')->name('doctor.update');
 
     Route::get('doctor-destroy-{id?}','destroy')->name('doctor.destroy');
 });
