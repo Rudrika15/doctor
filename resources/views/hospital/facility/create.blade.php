@@ -7,8 +7,8 @@
 
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
-        <h2 class="p-3">Gallery</h2>
-        <div class="pt-2"><a class="btn addbtn" href="{{route('gallery.index')}}"> Back</a></div>
+        <h2 class="p-3">Facility</h2>
+        <div class="pt-2"><a class="btn addbtn" href="{{route('facility.index')}}"> Back</a></div>
     </div>
     <div class="card-body">
 
@@ -18,7 +18,7 @@
         </div>
         @endif
 
-        <form action="{{route('gallery.store')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
+        <form action="{{route('facility.store')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
             @csrf
           <div class="col-xs-12 col-sm-12 col-md-12">
               <div class="form-group">

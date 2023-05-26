@@ -8,6 +8,7 @@ use App\Http\Controllers\Hospital\GalleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HospitalController;
 use App\Http\Controllers\Admin\HospitalTypeController;
+use App\Http\Controllers\Hospital\FacalityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,28 +83,41 @@ Route::controller(DoctorController::class)->group(function () {
 // });
 
 Route::controller(DoctorController::class)->group(function () {
-    Route::get('doctor-index', 'index')->name('doctor.index');
+   
     Route::get('hospital/doctor-index', 'index')->name('doctor.index');
 
-    Route::get('doctor-create', 'create')->name('doctor.create');
+    Route::get('hospital/doctor-create', 'create')->name('doctor.create');
     Route::post('doctor-store', 'store')->name('doctor.store');
 
     Route::get('doctor-edit-{id?}', 'edit')->name('doctor.edit');
+    Route::get('doctor-update', 'update')->name('doctor.update');
 
     Route::get('doctor-destroy-{id?}', 'destroy')->name('doctor.destroy');
 });
 
 
 Route::controller(GalleryController::class)->group(function () {
-    // Route::get('hospital/doctor-index','index')->name('doctor.index');
+     Route::get('hospital/gallery-index','index')->name('gallery.index');
 
-    Route::get('gallery-create', 'create')->name('gallery.create');
-    // Route::post('doctor-store','store')->name('doctor.store');
+    Route::get('hospital/gallery-create', 'create')->name('gallery.create');
+     Route::post('gallery-store','store')->name('gallery.store');
 
-    // Route::get('doctor-edit-{id?}','edit')->name('doctor.edit');
-    // Route::post('doctor-update','update')->name('doctor.update');
+     Route::get('hospital/gallery-edit-{id?}','edit')->name('gallery.edit');
+     Route::post('hospital/gallery-update','update')->name('gallery.update');
 
-    // Route::get('doctor-destroy-{id?}','destroy')->name('doctor.destroy');
+     Route::get('gallery-destroy-{id?}','destroy')->name('gallery.destroy');
+});
+
+Route::controller(FacalityController::class)->group(function () {
+    Route::get('hospital/facility-index','index')->name('facility.index');
+
+   Route::get('hospital/facility-create', 'create')->name('facility.create');
+    Route::post('facility-store','store')->name('facility.store');
+
+    Route::get('hospital/facility-edit-{id?}','edit')->name('facility.edit');
+    Route::post('hospital/facility-update','update')->name('facility.update');
+
+    Route::get('facility-destroy-{id?}','destroy')->name('facility.destroy');
 });
 
 
