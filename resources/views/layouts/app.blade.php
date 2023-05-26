@@ -101,23 +101,26 @@
                     <li>
                         <a class="text-white waves-effect" href="/home"><i class="text-white menu-icon fa fa-product-hunt"></i><span>Dashboard</span></a>
                     </li>
+                    @role("Admin")
                     <li>
-                        <a class="text-white waves-effect" href="{{route('city.index')}}"><i class="text-white menu-icon fa fa-city"></i><span>City</span></a>
+                        <a class="text-white waves-effect" href="{{route('city.index')}}"><i class="text-white menu-icon bi bi-buildings"></i><span>City</span></a>
                     </li>
                     <li>
-                        <a class="text-white waves-effect" href="{{route('hospital.index')}}"><i class="text-white menu-icon fa fa-city"></i><span>Hospital</span></a>
+                        <a class="text-white waves-effect" href="{{route('hospital.index')}}"><i class="text-white menu-icon bi bi-hospital-fill"></i><span>Hospital</span></a>
                     </li>
                     <li>
-                        <a class="text-white waves-effect" href="{{route('hospitaltype.index')}}"><i class="text-white menu-icon "></i><span>Hoapital Type</span></a>
+                        <a class="text-white waves-effect" href="{{route('hospitaltype.index')}}"><i class="text-white menu-icon bi bi-building-add"></i><span>Hoapital Type</span></a>
                     </li>
                     <li>
                         <a class="text-white waves-effect" href="{{route('gallery.create')}}"><i class="text-white menu-icon bi bi-images"></i><span>Gallery</span></a>
                     </li>
+                    @endrole
 
+                    @role("Hospital")
                     <li>
                         <a class="text-white waves-effect" href="{{route('doctor.create')}}"><i class="text-white menu-icon bi bi-person-circle "></i><span>Doctor</span></a>
                     </li>
-                    
+                    @endrole
                     <li>
                         <a class="text-white waves-effect parent-item js__control" href="#"><i class="text-white menu-icon fa fa-cog"></i><span>Settings</span><span class="menu-arrow fa fa-angle-down"></span></a>
                         <ul class="sub-menu js__content ">
@@ -219,7 +222,7 @@
     <script>
         // Replace the <textarea id="editor1"> with a CKEditor 4
         // instance, using default configuration.
-        CKEDITOR.replace( 'editor1' );
+        CKEDITOR.replace('editor1');
     </script>
 
 
