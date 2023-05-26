@@ -88,7 +88,7 @@
                 <strong>Select Image </strong>
                 <div class="row">
                     <div class="col-md-4">
-                        <input type="file" value="{{$doctor->photo}}"  accept='image/*' onchange="readURL(this,'#img1')" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo">
+                        <input type="file"  accept='image/*' onchange="readURL(this,'#img1')" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo">
                         @error('photo')
                         <sapn class="text-danger">{{ $message }}</sapn>
                         @enderror
@@ -96,9 +96,9 @@
 
                     <div class="col-md-4">
                         <label for="image"></label>
-                        <img src="{{url('asset/img/default.jpg')}}" alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
+                        <img src="/photo/{{$doctor->photo}}" alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
                     </div>
-
+                   
                 </div>
             </div>
 

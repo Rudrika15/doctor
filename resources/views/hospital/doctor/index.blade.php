@@ -58,6 +58,7 @@
             </tr>
             @endforeach
         </table>
+        {!! $doctor->withQueryString()->links('pagination::bootstrap-5') !!}
 
         {{-- {!! $data->render() !!} --}}
     </div>

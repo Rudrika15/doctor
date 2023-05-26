@@ -11,7 +11,7 @@ class DoctorController extends Controller
 
     public function index()
     {
-        $doctor = Doctor::all();
+        $doctor = Doctor::paginate(5);
         return view('hospital.doctor.index', compact('doctor'));
     }
 
@@ -45,10 +45,10 @@ class DoctorController extends Controller
         $doctor->registerNumber = $request->registerNumber;
 
         if ($doctor->save()) {
+            return redirect()->back()->with('success', 'Record Added successfully!');
 
-            return redirect('doctor-index')->with('success', 'Record Updated successfully!');
         } else {
-            return redirect('product/view')->with('error', 'You have no permission for this page!');
+            return back()->with('error', 'You have no permission for this page!');
         }
     }
 
@@ -87,24 +87,23 @@ class DoctorController extends Controller
         $doctor->registerNumber = $request->registerNumber;
 
         $doctor->status = "Active";
-        $doctor->save();
-        return $doctor;
-        // {
-
-        //     return redirect('product/view')->with('success','Record Updated successfully!');
-        // }
-        // else{
-        //     return redirect('product/view')->with('error','You have no permission for this page!');
-
-        // }
-
+        if ($doctor->save()) {
+            return redirect('hospital/doctor-index')->with('success', 'Record Updated successfully!');
+        } else {
+            return back()->with('error', 'You have no permission for this page!');
+        }
     }
 
     public function destroy($id)
     {
         $doctor = Doctor::find($id);
         $doctor->status = "delete";
-        $doctor->delete();
-        return redirect()->back();
+        if($doctor->save()){
+            return redirect('hospital/doctor-index')->with('success', 'Record Updated successfully!');
+        } else {
+            return back()->with('error', 'You have no permission for this page!');
+
+        }
+        
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Hospital\DoctorController;
+use App\Http\Controllers\Hospital\GalleryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,13 +38,27 @@ Route::group(['middleware' => ['auth']], function () {
 // });
 
 Route::controller(DoctorController::class)->group(function () {
-    Route::get('doctor-index','index')->name('doctor.index');
+    Route::get('hospital/doctor-index','index')->name('doctor.index');
 
     Route::get('doctor-create', 'create')->name('doctor.create');
     Route::post('doctor-store','store')->name('doctor.store');
 
     Route::get('doctor-edit-{id?}','edit')->name('doctor.edit');
-    Route::post('doctor-update-{id?}','update')->name('doctor.update');
+    Route::post('doctor-update','update')->name('doctor.update');
 
     Route::get('doctor-destroy-{id?}','destroy')->name('doctor.destroy');
 });
+
+Route::controller(GalleryController::class)->group(function () {
+    // Route::get('hospital/doctor-index','index')->name('doctor.index');
+
+    Route::get('gallery-create', 'create')->name('gallery.create');
+    // Route::post('doctor-store','store')->name('doctor.store');
+
+    // Route::get('doctor-edit-{id?}','edit')->name('doctor.edit');
+    // Route::post('doctor-update','update')->name('doctor.update');
+
+    // Route::get('doctor-destroy-{id?}','destroy')->name('doctor.destroy');
+});
+
+
