@@ -89,8 +89,8 @@ Route::controller(DoctorController::class)->group(function () {
     Route::get('hospital/doctor-create', 'create')->name('doctor.create');
     Route::post('doctor-store', 'store')->name('doctor.store');
 
-    Route::get('doctor-edit-{id?}', 'edit')->name('doctor.edit');
-    Route::get('doctor-update', 'update')->name('doctor.update');
+    Route::get('hospital/doctor-edit-{id?}', 'edit')->name('doctor.edit');
+    Route::post('hospital/doctor-update', 'update')->name('doctor.update');
 
     Route::get('doctor-destroy-{id?}', 'destroy')->name('doctor.destroy');
 });
