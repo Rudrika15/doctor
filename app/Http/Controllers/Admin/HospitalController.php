@@ -3,21 +3,31 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\City;
 use App\Models\Hospital;
+use App\Models\HospitalType;
 use Illuminate\Http\Request;
 
 class HospitalController extends Controller
 {
+    // function Allproductrelation(){
+    //     $category=Newproduct::with('category')->get();
+    //     return $category;
+    // }
     public function index(){
-       // $hospital=Hospital::join('cities','cities.id','=','hospitals.cityId')
-                    //->get([hospi]);
-        $hospital=Hospital::paginate(5);
+       $hospital=Hospital::with('hospitalType')
+        ->with('city')
+        ->with('user')
+        ->paginate(5);
+
         return view('admin.hospital.index',compact('hospital'));
     }
     public function create(){
+        $user=User::all();
         $city=City::all();
-        return view('admin.hospital.create',compact('city'));
+        $hospitaltype=HospitalType::all();
+        return view('admin.hospital.create',compact('city','hospitaltype','user'));
     }
     public function store(Request $request){
         $this->validate($request,[
@@ -49,9 +59,11 @@ class HospitalController extends Controller
 
     }
     public function edit($id){
+        $user=User::all();
         $city=City::all();
+        $hospitaltype=HospitalType::all();
         $hospital=Hospital::find($id);
-        return view('admin.hospital.edit',compact('hospital','city'));
+        return view('admin.hospital.edit',compact('hospital','city','hospitaltype','user'));
     }
     public function update(Request $request){
 

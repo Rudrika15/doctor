@@ -16,7 +16,7 @@
 
         <form action="{{route('hospital.update')}}" method="POST" enctype="multipart/form-data">
         @csrf
-        <input type="text" name="hospitalId" value="{{$hospital->id}}">
+        <input type="hidden" name="hospitalId" value="{{$hospital->id}}">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Hospital Name:</strong>
@@ -73,9 +73,10 @@
                         name="hospitalTypeId" value="{{$hospital->hospitalTypeId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
                              <option selected disabled>Select Hospital Type</option>
-                             <option value=1>One</option>
-                             <option value=2>Two</option>
-                            </select>
+                             @foreach ($hospitaltype as $hospitaltype)
+                                <option value={{$hospitaltype->id}}>{{$hospitaltype->typeName}}</option>
+                             @endforeach
+                    </select>
                     @error('hospitalTypeId')
                         <span class="invalid-feedback" role="alert">
                         {{$message}}
@@ -92,8 +93,10 @@
                         name="userId" value="{{$hospital->userId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
                              <option selected disabled>Select User</option>
-                             <option value=1>One</option>
-                             <option value=2>Two</option>
+                             @foreach ($user as $user)
+                                <option value="{{$user->id}}">{{$user->name}}</option>
+                             @endforeach
+                            
                     </select>
                     @error('userId')
                         <span class="invalid-feedback" role="alert">

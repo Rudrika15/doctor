@@ -32,10 +32,21 @@
                     <tr>
                         <td>{{$hospitals->hospitalName}}</td>
                         <td>{{$hospitals->address}}</td>
-                        <td>{{$hospitals->cityId}}</td>
-                        <td>{{$hospitals->contactNo}}</td>
-                        <td>{{$hospitals->hospitalTypeId}}</td>
-                        <td>{{$hospitals->userId}}</td>
+
+                        @foreach ($hospitals->city as $city)
+                            <td>{{$city->name}}</td>
+                        @endforeach
+
+                            <td>{{$hospitals->contactNo}}</td>
+
+                        @foreach ($hospitals->hospitaltype as $hospitaltype)
+                            <td>{{$hospitaltype->typeName}}</td> 
+                        @endforeach
+
+                       
+                             <td>{{$hospitals->user->name}}</td> 
+                        
+                        
                         <td>{{$hospitals->siteUrl}}</td>
                         <td>{{$hospitals->category}}</td>
                         <td>{{$hospitals->status}}</td>

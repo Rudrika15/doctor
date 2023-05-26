@@ -6,6 +6,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Hospital\DoctorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HospitalController;
+use App\Http\Controllers\Admin\HospitalTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,8 +55,20 @@ Route::controller(HospitalController::class)->group(function () {
     Route::get('admin/hospital-delete-{id?}', 'delete')->name('hospital.delete');
 });
 
+Route::controller(HospitalTypeController::class)->group(function(){
+    Route::get('admin/hospitaltype-index','index')->name('hospitaltype.index');
+    Route::get('admin/hospitaltype-create','create')->name('hospitaltype.create');
+    Route::post('admin/hospitaltype-store','store')->name('hospitaltype.store');
+    Route::get('admin/hospitaltype-edit-{id?}','edit')->name('hospitaltype.edit');
+    Route::post('admin/hospitaltype-update','update')->name('hospitaltype.update');
+    Route::get('admin/hospitaltype-delete-{id?}','delete')->name('hospitaltype.delete');
+});
 
+Route::controller(DoctorController::class)->group(function(){
+    Route::get('admin-doctor-create','create');
+});
 
+// -------------------------------------------------------
 
 
 

@@ -14,39 +14,19 @@
         </div>
         @endif
 
-        <form action="{{route('hospital.store')}}" method="POST" enctype="multipart/form-data">
+        <form action="" method="" enctype="multipart/form-data">
         @csrf
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Hospital Name:</strong>
-                <input type="text" name="hospitalName" class="form-control @error('hospitalName') is-invalid @enderror">
-                @error('hospitalName')
-                    <sapn class="text-danger">{{ $message }}</sapn>
-                @enderror
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Address:</strong>
-                <textarea name="address" id="editor1" class="form-control @error('address') is-invalid @enderror" cols="10" rows="5"></textarea>
-                @error('address')
-                <sapn class="text-danger">{{ $message }}</sapn>
-                @enderror
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Select City</strong>
+                <strong>Select Hospital Type</strong>
                     <br>
-                    <select class="form-select form-control-user @error('cityId') is-invalid @enderror"
-                        name="cityId" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
+                    <select class="form-select form-control-user @error('hospitalId') is-invalid @enderror"
+                        name="hospitalId" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
                              <option selected disabled>Select City</option>
-                             @foreach ($city as $city)
-                                <option value={{$city->id}}>{{$city->name}}</option> 
-                             @endforeach
+                             <option value=1>One</option>
                     </select>
-                    @error('cityId')
+                    @error('hospitalId')
                         <span class="invalid-feedback" role="alert">
                         {{$message}}
                         </span>
@@ -54,6 +34,15 @@
             </div>
         </div>
 
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Doctor Name:</strong>
+                <input type="text" name="doctorName" class="form-control @error('doctorName') is-invalid @enderror">
+                @error('doctorName')
+                    <sapn class="text-danger">{{ $message }}</sapn>
+                @enderror
+            </div>
+        </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Contact No</strong>
@@ -66,17 +55,15 @@
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong> Hospital Type</strong>
+                <strong>Select Specialist</strong>
                     <br>
-                    <select class="form-select form-control-user @error('hospitalTypeId') is-invalid @enderror"
-                        name="hospitalTypeId" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
+                    <select class="form-select form-control-user @error('specialistId') is-invalid @enderror"
+                        name="specialistId" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
-                             <option selected disabled>Select Hospital Type</option>
-                             @foreach ($hospitaltype as $hospitaltype)
-                                <option value={{$hospitaltype->id}}>{{$hospitaltype->typeName}}</option>
-                             @endforeach
+                             <option selected disabled>Select Specialist</option>
+                             <option value=1>One</option>
                     </select>
-                    @error('hospitalTypeId')
+                    @error('specialistId')
                         <span class="invalid-feedback" role="alert">
                         {{$message}}
                         </span>
@@ -92,9 +79,7 @@
                         name="userId" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
                              <option selected disabled>Select User</option>
-                             @foreach ($user as $user)
-                                <option value="{{$user->id}}">{{$user->name}}</option>
-                             @endforeach
+                             <option value=1>One</option>
                     </select>
                     @error('userId')
                         <span class="invalid-feedback" role="alert">
@@ -106,23 +91,24 @@
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Site Url</strong>
-                <input type="text" name="siteUrl" class="form-control @error('category') is-invalid @enderror">
-                @error('siteUrl')
+                <strong>Experience:</strong>
+                <textarea name="experience" id="editor1" class="form-control @error('experience') is-invalid @enderror" cols="10" rows="5"></textarea>
+                @error('experience')
+                <sapn class="text-danger">{{ $message }}</sapn>
+                @enderror
+            </div>
+        </div>
+        
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Register No</strong>
+                <input type="text" name="registerNumber" class="form-control @error('registerNumber') is-invalid @enderror">
+                @error('registerNumber')
                     <sapn class="text-danger">{{ $message }}</sapn>
                 @enderror
             </div>
         </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Category</strong>
-                <input type="text" name="category" class="form-control @error('siteUrl') is-invalid @enderror">
-                @error('category')
-                    <sapn class="text-danger">{{ $message }}</sapn>
-                @enderror
-            </div>
-        </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btnsubmit">Submit</button>
         </div>
