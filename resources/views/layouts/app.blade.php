@@ -120,9 +120,7 @@
                         <li>
                             <a class="text-white waves-effect" href="{{route('hospitaltype.index')}}"><i class="text-white menu-icon bi bi-building-add"></i><span>Hoapital Type</span></a>
                         </li>
-                        <li>
-                            <a class="text-white waves-effect" href="{{route('admin.doctor.index')}}"><i class="text-white menu-icon bi bi-file-person-fill"></i><span>Doctor</span></a>
-                        </li>
+                        
                         <li>
                             <a class="text-white waves-effect" href="{{route('specialist.index')}}"><i class="text-white menu-icon bi bi-file-person-fill"></i><span>Specialist</span></a>
                         </li>

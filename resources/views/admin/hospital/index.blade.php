@@ -51,9 +51,11 @@
                         <td>{{$hospitals->category}}</td>
                         <td>{{$hospitals->status}}</td>
                         <td>
-                            <a class="btn btn-primary mt-1" href="{{route('hospital.edit')}}{{$hospitals->id}}">Edit</a>
+                            <a class="btn btn-success mt-1" href="{{route('hospital.viewdetails')}}{{$hospitals->id}}">View Details</a>
                     
-                            <a class="btn btn-danger mt-1" onclick="return confirm('Are you sure want to delete?')" href="{{route('hospital.delete')}}{{$hospitals->id}}">Delete</a>
+                            <a class="btn btn-primary mt-2" href="{{route('hospital.edit')}}{{$hospitals->id}}">Edit</a>
+                    
+                            <a class="btn btn-danger mt-2" onclick="return confirm('Are you sure want to delete?')" href="{{route('hospital.delete')}}{{$hospitals->id}}">Delete</a>
                         </td>
                     </tr>
                 @endforeach

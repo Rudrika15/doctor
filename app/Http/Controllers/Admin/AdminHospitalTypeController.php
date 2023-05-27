@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Hospital;
 use App\Models\HospitalType;
 use Illuminate\Http\Request;
 
-class HospitalTypeController extends Controller
+class AdminHospitalTypeController extends Controller
 {
     public function index(){
         $hospitaltype=HospitalType::paginate(5);
@@ -58,5 +57,5 @@ class HospitalTypeController extends Controller
 
         }
     }
-   
+
 }

@@ -7,26 +7,26 @@ use App\Models\Doctor;
 use App\Models\Hospital;
 use App\Models\Specialist;
 use App\Models\User;
+
 use Illuminate\Http\Request;
 
-class DoctorController extends Controller
+class AdminDoctorController extends Controller
 {
-    public function index(){
-        // $hospital=Hospital::with('hospitalType')
-        // ->with('city')
-        // ->with('user')
-        // ->paginate(5);
-        $doctor=Doctor::with('hospital')
+    public function index(Request $request,$id){
+    
+       $hospitalId=$request->id;
+        $doctor=Doctor::where('hospitalId',$hospitalId)
+        ->with('hospital')
         ->with('user')
         ->paginate(5);
 
         return view('admin.doctor.index',compact('doctor'));
     }
-    public function create(){
-        $hospital=Hospital::all();
+    public function create($id){
+        // $hospital=Hospital::find($id);
         $specialist=Specialist::all();
         $user=User::all();
-        return view('admin.doctor.create',compact('hospital','user','specialist'));
+        return view('admin.doctor.create',compact('user','specialist',));
     }
     public function store(Request $request){
         $this->validate($request,[
@@ -79,6 +79,7 @@ class DoctorController extends Controller
         ]);
 
         $id=$request->doctorId;
+        return $hospitalId=$request->hospitalId;
         $doctor=Doctor::find($id);
         $doctor->hospitalId=$request->hospitalId;
         $doctor->doctorName=$request->doctorName;
@@ -86,17 +87,18 @@ class DoctorController extends Controller
         $doctor->specialistId=$request->specialistId;
         $doctor->userId=$request->userId;
         
-        $photo=$request->photo;
-        $doctor->photo=time().'.'.$request->photo->extension();
-        $request->photo->move(public_path('admin_img'),$doctor->photo);
-        
+        if ($request->photo) {
+            $photo = $request->photo;
+            $doctor->photo = time() . '.' . $request->photo->extension();
+            $request->photo->move(public_path('admin_img'), $doctor->photo);
+        }
         $doctor->experience=$request->experience;
         $doctor->registerNumber=$request->registerNumber;
 
         $doctor->status="Active";
 
         if($doctor->save()){
-            return redirect('admin/doctor-index')->with('success','Hospital Updated successfully!');
+            return redirect('admin/doctor-index-$hospitalId')->with('success','Doctor Updated successfully!');
         }else{
             return back()->with('error','You have no permission for this page!');
         }       
@@ -105,9 +107,10 @@ class DoctorController extends Controller
         $doctor=Doctor::find($id);
         $doctor->status="Delete";
         if($doctor->save()){
-            return redirect('admin/doctor-index')->with('success','Hospital Added successfully!');
+            return redirect('admin/doctor-index')->with('success','Doctor Deleted successfully!');
         }else{
             return back()->with('error','You have no permission for this page!');
         } 
     }
+
 }

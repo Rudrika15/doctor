@@ -16,27 +16,9 @@
 
         <form action="{{route('admin.doctor.update')}}" method="POST" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="doctorId"  value="{{$doctor->id}}">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Select Hospital</strong>
-                    <br>
-                    <select class="form-select form-control-user @error('hospitalId') is-invalid @enderror"
-                        name="hospitalId" value="{{$doctor->hospitalId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
-                         aria-label="Default select example">
-                             <option selected disabled>Select City</option>
-                             @foreach ($hospital as $hospital)
-                                <option value={{$hospital->id}}>{{$hospital->hospitalName}}</option>
-                             @endforeach
-                    </select>
-                    @error('hospitalId')
-                        <span class="invalid-feedback" role="alert">
-                        {{$message}}
-                        </span>
-                    @enderror
-            </div>
-        </div>
-
+        <input type="text" name="doctorId"  value="{{$doctor->id}}">
+        <input type="text" name="hospitalId" value="{{$doctor->hospitalId}}">
+        
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Doctor Name:</strong>
