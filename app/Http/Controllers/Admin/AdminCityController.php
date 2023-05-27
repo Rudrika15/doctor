@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\City;
 use Illuminate\Http\Request;
-use PhpParser\Node\Expr\FuncCall;
+use App\Models\City;
 
-class CityController extends Controller
+class AdminCityController extends Controller
 {
     public function index(){
         $city=City::paginate(5);
@@ -63,4 +62,5 @@ class CityController extends Controller
 
         }
     }
+
 }

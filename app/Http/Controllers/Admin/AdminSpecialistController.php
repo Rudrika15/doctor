@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Specialist;
 use Illuminate\Http\Request;
-use PhpParser\Node\Expr\FuncCall;
 
-class SpecialistController extends Controller
+class AdminSpecialistController extends Controller
 {
     public function index(){
         $specialist=Specialist::paginate(5);
@@ -28,7 +27,6 @@ class SpecialistController extends Controller
             return redirect()->back()->with('success','Specialist Added successfully!');
         }else{
             return back()->with('error','You have no permission for this page!');
-
         }
     }
     public function edit($id){
@@ -45,10 +43,9 @@ class SpecialistController extends Controller
         $specialist->status="Active";
         
         if($specialist->save()){
-            return redirect('admin/specialist-index')->with('Success!','Specialist Update successfully!');
+            return redirect('admin/specialist-index')->with('success','Specialist Updated successfully!');
         }else{
             return back()->with('error','You have no permission for this page!');
-
         }
     }
     public function delete($id){
@@ -56,9 +53,10 @@ class SpecialistController extends Controller
         $specialist->status="Delete";
         $specialist->save();
         if($specialist->save()){
-            return redirect()->back()->with('Success','Specialist Deleted successfully!');
+            return redirect()->back()->with('success','Specialist Deleted successfully!');
         }else{
             return back()->with('error','You have no permission for this page!');
         }
     }
+
 }

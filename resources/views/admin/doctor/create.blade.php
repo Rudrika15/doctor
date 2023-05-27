@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
         <h2 class="p-3">Doctor Management</h2>
-        <div class="pt-2"><a class="btn addbtn" href="{{ route('admin.doctor.index') }}"> Back</a></div>
+        <div class="pt-2"><a class="btn addbtn" href="{{ route('admin.doctor.index',['id' => request()->route('id')]) }}"> Back</a></div>
     </div>
     <div class="card-body">
 
@@ -16,27 +16,8 @@
 
         <form action="{{route('admin.doctor.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Select Hospital</strong>
-                    <br>
-                    <select class="form-select form-control-user @error('hospitalId') is-invalid @enderror"
-                        name="hospitalId" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
-                         aria-label="Default select example">
-                             <option selected disabled>Select City</option>
-                             @foreach ($hospital as $hospital)
-                                <option value={{$hospital->id}}>{{$hospital->hospitalName}}</option>
-                             @endforeach
-                             
-                    </select>
-                    @error('hospitalId')
-                        <span class="invalid-feedback" role="alert">
-                        {{$message}}
-                        </span>
-                    @enderror
-            </div>
-        </div>
-
+        <input type="hidden" name="hospitalId" value="{{ request()->route('id') }}" class="form-control @error('doctorName') is-invalid @enderror">
+  
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Doctor Name:</strong>
