@@ -116,11 +116,22 @@
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Category</strong>
-                <input type="text" name="category" class="form-control @error('siteUrl') is-invalid @enderror">
-                @error('category')
-                    <sapn class="text-danger">{{ $message }}</sapn>
-                @enderror
+                <strong>Select Category</strong>
+                    <br>
+                    <select class="form-select form-control-user @error('category') is-invalid @enderror"
+                        name="category" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
+                         aria-label="Default select example">
+                             <option selected disabled>Select Category</option>
+                             <option value="Alopethi">Alopethi</option>
+                             <option value="Homiopethi">Homiopethi</option>
+                             <option value="Aayurvedi">Aayurvedi</option>
+                             
+                    </select>
+                    @error('category')
+                        <span class="invalid-feedback" role="alert">
+                        {{$message}}
+                        </span>
+                    @enderror
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

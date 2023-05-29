@@ -88,7 +88,7 @@ Route::controller(AdminSpecialistController::class)->group(function(){
 });
 
 Route::controller(AdminGalleryController::class)->group(function(){
-    Route::get('admin/gallery-index','index')->name('admin.gallery.index');
+    Route::get('admin/gallery-index-{id?}','index')->name('admin.gallery.index');
     Route::get('admin/gallery-create-{id?}','create')->name('admin.gallery.create');
     Route::post('admin/gallery-store','store')->name('admin.gallery.store');
     Route::get('admin/gallery-edit-{id?}','edit')->name('admin.gallery.edit');
@@ -97,7 +97,7 @@ Route::controller(AdminGalleryController::class)->group(function(){
 });
 
 Route::controller(AdminFacalityController::class)->group(function(){
-    Route::get('admin/facility-index','index')->name('admin.facility.index');
+    Route::get('admin/facility-index-{id?}','index')->name('admin.facility.index');
     Route::get('admin/facility-create-{id?}','create')->name('admin.facility.create');
     Route::post('admin/facility-store','store')->name('admin.facility.store');
     Route::get('admin/facility-edit-{id?}','edit')->name('admin.facility.edit');

@@ -9,13 +9,16 @@ use Illuminate\Http\Request;
 
 class AdminFacalityController extends Controller
 {
-    public function index(){
-        $facility=Facility::with('hospital')->paginate(2);
+    public function index(Request $request,$id){
+        $hospitalId=$request->id;
+        $facility=Facility::where('hospitalId',$hospitalId)
+                ->with('hospital')
+                ->paginate(5);
         return view('admin.facility.index',compact('facility'));
     }
     public function create($id){
-        $hospital=Hospital::find($id);
-        return view('admin.facility.create',compact('hospital'));
+        //$hospital=Hospital::find($id);
+        return view('admin.facility.create');
     }
     public function store(Request $request){
         $this->validate($request,[
@@ -23,16 +26,14 @@ class AdminFacalityController extends Controller
             'title'=>'required',
             'photo'=>'required'
         ]);
-
         $facility=new Facility();
         $facility->hospitalId=$request->hospitalId;
         $facility->title=$request->title;
+
         $photo=$request->photo;
         $facility->photo=time().'.'.$request->photo->extension();
         $request->photo->move(public_path('admin_img'),$facility->photo);
        
-        $facility->save();
-
         if($facility->save()){
             return redirect()->back()->with('success','Facility Added successfully!');
         }else{
@@ -48,8 +49,8 @@ class AdminFacalityController extends Controller
         $this->validate($request,[
             'hospitalId'=>'required',
             'title'=>'required',
-            
         ]);
+        $hospitalId=$request->hospitalId;
         $id=$request->facilityId;
         $facility=Facility::find($id);
         $facility->hospitalId=$request->hospitalId;
@@ -62,7 +63,7 @@ class AdminFacalityController extends Controller
         $facility->status="Active";
        
         if($facility->save()){
-            return redirect('admin/facility-index')->with('success','Facility Edited successfully!');
+            return redirect()->route('admin.facility.index',$hospitalId)->with('success','Facility Edited successfully!');
         }else{
             return back()->with('error','You have no permission for this page!');
         }
