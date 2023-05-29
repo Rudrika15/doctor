@@ -8,7 +8,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
         <h2 class="p-3">Hospital Type Management</h2>
-        <div class="pt-2"><a class="btn addbtn" href="{{ route('hospitaltype.create') }}">Add Hospital TYpe</a></div>
+        <div class="pt-2"><a class="btn addbtn" href="{{ route('hospitaltype.create') }}">Add Hospital Type</a></div>
     </div>
     <div class="card-body">
 
