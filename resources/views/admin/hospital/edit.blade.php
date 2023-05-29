@@ -42,10 +42,10 @@
                     <select class="form-select form-control-user @error('cityId') is-invalid @enderror"
                         name="cityId" value="{{$hospital->cityId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
-                             <option selected disabled>Select City</option>
                              @foreach ($city as $city)
-                                <option value={{$city->id}}>{{$city->name}}</option> 
+                                <option value="{{$city->id}}">{{$city->name}}</option> 
                              @endforeach
+
                     </select>
                     @error('cityId')
                         <span class="invalid-feedback" role="alert">
@@ -72,7 +72,6 @@
                     <select class="form-select form-control-user @error('hospitalTypeId') is-invalid @enderror"
                         name="hospitalTypeId" value="{{$hospital->hospitalTypeId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
-                             <option selected disabled>Select Hospital Type</option>
                              @foreach ($hospitaltype as $hospitaltype)
                                 <option value={{$hospitaltype->id}}>{{$hospitaltype->typeName}}</option>
                              @endforeach
