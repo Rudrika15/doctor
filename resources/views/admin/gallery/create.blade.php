@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
         <h2 class="p-3">Gallery Management</h2>
-        <div class="pt-2"><a class="btn addbtn" href="{{ route('admin.gallery.index') }}"> Back</a></div>
+        <div class="pt-2"><a class="btn addbtn" href="{{ route('admin.gallery.index',['id' => request()->route('id')]) }}"> Back</a></div>
     </div>
     <div class="card-body">
 
@@ -16,7 +16,7 @@
 
         <form action="{{route('admin.gallery.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="hospitalId" value="{{$hospital->id}}" class="form-control @error('doctorName') is-invalid @enderror">
+        <input type="hidden" name="hospitalId" value="{{ request()->route('id') }}" class="form-control @error('doctorName') is-invalid @enderror">
   
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">

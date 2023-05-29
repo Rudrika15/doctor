@@ -10,13 +10,18 @@ use PhpParser\Node\Expr\FuncCall;
 
 class AdminGalleryController extends Controller
 {
-    public function index(){
-        $gallery=Gallery::with('hospital')->paginate(2);
+    public function index(Request $request,$id){
+        $hospital=$request->id;
+        
+        $gallery=Gallery::where('hospitalId',$hospital)
+        ->with('hospital')
+        ->paginate(3);
+
         return view('admin.gallery.index',compact('gallery'));
     }
     public function create($id){
-        $hospital=Hospital::find($id);
-        return view('admin.gallery.create',compact('hospital'));
+       // $hospital=Hospital::find($id);
+        return view('admin.gallery.create');
     }
     public function store(Request $request){
         $this->validate($request,[
@@ -49,6 +54,7 @@ class AdminGalleryController extends Controller
             'hospitalId'=>'required',
             'title'=>'required',
         ]);
+        $hospitalId=$request->hospitalId;
         $id=$request->galleryId;
         $gallery=Gallery::find($id);
         $gallery->hospitalId=$request->hospitalId;
@@ -62,7 +68,7 @@ class AdminGalleryController extends Controller
         $gallery->save();
 
         if($gallery->save()){
-            return redirect('admin/gallery-index')->with('success','Gallery Updated successfully!');
+            return redirect()->route('admin.gallery.index',$hospitalId)->with('success','Gallery Updated successfully!');
         }else{
             return back()->with('error','You have no permission for this page!');
         }

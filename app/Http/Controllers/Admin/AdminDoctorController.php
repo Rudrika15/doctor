@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 
 class AdminDoctorController extends Controller
 {
+    
     public function index(Request $request,$id){
     
        $hospitalId=$request->id;
@@ -68,6 +69,7 @@ class AdminDoctorController extends Controller
         return view('admin.doctor.edit',compact('doctor','hospital','user','specialist'));
     }
     public function update(Request $request){
+       
         $this->validate($request,[
             'hospitalId'=>'required',
             'doctorName'=>'required',
@@ -78,8 +80,9 @@ class AdminDoctorController extends Controller
             'registerNumber'=>'required'
         ]);
 
+        $hospiId=$request->hospitalId;
         $id=$request->doctorId;
-        return $hospitalId=$request->hospitalId;
+        //return $hospitalId=$request->hospitalId;
         $doctor=Doctor::find($id);
         $doctor->hospitalId=$request->hospitalId;
         $doctor->doctorName=$request->doctorName;
@@ -96,9 +99,9 @@ class AdminDoctorController extends Controller
         $doctor->registerNumber=$request->registerNumber;
 
         $doctor->status="Active";
-
         if($doctor->save()){
-            return redirect('admin/doctor-index-$hospitalId')->with('success','Doctor Updated successfully!');
+
+            return redirect()->route("admin.doctor.index",$hospiId)->with('success','Doctor Updated successfully!');
         }else{
             return back()->with('error','You have no permission for this page!');
         }       

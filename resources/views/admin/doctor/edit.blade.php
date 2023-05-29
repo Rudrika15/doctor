@@ -16,8 +16,8 @@
 
         <form action="{{route('admin.doctor.update')}}" method="POST" enctype="multipart/form-data">
         @csrf
-        <input type="text" name="doctorId"  value="{{$doctor->id}}">
-        <input type="text" name="hospitalId" value="{{$doctor->hospitalId}}">
+        <input type="hidden" name="doctorId"  value="{{$doctor->id}}">
+        <input type="hidden" name="hospitalId" value="{{$doctor->hospitalId}}">
         
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -45,7 +45,7 @@
                     <select class="form-select form-control-user @error('specialistId') is-invalid @enderror"
                         name="specialistId" value="{{$doctor->specialistId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
-                             <option selected disabled>Select Specialist</option>
+                         <option selected disabled>Select Specialist</option>                  
                              @foreach ($specialist as $specialist)
                                 <option value={{$specialist->id}}>{{$specialist->specialistName}}</option>
                              @endforeach
@@ -65,10 +65,10 @@
                     <select class="form-select form-control-user @error('userId') is-invalid @enderror"
                         name="userId" value="{{$doctor->userId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
-                             <option selected disabled>Select User</option>
-                             @foreach ($user as $user)
-                             <option value={{$user->id}}>{{$user->name}}</option>
-                             @endforeach
+                         <option selected disabled>Select Specialist</option>                  
+                                @foreach ($user as $user)
+                                <option value={{$user->id}}>{{$user->name}}</option>
+                                @endforeach
                     </select>
                     @error('userId')
                         <span class="invalid-feedback" role="alert">
