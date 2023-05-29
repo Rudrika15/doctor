@@ -18,6 +18,7 @@ class GalleryController extends Controller
     {
         return view('hospital.gallery.create');
     }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -39,11 +40,13 @@ class GalleryController extends Controller
             return back()->with('error', 'You have no permission for this page!');
         }
     }
+
     public function edit($id)
     {
         $gallery = Gallery::find($id);
         return view('hospital.gallery.edit', compact('gallery'));
     }
+
     public function update(Request $request)
     {
         $request->validate([
@@ -69,6 +72,7 @@ class GalleryController extends Controller
             return back()->with('error', 'You have no permission for this page!');
         }
     }
+
     public function destroy($id)
     {
         $gallery = Gallery::find($id);

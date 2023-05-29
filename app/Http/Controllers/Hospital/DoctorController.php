@@ -19,6 +19,7 @@ class DoctorController extends Controller
     {
         return view('hospital.doctor.create');
     }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -46,7 +47,6 @@ class DoctorController extends Controller
 
         if ($doctor->save()) {
             return redirect()->back()->with('success', 'Record Added successfully!');
-
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }
@@ -57,6 +57,7 @@ class DoctorController extends Controller
         $doctor = Doctor::find($id);
         return view('hospital.doctor.edit', compact('doctor'));
     }
+
     public function update(Request $request)
     {
         $request->validate([
@@ -98,12 +99,10 @@ class DoctorController extends Controller
     {
         $doctor = Doctor::find($id);
         $doctor->status = "Deleted";
-        if($doctor->save()){
+        if ($doctor->save()) {
             return redirect('hospital/doctor-index')->with('success', 'Record deleted');
         } else {
             return back()->with('error', 'You have no permission for this page!');
-
         }
-        
     }
 }

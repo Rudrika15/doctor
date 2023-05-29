@@ -71,7 +71,7 @@
             </a>
             <button type="button" class="button-close fa fa-times js__menu_close" style="color: #03ACF0;"></button>
             <div class="user">
-                <h5 class="name"><a class="text-white fs-2" href="#"></a></h5>
+                <h5 class="name"><a class="text-white fs-2" href="#">{{Auth::user()->name}}</a></h5>
                 <!-- /.name -->
                 <div class="control-wrap js__drop_down">
                     <i class="fa fa-aret-down "></i>
@@ -101,44 +101,22 @@
                     <li>
                         <a class="text-white waves-effect" href="/home"><i class="text-white menu-icon fa fa-product-hunt"></i><span>Dashboard</span></a>
                     </li>
+
+
                     @role("Admin")
-                    <li>
-                        <a class="text-white waves-effect" href="{{route('city.index')}}"><i class="text-white menu-icon bi bi-buildings"></i><span>City</span></a>
-                    </li>
-                    <li>
-                        <a class="text-white waves-effect" href="{{route('hospital.index')}}"><i class="text-white menu-icon bi bi-hospital-fill"></i><span>Hospital</span></a>
-                    </li>
-                    <li>
-                        <a class="text-white waves-effect" href="{{route('hospitaltype.index')}}"><i class="text-white menu-icon bi bi-building-add"></i><span>Hospital Type</span></a>
-                    </li>
-                        
-                    <li>
-                        <a class="text-white waves-effect" href="{{route('specialist.index')}}"><i class="text-white menu-icon bi bi-file-person-fill"></i><span>Specialist</span></a>
-                    </li>
+                    @include('layouts.adminSidebar')
+
+                    @endrole
+
+                    @role("Hospital")
+                    @include('layouts.hospitalSidebar')
+
+                    @endrole
+                    @role("Doctor")
+                    @include('layouts.doctorSidebar')
+
                     @endrole
                     
-                    @role("Hospital")
-                    <li>
-                        <a class="text-white waves-effect" href="{{route('doctor.index')}}"><i class="text-white menu-icon bi bi-person-circle "></i><span>Doctor</span></a>
-                    </li>
-                    <li>
-                        <a class="text-white waves-effect" href="{{route('gallery.index')}}"><i class="text-white menu-icon bi bi-images"></i><span>Gallery</span></a>
-                    </li>
-                    <li>
-                        <a class="text-white waves-effect" href="{{route('facility.index')}}"><i class="text-white menu-icon bi bi-images"></i><span>Facility</span></a>
-                    </li>
-                    <li>
-                        <a class="text-white waves-effect" href="{{route('gallery.create')}}"><i class="text-white menu-icon "></i><span>Gallery</span></a>
-                    </li>
-                    @endrole
-                    <li>
-                        <a class="text-white waves-effect parent-item js__control" href="#"><i class="text-white menu-icon fa fa-cog"></i><span>Settings</span><span class="menu-arrow fa fa-angle-down"></span></a>
-                        <ul class="sub-menu js__content ">
-                            <li><a class="text-white" href="{{ route('users.index') }}">Manage User</a></li>
-                            <li><a class="text-white" href="{{ route('roles.index') }}">Manage Role</a></li>
-                        </ul>
-                        <!-- /.sub-menu js__content -->
-                    </li>
 
                 </ul>
 
