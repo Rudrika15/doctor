@@ -109,7 +109,7 @@
                             <a class="text-white waves-effect" href="{{route('hospital.index')}}"><i class="text-white menu-icon bi bi-hospital-fill"></i><span>Hospital</span></a>
                         </li>
                         <li>
-                            <a class="text-white waves-effect" href="{{route('hospitaltype.index')}}"><i class="text-white menu-icon bi bi-building-add"></i><span>Hoapital Type</span></a>
+                            <a class="text-white waves-effect" href="{{route('hospitaltype.index')}}"><i class="text-white menu-icon bi bi-building-add"></i><span>Hospital Type</span></a>
                         </li>
                         
                         <li>
