@@ -97,9 +97,9 @@ class DoctorController extends Controller
     public function destroy($id)
     {
         $doctor = Doctor::find($id);
-        $doctor->status = "delete";
+        $doctor->status = "Deleted";
         if($doctor->save()){
-            return redirect('hospital/doctor-index')->with('success', 'Record Updated successfully!');
+            return redirect('hospital/doctor-index')->with('success', 'Record deleted');
         } else {
             return back()->with('error', 'You have no permission for this page!');
 

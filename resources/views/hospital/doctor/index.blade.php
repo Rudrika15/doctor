@@ -28,6 +28,7 @@
                 <th>Photo</th>
                 <th>Experiance</th>
                 <th>Register Number</th>
+                <th> Status</th>
                 <th width="280px">Action</th>
             </tr>
             @foreach ($doctor as $doctors)
@@ -40,6 +41,9 @@
                 <td> <img src="/photo/{{$doctors->photo}}" alt=""> </td>
                 <td>{{ $doctors->experience }}</td>
                 <td>{{ $doctors->registerNumber }}</td>
+                <td>{{ $doctors->status }}</td>
+              
+              
                 {{-- <td>
                     @if(!empty($user->getRoleNames()))
                     @foreach($user->getRoleNames() as $v)
@@ -49,7 +53,7 @@
                 </td> --}}
                 <td>
                     {{-- <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a> --}}
-                    <a class="btn btn-success" href="{{route('doctor.edit')}}{{$doctors->id}}">Edit</a> 
+                    <a class="btn btn-success" href="{{route('doctor.edit')}}{{$doctors->id}}">Edit</a> <br><br>
                     <a onclick="return confirm('Are you sure want to delete ?')" class="btn btn-danger" href="{{route('doctor.destroy')}}{{$doctors->id}}">Delete</a>
                     {{-- {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}

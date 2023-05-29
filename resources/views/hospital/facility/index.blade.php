@@ -7,8 +7,8 @@
 
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
-        <h2 class="p-3">Gallery</h2>
-        <div class="pt-2"><a class="btn addbtn" href="{{route('gallery.create')}}"> Add Gallery</a></div>
+        <h2 class="p-3">Facility</h2>
+        <div class="pt-2"><a class="btn addbtn" href="{{route('facility.create')}}"> Add Facility</a></div>
     </div>
     <div class="card-body">
 
@@ -27,12 +27,12 @@
                
                 <th width="280px">Action</th>
             </tr>
-            @foreach ($gallery as $galleries)
+            @foreach ($facility as $facilities)
             <tr>
-                <td>{{ $galleries->hospitalId }}</td>
-                <td>{{ $galleries->title }}</td>
-                <td> <img src="/photo/{{$galleries->photo}}" alt="" style="min-height:100px;min-width:100px;max-height:100px;max-width:100px"> </td>
-                <td>{{ $galleries->status }}</td>
+                <td>{{ $facilities->hospitalId }}</td>
+                <td>{{ $facilities->title }}</td>
+                <td> <img src="/photo/{{$facilities->photo}}" alt="" style="min-height:100px;min-width:100px;max-height:100px;max-width:100px"> </td>
+                <td>{{ $facilities->status }}</td>
                 
                 {{-- <td>
                     @if(!empty($user->getRoleNames()))
@@ -43,8 +43,8 @@
                 </td> --}}
                 <td>
                     {{-- <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a> --}}
-                    <a class="btn btn-success" href="{{route('gallery.edit')}}{{$galleries->id}}">Edit</a> 
-                    <a onclick="return confirm('Are you sure want to delete  ?')" class="btn btn-danger" href="{{route('gallery.destroy')}}{{$galleries->id}}">Delete</a>
+                    <a class="btn btn-success" href="{{route('facility.edit')}}{{$facilities->id}}">Edit</a> 
+                    <a onclick="return confirm('Are you sure want to delete  ?')" class="btn btn-danger" href="{{route('facility.destroy')}}{{$facilities->id}}">Delete</a>
 
                     {{-- {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
@@ -53,7 +53,7 @@
             </tr>
             @endforeach
         </table>
-        {!! $gallery->withQueryString()->links('pagination::bootstrap-5') !!}
+        {!! $facility->withQueryString()->links('pagination::bootstrap-5') !!}
 
         {{-- {!! $data->render() !!} --}}
     </div>
