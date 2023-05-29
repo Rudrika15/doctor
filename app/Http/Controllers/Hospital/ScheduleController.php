@@ -13,6 +13,7 @@ class ScheduleController extends Controller
         $schedule = Schedule::paginate(5);
         return view('hospital.schedule.index', compact('schedule'));
     }
+
     public function create()
     {
         return view('hospital.schedule.create');
@@ -40,11 +41,13 @@ class ScheduleController extends Controller
             return back()->with('error', 'you have no permission for this page');
         }
     }
+
     public function edit($id)
     {
         $schedule = Schedule::find($id);
         return view('hospital.schedule.edit', compact('schedule'));
     }
+
     public function update(Request $request)
     {
         $request->validate([
@@ -71,15 +74,14 @@ class ScheduleController extends Controller
         }
     }
 
-    public function destroy($id){
-        $schedule=Schedule::find($id);
-        $schedule->status="Deleted";
-        if($schedule->save()){
-            return redirect('hospital/schedule-index')->with('success','record deleted');
+    public function destroy($id)
+    {
+        $schedule = Schedule::find($id);
+        $schedule->status = "Deleted";
+        if ($schedule->save()) {
+            return redirect('hospital/schedule-index')->with('success', 'record deleted');
+        } else {
+            return back()->with('error', 'you have no permission fot this page');
         }
-        else{
-            return back()->with('error','you have no permission fot this page');
-        }
-
     }
 }

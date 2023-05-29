@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Facility;
 use Illuminate\Http\Request;
 
-class FacalityController extends Controller
+class FacilityController extends Controller
 {
     public function index()
     {
@@ -18,6 +18,7 @@ class FacalityController extends Controller
     {
         return view('hospital.facility.create');
     }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -39,11 +40,13 @@ class FacalityController extends Controller
             return back()->with('error', 'You have no permission for this page!');
         }
     }
+
     public function edit($id)
     {
         $facility = Facility::find($id);
         return view('hospital.facility.edit', compact('facility'));
     }
+
     public function update(Request $request)
     {
         $request->validate([
@@ -68,6 +71,7 @@ class FacalityController extends Controller
             return back()->with('error', 'You have no permission for this page!');
         }
     }
+
     public function destroy($id)
     {
         $facility = Facility::find($id);
