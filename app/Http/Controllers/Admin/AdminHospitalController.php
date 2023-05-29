@@ -13,10 +13,7 @@ use Illuminate\Http\Request;
 class AdminHospitalController extends Controller
 {
     public function index(){
-        $hospital=Hospital::with('hospitalType')
-         ->with('city')
-         ->with('user')
-         ->paginate(5);
+        $hospital=Hospital::paginate(5);
  
          return view('admin.hospital.index',compact('hospital'));
      }
