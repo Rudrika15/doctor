@@ -116,7 +116,7 @@
                     @include('layouts.doctorSidebar')
 
                     @endrole
-                    
+
 
                 </ul>
 
