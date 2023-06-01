@@ -39,11 +39,18 @@
             <div class="form-group">
                 <strong>Select City</strong>
                     <br>
+                    {{-- <select name="dropdown_field">
+                        @foreach ($dropdownData as $option)
+                            <option value="{{ $option->id }}" {{ $option->id == old('dropdown_field', $data->dropdown_field) ? 'selected' : '' }}>
+                                {{ $option->name }}
+                            </option>
+                        @endforeach
+                    </select> --}}
                     <select class="form-select form-control-user @error('cityId') is-invalid @enderror"
                         name="cityId" value="{{$hospital->cityId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
-                             @foreach ($city as $city)
-                                <option value="{{$city->id}}">{{$city->name}}</option> 
+                             @foreach ($city as $citydata)
+                                <option value="{{$citydata->id}}" {{$citydata->id == old('cityId',$hospital->cityId) ? 'selected':'' }}>{{$citydata->name}}</option> 
                              @endforeach
 
                     </select>
@@ -72,9 +79,12 @@
                     <select class="form-select form-control-user @error('hospitalTypeId') is-invalid @enderror"
                         name="hospitalTypeId" value="{{$hospital->hospitalTypeId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
-                             @foreach ($hospitaltype as $hospitaltype)
+                         @foreach ($hospitaltype as $hospitaltypedata)
+                                <option value="{{$hospitaltypedata->id}}" {{$hospitaltypedata->id == old('hospitalTypeId',$hospital->hospitalTypeId) ? 'selected':'' }}>{{$hospitaltypedata->typeName}}</option> 
+                        @endforeach
+                             {{-- @foreach ($hospitaltype as $hospitaltypedata)
                                 <option value={{$hospitaltype->id}}>{{$hospitaltype->typeName}}</option>
-                             @endforeach
+                             @endforeach --}}
                     </select>
                     @error('hospitalTypeId')
                         <span class="invalid-feedback" role="alert">
@@ -92,9 +102,9 @@
                         name="userId" value="{{$hospital->userId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
                              <option selected disabled>Select User</option>
-                             @foreach ($user as $user)
-                                <option value="{{$user->id}}">{{$user->name}}</option>
-                             @endforeach
+                             @foreach ($user as $userdata)
+                                <option value="{{$userdata->id}}"{{$userdata->id == old('userId',$hospital->userId) ? 'selected':'' }}>{{$userdata->name}}</option>
+                            @endforeach
                             
                     </select>
                     @error('userId')

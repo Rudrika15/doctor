@@ -5,7 +5,9 @@ use App\Http\Controllers\Admin\AdminCityController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Admin\AdminDoctorController;
+use App\Http\Controllers\Admin\AdminSpecialistController;
 use App\Http\Controllers\Admin\AdminFacilityController;
+use App\Http\Controllers\Admin\AdminSliderController;
 use App\Http\Controllers\Hospital\GalleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHospitalController;
@@ -111,6 +113,20 @@ Route::controller(AdminFacilityController::class)->group(function () {
     Route::post('admin/facility-update', 'update')->name('admin.facility.update');
     Route::get('admin/facility-delete-{id?}', 'delete')->name('admin.facility.delete');
 });
+
+//Admin Slider
+
+Route::controller(AdminSliderController::class)->group(function () {
+    Route::get('admin/slider-create', 'create')->name('admin.slider.create');
+   
+});
+
+
+
+
+
+
+
 
 
 
