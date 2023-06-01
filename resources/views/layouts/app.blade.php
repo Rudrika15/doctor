@@ -11,6 +11,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('favicon.ico') }}">
 
+    {{-- For bootstrap tab with js --}}
+    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> --}}
 
     <title>Doctor</title>
     <!-- Main Styles -->
@@ -200,7 +204,8 @@
     <!-- Full Screen Plugin -->
     <script src="assets/plugin/fullscreen/jquery.fullscreen-min.js"></script>
 
-
+    {{-- For bootstrap tab --}}
+    
 
     <!-- Dropify -->
     <script src="{{ asset('assets/plugin/dropify/js/dropify.min.js') }}"></script>
@@ -212,8 +217,6 @@
         // instance, using default configuration.
         CKEDITOR.replace('editor1');
     </script>
-
-
 </body>
 
 </html>
