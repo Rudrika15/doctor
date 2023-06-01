@@ -33,7 +33,8 @@
             </tr>
             @foreach ($doctor as $doctors)
             <tr>
-                <td>{{ $doctors->hospitalId }}</td>
+
+                <td>{{ $doctors->hospital->hospitalName }}</td>
                 <td>{{ $doctors->doctorName }}</td>
                 <td>{{ $doctors->contactNo }}</td>
                 <td>{{ $doctors->specialistId }}</td>

@@ -47,7 +47,8 @@ class ScheduleController extends Controller
     public function edit($id)
     {
         $schedule = Schedule::find($id);
-        return view('hospital.schedule.edit', compact('schedule'));
+        $doctor=Doctor::all();
+        return view('hospital.schedule.edit', compact('schedule','doctor'));
     }
 
     public function update(Request $request)
@@ -81,7 +82,7 @@ class ScheduleController extends Controller
         $schedule = Schedule::find($id);
         $schedule->status = "Deleted";
         if ($schedule->save()) {
-            return redirect('hospital/schedule-index')->with('success', 'record deleted');
+            return redirect()->back()->with('success', 'Record deleted');
         } else {
             return back()->with('error', 'you have no permission fot this page');
         }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Hospital;
 
 use App\Http\Controllers\Controller;
 use App\Models\Gallery;
+use App\Models\Hospital;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
@@ -16,7 +17,8 @@ class GalleryController extends Controller
 
     public function create()
     {
-        return view('hospital.gallery.create');
+        $hospital=Hospital::all();
+        return view('hospital.gallery.create',compact('hospital'));
     }
 
     public function store(Request $request)
@@ -78,7 +80,7 @@ class GalleryController extends Controller
         $gallery = Gallery::find($id);
         $gallery->status = "Deleted";
         if ($gallery->save()) {
-            return redirect('hospital/gallery-index')->with('success', 'Record Deleted!');
+            return redirect()->back()->with('success', 'Record deleted');
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }

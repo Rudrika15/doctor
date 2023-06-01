@@ -29,7 +29,7 @@
             </tr>
             @foreach ($gallery as $galleries)
             <tr>
-                <td>{{ $galleries->hospitalId }}</td>
+                <td>{{ $galleries->hospital->hospitalName }}</td>
                 <td>{{ $galleries->title }}</td>
                 <td> <img src="/photo/{{$galleries->photo}}" alt="" style="min-height:100px;min-width:100px;max-height:100px;max-width:100px"> </td>
                 <td>{{ $galleries->status }}</td>

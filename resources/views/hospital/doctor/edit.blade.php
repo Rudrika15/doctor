@@ -28,7 +28,7 @@
                     <select type="text" value="{{$doctor->hospitalId}}" name="hospitalId" class="form-control @error('hospitalId') is-invalid @enderror">
                     <option selected disabled><strong >Select here...  </strong></option>
                     <option value=1 ><strong > 1</strong></option>
-                    <option value=1 ><strong >2</strong></option>
+                    <option value=2 ><strong >2</strong></option>
                     </select>
                     @error('hospitalId')
                     <sapn class="text-danger">{{ $message }}</sapn>
@@ -76,7 +76,7 @@
                       <select type="text" value="{{$doctor->userId}}" name="userId" class="form-control @error('userId') is-invalid @enderror">
                       <option selected disabled><strong >Select here...  </strong></option>
                       <option value=1 ><strong >jkl </strong></option>
-                      <option value=1><strong >pqr</strong></option> 
+                      <option value=2><strong >pqr</strong></option> 
                     </select>
                       @error('userId')
                       <sapn class="text-danger">{{ $message }}</sapn>

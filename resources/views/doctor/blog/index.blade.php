@@ -41,8 +41,8 @@
                 <td>{{ $blogs->status }}</td>
 
                 <td>
-                    <a class="btn btn-success" href="">Edit</a> 
-                    <a class="btn btn-danger" href="">Delete</a>
+                    <a class="btn btn-success" href="{{route('blog.edit')}}{{$blogs->id}}">Edit</a> 
+                    <a onclick="return confirm('are you sure want to deleted') " class="btn btn-danger" href="{{route('blog.destroy')}}{{$blogs->id}}">Delete</a>
                  
                 </td>
             </tr>

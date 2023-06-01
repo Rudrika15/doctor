@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Hospital;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Doctor;
+use App\Models\Hospital;
 
 class DoctorController extends Controller
 {
@@ -12,12 +13,14 @@ class DoctorController extends Controller
     public function index()
     {
         $doctor = Doctor::paginate(5);
+
         return view('hospital.doctor.index', compact('doctor'));
     }
 
     public function create()
     {
-        return view('hospital.doctor.create');
+        $hospital=Hospital::all();
+        return view('hospital.doctor.create',compact('hospital'));
     }
 
     public function store(Request $request)
@@ -100,7 +103,7 @@ class DoctorController extends Controller
         $doctor = Doctor::find($id);
         $doctor->status = "Deleted";
         if ($doctor->save()) {
-            return redirect('hospital/doctor-index')->with('success', 'Record deleted');
+            return redirect()->back()->with('success', 'Record deleted');
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }
