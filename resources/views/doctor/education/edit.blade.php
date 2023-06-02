@@ -27,8 +27,9 @@
                     <strong>Doctor ID </strong> 
                     <select type="text" name="doctorId"  value="{{$education->doctorId}}" class="form-control @error('doctorId') is-invalid @enderror">
                  <option selected disabled><strong >Select here...  </strong></option>
-                 @foreach ($doctor as $doctor)
-                 <option value="{{$doctor->id}}">{{$doctor->doctorName}}</option>
+                 @foreach ($doctor as $doctordata)
+                 <option value="{{$doctordata->id}}" {{$doctordata->id==old('doctorId',$education->doctorId)?'selected':''}}>{{$doctordata->doctorName}}</option>
+
                  @endforeach
                 </select>
                 @error('doctorId')
