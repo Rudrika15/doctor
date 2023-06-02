@@ -1,10 +1,12 @@
 @extends('layouts.app')
-@section('content')
 
+@section('content')
+    
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
         <h2 class="p-3">Slider Management</h2>
-        <div class="pt-2"><a class="btn addbtn" href="{{ route('admin.gallery.index',['id' => request()->route('id')]) }}"> Back</a></div>
+        <div class="pt-2"><a class="btn addbtn" href="{{ route('admin.slider.index')}}"> Back</a></div>
+
     </div>
     <div class="card-body">
 
@@ -14,29 +16,27 @@
         </div>
         @endif
 
-        <form action="" method="" enctype="multipart/form-data">
+        <form id="frm" action="{{route('admin.slider.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
       
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Title</strong>
-                <input type="text" name="title" class="form-control @error('title') is-invalid @enderror">
+                <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror">   
                 @error('title')
                     <sapn class="text-danger">{{ $message }}</sapn>
                 @enderror
             </div>
         </div>
        
-       
-        
         <div class="col-xs-12 col-sm-12 col-md-12">
             <strong>Select Image </strong>
             <div class="row">
                 <div class="col-md-4">
-                    <input type="file" accept='image/*' onchange="readURL(this,'#img1')" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo">
-                    @error('photo')
+                    <input type="file" accept='image/*' onchange="readURL(this,'#img1')" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
+                    @error('image')
                     <sapn class="text-danger">{{ $message }}</sapn>
-                    @enderror
+                    @enderror  
                 </div>
 
                 <div class="col-md-4">
@@ -52,24 +52,24 @@
                 <strong>Select Place</strong>
                     <br>
                     <select class="form-select form-control-user @error('place') is-invalid @enderror"
-                        name="place" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
+                        name="place" id="place" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
                              <option selected disabled>Select Place</option>
                              <option value="inside">Inside</option>
                              <option value="outside">Outside</option>  
                     </select>
                     @error('place')
-                        <span class="invalid-feedback" role="alert">
-                        {{$message}}
-                        </span>
-                    @enderror
+                    <span class="invalid-feedback" role="alert">
+                    {{$message}}
+                    </span>
+                @enderror
             </div>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Navigate</strong>
-                <input type="text" name="navigate" class="form-control @error('navigate') is-invalid @enderror">
+                <input type="text" name="navigate" id="navigate" class="form-control @error('navigate') is-invalid @enderror">    
                 @error('navigate')
                     <sapn class="text-danger">{{ $message }}</sapn>
                 @enderror
@@ -77,6 +77,7 @@
         </div>
 
         
+    
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btnsubmit">Submit</button>
         </div>
@@ -85,8 +86,10 @@
     </div>
 
 </div>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
 
-<script>
+ <script>
     function readURL(input, tgt) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -97,5 +100,48 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+</script>    
+<script>
+
+jQuery('#frm').validate({
+	rules:{
+		title:{
+            required:true,
+            minlength:5,
+            maxlength:200
+        },
+        image:{
+            required:true,
+        },
+        place:{
+            required:true,
+        },
+        navigate:{
+            required:true,
+            minlength:10,
+        },	
+	},
+    messages:{
+		title:{
+            required:"Please Enter Title",
+            minlength:"Title Minimum of 5 Character Long"
+        },
+        image:{
+            required:"Please Select Image",
+        },
+        place:{
+            required:"Please Select Place",
+        },
+        navigate:{
+            required:"Please Enter Navigate",
+            minlength:"Title Minimum of 10 Character Long"
+        },
+        
+	},
+	submitHandler:function(form){
+		form.submit();
+	}
+});
 </script>
+
 @endsection

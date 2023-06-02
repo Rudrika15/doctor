@@ -204,9 +204,12 @@
     <!-- Full Screen Plugin -->
     <script src="assets/plugin/fullscreen/jquery.fullscreen-min.js"></script>
 
-    {{-- For bootstrap tab --}}
+    {{-- For Jquery Validation  --}}
     
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script> --}}
 
+    
     <!-- Dropify -->
     <script src="{{ asset('assets/plugin/dropify/js/dropify.min.js') }}"></script>
     <script src="{{ asset('assets/scripts/fileUpload.demo.min.js') }}"></script>

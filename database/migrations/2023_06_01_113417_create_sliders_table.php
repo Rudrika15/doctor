@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('image');
             $table->string('place');
             $table->string('navigate');
+            $table->string('status')->default('Active');
             $table->timestamps();
         });
     }
