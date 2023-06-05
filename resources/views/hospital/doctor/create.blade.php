@@ -60,8 +60,9 @@
                         <strong>Specialist ID </strong> 
                       <select type="text" name="specialistId" class="form-control @error('specialistId') is-invalid @enderror">
                       <option selected disabled><strong >Select here...  </strong></option>
-                      <option value=1 ><strong >abc </strong></option>
-                      <option  value=2><strong >xyz</strong></option> 
+                      @foreach ($specialist as $specialist)
+                     <option value="{{$specialist->id}}">{{$specialist->specialistName}}</option>
+                     @endforeach
                     </select>
                       @error('specialistId')
                       <sapn class="text-danger">{{ $message }}</sapn>
@@ -74,8 +75,9 @@
                         <strong>User ID </strong> 
                       <select type="text" name="userId" class="form-control @error('userId') is-invalid @enderror">
                       <option selected disabled><strong >Select here...  </strong></option>
-                      <option value=1 ><strong >jkl </strong></option>
-                      <option value=2><strong >pqr</strong></option> 
+                      @foreach ($user as $user)
+                     <option value="{{$user->id}}">{{$user->name}}</option>
+                     @endforeach
                     </select>
                       @error('userId')
                       <sapn class="text-danger">{{ $message }}</sapn>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Hospital;
 
 use App\Http\Controllers\Controller;
 use App\Models\Doctor;
+use App\Models\Hospital;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,8 @@ class ScheduleController extends Controller
     public function create()
     {
         $doctor=Doctor::all();
-        return view('hospital.schedule.create',compact('doctor'));
+        $hospital=Hospital::all();
+        return view('hospital.schedule.create',compact('doctor','hospital'));
     }
 
     public function store(Request $request)
@@ -48,7 +50,8 @@ class ScheduleController extends Controller
     {
         $schedule = Schedule::find($id);
         $doctor=Doctor::all();
-        return view('hospital.schedule.edit', compact('schedule','doctor'));
+        $hospital=Hospital::all();
+        return view('hospital.schedule.edit', compact('schedule','doctor','hospital'));
     }
 
     public function update(Request $request)

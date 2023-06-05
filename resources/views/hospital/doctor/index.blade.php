@@ -37,8 +37,8 @@
                 <td>{{ $doctors->hospital->hospitalName }}</td>
                 <td>{{ $doctors->doctorName }}</td>
                 <td>{{ $doctors->contactNo }}</td>
-                <td>{{ $doctors->specialistId }}</td>
-                <td>{{ $doctors->userId }}</td>
+                <td>{{ $doctors->specialist->specialistName	 }}</td>
+                <td>{{ $doctors->user->name }}</td>
                 <td> <img src="/photo/{{$doctors->photo}}" alt=""> </td>
                 <td>{{ $doctors->experience }}</td>
                 <td>{{ $doctors->registerNumber }}</td>

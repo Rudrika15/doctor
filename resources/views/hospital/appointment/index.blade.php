@@ -8,7 +8,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
         <h2 class="p-3">Schedule</h2>
-        <div class="pt-2"><a class="btn addbtn" href="{{route('schedule.create')}}"> Add Schedule</a></div>
+        <div class="pt-2"><a class="btn addbtn" href="{{route('appointment.index')}}"> Back</a></div>
     </div>
     <div class="card-body">
 
@@ -22,16 +22,16 @@
             <tr>
                 <th>Hospital Name</th>
                 <th>Doctor Name</th>
-                <th>Day</th>
-                <th>Session</th>
-                <th>Time</th>
-                <th>Status</th>
+                {{-- <th>Patient Name</th>
+                <th>Schedule</th>
+                --}}
+                {{-- <th>Status</th> --}}
                
-                <th width="280px">Action</th>
+                {{-- <th width="280px">Action</th> --}}
             </tr>
-            @foreach ($schedule as $schedules)
+            @foreach ($appointment as $appointments)
             <tr>
-                @foreach ($schedules->hospital as $hospital)
+                {{-- @foreach ($schedules->hospital as $hospital)
                     
                 <td>{{ $hospital->hospitalName }}</td>
                 @endforeach
@@ -39,12 +39,12 @@
                 @foreach ($schedules->doctor as $doctor)
                     
                 <td>{{ $doctor->doctorName }}</td>
-                @endforeach
+                @endforeach --}}
 
-                <td>{{ $schedules->day }}</td>
-                <td>{{ $schedules->session }}</td>
-                <td>{{ $schedules->time }}</td>
-                <td>{{ $schedules->status }}</td>
+                <td>{{ $appointments->hospital->hospitalName }}</td>
+                <td>{{ $appointments->doctor->doctorName }}</td>
+                {{-- <td>{{ $appointments->p}}</td>
+                <td>{{ $appointments->status }}</td> --}}
                 
                 {{-- <td>
                     @if(!empty($user->getRoleNames()))
@@ -53,21 +53,21 @@
                     @endforeach
                     @endif
                 </td> --}}
-                <td>
+                {{-- <td> --}}
                     {{-- <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a> --}}
-                    <a class="btn btn-success" href="{{route('schedule.edit')}}{{$schedules->id}}">Edit</a> 
+                    {{-- <a class="btn btn-success" href="{{route('schedule.edit')}}{{$schedules->id}}">Edit</a>  --}}
 
 
-                    <a onclick="return confirm('Are you sure want to delete  ?')" class="btn btn-danger" href="{{route('schedule.destroy')}}{{$schedules->id}}">Delete</a>
+                    {{-- <a onclick="return confirm('Are you sure want to delete  ?')" class="btn btn-danger" href="{{route('schedule.destroy')}}{{$schedules->id}}">Delete</a> --}}
 
                     {{-- {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                     {!! Form::close() !!} --}}
-                </td>
+                {{-- </td> --}}
             </tr>
             @endforeach
         </table>
-        {!! $schedule->withQueryString()->links('pagination::bootstrap-5') !!}
+        {!! $appointment->withQueryString()->links('pagination::bootstrap-5') !!}
 
         {{-- {!! $data->render() !!} --}}
     </div>

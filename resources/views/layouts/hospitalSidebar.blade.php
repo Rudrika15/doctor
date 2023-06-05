@@ -11,3 +11,6 @@
 <li>
     <a class="text-white waves-effect" href="{{route('schedule.index')}}"><i class="text-white menu-icon bi bi-calendar-day-fill"></i><span>Schedule</span></a>
 </li>
+<li>
+    <a class="text-white waves-effect" href="{{route('appointment.index')}}"><i class="text-white menu-icon bi bi-calendar-day-fill"></i><span>Appointments</span></a>
+</li>

@@ -11,6 +11,10 @@ class Schedule extends Model
      function  doctor(){
         return $this->hasMany(Doctor::class,'id','doctorId');
        
+     }
+     function  hospital(){
+        return $this->hasMany(Hospital::class,'id','hospitalId');
+       
 
      }
 }
