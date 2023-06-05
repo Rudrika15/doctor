@@ -10,6 +10,7 @@ use App\Http\Controllers\Hospital\GalleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHospitalController;
 use App\Http\Controllers\Admin\AdminHospitalTypeController;
+use App\Http\Controllers\Admin\AdminSpecialistController;
 use App\Http\Controllers\Hospital\DoctorController;
 use App\Http\Controllers\Hospital\FacilityController;
 use App\Http\Controllers\Hospital\ScheduleController;
