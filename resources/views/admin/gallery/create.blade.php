@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
         <h2 class="p-3">Gallery Management</h2>
-        <div class="pt-2"><a class="btn addbtn" href="{{ route('admin.gallery.index',['id' => request()->route('id')]) }}"> Back</a></div>
+        <div class="pt-2"><a class="btn addbtn" href="{{ route('admin.hospital.viewdetails',['id' => request()->route('id')]) }}"> Back</a></div>
     </div>
     <div class="card-body">
 

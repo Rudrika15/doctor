@@ -45,9 +45,12 @@
                     <select class="form-select form-control-user @error('specialistId') is-invalid @enderror"
                         name="specialistId" value="{{$doctor->specialistId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
-                         <option selected disabled>Select Specialist</option>                  
-                             @foreach ($specialist as $specialist)
-                                <option value={{$specialist->id}}>{{$specialist->specialistName}}</option>
+                         <option selected disabled>Select Specialist</option>
+                         {{-- @foreach ($user as $userdata)
+                         <option value="{{$userdata->id}}" {{$userdata->id == old('userId',$doctor->userId) ? 'selected':''}}>{{$userdata->name}}</option>
+                     @endforeach             --}}
+                             @foreach ($specialist as $specialistdata)
+                                <option value="{{$specialistdata->id}}" {{$specialistdata->id == old('specialistId',$doctor->specialistId)? 'selected':''}}>{{$specialistdata->specialistName}}</option>
                              @endforeach
                     </select>
                     @error('specialistId')
@@ -66,9 +69,10 @@
                         name="userId" value="{{$doctor->userId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
                          <option selected disabled>Select Specialist</option>                  
-                                @foreach ($user as $user)
-                                <option value={{$user->id}}>{{$user->name}}</option>
-                                @endforeach
+                         
+                            @foreach ($user as $userdata)
+                                <option value="{{$userdata->id}}" {{$userdata->id == old('userId',$doctor->userId) ? 'selected':''}}>{{$userdata->name}}</option>
+                            @endforeach
                     </select>
                     @error('userId')
                         <span class="invalid-feedback" role="alert">

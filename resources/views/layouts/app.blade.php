@@ -17,14 +17,15 @@
     <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> --}}
 
     <title>Doctor</title>
+    
     <!-- Main Styles -->
     <link rel="stylesheet" href="{{ asset('assets/styles/style.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/styles/color.css') }}">
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"> -->
     <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
     <!-- bootstrap 5 css -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
     <!-- mCustomScrollbar -->
     <link rel="stylesheet" href="{{ asset('assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.min.css') }}">
 
@@ -160,9 +161,8 @@
             @yield('content')
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+ 
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{{ asset('assets/scripts/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/scripts/modernizr.min.js') }}"></script>
@@ -204,9 +204,12 @@
     <!-- Full Screen Plugin -->
     <script src="assets/plugin/fullscreen/jquery.fullscreen-min.js"></script>
 
-    {{-- For bootstrap tab --}}
+    {{-- For Jquery Validation  --}}
     
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script> --}}
 
+    
     <!-- Dropify -->
     <script src="{{ asset('assets/plugin/dropify/js/dropify.min.js') }}"></script>
     <script src="{{ asset('assets/scripts/fileUpload.demo.min.js') }}"></script>

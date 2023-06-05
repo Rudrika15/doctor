@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\City;
+use App\Models\Doctor;
 use App\Models\Hospital;
 use App\Models\HospitalType;
+use App\Models\Gallery;
+use App\Models\Facility;
 
 use Illuminate\Http\Request;
 
@@ -111,9 +114,27 @@ class AdminHospitalController extends Controller
         }
     }
 
-    public function viewDetails($id)
+    public function viewDetails(Request $request,$id)
     {
-        $hospital = Hospital::find($id);
-        return view('admin.hospital.viewdetails', compact('hospital'));
+        // $doctor = Doctor::where('hospitalId', $hospitalId)
+        //     ->with('hospital')
+        //     ->with('user')
+        //     ->paginate(5);
+        $hospital=Hospital::find($id);
+        $hospitalId=$request->id;
+        $doctor=Doctor::where('hospitalId',$hospitalId)
+            ->with('hospital')
+            ->with('user')
+            ->paginate(5);
+        
+        $gallery = Gallery::where('hospitalId', $hospitalId)
+            ->with('hospital')
+            ->paginate(5);
+
+        $facility = Facility::where('hospitalId', $hospitalId)
+            ->with('hospital')
+            ->paginate(5);
+           
+        return view('admin.hospital.viewdetails', compact('hospital','doctor','gallery','facility'));
     }
 }

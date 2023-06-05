@@ -5,7 +5,9 @@ use App\Http\Controllers\Admin\AdminCityController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Admin\AdminDoctorController;
+use App\Http\Controllers\Admin\AdminSpecialistController;
 use App\Http\Controllers\Admin\AdminFacilityController;
+use App\Http\Controllers\Admin\AdminSliderController;
 use App\Http\Controllers\Hospital\GalleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHospitalController;
@@ -62,7 +64,7 @@ Route::controller(AdminHospitalController::class)->group(function () {
     Route::get('admin/hospital-edit-{id?}', 'edit')->name('hospital.edit');
     Route::post('admin/hospital-update', 'update')->name('hospital.update');
     Route::get('admin/hospital-delete-{id?}', 'delete')->name('hospital.delete');
-    Route::get('admin/hospital-viewdetails-{id?}', 'viewDetails')->name('hospital.viewdetails');
+    Route::get('admin/hospital-viewdetails-{id?}', 'viewDetails')->name('admin.hospital.viewdetails');
 });
 
 // Admin HospitalType
@@ -112,6 +114,24 @@ Route::controller(AdminFacilityController::class)->group(function () {
     Route::post('admin/facility-update', 'update')->name('admin.facility.update');
     Route::get('admin/facility-delete-{id?}', 'delete')->name('admin.facility.delete');
 });
+
+//Admin Slider
+
+Route::controller(AdminSliderController::class)->group(function () {
+    Route::get('admin/slider-index','index')->name('admin.slider.index');
+    Route::get('admin/slider-create', 'create')->name('admin.slider.create');
+    Route::post('admin/slider-store','store')->name('admin.slider.store');
+    Route::get('admin/slider-edit-{id?}','edit')->name('admin.slider.edit');
+    Route::post('admin/slider-update','update')->name('admin.slider.update');
+    Route::get('admin/slider-delete-{id?}','delete')->name('admin.slider.delete');
+});
+
+
+
+
+
+
+
 
 
 

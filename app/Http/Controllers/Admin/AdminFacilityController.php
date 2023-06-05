@@ -71,7 +71,7 @@ class AdminFacilityController extends Controller
         $facility->status = "Active";
 
         if ($facility->save()) {
-            return redirect()->route('admin.facility.index', $hospitalId)->with('success', 'Facility Edited successfully!');
+            return redirect()->route('admin.hospital.viewdetails', $hospitalId)->with('success', 'Facility Edited successfully!');
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }

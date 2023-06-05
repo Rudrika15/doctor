@@ -105,7 +105,7 @@ class AdminDoctorController extends Controller
         $doctor->status = "Active";
         if ($doctor->save()) {
 
-            return redirect()->route("admin.doctor.index", $hospiId)->with('success', 'Doctor Updated successfully!');
+            return redirect()->route("admin.hospital.viewdetails", $hospiId)->with('success', 'Doctor Updated successfully!');
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }

@@ -51,7 +51,7 @@
                         <td>{{$hospitals->category}}</td>
                         <td>{{$hospitals->status}}</td>
                         <td>
-                            <a class="btn btn-success mt-1" href="{{route('hospital.viewdetails')}}{{$hospitals->id}}">View Details</a>
+                            <a class="btn btn-success mt-1" href="{{route('admin.hospital.viewdetails')}}{{$hospitals->id}}">View Details</a>
                     
                             <a class="btn btn-primary mt-2" href="{{route('hospital.edit')}}{{$hospitals->id}}">Edit</a>
                     

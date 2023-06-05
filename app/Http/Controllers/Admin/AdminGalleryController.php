@@ -75,7 +75,7 @@ class AdminGalleryController extends Controller
         $gallery->save();
 
         if ($gallery->save()) {
-            return redirect()->route('admin.gallery.index', $hospitalId)->with('success', 'Gallery Updated successfully!');
+            return redirect()->route('admin.hospital.viewdetails', $hospitalId)->with('success', 'Gallery Updated successfully!');
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }
