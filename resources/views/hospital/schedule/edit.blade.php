@@ -26,8 +26,8 @@
                       <strong>Hospital ID </strong> 
                     <select type="text" value="{{$schedule->hospitalId}}" name="hospitalId" class="form-control @error('hospitalId') is-invalid @enderror">
                     <option selected disabled><strong >Select here...  </strong></option>
-                    <option value=1 ><strong > 1</strong></option>
-                    <option value=2 ><strong >2</strong></option>
+                    <option value=1 ><strong > aaa</strong></option>
+                    <option value=2 ><strong >bbb</strong></option>
                     </select>
                     @error('hospitalId')
                     <sapn class="text-danger">{{ $message }}</sapn>
@@ -40,14 +40,25 @@
                         <strong>Doctor ID </strong> 
                       <select type="text" value="{{$schedule->doctorId}}" name="doctorId" class="form-control @error('doctorId') is-invalid @enderror">
                       <option selected disabled><strong >Select here...  </strong></option>
-                      <option value=1 ><strong > 1</strong></option>
-                      <option value=2 ><strong >2</strong></option>
+                      @foreach ($doctor as $doctordata)
+                      <option value="{{$doctordata->id}}" {{$doctordata->id==old('doctorId',$schedule->doctorId)? 'selected':''}}>{{$doctordata->doctorName}}</option>
+
+                      @endforeach
                       </select>
                       @error('doctorId')
                       <sapn class="text-danger">{{ $message }}</sapn>
                       @enderror
                   </div>
               </div>
+
+              {{-- <select class="form-select form-control-user @error('cityId') is-invalid @enderror"
+              name="cityId" value="{{$hospital->cityId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
+               aria-label="Default select example">
+                   @foreach ($city as $citydata)
+                      <option value="{{$citydata->id}}" {{$citydata->id == old('cityId',$hospital->cityId) ? 'selected':'' }}>{{$citydata->name}}</option>
+                   @endforeach
+          </select> --}}
+
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">

@@ -7,8 +7,8 @@
 
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
-        <h2 class="p-3">Gallery</h2>
-        <div class="pt-2"><a class="btn addbtn" href="{{route('gallery.index')}}"> Back</a></div>
+        <h2 class="p-3">Blog</h2>
+        <div class="pt-2"><a class="btn addbtn" href="{{route('blog.index')}}"> Back</a></div>
     </div>
     <div class="card-body">
 
@@ -18,22 +18,9 @@
         </div>
         @endif
 
-        <form action="{{route('gallery.store')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
+        <form action="{{route('blog.store')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
             @csrf
-          <div class="col-xs-12 col-sm-12 col-md-12">
-              <div class="form-group">
-                      <strong>Hospital ID </strong> 
-                    <select type="text" name="hospitalId" class="form-control @error('hospitalId') is-invalid @enderror">
-                    <option selected disabled><strong >Select here...  </strong></option>
-                    @foreach ($hospital as $hospital)
-                <option value="{{$hospital->id}}">{{$hospital->hospitalName}}</option>
-                   @endforeach
-                    </select>
-                    @error('hospitalId')
-                    <sapn class="text-danger">{{ $message }}</sapn>
-                    @enderror
-                </div>
-            </div>
+        
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -45,6 +32,18 @@
                 </div>
             </div>
 
+            
+            
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                      <strong> Details</strong>
+                      <textarea class="form-control @error('detail')is-invalid @enderror" name="detail" id="exampleTextarea" rows="3"></textarea>
+                      @error('detail')
+                      <sapn class="text-danger">{{ $message }}</sapn>
+                      @enderror
+                  </div>
+              </div>
+             
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <strong>Select Image </strong>
                 <div class="row">
@@ -59,16 +58,31 @@
                         <label for="image"></label>
                         <img src="{{url('asset/img/default.jpg')}}" alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
                     </div>
-
+                    
                 </div>
             </div>
+                    
+        <div class="col-xs-12 col-sm-12 col-md-12">
+             <div class="form-group">
+                <strong>Doctor ID </strong> 
+                 <select type="text" name="doctorId" class="form-control @error('doctorId') is-invalid @enderror">
+                 <option selected disabled><strong >Select here...  </strong></option>
+                 @foreach ($doctor as $doctor)
+                 <option value="{{$doctor->id}}">{{$doctor->doctorName}}</option>
+             @endforeach
+                 </select>
+                 @error('doctorId')
+                 <sapn class="text-danger">{{ $message }}</sapn>
+                 @enderror
+             </div>
+         
+
 
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btnsubmit">Submit</button>
             </div>
 
         </form>
-       
         <script>
             function readURL(input, tgt) {
                 if (input.files && input.files[0]) {

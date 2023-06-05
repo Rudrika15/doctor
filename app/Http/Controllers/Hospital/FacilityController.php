@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Hospital;
 
 use App\Http\Controllers\Controller;
 use App\Models\Facility;
+use App\Models\Hospital;
 use Illuminate\Http\Request;
 
 class FacilityController extends Controller
@@ -16,7 +17,8 @@ class FacilityController extends Controller
 
     public function create()
     {
-        return view('hospital.facility.create');
+        $hospital=Hospital::all();
+        return view('hospital.facility.create',compact('hospital'));
     }
 
     public function store(Request $request)
@@ -77,7 +79,7 @@ class FacilityController extends Controller
         $facility = Facility::find($id);
         $facility->status = "Deleted";
         if ($facility->save()) {
-            return redirect('hospital/facility-index')->with('success', 'Record Deleted!');
+            return redirect()->back()->with('success', 'Record deleted');
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }

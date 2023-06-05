@@ -32,7 +32,11 @@
             @foreach ($schedule as $schedules)
             <tr>
                 <td>{{ $schedules->hospitalId }}</td>
-                <td>{{ $schedules->doctorId }}</td>
+                @foreach ($schedules->doctor as $doctor)
+                    
+                <td>{{ $doctor->doctorName }}</td>
+                @endforeach
+
                 <td>{{ $schedules->day }}</td>
                 <td>{{ $schedules->session }}</td>
                 <td>{{ $schedules->time }}</td>

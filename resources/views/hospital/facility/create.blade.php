@@ -25,8 +25,9 @@
                       <strong>Hospital ID </strong> 
                     <select type="text" name="hospitalId" class="form-control @error('hospitalId') is-invalid @enderror">
                     <option selected disabled><strong >Select here...  </strong></option>
-                    <option value=1 ><strong > 1</strong></option>
-                    <option value=1 ><strong >2</strong></option>
+                    @foreach ($hospital as $hospital)
+                    <option value="{{$hospital->id}}">{{$hospital->hospitalName}}</option>
+                       @endforeach
                     </select>
                     @error('hospitalId')
                     <sapn class="text-danger">{{ $message }}</sapn>
