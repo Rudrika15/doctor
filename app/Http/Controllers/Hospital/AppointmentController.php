@@ -14,11 +14,8 @@ class AppointmentController extends Controller
     public function index()
     {
         $appointment=Appointment::paginate(5);
-        $hospital=Hospital::all();
-        $doctor=Doctor::all();
-        $patient=Patient::all();
-        
-        return view('hospital.appointment.index',compact('appointment','hospital','doctor','patient'));
+       
+        return view('hospital.appointment.index',compact('appointment'));
 
     }
 }

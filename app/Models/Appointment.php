@@ -16,12 +16,12 @@ class Appointment extends Model
         return $this->hasOne(Doctor::class,'id','doctorId');
        
      }
-     function  patient(){
-        return $this->hasOne(Patient::class,'id','patientId');
+   //   function  patient(){
+   //      return $this->hasOne(Patient::class,'id','patientId');
        
-     }
-     function  schedule(){
-        return $this->hasOne(Schedule::class,'id','scheduleId');
+   //   }
+   //   function  schedule(){
+   //      return $this->hasOne(Schedule::class,'id','scheduleId');
        
-     }
+   //   }
 }

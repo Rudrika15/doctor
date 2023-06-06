@@ -17,7 +17,7 @@
             <p>{{ $message }}</p>
         </div>
         @endif
-
+<div class="table-responsive">
         <table class="table table-bordered">
             <tr>
                 <th>Hospital Name</th>
@@ -67,6 +67,7 @@
             </tr>
             @endforeach
         </table>
+    </div>
         {!! $schedule->withQueryString()->links('pagination::bootstrap-5') !!}
 
         {{-- {!! $data->render() !!} --}}

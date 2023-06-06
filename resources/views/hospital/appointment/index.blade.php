@@ -22,10 +22,10 @@
             <tr>
                 <th>Hospital Name</th>
                 <th>Doctor Name</th>
-                {{-- <th>Patient Name</th>
+                <th>Patient Name</th>
                 <th>Schedule</th>
-                --}}
-                {{-- <th>Status</th> --}}
+               
+                <th>Status</th>
                
                 {{-- <th width="280px">Action</th> --}}
             </tr>
@@ -43,8 +43,9 @@
 
                 <td>{{ $appointments->hospital->hospitalName }}</td>
                 <td>{{ $appointments->doctor->doctorName }}</td>
-                {{-- <td>{{ $appointments->p}}</td>
-                <td>{{ $appointments->status }}</td> --}}
+                <td>{{ $appointments->patient}}</td>
+                <td>{{ $appointments->schedule}}</td>
+                <td>{{ $appointments->status}}</td>
                 
                 {{-- <td>
                     @if(!empty($user->getRoleNames()))

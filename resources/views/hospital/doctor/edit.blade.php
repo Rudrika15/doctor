@@ -24,7 +24,7 @@
 
           <div class="col-xs-12 col-sm-12 col-md-12">
               <div class="form-group">
-                      <strong>Hospital ID </strong> 
+                      <strong>Hospital Name </strong> 
                     <select type="text" value="{{$doctor->hospitalId}}" name="hospitalId" class="form-control @error('hospitalId') is-invalid @enderror">
                     <option selected disabled><strong >Select here...  </strong></option>
                     @foreach ($hospital as $hospitaldata)
@@ -60,7 +60,7 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                        <strong>Specialist ID </strong> 
+                        <strong>Specialist Name </strong> 
                       <select type="text" value="{{$doctor->specialistId}}"  name="specialistId" class="form-control @error('specialistId') is-invalid @enderror">
                       <option selected disabled><strong >Select here...  </strong></option>
                       @foreach ($specialist as $specialistdata)
@@ -76,7 +76,7 @@
 
               <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                        <strong>User ID </strong> 
+                        <strong>User Name </strong> 
                       <select type="text" value="{{$doctor->userId}}" name="userId" class="form-control @error('userId') is-invalid @enderror">
                       <option selected disabled><strong >Select here...  </strong></option>
                       @foreach ($user as $userdata)

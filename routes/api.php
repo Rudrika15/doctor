@@ -52,3 +52,9 @@ Route::get('sociallink/{id?}',[HospitalController::class,'socialLink']);
  Route::get('facility/{id?}',[HospitalController::class,'facility']);
  
  Route::get('hospitaldata',[HospitalController::class,'hospitalView']);
+ //hospitaltype list
+ Route::get('hospitaltype/view/{id?}',[HospitalController::class,'hospitaltype']);
+//hospital type wise hospital view
+Route::get('hospitaltypeview/{id?}',[HospitalController::class,'hospitaltypeview']);
+
+

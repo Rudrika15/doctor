@@ -17,14 +17,14 @@
             <p>{{ $message }}</p>
         </div>
         @endif
-
+<div class="table-responsive">
         <table class="table table-bordered">
             <tr>
-                <th>Hospital ID</th>
+                <th>Hospital Name</th>
                 <th>Doctor Name</th>
                 <th>Contact Number</th>
-                <th>Specialist ID</th>
-                <th>User ID</th>
+                <th>Specialist Name</th>
+                <th>User Name</th>
                 <th>Photo</th>
                 <th>Experiance</th>
                 <th>Register Number</th>
@@ -63,6 +63,7 @@
             </tr>
             @endforeach
         </table>
+    </div>
         {!! $doctor->withQueryString()->links('pagination::bootstrap-5') !!}
 
         {{-- {!! $data->render() !!} --}}

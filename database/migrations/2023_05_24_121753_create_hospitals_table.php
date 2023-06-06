@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('userId');
             $table->string('siteUrl');
             $table->string('category');
+            $table->string('hospitalLogo');
             $table->string('status')->default('Active');
             $table->timestamps();
         });
