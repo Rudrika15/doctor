@@ -46,7 +46,8 @@ class FacilityController extends Controller
     public function edit($id)
     {
         $facility = Facility::find($id);
-        return view('hospital.facility.edit', compact('facility'));
+        $hospital=Hospital::all();
+        return view('hospital.facility.edit', compact('facility','hospital'));
     }
 
     public function update(Request $request)

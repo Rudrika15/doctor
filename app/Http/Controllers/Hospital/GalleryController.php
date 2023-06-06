@@ -46,7 +46,8 @@ class GalleryController extends Controller
     public function edit($id)
     {
         $gallery = Gallery::find($id);
-        return view('hospital.gallery.edit', compact('gallery'));
+        $hospital=Hospital::all();
+        return view('hospital.gallery.edit', compact('gallery','hospital'));
     }
 
     public function update(Request $request)

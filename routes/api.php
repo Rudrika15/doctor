@@ -27,9 +27,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 //slider view
 Route::get('slider',[SliderController::class,'slider']);
-
-
-
 // specialist list
 Route::get('specialist',[SpecialistController::class,'specialistList']);
 //hospital List
@@ -39,6 +36,7 @@ Route::get('hospital',[HospitalListController::class,'HospitalList']);
  //Blog view
  Route::get('blog',[BlogListController::class,'blogView']);
  Route::get('blog/view/{id?}',[BlogListController::class,'blogList']);
+
  Route::get('blog/search/{title}',[BlogListController::class,'search']);
  
 //sociallink
@@ -54,6 +52,7 @@ Route::get('sociallink/{id?}',[HospitalController::class,'socialLink']);
  Route::get('hospitaldata',[HospitalController::class,'hospitalView']);
  //hospitaltype list
  Route::get('hospitaltype/view/{id?}',[HospitalController::class,'hospitaltype']);
+
 //hospital type wise hospital view
 Route::get('hospitaltypeview/{id?}',[HospitalController::class,'hospitaltypeview']);
 

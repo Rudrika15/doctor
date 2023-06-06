@@ -15,7 +15,7 @@ class HospitalController extends Controller
 {
     function hospitalView()
     {
-        $hospital = Hospital::all();
+        $hospital = HospitalType::all();
 
         if ($hospital) {
             return response([
