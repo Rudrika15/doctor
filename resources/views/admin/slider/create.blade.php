@@ -41,7 +41,7 @@
 
                 <div class="col-md-4">
                     <label for="image"></label>
-                    <img src="{{url('admin_img/default.jpg')}}" alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
+                    <img src="{{url('slider/default.jpg')}}" alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
                 </div>
 
             </div>

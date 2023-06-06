@@ -46,7 +46,7 @@
                                 <td>{{$doctors->user->name}}</td>
                                 
                                 <td>
-                                    <img src="/admin_img/{{$doctors->photo}}" alt="">
+                                    <img src="{{url('doctor')}}/{{$doctors->photo}}" alt="">
                                 </td>
                                 <td>{{$doctors->experience}}</td>
                                 <td>{{$doctors->registerNumber}}</td>
@@ -80,7 +80,7 @@
                                 <td>{{$gallerys->hospital->hospitalName}}</td>
                                 <td>{{$gallerys->title}}</td>
                                 <td>
-                                    <img src="/admin_img/{{$gallerys->photo}}" alt="" width="200" height="200">
+                                    <img src="{{url('gallery')}}/{{$gallerys->photo}}" alt="" width="200" height="200">
                                 </td>
                                 <td>{{$gallerys->status}}</td>
                                 <td>
@@ -112,7 +112,7 @@
                                 <td>{{$facilitys->hospital->hospitalName}}</td>
                                 <td>{{$facilitys->title}}</td>
                                 <td>
-                                    <img src="/admin_img/{{$facilitys->photo}}" alt="" width="200" height="200">
+                                    <img src="{{url('facility')}}/{{$facilitys->photo}}" alt="" width="200" height="200">
                                 </td>
                                 <td>{{$facilitys->status}}</td>
                                 <td>

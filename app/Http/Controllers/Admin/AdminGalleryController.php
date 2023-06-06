@@ -38,7 +38,7 @@ class AdminGalleryController extends Controller
         $gallery->title = $request->title;
         $photo = $request->photo;
         $gallery->photo = time() . '.' . $request->photo->extension();
-        $request->photo->move(public_path('admin_img'), $gallery->photo);
+        $request->photo->move(public_path('gallery'), $gallery->photo);
 
         $gallery->save();
 
@@ -69,7 +69,7 @@ class AdminGalleryController extends Controller
         if ($request->photo) {
             $photo = $request->photo;
             $gallery->photo = time() . '.' . $request->photo->extension();
-            $request->photo->move(public_path('admin_img'), $gallery->photo);
+            $request->photo->move(public_path('gallery'), $gallery->photo);
         }
         $gallery->status = "Active";
         $gallery->save();

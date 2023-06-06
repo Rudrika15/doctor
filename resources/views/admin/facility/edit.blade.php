@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
         <h2 class="p-3">Facility Management</h2>
-        <div class="pt-2"><a class="btn addbtn" href="{{ route('admin.facility.index') }}"> Back</a></div>
+        {{-- <div class="pt-2"><a class="btn addbtn" href="{{ route('admin.facility.index') }}"> Back</a></div> --}}
     </div>
     <div class="card-body">
 
@@ -14,7 +14,7 @@
         </div>
         @endif
 
-        <form action="{{route('admin.facility.update')}}" method="POST" enctype="multipart/form-data">
+        <form id="frm" action="{{route('admin.facility.update')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="facilityId" value="{{$facility->id}}">
         <input type="hidden" name="hospitalId" value="{{$facility->hospitalId}}">
@@ -22,7 +22,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Title</strong>
-                <input type="text" value="{{$facility->title}}" name="title" class="form-control @error('title') is-invalid @enderror">
+                <input type="text" id="title" value="{{$facility->title}}" name="title" class="form-control @error('title') is-invalid @enderror">
                 @error('title')
                     <sapn class="text-danger">{{ $message }}</sapn>
                 @enderror
@@ -43,7 +43,7 @@
 
                 <div class="col-md-4">
                     <label for="image"></label>
-                    <img src="/admin_img/{{$facility->photo}}" alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
+                    <img src="{{asset('/facility')}}/{{$facility->photo}}" alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
                 </div>
 
             </div>
@@ -69,5 +69,34 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+</script>
+
+
+{{-- Jquery Validation --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
+
+<script>
+
+    jQuery('#frm').validate({
+        rules:{
+            title:{
+                required:true,
+                minlength:5,
+                maxlength:200
+            },
+            	
+        },
+        messages:{
+            title:{
+                required:"Please Enter Title",
+                minlength:"Title Minimum of 5 Character Long"
+            },
+            
+        },
+        submitHandler:function(form){
+            form.submit();
+        }
+    });
 </script>
 @endsection

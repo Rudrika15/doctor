@@ -26,7 +26,7 @@
                 @foreach ($slider as $sliders)
                     <tr>
                         <td>{{$sliders->title}}</td>
-                        <td><img src="/admin_img/{{$sliders->image}}" alt="" width="200px" height="200px"></td>
+                        <td><img src="{{url('slider')}}/{{$sliders->image}}" alt="" width="200px" height="200px"></td>
                         <td>{{$sliders->place}}</td>
                         <td>{{$sliders->navigate}}</td>
                         <td>{{$sliders->status}}</td>
@@ -39,7 +39,7 @@
                 @endforeach
                 
             </table>
-            {{-- {!! $hospital->withQueryString()->links('pagination::bootstrap-5') !!} --}}
+            {!! $slider->withQueryString()->links('pagination::bootstrap-5') !!}
          </div>
         {{-- {!! $data->render() !!} --}}
     </div>
