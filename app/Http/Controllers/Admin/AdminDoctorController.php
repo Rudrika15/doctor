@@ -52,7 +52,7 @@ class AdminDoctorController extends Controller
 
         $photo = $request->photo;
         $doctor->photo = time() . '.' . $request->photo->extension();
-        $request->photo->move(public_path('admin_img'), $doctor->photo);
+        $request->photo->move(public_path('doctor'), $doctor->photo);
 
         $doctor->experience = $request->experience;
         $doctor->registerNumber = $request->registerNumber;
@@ -97,7 +97,7 @@ class AdminDoctorController extends Controller
         if ($request->photo) {
             $photo = $request->photo;
             $doctor->photo = time() . '.' . $request->photo->extension();
-            $request->photo->move(public_path('admin_img'), $doctor->photo);
+            $request->photo->move(public_path('doctor'), $doctor->photo);
         }
         $doctor->experience = $request->experience;
         $doctor->registerNumber = $request->registerNumber;

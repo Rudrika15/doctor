@@ -14,7 +14,7 @@
         </div>
         @endif
 
-        <form action="{{route('specialist.store')}}" method="POST" enctype="multipart/form-data">
+        <form id="frm" action="{{route('specialist.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -38,7 +38,31 @@
     </div>
 </div>
 
+{{-- Jquery Validation --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
 
+<script>
 
+    jQuery('#frm').validate({
+        rules:{
+            specialistName:{
+                required:true,
+                minlength:5,
+                maxlength:200
+            },
+            	
+        },
+        messages:{
+            specialistName:{
+                required:"Please Enter Specialist Name",
+                minlength:"Title Minimum of 5 Character Long"
+            },
+        },
+        submitHandler:function(form){
+            form.submit();
+        }
+    });
+    </script>
 
 @endsection

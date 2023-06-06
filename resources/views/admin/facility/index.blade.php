@@ -26,10 +26,11 @@
                 </tr>
                 @foreach ($facility as $facilitys)
                     <tr>
+                        asdsad
                         <td>{{$facilitys->hospital->hospitalName}}</td>
                         <td>{{$facilitys->title}}</td>
                         <td>
-                            <img src="/admin_img/{{$facilitys->photo}}" alt="" width="200" height="200">
+                            <img src="{{url('facility_img')}}/{{$facilitys->photo}}" alt="" width="200" height="200">
                         </td>
                         <td>{{$facilitys->status}}</td>
                         <td>

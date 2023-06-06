@@ -14,14 +14,14 @@
         </div>
         @endif
 
-        <form action="{{route('admin.gallery.store')}}" method="POST" enctype="multipart/form-data">
+        <form id="frm" action="{{route('admin.gallery.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="hospitalId" value="{{ request()->route('id') }}" class="form-control @error('doctorName') is-invalid @enderror">
   
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Title</strong>
-                <input type="text" name="title" class="form-control @error('title') is-invalid @enderror">
+                <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror">
                 @error('title')
                     <sapn class="text-danger">{{ $message }}</sapn>
                 @enderror
@@ -42,7 +42,7 @@
 
                 <div class="col-md-4">
                     <label for="image"></label>
-                    <img src="{{url('admin_img/default.jpg')}}" alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
+                    <img src="{{url('gallery/default.jpg')}}" alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
                 </div>
 
             </div>
@@ -68,5 +68,39 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+</script>
+
+
+{{-- Jquery Validation --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
+
+<script>
+
+    jQuery('#frm').validate({
+        rules:{
+            title:{
+                required:true,
+                minlength:5,
+                maxlength:200
+            },
+            photo:{
+                required:true,
+            }
+            	
+        },
+        messages:{
+            title:{
+                required:"Please Enter Title",
+                minlength:"Title Minimum of 5 Character Long"
+            },
+            photo:{
+                required:"Please Select Photo"
+            }
+        },
+        submitHandler:function(form){
+            form.submit();
+        }
+    });
 </script>
 @endsection

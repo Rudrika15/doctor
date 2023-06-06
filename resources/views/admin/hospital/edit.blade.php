@@ -14,13 +14,13 @@
         </div>
         @endif
 
-        <form action="{{route('hospital.update')}}" method="POST" enctype="multipart/form-data">
+        <form id="frm" action="{{route('hospital.update')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="hospitalId" value="{{$hospital->id}}">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Hospital Name:</strong>
-                <input type="text" value="{{$hospital->hospitalName}}" name="hospitalName" class="form-control @error('hospitalName') is-invalid @enderror">
+                <input type="text" value="{{$hospital->hospitalName}}" name="hospitalName" id="hospitalName" class="form-control @error('hospitalName') is-invalid @enderror">
                 @error('hospitalName')
                     <sapn class="text-danger">{{ $message }}</sapn>
                 @enderror
@@ -29,7 +29,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Address:</strong>
-                <textarea name="address" id="editor1" class="form-control @error('address') is-invalid @enderror" cols="10" rows="5">{{$hospital->address}}</textarea>
+                <textarea name="address" id="address" class="form-control @error('address') is-invalid @enderror" cols="10" rows="5">{{$hospital->address}}</textarea>
                 @error('address')
                 <sapn class="text-danger">{{ $message }}</sapn>
                 @enderror
@@ -39,15 +39,8 @@
             <div class="form-group">
                 <strong>Select City</strong>
                     <br>
-                    {{-- <select name="dropdown_field">
-                        @foreach ($dropdownData as $option)
-                            <option value="{{ $option->id }}" {{ $option->id == old('dropdown_field', $data->dropdown_field) ? 'selected' : '' }}>
-                                {{ $option->name }}
-                            </option>
-                        @endforeach
-                    </select> --}}
                     <select class="form-select form-control-user @error('cityId') is-invalid @enderror"
-                        name="cityId" value="{{$hospital->cityId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
+                        name="cityId" id="cityId" value="{{$hospital->cityId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
                              @foreach ($city as $citydata)
                                 <option value="{{$citydata->id}}" {{$citydata->id == old('cityId',$hospital->cityId) ? 'selected':'' }}>{{$citydata->name}}</option> 
@@ -65,7 +58,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Contact No</strong>
-                <input type="text" value="{{$hospital->contactNo}}" name="contactNo" class="form-control @error('contactNo') is-invalid @enderror">
+                <input type="text" value="{{$hospital->contactNo}}" name="contactNo" id="contactNo" class="form-control @error('contactNo') is-invalid @enderror">
                 @error('contactNo')
                     <sapn class="text-danger">{{ $message }}</sapn>
                 @enderror
@@ -77,14 +70,12 @@
                 <strong> Hospital Type</strong>
                     <br>
                     <select class="form-select form-control-user @error('hospitalTypeId') is-invalid @enderror"
-                        name="hospitalTypeId" value="{{$hospital->hospitalTypeId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
+                        name="hospitalTypeId" id="hospitalTypeId" value="{{$hospital->hospitalTypeId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
                          @foreach ($hospitaltype as $hospitaltypedata)
                                 <option value="{{$hospitaltypedata->id}}" {{$hospitaltypedata->id == old('hospitalTypeId',$hospital->hospitalTypeId) ? 'selected':'' }}>{{$hospitaltypedata->typeName}}</option> 
                         @endforeach
-                             {{-- @foreach ($hospitaltype as $hospitaltypedata)
-                                <option value={{$hospitaltype->id}}>{{$hospitaltype->typeName}}</option>
-                             @endforeach --}}
+                             
                     </select>
                     @error('hospitalTypeId')
                         <span class="invalid-feedback" role="alert">
@@ -99,7 +90,7 @@
                 <strong>Select User</strong>
                     <br>
                     <select class="form-select form-control-user @error('userId') is-invalid @enderror"
-                        name="userId" value="{{$hospital->userId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
+                        name="userId" id="userId" value="{{$hospital->userId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
                              <option selected disabled>Select User</option>
                              @foreach ($user as $userdata)
@@ -118,7 +109,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Site Url</strong>
-                <input type="text" value="{{$hospital->siteUrl}}" name="siteUrl" class="form-control @error('category') is-invalid @enderror">
+                <input type="text" value="{{$hospital->siteUrl}}" id="siteUrl" name="siteUrl" class="form-control @error('category') is-invalid @enderror">
                 @error('siteUrl')
                     <sapn class="text-danger">{{ $message }}</sapn>
                 @enderror
@@ -130,7 +121,7 @@
                 <strong>Select Category</strong>
                     <br>
                     <select class="form-select form-control-user @error('category') is-invalid @enderror"
-                        name="category" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
+                        name="category" id="category" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
                              <option value="{{$hospital->category}}">{{$hospital->category}}</option>
                              <option value="Alopethi">Alopethi</option>
@@ -145,6 +136,23 @@
                     @enderror
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <strong>Select Hospital Logo</strong>
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="file" accept='image/*' onchange="readURL(this,'#img1')" class="form-control @error('hospitalLogo') is-invalid @enderror" id="hospitalLogo" name="hospitalLogo">
+                    @error('hospitalLogo')
+                    <sapn class="text-danger">{{ $message }}</sapn>
+                    @enderror
+                </div>
+
+                <div class="col-md-4">
+                    <label for="hospitalLogo"></label>
+                    <img src="{{asset('hospital')}}/{{$hospital->hospitalLogo}}" alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
+                </div>
+
+            </div>
+        </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btnsubmit">Submit</button>
         </div>
@@ -152,4 +160,93 @@
     </form>
     </div>
 </div>
+
+<script>
+    function readURL(input, tgt) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.querySelector(tgt).setAttribute("src",
+                    e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+{{-- Jquery Validation --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
+
+<script>
+
+    jQuery('#frm').validate({
+        rules:{
+            hospitalName:{
+                required:true,
+                minlength:5,
+                maxlength:200
+            },
+            address:{
+                required:true,
+                minlength:10,
+            },
+            cityId:{
+                required:true,
+            },
+            contactNo:{
+                required:true,
+                minlength:10,
+                maxlength:12,
+            },
+             hospitalTypeId:{
+                required:true,
+            },
+            userId:{
+                required:true,
+            },
+            siteUrl:{
+                required:true,
+            },
+            category:{
+                required:true,
+            },
+            	
+        },
+        messages:{
+            hospitalName:{
+                required:"Please Enter Hospital Name",
+                minlength:"Enter Title Minimum of 5 Characters"
+            },
+            address:{
+                required:"Please Enter Address",
+                minlength:" Enter Address Minimum of 10 Charecters"
+            },
+            cityId:{
+                required:"Please Select City"
+            },
+            contactNo:{
+                        required:"Please Enter Contact Number",
+                        minlength:"Enter Contact Number Minimum of 10 Charactrs",
+                        maxlength:"Can't Enter Contact Number  More Then of 12 Didgit"
+            },
+            hospitalTypeId:{
+                required:"Please Select Hospital Type"
+            },
+            userId:{
+                required:"Please Select User"
+            },
+            siteUrl:{
+                required:"Please Select Site URL"
+            },
+            category:{
+                required:"Please Select Category"
+            },
+            
+        },
+        submitHandler:function(form){
+            form.submit();
+        }
+    });
+</script>
 @endsection

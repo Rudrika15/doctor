@@ -10,7 +10,7 @@ use PhpParser\Node\Expr\FuncCall;
 class AdminSliderController extends Controller
 {
     public function index(){
-        $slider=Slider::all();
+        $slider=Slider::paginate(3);
         return view('admin.slider.index',compact('slider'));
     }
     public function create(){
@@ -30,7 +30,7 @@ class AdminSliderController extends Controller
 
         $image = $request->image;
         $slider->image = time() . '.' . $request->image->extension();
-        $request->image->move(public_path('admin_img'), $slider->image);
+        $request->image->move(public_path('slider'), $slider->image);
 
         $slider->place=$request->place;
         $slider->navigate=$request->navigate;
@@ -63,7 +63,7 @@ class AdminSliderController extends Controller
             
             $image = $request->image;
             $slider->image = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('admin_img'), $slider->image);
+            $request->image->move(public_path('slider'), $slider->image);
         }
 
         $slider->place=$request->place;

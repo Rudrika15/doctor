@@ -16,7 +16,7 @@
         </div>
         @endif
 
-        <form action="{{route('city.update')}}" method="POST" enctype="multipart/form-data">
+        <form id="frm" action="{{route('city.update')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="id" value="{{$city->id}}">
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -40,7 +40,31 @@
     </div>
 </div>
 
+{{-- Jquery Validation --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
 
+<script>
 
+    jQuery('#frm').validate({
+        rules:{
+            name:{
+                required:true,
+                minlength:5,
+                maxlength:200
+            },
+            	
+        },
+        messages:{
+            name:{
+                required:"Please Enter Name",
+                minlength:"Title Minimum of 5 Character Long"
+            },
+        },
+        submitHandler:function(form){
+            form.submit();
+        }
+    });
+    </script>
 
 @endsection

@@ -43,7 +43,8 @@ class AdminHospitalController extends Controller
             'hospitalTypeId' => 'required',
             'userId' => 'required',
             'siteUrl' => 'required',
-            'category' => 'required'
+            'category' => 'required',
+            'hospitalLogo'=>'required'
         ]);
 
         $hospital = new Hospital();
@@ -55,6 +56,11 @@ class AdminHospitalController extends Controller
         $hospital->userId = $request->userId;
         $hospital->siteUrl = $request->siteUrl;
         $hospital->category = $request->category;
+            
+        $hospitalLogo = $request->hospitalLogo;
+        $hospital->hospitalLogo = time() . '.' . $request->hospitalLogo->extension();
+        $request->hospitalLogo->move(public_path('hospital'), $hospital->hospitalLogo);
+    
 
         if ($hospital->save()) {
             return redirect()->back()->with('success', 'Hospital Added successfully!');
@@ -94,6 +100,13 @@ class AdminHospitalController extends Controller
         $hospital->userId = $request->userId;
         $hospital->siteUrl = $request->siteUrl;
         $hospital->category = $request->category;
+        
+        if($request->hospitalLogo){
+            $hospitalLogo = $request->hospitalLogo;
+            $hospital->hospitalLogo = time() . '.' . $request->hospitalLogo->extension();
+            $request->hospitalLogo->move(public_path('hospital'), $hospital->hospitalLogo);
+        }
+        
         $hospital->status = "Active";
 
         if ($hospital->save()) {

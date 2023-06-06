@@ -14,7 +14,7 @@
         </div>
         @endif
 
-        <form action="{{route('admin.slider.update')}}" method="POST" enctype="multipart/form-data">
+        <form id="frm" action="{{route('admin.slider.update')}}" method="POST" enctype="multipart/form-data">
         @csrf
       <input type="hidden" name="sliderId" value="{{$slider->id}}">
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -41,7 +41,7 @@
 
                 <div class="col-md-4">
                     <label for="image"></label>
-                    <img src="/admin_img/{{$slider->image}}" alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
+                    <img src="{{asset('slider')}}/{{$slider->image}}" alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
                 </div>
 
             </div>
@@ -99,4 +99,45 @@
         }
     }
 </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
+
+<script>
+    jQuery('#frm').validate({
+	rules:{
+		title:{
+            required:true,
+            minlength:5,
+            maxlength:200
+        },
+        place:{
+            required:true,
+        },
+        navigate:{
+            required:true,
+            minlength:10,
+        },	
+	},
+    messages:{
+		title:{
+            required:"Please Enter Title",
+            minlength:"Title Minimum of 5 Character Long"
+        },
+       
+        place:{
+            required:"Please Select Place",
+        },
+        navigate:{
+            required:"Please Enter Navigate",
+            minlength:"Title Minimum of 10 Character Long"
+        },
+        
+	},
+	submitHandler:function(form){
+		form.submit();
+	}
+});
+</script>
+
+
 @endsection
