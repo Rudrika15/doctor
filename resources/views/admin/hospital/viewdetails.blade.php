@@ -46,7 +46,8 @@
                                 <td>{{$doctors->user->name}}</td>
                                 
                                 <td>
-                                    <img src="{{url('doctor')}}/{{$doctors->photo}}" alt="">
+                                    <img src="{{url('doctor')}}/{{$doctors->photo}}" alt="" width="200" height="200">
+
                                 </td>
                                 <td>{{$doctors->experience}}</td>
                                 <td>{{$doctors->registerNumber}}</td>

@@ -117,7 +117,6 @@ Route::controller(AdminFacilityController::class)->group(function () {
 });
 
 //Admin Slider
-
 Route::controller(AdminSliderController::class)->group(function () {
     Route::get('admin/slider-index', 'index')->name('admin.slider.index');
     Route::get('admin/slider-create', 'create')->name('admin.slider.create');
@@ -126,6 +125,14 @@ Route::controller(AdminSliderController::class)->group(function () {
     Route::post('admin/slider-update', 'update')->name('admin.slider.update');
     Route::get('admin/slider-delete-{id?}', 'delete')->name('admin.slider.delete');
 });
+
+
+
+
+
+
+
+
 
 //-------------------------------------- Hospital Side------------------------------------------
 

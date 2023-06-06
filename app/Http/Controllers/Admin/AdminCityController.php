@@ -8,9 +8,30 @@ use App\Models\City;
 
 class AdminCityController extends Controller
 {
-    public function index()
+    public function index(Request $req)
     {
-        $city = City::paginate(5);
+        $cityName = $req->cityName;
+        $status = $req->status;
+
+        if(isset($cityName) && isset($status))
+        {
+            $city = City::where('name','=',$cityName)
+            ->where('status','=',$status)
+            ->paginate(5);
+        }
+        else if(!isset($cityName)&&isset($status))
+            {
+                $city = City::where('status','=',$status)
+                ->paginate(5);
+            }
+        else if(isset($cityName)&&!isset($status))
+            {
+                $city = City::where('name','=',$cityName)
+                ->paginate(5);
+            }
+        else{
+            $city = City::paginate(5);
+        }
         return view('admin.city.index', compact('city'));
     }
 
