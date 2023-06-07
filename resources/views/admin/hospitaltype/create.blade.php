@@ -16,13 +16,13 @@
         </div>
         @endif
 
-        <form action="{{route('hospitaltype.store')}}" method="POST" enctype="multipart/form-data">
+        <form id="frm" action="{{route('hospitaltype.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Type Name:</strong>
-                <input type="text" name="typeName" class="form-control @error('typeName') is-invalid @enderror">
+                <input type="text" name="typeName" id="typeName" class="form-control @error('typeName') is-invalid @enderror">
                 @error('typeName')
                 <sapn class="text-danger">{{ $message }}</sapn>
                 @enderror
@@ -40,7 +40,30 @@
     </div>
 </div>
 
+{{-- Jquery Validation --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
 
+<script>
 
-
+    jQuery('#frm').validate({
+        rules:{
+            typeName:{
+                required:true,
+                minlength:5,
+                maxlength:200
+            },
+            	
+        },
+        messages:{
+            typeName:{
+                required:"Please Enter Hospital Type Name",
+                minlength:"Hospital Type Name Minimum of 5 Character Long"
+            },
+        },
+        submitHandler:function(form){
+            form.submit();
+        }
+    });
+</script>
 @endsection

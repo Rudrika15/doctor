@@ -40,7 +40,7 @@
                         <td>{{$doctors->user->name}}</td>
                         
                         <td>
-                            <img src="/admin_img/{{$doctors->photo}}" alt="">
+                            <img src="/doctor_img/{{$doctors->photo}}" alt="">
                         </td>
                         <td>{{$doctors->experience}}</td>
                         <td>{{$doctors->registerNumber}}</td>

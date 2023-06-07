@@ -16,6 +16,8 @@
         <div class="table-responsive">
             <table class="table table-bordered">
                 <tr>
+                        
+                    
                     <th>Hospital Name</th>
                     <th>Address</th>
                     <th>City</th>
@@ -24,6 +26,7 @@
                     <th>User</th>
                     <th>Site Url</th>
                     <th>Category</th>
+                    <th>Hospital Logo</th>
                     <th>Status</th>
                     <th>Action</th>
                     
@@ -49,7 +52,10 @@
                         
                         <td>{{$hospitals->siteUrl}}</td>
                         <td>{{$hospitals->category}}</td>
+                        <td><img src="{{url('/hospital')}}/{{$hospitals->hospitalLogo}}"></td>
+
                         <td>{{$hospitals->status}}</td>
+                        
                         <td>
                             <a class="btn btn-success mt-1" href="{{route('admin.hospital.viewdetails')}}{{$hospitals->id}}">View Details</a>
                     

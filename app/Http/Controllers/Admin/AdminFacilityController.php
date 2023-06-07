@@ -37,7 +37,7 @@ class AdminFacilityController extends Controller
 
         $photo = $request->photo;
         $facility->photo = time() . '.' . $request->photo->extension();
-        $request->photo->move(public_path('admin_img'), $facility->photo);
+        $request->photo->move(public_path('facility'), $facility->photo);
 
         if ($facility->save()) {
             return redirect()->back()->with('success', 'Facility Added successfully!');
@@ -66,7 +66,7 @@ class AdminFacilityController extends Controller
         if ($request->photo) {
             $photo = $request->photo;
             $facility->photo = time() . '.' . $request->photo->extension();
-            $request->photo->move(public_path('admin_img'), $facility->photo);
+            $request->photo->move(public_path('facility'), $facility->photo);
         }
         $facility->status = "Active";
 
