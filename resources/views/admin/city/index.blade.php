@@ -19,21 +19,27 @@
     
         <div class="col-lg-4">
             <div class="form-group">
-                
-                <input type="text" id="status" name="status" class="form-control @error('status') is-invalid @enderror" placeholder="Enter Status">
-                @error('status')
-                <sapn class="text-danger">{{ $message }}</sapn>
-                @enderror
+                    <select class="form-select form-control-user @error('status') is-invalid @enderror"
+                        name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;"
+                         aria-label="Default select example">
+                             <option selected disabled>Select Status</option>
+                             <option value="Active">Active</option>
+                             <option value="Delete">Delete</option>
+                             
+                    </select>
+                    @error('status')
+                        <span class="invalid-feedback" role="alert">
+                        {{$message}}
+                        </span>
+                    @enderror
             </div>
         </div>
-    
         
         <div class="col-lg-4 text-center gap-5">
-            <button type="submit" class="btn btnsubmit">Search</button>
-            <button type="submit" class="btn btnsubmit">Clear</button>
-
+            <button type="submit" class="btn btn-primary">Search</button>
+            <a class=" btn btnsubmit" href="{{route('city.index')}}">Clear</a>
         </div>
-    
+
     </form>
     
     <div class="card-body">

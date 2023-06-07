@@ -40,9 +40,8 @@
             </div>
         </div>        
         <div class="col-lg-4  text-center">
-            <button type="submit" class="btn btnsubmit">Search</button>
-            <button type="submit" class="btn btnsubmit">Clear</button>
-
+            <button type="submit" class="btn btn-primary">Search</button>
+            <a class=" btn btnsubmit" href="{{route('hospitaltype.index')}}">Clear</a>
         </div>
 
     </form>

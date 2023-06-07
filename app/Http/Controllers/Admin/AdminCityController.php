@@ -15,22 +15,24 @@ class AdminCityController extends Controller
 
         if(isset($cityName) && isset($status))
         {
-            $city = City::where('name','=',$cityName)
+            $city = City::orderBy('name', 'ASC')->where('name','=',$cityName)
             ->where('status','=',$status)
             ->paginate(5);
         }
         else if(!isset($cityName)&&isset($status))
             {
-                $city = City::where('status','=',$status)
+                $city = City::orderBy('name', 'ASC')
+                ->where('status','=',$status)
                 ->paginate(5);
             }
         else if(isset($cityName)&&!isset($status))
             {
-                $city = City::where('name','=',$cityName)
+                $city = City::orderBy('name', 'ASC')
+                ->where('name','=',$cityName)
                 ->paginate(5);
             }
         else{
-            $city = City::paginate(5);
+            $city = City::orderBy('name', 'ASC')->paginate(5);
         }
         return view('admin.city.index', compact('city'));
     }

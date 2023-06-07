@@ -20,9 +20,62 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="doctor">
+                    <form  action="" method="get" class="mb-5">
+                        <div class="row">
+                        <input type="hidden" name="hospitalId" value="{{ request()->route('id') }}" class="form-control @error('doctorName') is-invalid @enderror" >
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <input type="text" name="doctorName" id="doctorName" placeholder="Enter Doctor Name"class="form-control @error('doctorName') is-invalid @enderror">
+                                @error('doctorName')
+                                    <sapn class="text-danger">{{ $message }}</sapn>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                    <select class="form-select form-control-user @error('specialistId') is-invalid @enderror"
+                                        name="specialistId" id="specialistId" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;"
+                                         aria-label="Default select example">
+                                             <option selected disabled>---Select Specialist---</option>
+                                             @foreach ($specialist as $specialist)
+                                                <option value={{$specialist->id}}>{{$specialist->specialistName}}</option>
+                                             @endforeach
+                                             
+                                    </select>
+                                    @error('specialistId')
+                                        <span class="invalid-feedback" role="alert">
+                                        {{$message}}
+                                        </span>
+                                    @enderror
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                    <select class="form-select form-control-user @error('status') is-invalid @enderror"
+                                        name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;"
+                                         aria-label="Default select example">
+                                             <option selected disabled>---Select Status---</option>
+                                             <option value="Active">Active</option>
+                                             <option value="Delete">Delete</option>
+                                             
+                                    </select>
+                                    @error('status')
+                                        <span class="invalid-feedback" role="alert">
+                                        {{$message}}
+                                        </span>
+                                    @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-2 text-center">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                            <a class=" btn btnsubmit" href="{{route('admin.hospital.viewdetails',['id' => request()->route('id')])}}">Clear</a>
+                        </div>
+                    </div>
+                </form>
+                  
                 <div class="table-responsive">
                     <div class="mb-4 pull-right"><a class="btn addbtn" href="{{route('admin.doctor.create',['id' => request()->route('id')])}}"> Add Doctor</a></div>
-
                     <table class="table table-bordered">
                         <tr>
                             <th>Hospital</th>
@@ -65,6 +118,45 @@
                  </div>
             </div>
             <div class="tab-pane" id="gallery">
+                                                                                               
+                <form action="{{ route('admin.hospital.viewdetails',['id' => request()->route('id')]) }}" method="get" class="mb-5">
+                        <div class="row">
+                        <input type="hidden" name="hospitalId" value="{{ request()->route('id') }}" class="form-control @error('doctorName') is-invalid @enderror">
+                  
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <strong>Title</strong>
+                                <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror">
+                                @error('title')
+                                    <sapn class="text-danger">{{ $message }}</sapn>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mt-4">
+                            <div class="form-group">
+                                    <select class="form-select form-control-user @error('status') is-invalid @enderror"
+                                        name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;"
+                                         aria-label="Default select example">
+                                             <option selected disabled>Select Status</option>
+                                             <option value="Active">Active</option>
+                                             <option value="Delete">Delete</option>
+                                             
+                                    </select>
+                                    @error('status')
+                                        <span class="invalid-feedback" role="alert">
+                                        {{$message}}
+                                        </span>
+                                    @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mt-4 text-center">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                            <a class=" btn btnsubmit" href="{{route('admin.hospital.viewdetails',['id' => request()->route('id')])}}">Clear</a>
+
+                        </div>
+                     </div>
+                    </form>
+                
                 <div class="table-responsive">
                     <div class="mb-4 pull-right"><a class="btn addbtn" href="{{ route('admin.gallery.create',['id' => request()->route('id')])}}"> Add Gallery</a></div>
                     <table class="table table-bordered">
@@ -96,6 +188,44 @@
                 {{-- {!! $data->render() !!} --}}
             </div>
             <div class="tab-pane" id="facility">
+                <form class="mb-5" action="{{ route('admin.hospital.viewdetails',['id' => request()->route('id')]) }}" method="get">
+                    <div class="row">
+                    <input type="hidden" name="hospitalId" value="{{ request()->route('id') }}" class="form-control @error('doctorName') is-invalid @enderror">
+              
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <strong>Title</strong>
+                            <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror">
+                            @error('title')
+                                <sapn class="text-danger">{{ $message }}</sapn>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mt-4">
+                        <div class="form-group">
+                                <select class="form-select form-control-user @error('status') is-invalid @enderror"
+                                    name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;"
+                                     aria-label="Default select example">
+                                         <option selected disabled>Select Status</option>
+                                         <option value="Active">Active</option>
+                                         <option value="Delete">Delete</option>
+                                         
+                                </select>
+                                @error('status')
+                                    <span class="invalid-feedback" role="alert">
+                                    {{$message}}
+                                    </span>
+                                @enderror
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mt-4 text-center">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                        <a class=" btn btnsubmit" href="{{route('admin.hospital.viewdetails',['id' => request()->route('id')])}}">Clear</a>
+
+                    </div>
+                 </div>
+                </form>
+            
                 <div class="table-responsive">
                     <div class="mb-4 pull-right"><a class="btn addbtn" href="{{ route('admin.facility.create',['id' => request()->route('id')]) }}"> Add Facility</a></div>
 

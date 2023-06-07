@@ -9,8 +9,37 @@ use PhpParser\Node\Expr\FuncCall;
 
 class AdminSliderController extends Controller
 {
-    public function index(){
-        $slider=Slider::paginate(3);
+    public function index(Request $request){
+        $title=$request->title;
+        $place=$request->place;
+        $status=$request->status;
+
+        if(isset($title) && isset($place) && isset($status)){
+            $slider=Slider::orderBy('title', 'ASC')
+                ->where('title','=',$title)
+                ->where('place','=',$place)
+                ->where('status','=',$status)
+                ->paginate(5);
+        }
+        else if(isset($title) && !isset($place) && !isset($status)){
+            $slider=Slider::orderBy('title', 'ASC')
+                ->where('title','=',$title)
+                ->paginate(5);
+        }
+        else if(!isset($title) && isset($place) && !isset($status)){
+            $slider=Slider::orderBy('title', 'ASC') 
+                ->where('place','=',$place)
+                ->paginate(5);
+        }
+        else if(!isset($title) && !isset($place) && isset($status)){
+            $slider=Slider::orderBy('title', 'ASC')
+                ->where('status','=',$status)
+                ->paginate(5);
+        }
+        else{
+            $slider=Slider::orderBy('title', 'ASC')->paginate(3);
+        }
+       
         return view('admin.slider.index',compact('slider'));
     }
     public function create(){

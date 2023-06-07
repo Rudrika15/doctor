@@ -57,28 +57,9 @@
                     @enderror
             </div>
         </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Select User</strong>
-                    <br>
-                    <select class="form-select form-control-user @error('userId') is-invalid @enderror"
-                        name="userId" id="userId" value="{{$doctor->userId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
-                         aria-label="Default select example">
-                         <option selected disabled>Select Specialist</option>                  
-                         
-                            @foreach ($user as $userdata)
-                                <option value="{{$userdata->id}}" {{$userdata->id == old('userId',$doctor->userId) ? 'selected':''}}>{{$userdata->name}}</option>
-                            @endforeach
-                    </select>
-                    @error('userId')
-                        <span class="invalid-feedback" role="alert">
-                        {{$message}}
-                        </span>
-                    @enderror
-            </div>
-        </div>
-
+        {{-- Auth User --}}
+        <input type="hidden" name="userId" value="{{Auth::User()->id}}">
+        {{--  --}}
         <div class="col-xs-12 col-sm-12 col-md-12">
             <strong>Select Image </strong>
             <div class="row">

@@ -14,20 +14,22 @@ class AdminHospitalTypeController extends Controller
         $status=$request->status;
        
         if(isset($typeName) && isset($status)){
-            $hospitaltype=HospitalType::
-            where('typeName','=',$typeName)
-            ->where('status','=',$status)
-            ->paginate(3);
-            
+            $hospitaltype=HospitalType::orderBy('typeName', 'ASC')
+                ->where('typeName','=',$typeName)
+                ->where('status','=',$status)
+                ->paginate(3);
+                
         }
         else if(isset($typeName) && !isset($status)){
-            $hospitaltype=HospitalType::where('typeName','=',$typeName)->paginate(3);
+            $hospitaltype=HospitalType::orderBy('typeName', 'ASC')
+                ->where('typeName','=',$typeName)->paginate(3);
         }
         else if(!isset($typeName) && isset($status)){
-            $hospitaltype=HospitalType::where('status','=',$status)->paginate(3);
+            $hospitaltype=HospitalType::orderBy('typeName', 'ASC')
+                ->where('status','=',$status)->paginate(3);
         }
         else{
-            $hospitaltype = HospitalType::paginate(5);
+            $hospitaltype = HospitalType::orderBy('typeName', 'ASC')->paginate(5);
             
         }
         return view('admin.hospitaltype.index', compact('hospitaltype'));
