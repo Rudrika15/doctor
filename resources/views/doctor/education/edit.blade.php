@@ -24,7 +24,7 @@
            
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Doctor ID </strong> 
+                    <strong>Doctor Name </strong> 
                     <select type="text" name="doctorId"  value="{{$education->doctorId}}" class="form-control @error('doctorId') is-invalid @enderror">
                  <option selected disabled><strong >Select here...  </strong></option>
                  @foreach ($doctor as $doctordata)

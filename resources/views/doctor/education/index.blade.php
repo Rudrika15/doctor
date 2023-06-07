@@ -20,7 +20,7 @@
 
         <table class="table table-bordered">
             <tr>
-                <th>Doctor ID</th>
+                <th>Doctor Name</th>
                 <th>Education</th>
                 <th>Status</th>
                 

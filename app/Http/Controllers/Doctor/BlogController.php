@@ -34,7 +34,7 @@ class BlogController extends Controller
         $blog->detail = $request->detail;
         $photo = $request->photo;
         $blog->photo = time() . '.' . $request->photo->extension();
-        $request->photo->move(public_path('photo'), $blog->photo);
+        $request->photo->move(public_path('blog'), $blog->photo);
         $blog->doctorId = $request->doctorId;
         if ($blog->save()) {
 
@@ -66,7 +66,7 @@ class BlogController extends Controller
         if ($request->photo) {
             $photo = $request->photo;
             $blog->photo = time() . '.' . $request->photo->extension();
-            $request->photo->move(public_path('photo'), $blog->photo);
+            $request->photo->move(public_path('blog'), $blog->photo);
         }
         $blog->doctorId = $request->doctorId;
         $blog->status = "Active";

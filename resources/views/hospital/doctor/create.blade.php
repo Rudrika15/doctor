@@ -69,8 +69,8 @@
                       @enderror
                   </div>
               </div>
-
-              <div class="col-xs-12 col-sm-12 col-md-12">
+              <input type="hidden" name="userId" value="{{Auth::User()->id}}">
+              {{-- <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                         <strong>User Name </strong> 
                       <select type="text" name="userId" class="form-control @error('userId') is-invalid @enderror">
@@ -83,7 +83,7 @@
                       <sapn class="text-danger">{{ $message }}</sapn>
                       @enderror
                   </div>
-              </div>
+              </div> --}}
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <strong>Select Image </strong>
@@ -97,7 +97,8 @@
 
                     <div class="col-md-4">
                         <label for="image"></label>
-                        <img src="{{url('asset/img/default.jpg')}}" alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
+                        <img src="{{url('doctor/default.jpg')}}" alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
+                       
                     </div>
 
                 </div>

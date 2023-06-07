@@ -57,7 +57,8 @@
 
                     <div class="col-md-4">
                         <label for="image"></label>
-                        <img src="/photo/{{$blog->photo}}"  alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
+                        <img src="{{asset('blog')}}/{{$blog->photo}}"  alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
+                       
                        
                     </div>
                     
@@ -66,7 +67,7 @@
                     
         <div class="col-xs-12 col-sm-12 col-md-12">
              <div class="form-group">
-                <strong>Doctor ID </strong> 
+                <strong>Doctor Name </strong> 
                  <select type="text" name="doctorId" value="{{$blog->doctorId}}" class="form-control @error('doctorId') is-invalid @enderror">
                  <option selected disabled><strong >Select here...  </strong></option>
                  @foreach ($doctor as $doctordata)

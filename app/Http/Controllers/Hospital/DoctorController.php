@@ -49,7 +49,7 @@ class DoctorController extends Controller
         $doctor->userId = $request->userId;
         $photo = $request->photo;
         $doctor->photo = time() . '.' . $request->photo->extension();
-        $request->photo->move(public_path('photo'), $doctor->photo);
+        $request->photo->move(public_path('doctor'), $doctor->photo);
         $doctor->experience = $request->experience;
         $doctor->registerNumber = $request->registerNumber;
 
@@ -93,7 +93,7 @@ class DoctorController extends Controller
         if ($request->photo) {
             $photo = $request->photo;
             $doctor->photo = time() . '.' . $request->photo->extension();
-            $request->photo->move(public_path('photo'), $doctor->photo);
+            $request->photo->move(public_path('doctor'), $doctor->photo);
         }
         $doctor->experience = $request->experience;
         $doctor->registerNumber = $request->registerNumber;

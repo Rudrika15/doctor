@@ -25,17 +25,22 @@ class BlogListController extends Controller
             ], 404);
         }
     }
-    function blogList($id = 0)
+    function blogList($id=0)
     {
-        if ($id > 0) {
-            $blog = Blog::find($id);
+        $blogs = Blog::find($id);
+        if ($blogs) {
+            return response([
+                'status' => 200,
+                'data' => $blogs,
+            ]);
         } else {
-            // $blog = Blog::where('status','!=','Deleted')->get();
-
-            return "not Found";
+            return response([
+                'message' => ['Not list found']
+            ], 404);
         }
-        return $blog;
     }
+   
+  
     function blogDetails($id = 0)
     {
         if ($id > 0) {
@@ -49,12 +54,7 @@ class BlogListController extends Controller
     }
     public function search($title)
     {
-        return Blog::where("title",$title)->get();
-        // $results = Blog::table('blogs')
-        //     ->where('title', 'like', '%' . $query . '%')
-        //     ->orWhere('content', 'like', '%' . $query . '%')
-        //     ->get();
-
-        // return response()->json($results);
+        return Blog::where("title","like","%".$title."%")->get();
+       
     }
 }

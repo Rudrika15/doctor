@@ -39,7 +39,8 @@
                 <td>{{ $doctors->contactNo }}</td>
                 <td>{{ $doctors->specialist->specialistName	 }}</td>
                 <td>{{ $doctors->user->name }}</td>
-                <td> <img src="/photo/{{$doctors->photo}}" alt=""> </td>
+                <td> <img src="{{url('/doctor')}}/{{$doctors->photo}}" alt=""> </td>
+
                 <td>{{ $doctors->experience }}</td>
                 <td>{{ $doctors->registerNumber }}</td>
                 <td>{{ $doctors->status }}</td>

@@ -56,15 +56,16 @@
 
                     <div class="col-md-4">
                         <label for="image"></label>
-                        <img src="{{url('asset/img/default.jpg')}}" alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
+                        <img src="{{url('blog/default.jpg')}}" alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
                     </div>
                     
                 </div>
             </div>
                     
-        <div class="col-xs-12 col-sm-12 col-md-12">
+            <input type="hiddenn" name="doctorId" value="{{Auth::Doctor()->id}}">
+            {{-- <div class="col-xs-12 col-sm-12 col-md-12">
              <div class="form-group">
-                <strong>Doctor ID </strong> 
+                <strong>Doctor Name </strong> 
                  <select type="text" name="doctorId" class="form-control @error('doctorId') is-invalid @enderror">
                  <option selected disabled><strong >Select here...  </strong></option>
                  @foreach ($doctor as $doctor)
@@ -76,6 +77,7 @@
                  @enderror
              </div>
          
+             </div> --}}
 
 
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

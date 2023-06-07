@@ -22,7 +22,7 @@
             @csrf
           <div class="col-xs-12 col-sm-12 col-md-12">
               <div class="form-group">
-                      <strong>Hospital ID </strong> 
+                      <strong>Hospital Name </strong> 
                     <select type="text" name="hospitalId" class="form-control @error('hospitalId') is-invalid @enderror">
                     <option selected disabled><strong >Select here...  </strong></option>
                    @foreach ($hospital as $hospital)
@@ -38,7 +38,7 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                        <strong>Doctor ID </strong> 
+                        <strong>Doctor Name </strong> 
                       <select type="text" name="doctorId" class="form-control @error('doctorId') is-invalid @enderror">
                       <option selected disabled><strong >Select here...  </strong></option>
                      @foreach ($doctor as $doctor)
