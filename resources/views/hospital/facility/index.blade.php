@@ -17,10 +17,10 @@
             <p>{{ $message }}</p>
         </div>
         @endif
-
+<div class="table-responsive">
         <table class="table table-bordered">
             <tr>
-                <th>Hospital ID</th>
+                <th>Hospital Name</th>
                 <th>Title</th>
                 <th>Photo</th>
                 <th>Status</th>
@@ -53,6 +53,7 @@
             </tr>
             @endforeach
         </table>
+    </div>
         {!! $facility->withQueryString()->links('pagination::bootstrap-5') !!}
 
         {{-- {!! $data->render() !!} --}}

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\SliderController;
 use App\Http\Controllers\Api\Doctor\BlogListController;
 use App\Http\Controllers\Api\Doctor\CityListController;
 use App\Http\Controllers\Api\Doctor\SpecialistController;
@@ -24,6 +25,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+//slider view
+Route::get('slider',[SliderController::class,'slider']);
+
+
 
 // specialist list
 Route::get('specialist',[SpecialistController::class,'specialistList']);
@@ -47,3 +52,9 @@ Route::get('sociallink/{id?}',[HospitalController::class,'socialLink']);
  Route::get('facility/{id?}',[HospitalController::class,'facility']);
  
  Route::get('hospitaldata',[HospitalController::class,'hospitalView']);
+ //hospitaltype list
+ Route::get('hospitaltype/view/{id?}',[HospitalController::class,'hospitaltype']);
+//hospital type wise hospital view
+Route::get('hospitaltypeview/{id?}',[HospitalController::class,'hospitaltypeview']);
+
+

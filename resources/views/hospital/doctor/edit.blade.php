@@ -24,11 +24,13 @@
 
           <div class="col-xs-12 col-sm-12 col-md-12">
               <div class="form-group">
-                      <strong>Hospital ID </strong> 
+                      <strong>Hospital Name </strong> 
                     <select type="text" value="{{$doctor->hospitalId}}" name="hospitalId" class="form-control @error('hospitalId') is-invalid @enderror">
                     <option selected disabled><strong >Select here...  </strong></option>
-                    <option value=1 ><strong > 1</strong></option>
-                    <option value=2 ><strong >2</strong></option>
+                    @foreach ($hospital as $hospitaldata)
+                    <option value="{{$hospitaldata->id}}" {{$hospitaldata->id==old('hospitalId',$doctor->hospitalId)? 'selected':''}}>{{$hospitaldata->hospitalName}}</option>
+           
+                    @endforeach
                     </select>
                     @error('hospitalId')
                     <sapn class="text-danger">{{ $message }}</sapn>
@@ -58,11 +60,13 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                        <strong>Specialist ID </strong> 
+                        <strong>Specialist Name </strong> 
                       <select type="text" value="{{$doctor->specialistId}}"  name="specialistId" class="form-control @error('specialistId') is-invalid @enderror">
                       <option selected disabled><strong >Select here...  </strong></option>
-                      <option value=1 ><strong >abc </strong></option>
-                      <option  value="2"><strong >xyz</strong></option> 
+                      @foreach ($specialist as $specialistdata)
+                      <option value="{{$specialistdata->id}}" {{$specialistdata->id==old('specialistId',$doctor->specialistId)? 'selected':''}}>{{$specialistdata->specialistName}}</option>
+             
+                      @endforeach
                     </select>
                       @error('specialistId')
                       <sapn class="text-danger">{{ $message }}</sapn>
@@ -72,11 +76,13 @@
 
               <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                        <strong>User ID </strong> 
+                        <strong>User Name </strong> 
                       <select type="text" value="{{$doctor->userId}}" name="userId" class="form-control @error('userId') is-invalid @enderror">
                       <option selected disabled><strong >Select here...  </strong></option>
-                      <option value=1 ><strong >jkl </strong></option>
-                      <option value=2><strong >pqr</strong></option> 
+                      @foreach ($user as $userdata)
+                      <option value="{{$userdata->id}}" {{$userdata->id==old('userId',$doctor->userId)? 'selected':''}}>{{$userdata->name}}</option>
+
+                      @endforeach
                     </select>
                       @error('userId')
                       <sapn class="text-danger">{{ $message }}</sapn>

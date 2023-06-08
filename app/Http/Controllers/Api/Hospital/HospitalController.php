@@ -7,6 +7,7 @@ use App\Models\Doctor;
 use App\Models\Facility;
 use App\Models\Hospital;
 use App\Models\Gallery;
+use App\Models\HospitalType;
 use App\Models\SocialLink;
 use Illuminate\Http\Request;
 
@@ -32,7 +33,7 @@ class HospitalController extends Controller
     {
        $gallery = Gallery::where('hospitalId','=',$id)->get();
        
-        if (\count($gallery)>0) {
+        if (count($gallery)>0) {
             return response([
                 'status' => 200,
                 'data' => $gallery,
@@ -91,4 +92,30 @@ class HospitalController extends Controller
             ],200);
         }
     }
+    function hospitaltype($id=0)
+    {
+        if ($id>0) {
+            $hospitaltype=HospitalType::find($id);
+        } else {
+          $hospitaltype=HospitalType::where('status','!=','DEleted')->get();
+        }
+        return $hospitaltype;
+    }
+   
+    function hospitaltypeview($id = 0)
+    {
+        if($id>0){
+            $hospital=HospitalType::with('hospital')
+            ->where('id','=',$id)
+            ->get();
+            return $hospital;
+    }else{
+        return response([
+            'message' => 'Not list found'
+        ],200);
+    }
+        
+    }
+
+       
 }

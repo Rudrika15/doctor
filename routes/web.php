@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\AdminHospitalController;
 use App\Http\Controllers\Admin\AdminHospitalTypeController;
 use App\Http\Controllers\Doctor\BlogController;
 use App\Http\Controllers\Doctor\EducationController;
+use App\Http\Controllers\Hospital\AppointmentController;
 use App\Http\Controllers\Hospital\DoctorController;
 use App\Http\Controllers\Hospital\FacilityController;
 use App\Http\Controllers\Hospital\ScheduleController;
@@ -174,6 +175,10 @@ Route::controller(ScheduleController::class)->group(function () {
     Route::post('hospital/schedule-update', 'update')->name('schedule.update');
     Route::get('schedule-destroy-{id?}', 'destroy')->name('schedule.destroy');
 });
+Route::get('index',[AppointmentController::class,'index'])->name('appointment.index');
+
+
+//Route::get('/', 'HomeController@index')->name('home');
 
 
 // --------------------------------------Doctor Side---------------------------------------------
@@ -202,3 +207,5 @@ Route::controller(EducationController::class)->group(function () {
 
     Route::get('doctor/education-destroy-{id?}', 'destroy')->name('education.destroy');
 });
+
+

@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Doctor;
 use App\Models\Hospital;
+use App\Models\Schedule;
+use App\Models\Specialist;
+use App\Models\User;
 
 class DoctorController extends Controller
 {
@@ -20,7 +23,9 @@ class DoctorController extends Controller
     public function create()
     {
         $hospital=Hospital::all();
-        return view('hospital.doctor.create',compact('hospital'));
+        $specialist=Specialist::all();
+        $user=User::all();
+        return view('hospital.doctor.create',compact('hospital','specialist','user'));
     }
 
     public function store(Request $request)
@@ -58,7 +63,10 @@ class DoctorController extends Controller
     public function edit($id)
     {
         $doctor = Doctor::find($id);
-        return view('hospital.doctor.edit', compact('doctor'));
+        $hospital=Hospital::all();
+        $specialist=Specialist::all();
+        $user=User::all();
+        return view('hospital.doctor.edit', compact('doctor','hospital','specialist','user'));
     }
 
     public function update(Request $request)
