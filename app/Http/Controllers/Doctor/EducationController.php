@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Doctor;
 use App\Models\Education;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class EducationController extends Controller
 {
@@ -20,12 +22,11 @@ class EducationController extends Controller
     }
     public function store(Request $request){
         $request->validate([
-            'doctorId'=>'required',
             'education'=>'required'
         ]);
-
+        $doctorId = Auth::user()->id;
         $education=New Education();
-        $education->doctorId=$request->doctorId;
+        $education->doctorId=$doctorId;
         $education->education=$request->education;
         if($education->save())
         {

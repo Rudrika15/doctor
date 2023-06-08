@@ -48,18 +48,18 @@ class HospitalController extends Controller
     {
         $hospital = Hospital::find($id);
         if ($hospital) {
-                         return response([
-                        'status' => 200,
-                        'data' => $hospital,
-                         ]);
+            return response([
+                'status' => 200,
+                'data' => $hospital,
+            ]);
         } else {
             return response([
                 'message' => ['Not list found']
-            ], 404);  
+            ], 200);
         }
     }
    
-    
+
     function doctor($id = 0)
     {
         $doctor = Doctor::where('hospitalId', '=', $id)->get();
@@ -115,14 +115,14 @@ class HospitalController extends Controller
                 'status' => 200,
                 'data' => $hospitaltype,
             ]);
-        }  else {
+        } else {
             return response([
                 'message' => ['Not list found']
             ], 404);
         }
     }
-    
-   
+
+
     function hospitaltypeview($id = 0)
     {
         if ($id > 0) {

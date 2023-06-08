@@ -18,29 +18,15 @@
         </div>
         @endif
 
-        <form action="{{route('education.update')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
+        <form id="frm" action="{{route('education.update')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden"  value="{{$education->id}}" name="id">
            
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Doctor Name </strong> 
-                    <select type="text" name="doctorId"  value="{{$education->doctorId}}" class="form-control @error('doctorId') is-invalid @enderror">
-                 <option selected disabled><strong >Select here...  </strong></option>
-                 @foreach ($doctor as $doctordata)
-                 <option value="{{$doctordata->id}}" {{$doctordata->id==old('doctorId',$education->doctorId)?'selected':''}}>{{$doctordata->doctorName}}</option>
-
-                 @endforeach
-                </select>
-                @error('doctorId')
-                 <sapn class="text-danger">{{ $message }}</sapn>
-                 @enderror
-             </div>
-
+          
              <div class="col-xs-12 col-sm-12 col-md-12">
                  <div class="form-group">
                        <strong> Education</strong>
-                       <textarea class="form-control @error('education')is-invalid @enderror" name="education" id="exampleTextarea" rows="3">{{$education->education}}</textarea>
+                       <textarea class="form-control @error('education')is-invalid @enderror" name="education" id="education" rows="3">{{$education->education}}</textarea>
                        @error('education')
                        <sapn class="text-danger">{{ $message }}</sapn>
                        @enderror
@@ -54,6 +40,26 @@
         </form>
         
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
+         
+    <script>
+      jQuery('#frm').validate({
+      rules:{
+         
+       education:"required",
+         
+          
+      },messages:{
+        
+       education:"Please enter education detail",
+         
+      },
+      submitHandler:function(form){
+          form.submit();
+      }
+  });
+</script>
 </div>
 
 @endsection

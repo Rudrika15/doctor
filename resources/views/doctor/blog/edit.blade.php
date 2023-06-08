@@ -18,7 +18,7 @@
         </div>
         @endif
 
-        <form action="{{route('blog.update')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
+        <form id="frm" action="{{route('blog.update')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" value="{{$blog->id}}" name="id">
 
@@ -26,7 +26,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Title </strong>
-                    <input type="text" name="title" value="{{$blog->title}}" class="form-control @error('title') is-invalid @enderror">
+                    <input type="text" id="title" name="title" value="{{$blog->title}}" class="form-control @error('title') is-invalid @enderror">
                     @error('title')
                     <sapn class="text-danger">{{ $message }}</sapn>
                     @enderror
@@ -38,7 +38,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                       <strong> Details</strong>
-                      <textarea class="form-control @error('detail')is-invalid @enderror" value="" name="detail" id="exampleTextarea" rows="3">{{$blog->detail}}</textarea>
+                      <textarea class="form-control @error('detail')is-invalid @enderror" value="" name="detail" id="detail" rows="3">{{$blog->detail}}</textarea>
                       @error('detail')
                       <sapn class="text-danger">{{ $message }}</sapn>
                       @enderror
@@ -65,21 +65,7 @@
                 </div>
             </div>
                     
-        <div class="col-xs-12 col-sm-12 col-md-12">
-             <div class="form-group">
-                <strong>Doctor Name </strong> 
-                 <select type="text" name="doctorId" value="{{$blog->doctorId}}" class="form-control @error('doctorId') is-invalid @enderror">
-                 <option selected disabled><strong >Select here...  </strong></option>
-                 @foreach ($doctor as $doctordata)
-                 <option value="{{$doctordata->id}}" {{$doctordata->id==old('doctorId',$blog->doctorId)?'selected':''}}>{{$doctordata->doctorName}}</option>
-
-
-             @endforeach
-                 </select>
-                 @error('doctorId')
-                 <sapn class="text-danger">{{ $message }}</sapn>
-                 @enderror
-             </div>
+       
          
 
 
@@ -88,6 +74,31 @@
             </div>
 
         </form>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>   
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
+          
+          <script>
+       jQuery('#frm').validate({
+       rules:{
+           title:"required",
+           detail:"required",
+           photo:"required",
+           
+       },messages:{
+           title:"Please enter  title",
+           detail:"Please enter details",
+           photo:"please select image",
+           
+       },
+       submitHandler:function(form){
+           form.submit();
+       }
+   });
+   
+         </script>
+     
+        
+
         <script>
             function readURL(input, tgt) {
                 if (input.files && input.files[0]) {

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
@@ -25,17 +26,15 @@ class BlogController extends Controller
             'title' => 'required',
             'detail' => 'required',
             'photo' => 'required',
-            'doctorId' => 'required'
-
         ]);
-
+            $doctorId = Auth::user()->id;
         $blog = new Blog();
         $blog->title = $request->title;
         $blog->detail = $request->detail;
         $photo = $request->photo;
         $blog->photo = time() . '.' . $request->photo->extension();
         $request->photo->move(public_path('blog'), $blog->photo);
-        $blog->doctorId = $request->doctorId;
+        $blog->doctorId = $doctorId;
         if ($blog->save()) {
 
             return redirect()->back()->with('success', 'Record Added successfully!');
@@ -70,21 +69,20 @@ class BlogController extends Controller
         }
         $blog->doctorId = $request->doctorId;
         $blog->status = "Active";
-        if($blog->update())
-        {
+        if ($blog->update()) {
             return redirect('doctor/blog-index')->with('success', 'record updated successfully');
-        }else{
-            return back()->with('error','you have no permission');
+        } else {
+            return back()->with('error', 'you have no permission');
         }
     }
-    public function destroy($id){
-        $blog=Blog::find($id);
-        $blog->status="Deleted";
+    public function destroy($id)
+    {
+        $blog = Blog::find($id);
+        $blog->status = "Deleted";
         if ($blog->save()) {
             return redirect()->back()->with('success', 'Record deleted');
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }
-
     }
 }

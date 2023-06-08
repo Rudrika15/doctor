@@ -23,7 +23,6 @@
                 <th>Title</th>
                 <th>Detail</th>
                 <th>Photo</th>
-                <th>Doctor Name</th>
                 <th> Status</th>
                 <th>Action</th>
             </tr>
@@ -33,10 +32,6 @@
                 <td>{{ $blogs->title }}</td>
                 <td>{{ $blogs->detail }}</td>
                 <td> <img src="{{url('/blog')}}/{{$blogs->photo}}" alt="" style="min-height:100px;min-width:100px;max-height:100px;max-width:100px"> </td>
-              
-                @foreach ($blogs->doctor as $doctor)
-                <td>{{ $doctor->doctorName }}</td>
-                @endforeach
 
                 <td>{{ $blogs->status }}</td>
 

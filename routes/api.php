@@ -41,7 +41,7 @@ Route::get('slider',[SliderController::class,'slider']);
  //Blog view
  Route::get('blog',[BlogListController::class,'blogView']);
  Route::get('blog/view/{id?}',[BlogListController::class,'blogList']);
-  Route::get('blog/search/{title}',[BlogListController::class,'search']);
+  Route::get('blog/search/{keyword}',[BlogListController::class,'search']);
  
 
 
@@ -67,7 +67,7 @@ Route::get('sociallink/{id?}',[HospitalController::class,'socialLink']);
  Route::get('hospitaldata',[HospitalController::class,'hospitalView']);
 
  //hospitaltype list
- Route::get('hospitaltype/view/{id?}',[HospitalController::class,'hospitaltype']);
+ Route::get('hospitaltype/{id?}',[HospitalController::class,'hospitaltype']);
 
 //hospital type wise hospital view
 Route::get('hospitaltypeview/{id?}',[HospitalController::class,'hospitaltypeview']);
