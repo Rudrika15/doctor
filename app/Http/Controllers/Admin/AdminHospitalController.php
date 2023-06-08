@@ -182,12 +182,13 @@ class AdminHospitalController extends Controller
         $hospitalId=$request->id;
 
 //For Doctor
-$specialist=Specialist::all();
+        $specialist=Specialist::all();
         $doctorName=$request->doctorName;
         $specialistId=$request->specialistId;
         
         $status=$request->status;
         if(isset($doctorName) && isset($specialistId) && isset($registerNumber) && isset($status)){
+           
             $doctor=Doctor::orderBy('doctorName', 'ASC')
                 ->where('doctorName','=',$doctorName)
                 ->where('specialistId','=',$specialistId)
@@ -195,55 +196,66 @@ $specialist=Specialist::all();
                 ->paginate(5);
         }
         else if(isset($doctorName) && !isset($specialistId) && !isset($status)){
-            $doctor=Doctor::orderBy('doctorName', 'ASC')
-                ->where('doctorName','=',$doctorName)
-                ->paginate(5);
+           
+           $doctor=Doctor::orderBy('doctorName', 'ASC')
+           ->where('doctorName','=',$doctorName)
+           ->paginate(5);
         }
         else if(!isset($doctorName) && isset($specialistId) && !isset($status)){
+            
+            
             $doctor=Doctor::orderBy('doctorName', 'ASC')
-                ->where('specialistId','=',$specialistId)
+                ->with('specialist')
+                ->where('specialistId',$specialistId)
                 ->paginate(5);
         }
         
         else if(!isset($doctorName) && !isset($specialistId) &&  isset($status)){
+           
             $doctor=Doctor::orderBy('doctorName', 'ASC')
                 ->where('status','=',$status)
                 ->paginate(5);
         }
         else{
-            
+           
             $doctor=Doctor::orderBy('doctorName', 'ASC')
                 ->where('hospitalId',$hospitalId)
                 ->with('hospital')
                 ->with('user')
                 ->paginate(5);
         }
-       
+//-------------------------------------------------------------------------
+
 //For Gallery
 
         $title=$request->title;
         $status=$request->status;
+
         if(isset($title) && isset($status)){
             $gallery = Gallery::orderBy('title', 'ASC')
                 ->where('title','=',$title)
                 ->where('status','=',$status)
-                ->paginate(5);  
+                ->paginate(5);
+                $gallerycount=count($gallery);  
         }
         else if(isset($title) && !isset($status)){
             $gallery = Gallery::orderBy('title', 'ASC')
                 ->where('title','=',$title)
-                ->paginate(5);  
+                ->paginate(5);
+                $gallerycount=count($gallery);  
         }
         else if(!isset($title) && isset($status)){
             $gallery = Gallery::orderBy('title', 'ASC')
                 ->where('status','=',$status)
-                ->paginate(5);  
+                ->paginate(5);
+                $gallerycount=count($gallery);  
         }
         else{
             $gallery = Gallery::orderBy('title', 'ASC')
             ->where('hospitalId', $hospitalId)
             ->with('hospital')
             ->paginate(5);
+            $gallerycount=count($gallery);
         }
 
 //For Facility
@@ -254,23 +266,27 @@ $specialist=Specialist::all();
                 ->where('title','=',$facilityTitle)
                 ->where('status','=',$facilityStatus)
                 ->paginate(5);
+                $facilitycount=count($facility);
         }
         else  if(isset($facilityTitle) && !isset($facilityStatus)){
             $facility=Facility::orderBy('title', 'ASC')
-            ->where('title','=',$facilityTitle)
+             ->where('title','=',$facilityTitle)
                 ->paginate(5);
+                $facilitycount=count($facility);
         } 
         else if(!isset($facilityTitle) && isset($facilityStatus)){
             $facility=Facility::orderBy('title', 'ASC')
-            ->where('status','=',$facilityStatus)
+                ->where('status','=',$facilityStatus)
                 ->paginate(5);
+                $facilitycount=count($facility);
         }
         else{
             $facility = Facility::orderBy('title', 'ASC')
-            ->where('hospitalId', $hospitalId)
-            ->with('hospital')
-            ->paginate(5);
+                ->where('hospitalId', $hospitalId)
+                ->with('hospital')
+                ->paginate(5);
+                $facilitycount=count($facility);
         }   
-        return view('admin.hospital.viewdetails', compact('hospital','doctor','gallery','facility','specialist'));
+        return view('admin.hospital.viewdetails', compact('hospital','doctor','gallery','facility','specialist','gallerycount','facilitycount'));
     }
 }

@@ -9,32 +9,34 @@
     <form id="frm" class="mt-5" action="{{route('city.index')}}" method="get" >
 
         <div class="col-lg-4">
+                <div class="form-group">
+                    <input type="text" list="magicHouses" id="cityName" name="cityName" class="form-control @error('cityName') is-invalid @enderror" placeholder="Enter City Name">
+                    <datalist id="magicHouses">
+                        @foreach ($city as $cityname)
+                        <option value={{$cityname->cityName}}>
+                         @endforeach
+                    </datalist>
+                   
+                    @error('cityName')
+                    <sapn class="text-danger">{{ $message }}</sapn>
+                    @enderror
+                </div>
+        </div>
+       
+        <div class="col-lg-4">
             <div class="form-group">
-                <input type="text" id="name" name="cityName" class="form-control @error('name') is-invalid @enderror" placeholder="Enter City Name">
-                @error('name')
+                <input type="text" id="magicHousesss" name="status" class="form-control @error('status') is-invalid @enderror" placeholder="Enter Status">
+                <datalist id="magicHousesss">
+                    @foreach ($city as $status)
+                    <option value={{$status->status}}>
+                    @endforeach
+                </datalist>
+                @error('status')
                 <sapn class="text-danger">{{ $message }}</sapn>
                 @enderror
             </div>
         </div>
     
-        <div class="col-lg-4">
-            <div class="form-group">
-                    <select class="form-select form-control-user @error('status') is-invalid @enderror"
-                        name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;"
-                         aria-label="Default select example">
-                             <option selected disabled>Select Status</option>
-                             <option value="Active">Active</option>
-                             <option value="Delete">Delete</option>
-                             
-                    </select>
-                    @error('status')
-                        <span class="invalid-feedback" role="alert">
-                        {{$message}}
-                        </span>
-                    @enderror
-            </div>
-        </div>
-        
         <div class="col-lg-4 text-center gap-5">
             <button type="submit" class="btn btn-primary">Search</button>
             <a class=" btn btnsubmit" href="{{route('city.index')}}">Clear</a>
@@ -71,6 +73,10 @@
 
                 </tr>
                 @endforeach
+
+                @if ($count==0)
+                    <td colspan="3" class="display-3 text-center text-danger">No data found</td>
+                @endif
             </table>
             {!! $city->withQueryString()->links('pagination::bootstrap-5') !!}
          </div>

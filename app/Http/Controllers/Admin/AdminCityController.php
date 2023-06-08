@@ -18,23 +18,27 @@ class AdminCityController extends Controller
             $city = City::orderBy('name', 'ASC')->where('name','=',$cityName)
             ->where('status','=',$status)
             ->paginate(5);
+            $count=count($city);
         }
         else if(!isset($cityName)&&isset($status))
             {
                 $city = City::orderBy('name', 'ASC')
                 ->where('status','=',$status)
                 ->paginate(5);
+                $count=count($city);
             }
         else if(isset($cityName)&&!isset($status))
             {
                 $city = City::orderBy('name', 'ASC')
                 ->where('name','=',$cityName)
                 ->paginate(5);
+                $count=count($city);
             }
         else{
             $city = City::orderBy('name', 'ASC')->paginate(5);
+            $count=count($city);
         }
-        return view('admin.city.index', compact('city'));
+        return view('admin.city.index', compact('city','count'));
     }
 
     public function create()

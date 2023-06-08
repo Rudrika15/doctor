@@ -18,21 +18,23 @@ class AdminHospitalTypeController extends Controller
                 ->where('typeName','=',$typeName)
                 ->where('status','=',$status)
                 ->paginate(3);
-                
+                $count = count($hospitaltype);
         }
         else if(isset($typeName) && !isset($status)){
             $hospitaltype=HospitalType::orderBy('typeName', 'ASC')
                 ->where('typeName','=',$typeName)->paginate(3);
+                $count = count($hospitaltype);
         }
         else if(!isset($typeName) && isset($status)){
             $hospitaltype=HospitalType::orderBy('typeName', 'ASC')
                 ->where('status','=',$status)->paginate(3);
+                $count = count($hospitaltype);
         }
         else{
             $hospitaltype = HospitalType::orderBy('typeName', 'ASC')->paginate(5);
-            
+            $count = count($hospitaltype);
         }
-        return view('admin.hospitaltype.index', compact('hospitaltype'));
+        return view('admin.hospitaltype.index', compact('hospitaltype','count'));
        
     }
     public function create()

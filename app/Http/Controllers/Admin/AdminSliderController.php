@@ -10,6 +10,8 @@ use PhpParser\Node\Expr\FuncCall;
 class AdminSliderController extends Controller
 {
     public function index(Request $request){
+
+        $slider=Slider::all();
         $title=$request->title;
         $place=$request->place;
         $status=$request->status;
@@ -20,27 +22,32 @@ class AdminSliderController extends Controller
                 ->where('place','=',$place)
                 ->where('status','=',$status)
                 ->paginate(5);
+                $count = count($slider);
         }
         else if(isset($title) && !isset($place) && !isset($status)){
             $slider=Slider::orderBy('title', 'ASC')
                 ->where('title','=',$title)
                 ->paginate(5);
+                $count = count($slider);
         }
         else if(!isset($title) && isset($place) && !isset($status)){
             $slider=Slider::orderBy('title', 'ASC') 
                 ->where('place','=',$place)
                 ->paginate(5);
+                $count = count($slider);
         }
         else if(!isset($title) && !isset($place) && isset($status)){
             $slider=Slider::orderBy('title', 'ASC')
                 ->where('status','=',$status)
                 ->paginate(5);
+                $count = count($slider);
         }
         else{
             $slider=Slider::orderBy('title', 'ASC')->paginate(3);
+            $count = count($slider);
         }
        
-        return view('admin.slider.index',compact('slider'));
+        return view('admin.slider.index',compact('slider','count'));
     }
     public function create(){
         return view('admin.slider.create');
