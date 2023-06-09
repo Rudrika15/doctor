@@ -10,12 +10,13 @@ class AdminCityController extends Controller
 {
     public function index(Request $req)
     {
+
         $cityName = $req->cityName;
         $status = $req->status;
 
         if(isset($cityName) && isset($status))
         {
-            $city = City::orderBy('name', 'ASC')->where('name','=',$cityName)
+            $city = City::orderBy('name', 'ASC')->where('name','like','%'.$cityName.'%')
             ->where('status','=',$status)
             ->paginate(5);
             $count=count($city);
