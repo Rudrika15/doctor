@@ -18,14 +18,14 @@
         </div>
         @endif
 
-        <form action="{{route('facility.update')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
+        <form id="frm" action="{{route('facility.update')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
             @csrf
              <input type="hidden" value="{{$facility->id}}" name="id"> 
 
           <div class="col-xs-12 col-sm-12 col-md-12">
               <div class="form-group">
                       <strong>Hospital Name </strong> 
-                    <select type="text" value="{{$facility->hospitalId}}" name="hospitalId" class="form-control @error('hospitalId') is-invalid @enderror">
+                    <select type="text" value="{{$facility->hospitalId}}" name="hospitalId" id="hospitalId" class="form-control @error('hospitalId') is-invalid @enderror">
                     <option selected disabled><strong >Select here...  </strong></option>
                     @foreach ($hospital as $hospitaldata)
                     <option value="{{$hospitaldata->id}}" {{$hospitaldata->id==old('hospitalId',$facility->hospitalId)? 'selected':''}}>{{$hospitaldata->hospitalName}}</option>
@@ -41,7 +41,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Title </strong>
-                    <input type="text" value="{{$facility->title}}" name="title" class="form-control @error('title') is-invalid @enderror">
+                    <input type="text" value="{{$facility->title}}" name="title" id="title" class="form-control @error('title') is-invalid @enderror">
                     @error('title')
                     <sapn class="text-danger">{{ $message }}</sapn>
                     @enderror
@@ -90,7 +90,31 @@
     </div>
 </div>
 
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
+  
+    <script>
+        jQuery('#frm').validate({
+        rules:{
+                hospitalId:"required",
+                title:{
+                    required:true,
+                    maxlength:15,
+                },
+                photo:"required",
+        },messages:{
+                    hospitalId:"Please Enter Hospital Name",
+                    title:{
+                        required:"Please Enter Title",
+                    },
+                    photo:"Please Select Image",
+            },
+        submitHandler:function(form)
+        {
+             form.submit();
+        }
+        });
+     </script>
 
 
 @endsection

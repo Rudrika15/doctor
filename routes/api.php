@@ -41,7 +41,7 @@ Route::get('slider',[SliderController::class,'slider']);
  //Blog view
  Route::get('blog',[BlogListController::class,'blogView']);
  Route::get('blog/view/{id?}',[BlogListController::class,'blogList']);
-  Route::get('blog/search/{keyword}',[BlogListController::class,'search']);
+  Route::get('search/{keyword}',[BlogListController::class,'search']);
  
 
 

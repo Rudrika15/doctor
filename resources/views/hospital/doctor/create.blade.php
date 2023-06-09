@@ -124,11 +124,41 @@
        jQuery('#frm').validate({
        rules:{
         hospitalId:"required",
+        doctorName:{
+        required:true,
+        maxlength:15
+    },
+        contactNo:{
+            required:true,
+            minlength:10,
+            maxlength:12,
+
+        },
+        specialistId:"required",
+        photo:"required",
+        experience:{
+                required:true,
+                maxlength:25,
+
+        },
+        registerNumber:"required",
           
            
        },messages:{
-        hospitalId:"Please Enter Hospital Name"
-          
+        hospitalId:"Please Enter Hospital Name",
+        doctorName:{
+        required:"Please Enter Doctor Name",
+    },
+        contactNo:{
+            required:"Please Enter Contact Number",
+           
+          },
+          specialistId:"Please Select Specialist Name",
+          photo:"Please Select Image",
+          experience:{
+            required:"Please Enter Your Experiance",
+          },
+          registerNumber:"Please Enter Register Number",
            
        },
        submitHandler:function(form){
