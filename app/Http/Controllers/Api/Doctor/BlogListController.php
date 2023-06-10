@@ -64,23 +64,58 @@ class BlogListController extends Controller
     public function search($keyword)
     {
 
-        return  Blog::where("title", "like", "%" . $keyword . "%")->get();
-        // $response = [
-        //     'blog' => $blog,
-        // ];
-
-        // return $response;
+        $blog = Blog::where("title", "like", "%" . $keyword . "%")->get();
+        if ($blog) {
+            return response([
+                'status' => 200,
+                'data' => $blog,
+            ]);
+        } else {
+            return response([
+                'message' => ['Not list found']
+            ], 200);
+        }
     }
-    public function hospitalsearch(Request $request)
+    public function hospitalsearch(Request $request, $cityId, $keyword)
     {
-        $hospital = $request->input('hospital');
+        $cityId = $request->cityId;
+        $keyword = $request->keyword;
 
-        $search = Hospital::where(function ($queryBuilder) use ($hospital) {
+        $search = Hospital::with(['city' => function ($query) use ($cityId) {
+            $query->where('id', '=', $cityId);
+        }])->where('hospitalName', 'like', "%$keyword%")
+            ->with('doctor')->get();
 
-            $queryBuilder->where('hospitalName', 'like', "%$hospital%")
-                        ->orWhere('cityId', 'like', "%$hospital%");
-        })->get();
-        return response()->json($search);
+
+        if (count($search) > 0) {
+            if ($search) {
+                return response([
+                    'status' => 200,
+                    'data' => $search,
+                ]);
+            } else {
+                return response([
+                    'message' => ['Not list found']
+                ], 200);
+            }
+        } else {
+            $search = Hospital::with(['city' => function ($query) use ($cityId) {
+                $query->where('id', '=', $cityId);
+            }])->with(['doctor' => function ($query) use ($keyword) {
+                $query->where('doctorName', 'like', "%$keyword%");
+            }])->get();
+
+            if ($search) {
+                return response([
+                    'status' => 200,
+                    'data' => $search,
+                ]);
+            } else {
+                return response([
+                    'message' => ['Not list found']
+                ], 200);
+            }
+        }
     }
 }
 
