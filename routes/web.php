@@ -140,12 +140,6 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
-
-
-
-
-
-
     //-------------------------------------- Hospital Side------------------------------------------
 
     Route::controller(DoctorController::class)->group(function () {

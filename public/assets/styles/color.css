@@ -1,9 +1,9 @@
 :root {
     --black: #212121;
-    --offwhite: #EDC6B1;
+    --offwhite: #022b53;
     --darkblue: #BFCCB5;
-    --purple: #7C96AB;
-    --levendar: #B7B7B7;
+    --purple: #0ca798;
+    --levendar: #022b53;
     --white: #ffffff;
     --gray: #434a54;
     /* --green: #6ab783; */
@@ -49,7 +49,7 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: var(--green);
+    background: var(--purple);
     /* background-image: linear-gradient(var(--green), var(--pink), var(--levendar)); */
     border-radius: 50px;
 }
@@ -203,7 +203,7 @@ a .logo {
 
 .addbtn:hover {
     background-color: var(--darkblue) !important;
-    color: var(--white) !important;
+    color: var(--black) !important;
 }
 
 .navigation .menu a i {
@@ -284,7 +284,7 @@ a .logo {
 
 .btnsubmit:hover {
     background-color: var(--levendar) !important;
-    color: var(--black) !important;
+    color: var(--white) !important;
     font-weight: 600 !important;
 }
 

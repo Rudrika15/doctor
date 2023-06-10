@@ -23,7 +23,7 @@
     <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> --}}
 
     <title>Doctor</title>
-    
+
     <!-- Main Styles -->
     <link rel="stylesheet" href="{{ asset('assets/styles/style.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/styles/color.css') }}">
@@ -31,7 +31,7 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
     <!-- bootstrap 5 css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  
+
     <!-- mCustomScrollbar -->
     <link rel="stylesheet" href="{{ asset('assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.min.css') }}">
 
@@ -65,7 +65,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
-
+    <link rel="icon" href="{{ asset('asset/img/favicon.png') }}">
     {{-- For Icon  --}}
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
@@ -74,11 +74,11 @@
 <body>
     <div class="main-menu">
         <header class="header">
-            <a href="{{ url('/home') }}" class="logo pt-5" style="font-family: cursive;">
-                <!-- <img src="{{ asset('asset/img/logo.png') }}" style="width:150px" class="img-fluid" /> -->
-                <h2 class="text-center">Doctor
+            <a href="{{ url('/home') }}" class="logo" style="font-family: cursive;">
+                <img src="{{ asset('asset/img/logo.png') }}" style="width:150px" class="img-fluid" />
+                <!-- <h2 class="text-center">Doctor
                     <i class="menu-icon fa fa-leaf"></i>
-                </h2>
+                </h2> -->
             </a>
             <button type="button" class="button-close fa fa-times js__menu_close" style="color: #03ACF0;"></button>
             <div class="user">
@@ -168,7 +168,7 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
- 
+
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{{ asset('assets/scripts/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/scripts/modernizr.min.js') }}"></script>
@@ -211,9 +211,9 @@
     <script src="assets/plugin/fullscreen/jquery.fullscreen-min.js"></script>
 
     {{-- For Jquery Validation  --}}
-    
-    
-    
+
+
+
     <!-- Dropify -->
     <script src="{{ asset('assets/plugin/dropify/js/dropify.min.js') }}"></script>
     <script src="{{ asset('assets/scripts/fileUpload.demo.min.js') }}"></script>

@@ -141,6 +141,9 @@
                     <td>{{$hospitals->category}}</td>
                     <td><img src="{{url('/hospital')}}/{{$hospitals->hospitalLogo}}"></td>
 
+
+                    <td>{{$hospitals->hospitalTime}}</td>
+                    <td>{{$hospitals->services}}</td>
                     <td>{{$hospitals->status}}</td>
 
                     <td>

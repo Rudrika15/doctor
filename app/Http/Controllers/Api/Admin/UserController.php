@@ -50,7 +50,6 @@ class UserController extends Controller
             'contactNumber' => 'required',
         );
 
-
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return $validator->errors();
