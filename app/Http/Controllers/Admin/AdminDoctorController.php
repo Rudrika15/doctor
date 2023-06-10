@@ -116,7 +116,7 @@ class AdminDoctorController extends Controller
         $doctor = Doctor::find($id);
         $doctor->status = "Delete";
         if ($doctor->save()) {
-            return redirect('admin/doctor-index')->with('success', 'Doctor Deleted successfully!');
+            return redirect()->back()->with('success', 'Doctor Deleted successfully!');
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }

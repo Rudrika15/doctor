@@ -8,12 +8,35 @@ use Illuminate\Http\Request;
 
 class AdminHospitalTypeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $hospitaltype = HospitalType::paginate(5);
-        return view('admin.hospitaltype.index', compact('hospitaltype'));
+        $typeName=$request->typeName;
+        $status=$request->status;
+       
+        if(isset($typeName) && isset($status)){
+            $hospitaltype=HospitalType::orderBy('typeName', 'ASC')
+                ->where('typeName','=',$typeName)
+                ->where('status','=',$status)
+                ->paginate(3);
+                $count = count($hospitaltype);
+        }
+        else if(isset($typeName) && !isset($status)){
+            $hospitaltype=HospitalType::orderBy('typeName', 'ASC')
+                ->where('typeName','=',$typeName)->paginate(3);
+                $count = count($hospitaltype);
+        }
+        else if(!isset($typeName) && isset($status)){
+            $hospitaltype=HospitalType::orderBy('typeName', 'ASC')
+                ->where('status','=',$status)->paginate(3);
+                $count = count($hospitaltype);
+        }
+        else{
+            $hospitaltype = HospitalType::orderBy('typeName', 'ASC')->paginate(5);
+            $count = count($hospitaltype);
+        }
+        return view('admin.hospitaltype.index', compact('hospitaltype','count'));
+       
     }
-
     public function create()
     {
         return view('admin.hospitaltype.create');

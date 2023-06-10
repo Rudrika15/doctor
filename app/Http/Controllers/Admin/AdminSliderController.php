@@ -9,9 +9,45 @@ use PhpParser\Node\Expr\FuncCall;
 
 class AdminSliderController extends Controller
 {
-    public function index(){
-        $slider=Slider::paginate(3);
-        return view('admin.slider.index',compact('slider'));
+    public function index(Request $request){
+
+        $slider=Slider::all();
+        $title=$request->title;
+        $place=$request->place;
+        $status=$request->status;
+
+        if(isset($title) && isset($place) && isset($status)){
+            $slider=Slider::orderBy('title', 'ASC')
+                ->where('title','=',$title)
+                ->where('place','=',$place)
+                ->where('status','=',$status)
+                ->paginate(5);
+                $count = count($slider);
+        }
+        else if(isset($title) && !isset($place) && !isset($status)){
+            $slider=Slider::orderBy('title', 'ASC')
+                ->where('title','=',$title)
+                ->paginate(5);
+                $count = count($slider);
+        }
+        else if(!isset($title) && isset($place) && !isset($status)){
+            $slider=Slider::orderBy('title', 'ASC') 
+                ->where('place','=',$place)
+                ->paginate(5);
+                $count = count($slider);
+        }
+        else if(!isset($title) && !isset($place) && isset($status)){
+            $slider=Slider::orderBy('title', 'ASC')
+                ->where('status','=',$status)
+                ->paginate(5);
+                $count = count($slider);
+        }
+        else{
+            $slider=Slider::orderBy('title', 'ASC')->paginate(3);
+            $count = count($slider);
+        }
+       
+        return view('admin.slider.index',compact('slider','count'));
     }
     public function create(){
         return view('admin.slider.create');

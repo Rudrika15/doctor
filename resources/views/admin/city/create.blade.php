@@ -16,7 +16,7 @@
         </div>
         @endif
 
-        <form id="frm" action="{{route('city.store')}}" method="POST" enctype="multipart/form-data">
+    <form id="frm" action="{{route('city.store')}}" method="get" >
         @csrf
         
         <div class="col-xs-12 col-sm-12 col-md-12">

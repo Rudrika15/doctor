@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 @section('content')
 
@@ -8,20 +7,15 @@
         <div class="pt-2"><a class="btn addbtn" href="{{ route('city.create') }}"> Add City</a></div>
     </div>
     <form id="frm" class="mt-5" action="{{route('city.index')}}" method="get" >
-    
+
         <div class="col-lg-4">
                 <div class="form-group">
-                    <input autocomplete="off" type="text" id="myInput" onfocus="showList()" onkeyup="myFunction()" name="cityName" class="form-control @error('cityName') is-invalid @enderror" placeholder="Enter City Name">
-                    {{-- <datalist id="magicHouses">
+                    <input type="text" list="magicHouses" id="cityName" name="cityName" class="form-control @error('cityName') is-invalid @enderror" placeholder="Enter City Name">
+                    <datalist id="magicHouses">
                         @foreach ($city as $cityname)
-                        <option value={{$cityname->name}}>
+                        <option value={{$cityname->cityName}}>
                          @endforeach
-                    </datalist> --}}
-                    <ul id="myUL" style="display:none">
-                        @foreach ($city as $citysearch)
-                        <li><a href="#">{{$citysearch->name}}</a></li>
-                        @endforeach
-                    </ul>
+                    </datalist>
                    
                     @error('cityName')
                     <sapn class="text-danger">{{ $message }}</sapn>
@@ -31,21 +25,18 @@
        
         <div class="col-lg-4">
             <div class="form-group">
-                    <select class="form-select form-control-user @error('status') is-invalid @enderror"
-                        name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;"
-                         aria-label="Default select example">
-                             <option selected disabled class="text-center">---Select status---</option>
-                             <option value="Active">Acive</option> 
-                             <option value="Delete">Delete</option> 
-                    </select>
-                    @error('status')
-                        <span class="invalid-feedback" role="alert">
-                        {{$message}}
-                        </span>
-                    @enderror
+                <input type="text" id="magicHousesss" name="status" class="form-control @error('status') is-invalid @enderror" placeholder="Enter Status">
+                <datalist id="magicHousesss">
+                    @foreach ($city as $status)
+                    <option value={{$status->status}}>
+                    @endforeach
+                </datalist>
+                @error('status')
+                <sapn class="text-danger">{{ $message }}</sapn>
+                @enderror
             </div>
         </div>
-
+    
         <div class="col-lg-4 text-center gap-5">
             <button type="submit" class="btn btn-primary">Search</button>
             <a class=" btn btnsubmit" href="{{route('city.index')}}">Clear</a>
@@ -54,11 +45,15 @@
     </form>
     
     <div class="card-body">
+
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
         @endif
+
+    
+
         <div class="table-responsive">
             <table class="table table-bordered">
                 <tr>
@@ -89,31 +84,7 @@
     </div>
 </div>
 
-<script>
-    function showList() {
-      document.getElementById("myUL").style.display = "block";
-    }
-    
-    function myFunction() {
-      var input, filter, ul, li, a, i, txtValue;
-      input = document.getElementById("myInput");
-      filter = input.value.toUpperCase();
-      ul = document.getElementById("myUL");
-      li = ul.getElementsByTagName("li");
-      
-      for (i = 0; i <script li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          li[i].style.display = "";
-        } else {
-          li[i].style.display = "none";
-        }
-      }
-    }
-    function showList() {
-      document.getElementById("myUL").style.display = "block";
-    }
-</script>
-@endsection
 
+
+
+@endsection

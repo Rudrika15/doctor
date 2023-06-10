@@ -8,10 +8,35 @@ use Illuminate\Http\Request;
 
 class AdminSpecialistController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $specialist = Specialist::paginate(5);
-        return view('admin.specialist.index', compact('specialist'));
+        $specialistName=$request->specialistName;
+        $status=$request->status;
+
+        if(isset($specialistName) && isset($status)){
+            $specialist=Specialist::orderBy('specialistName', 'ASC')
+                ->where('specialistName','=',$specialistName)
+                ->where('status','=',$status)
+                ->paginate(5);
+                $count=count($specialist);
+        }
+        else if(isset($specialistName) && !isset($status)){
+            $specialist=Specialist::orderBy('specialistName', 'ASC')
+                ->where('specialistName','=',$specialistName)
+                ->paginate(5);
+                $count=count($specialist);
+        }
+        else if(!isset($specialistName) && isset($status)){
+            $specialist=Specialist::orderBy('specialistName', 'ASC')
+                ->where('status','=',$status)
+                ->paginate(5);
+                $count=count($specialist);
+        }
+        else{
+            $specialist = Specialist::orderBy('specialistName', 'ASC')->paginate(5); 
+            $count=count($specialist);  
+        }
+        return view('admin.specialist.index', compact('specialist','count'));
     }
 
     public function create()
