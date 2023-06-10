@@ -116,6 +116,8 @@
                     <th>Site Url</th>
                     <th>Category</th>
                     <th>Hospital Logo</th>
+                    <th>Time</th>
+                    <th>Service</th>
                     <th>Status</th>
                     <th>Action</th>
 

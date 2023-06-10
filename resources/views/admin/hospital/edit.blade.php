@@ -134,6 +134,26 @@
 
             </div>
         </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Time:</strong>
+                <input type="time" name="time" id="time" value="{{$hospital->time}}" class="form-control @error('time') is-invalid @enderror">
+                @error('time')
+                    <sapn class="text-danger">{{ $message }}</sapn>
+                @enderror
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Service:</strong>
+                <input type="text" name="service" id="service"  value="{{$hospital->service}}" class="form-control @error('service') is-invalid @enderror">
+                @error('service')
+                    <sapn class="text-danger">{{ $message }}</sapn>
+                @enderror
+            </div>
+        </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btnsubmit">Submit</button>
         </div>
@@ -192,6 +212,12 @@
             category:{
                 required:true,
             },
+            time:{
+                required:true,
+            },
+            service:{
+                required:true,
+            }
             	
         },
         messages:{
@@ -223,6 +249,12 @@
             category:{
                 required:"Please Select Category"
             },
+            time:{
+                required:"Please Enter Time"
+            },
+            service:{
+                required:"Please Enter Service"
+            }
             
         },
         submitHandler:function(form){

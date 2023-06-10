@@ -10,6 +10,7 @@ use App\Models\Hospital;
 use App\Models\HospitalType;
 use App\Models\Gallery;
 use App\Models\Facility;
+use App\Models\SocialLink;
 use App\Models\Specialist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -93,7 +94,9 @@ class AdminHospitalController extends Controller
             'userId' => 'required',
             'siteUrl' => 'required',
             'category' => 'required',
-            'hospitalLogo'=>'required'
+            'hospitalLogo'=>'required',
+            'time'=>'required',
+            'service'=>'required'
         ]);
         
         $hospital = new Hospital();
@@ -110,6 +113,8 @@ class AdminHospitalController extends Controller
         $hospital->hospitalLogo = time() . '.' . $request->hospitalLogo->extension();
         $request->hospitalLogo->move(public_path('hospital'), $hospital->hospitalLogo);
     
+        $hospital->time=$request->time;
+        $hospital->service=$request->service;
 
         if ($hospital->save()) {
             return redirect()->back()->with('success', 'Hospital Added successfully!');
@@ -137,7 +142,9 @@ class AdminHospitalController extends Controller
             'hospitalTypeId' => 'required',
             'userId' => 'required',
             'siteUrl' => 'required',
-            'category' => 'required'
+            'category' => 'required',
+            'time'=>'required',
+            'service'=>'required'
         ]);
         $id = $request->hospitalId;
         $hospital = Hospital::find($id);
@@ -156,6 +163,8 @@ class AdminHospitalController extends Controller
             $request->hospitalLogo->move(public_path('hospital'), $hospital->hospitalLogo);
         }
         
+        $hospital->time=$request->time;
+        $hospital->service=$request->service;
         $hospital->status = "Active";
 
         if ($hospital->save()) {
@@ -286,7 +295,12 @@ class AdminHospitalController extends Controller
                 ->with('hospital')
                 ->paginate(5);
                 $facilitycount=count($facility);
-        }   
-        return view('admin.hospital.viewdetails', compact('hospital','doctor','gallery','facility','specialist','gallerycount','facilitycount'));
+        }  
+        
+//For Social Link.
+        $sociallink=SocialLink::where('hospitalId',$hospitalId)
+            ->with('hospital')
+            ->paginate(5);
+        return view('admin.hospital.viewdetails', compact('hospital','doctor','gallery','facility','specialist','gallerycount','facilitycount','sociallink'));
     }
 }

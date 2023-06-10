@@ -17,6 +17,7 @@
 <li>
     <a class="text-white waves-effect" href="{{route('hospital.index')}}"><i class="text-white menu-icon bi bi-hospital-fill"></i><span>Hospital</span></a>
 </li>
+
 <li>
     <a class="text-white waves-effect parent-item js__control" href="#"><i class="text-white menu-icon bi bi-award-fill"></i><span>Master</span><span class="menu-arrow fa fa-angle-down"></span></a>
     <ul class="sub-menu js__content">
