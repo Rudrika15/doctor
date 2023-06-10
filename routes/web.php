@@ -128,6 +128,16 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('admin/slider-delete-{id?}', 'delete')->name('admin.slider.delete');
     });
 
+    //Admin Social Links
+    Route::controller(AdminSocialLinkController::class)->group(function () {
+        Route::get('admin/sociallink-index', 'index')->name('admin.sociallink.index');
+        Route::get('admin/sociallink-create-{id?}', 'create')->name('admin.sociallink.create');
+        Route::post('admin/sociallink-store', 'store')->name('admin.sociallink.store');
+        Route::get('admin/sociallink-edit-{id?}', 'edit')->name('admin.sociallink.edit');
+        Route::post('admin/sociallink-update', 'update')->name('admin.sociallink.update');
+        Route::get('admin/sociallink-delete-{id?}', 'delete')->name('admin.sociallink.delete');
+    });
+
 
 
 
