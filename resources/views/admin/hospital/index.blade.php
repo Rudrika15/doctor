@@ -124,6 +124,8 @@
                     <th>Site Url</th>
                     <th>Category</th>
                     <th>Hospital Logo</th>
+                    <th>Time</th>
+                    <th>Service</th>
                     <th>Status</th>
                     <th>Action</th>
                     
@@ -150,7 +152,8 @@
                         <td>{{$hospitals->siteUrl}}</td>
                         <td>{{$hospitals->category}}</td>
                         <td><img src="{{url('/hospital')}}/{{$hospitals->hospitalLogo}}"></td>
-
+                        <td>{{$hospitals->time}}</td>
+                        <td>{{$hospitals->service}}</td>
                         <td>{{$hospitals->status}}</td>
                         
                         <td>

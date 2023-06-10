@@ -12,12 +12,14 @@ use App\Http\Controllers\Hospital\GalleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHospitalController;
 use App\Http\Controllers\Admin\AdminHospitalTypeController;
+use App\Http\Controllers\Admin\AdminSocialLinkController;
 use App\Http\Controllers\Doctor\BlogController;
 use App\Http\Controllers\Doctor\EducationController;
 use App\Http\Controllers\Hospital\AppointmentController;
 use App\Http\Controllers\Hospital\DoctorController;
 use App\Http\Controllers\Hospital\FacilityController;
 use App\Http\Controllers\Hospital\ScheduleController;
+use Spatie\Permission\Contracts\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -127,6 +129,15 @@ Route::controller(AdminSliderController::class)->group(function () {
     Route::get('admin/slider-delete-{id?}', 'delete')->name('admin.slider.delete');
 });
 
+//Admin Social Links
+Route::controller(AdminSocialLinkController::class)->group(function(){
+    Route::get('admin/sociallink-index','index')->name('admin.sociallink.index');
+    Route::get('admin/sociallink-create-{id?}','create')->name('admin.sociallink.create');
+    Route::post('admin/sociallink-store','store')->name('admin.sociallink.store');
+    Route::get('admin/sociallink-edit-{id?}','edit')->name('admin.sociallink.edit');
+    Route::post('admin/sociallink-update','update')->name('admin.sociallink.update');
+    Route::get('admin/sociallink-delete-{id?}','delete')->name('admin.sociallink.delete');
+});
 
 
 
@@ -167,7 +178,6 @@ Route::controller(FacilityController::class)->group(function () {
 });
 
 Route::controller(ScheduleController::class)->group(function () {
-
     Route::get('hospital/schedule-index', 'index')->name('schedule.index');
     Route::get('hospital/schedule-create', 'create')->name('schedule.create');
     Route::post('schedule-store', 'store')->name('schedule.store');

@@ -17,6 +17,8 @@
             <li class="active"><a href="#doctor" data-toggle="tab">Doctor</a></li>
             <li><a href="#gallery" data-toggle="tab">Gallery</a></li>
             <li><a href="#facility" data-toggle="tab">Facility</a></li>
+            <li><a href="#sociallink" data-toggle="tab">Social Link</a></li>
+
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="doctor">
@@ -290,45 +292,45 @@
                  </div>
                 {{-- {!! $data->render() !!} --}}
             </div>
+
+            <div class="tab-pane" id="sociallink">
+               
+                <div class="table-responsive">
+                    <div class="mb-4 pull-right"><a class="btn addbtn" href="{{ route('admin.sociallink.create',['id' => request()->route('id')]) }}"> Add Social Link</a></div>
+
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Hospital</th>
+                            <th>Title</th>
+                            <th>Link</th>
+                            <th>Status</th>
+                            <th>Action</th>  
+                        </tr>
+                        @foreach ($sociallink as $sociallinks)
+                            <tr>
+                                <td>{{$sociallinks->hospital->hospitalName}}</td>
+                                <td>{{$sociallinks->title}}</td>
+                                <td>{{$sociallinks->link}}</td>
+                                <td>{{$sociallinks->status}}</td>
+                                <td>
+                                    <a class="btn btn-primary mt-1" href="{{route('admin.sociallink.edit')}}{{$sociallinks->id}}">Edit</a>
+                                    <a class="btn btn-danger mt-1" onclick="return confirm('Are you sure want to delete?')" href="{{route('admin.sociallink.delete')}}{{$sociallinks->id}}">Delete</a>
+                                </td>
+                            </tr>
+                        @endforeach
+
+                        {{-- @if ($facilitycount==0)
+                            <td colspan="5" class="display-3 text-center text-danger">No data found</td>
+                        @endif --}}
+                    </table>
+                    {!! $sociallink->withQueryString()->links('pagination::bootstrap-5') !!}
+                 </div>
+                {{-- {!! $data->render() !!} --}}
+            </div>
         </div>
-
-        
-        {{-- <div class="container gap-5">
-            
-            <ul class="nav nav-pills gap-5">
-              <li><a href="{{route('admin.doctor.index')}}{{$hospital->id}}" style="color:#7C96AB;font-size:22px">Doctor</a></li>
-              <li><a href="{{route('admin.gallery.index')}}{{$hospital->id}}" style="color:#7C96AB;font-size:22px">Gallery</a></li>
-              <li><a href="{{route('admin.facility.index')}}{{$hospital->id}}" style="color:#7C96AB;font-size:22px">Facilty</a></li>
-            </ul>
-        </div> --}}
-        {{-- <div class="d-flex justify-content-center gap-5 mb-5">
-            <a class="btn mt-5 ms-5 me-5 p-4" style="background-color:#7C96AB;color:white;font-size:18px;" href="{{route('admin.doctor.index')}}{{$hospital->id}}">Doctor</a>
-         
-            <a class="btn btn-secondary mt-5 ms-5 me-5 p-4" style="background-color:#7C96AB;color:white;font-size:18px;" href="{{route('admin.gallery.index')}}{{$hospital->id}}">Gallery</a>
-
-            <a class="btn btn-secondary mt-5 ms-5 me-5 p-4" style="background-color:#7C96AB;color:white;font-size:18px;" href="{{route('admin.facility.index')}}{{$hospital->id}}">Facality</a>
-        </div> --}}
-        
+ 
     </div>
 </div>
 
-    {{-- <div class="card">
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#tab1" data-toggle="tab">Home</a></li>
-            <li><a href="#tab2" data-toggle="tab">About</a></li>
-            <li><a href="#tab3" data-toggle="tab">Contact</a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane active" id="tab1">
-                Home
-            </div>
-            <div class="tab-pane" id="tab2">
-                About
-            </div>
-            <div class="tab-pane" id="tab3">
-                Contact
-            </div>
-        </div>
-
-    </div> --}}
+  
 @endsection
