@@ -34,7 +34,7 @@ class FacilityController extends Controller
         $facility->title = $request->title;
         $photo = $request->photo;
         $facility->photo = time() . '.' . $request->photo->extension();
-        $request->photo->move(public_path('photo'), $facility->photo);
+        $request->photo->move(public_path('facility'), $facility->photo);
 
         if ($facility->save()) {
             return redirect()->back()->with('success', 'Record Added successfully!');
@@ -46,7 +46,8 @@ class FacilityController extends Controller
     public function edit($id)
     {
         $facility = Facility::find($id);
-        return view('hospital.facility.edit', compact('facility'));
+        $hospital=Hospital::all();
+        return view('hospital.facility.edit', compact('facility','hospital'));
     }
 
     public function update(Request $request)
@@ -64,7 +65,7 @@ class FacilityController extends Controller
         if ($request->photo) {
             $photo = $request->photo;
             $facility->photo = time() . '.' . $request->photo->extension();
-            $request->photo->move(public_path('photo'), $facility->photo);
+            $request->photo->move(public_path('facility'), $facility->photo);
         }
         $facility->status = "Active";
         if ($facility->save()) {

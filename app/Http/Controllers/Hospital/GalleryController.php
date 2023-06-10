@@ -34,7 +34,7 @@ class GalleryController extends Controller
         $gallery->title = $request->title;
         $photo = $request->photo;
         $gallery->photo = time() . '.' . $request->photo->extension();
-        $request->photo->move(public_path('photo'), $gallery->photo);
+        $request->photo->move(public_path('gallery'), $gallery->photo);
 
         if ($gallery->save()) {
             return redirect()->back()->with('success', 'Record Added successfully!');
@@ -46,7 +46,8 @@ class GalleryController extends Controller
     public function edit($id)
     {
         $gallery = Gallery::find($id);
-        return view('hospital.gallery.edit', compact('gallery'));
+        $hospital=Hospital::all();
+        return view('hospital.gallery.edit', compact('gallery','hospital'));
     }
 
     public function update(Request $request)
@@ -65,7 +66,7 @@ class GalleryController extends Controller
         if ($request->photo) {
             $photo = $request->photo;
             $gallery->photo = time() . '.' . $request->photo->extension();
-            $request->photo->move(public_path('photo'), $gallery->photo);
+            $request->photo->move(public_path('gallery'), $gallery->photo);
         }
         $gallery->status = "Active";
         if ($gallery->save()) {

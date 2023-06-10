@@ -18,12 +18,12 @@
         </div>
         @endif
 
-        <form action="{{route('gallery.store')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
+        <form id="frm" action="{{route('gallery.store')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
             @csrf
           <div class="col-xs-12 col-sm-12 col-md-12">
               <div class="form-group">
-                      <strong>Hospital ID </strong> 
-                    <select type="text" name="hospitalId" class="form-control @error('hospitalId') is-invalid @enderror">
+                      <strong>Hospital Name </strong> 
+                    <select type="text" name="hospitalId" id="hospitalId" class="form-control @error('hospitalId') is-invalid @enderror">
                     <option selected disabled><strong >Select here...  </strong></option>
                     @foreach ($hospital as $hospital)
                 <option value="{{$hospital->id}}">{{$hospital->hospitalName}}</option>
@@ -38,7 +38,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Title </strong>
-                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror">
+                    <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror">
                     @error('title')
                     <sapn class="text-danger">{{ $message }}</sapn>
                     @enderror
@@ -57,7 +57,7 @@
 
                     <div class="col-md-4">
                         <label for="image"></label>
-                        <img src="{{url('asset/img/default.jpg')}}" alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
+                        <img src="{{url('gallery/default.jpg')}}" alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
                     </div>
 
                 </div>
@@ -85,6 +85,32 @@
         
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
+  
+    <script>
+        jQuery('#frm').validate({
+        rules:{
+                hospitalId:"required",
+                title:{
+                    required:true,
+                    maxlength:15,
+                },
+                photo:"required",
+        },messages:{
+                    hospitalId:"Please Enter Hospital Name",
+                    title:{
+                        required:"Please Enter Title",
+                    },
+                    photo:"Please Select Image",
+            },
+        submitHandler:function(form)
+        {
+             form.submit();
+        }
+        });
+     </script>
 
 
 

@@ -18,12 +18,12 @@
         </div>
         @endif
 
-        <form action="{{route('schedule.store')}}"  method="POST">
+        <form id="frm" action="{{route('schedule.store')}}"  method="POST">
             @csrf
           <div class="col-xs-12 col-sm-12 col-md-12">
               <div class="form-group">
-                      <strong>Hospital ID </strong> 
-                    <select type="text" name="hospitalId" class="form-control @error('hospitalId') is-invalid @enderror">
+                      <strong>Hospital Name </strong> 
+                    <select type="text" name="hospitalId" id="hospitalId" class="form-control @error('hospitalId') is-invalid @enderror">
                     <option selected disabled><strong >Select here...  </strong></option>
                    @foreach ($hospital as $hospital)
                    <option value="{{$hospital->id}}">{{$hospital->hospitalName}}</option>
@@ -38,8 +38,8 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                        <strong>Doctor ID </strong> 
-                      <select type="text" name="doctorId" class="form-control @error('doctorId') is-invalid @enderror">
+                        <strong>Doctor Name </strong> 
+                      <select type="text" name="doctorId" id="doctorId" class="form-control @error('doctorId') is-invalid @enderror">
                       <option selected disabled><strong >Select here...  </strong></option>
                      @foreach ($doctor as $doctor)
                      <option value="{{$doctor->id}}">{{$doctor->doctorName}}</option>
@@ -55,7 +55,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Day </strong>
-                    <input type="date" name="day" class="form-control @error('day') is-invalid @enderror">
+                    <input type="date" name="day"  id="day" class="form-control @error('day') is-invalid @enderror">
                     @error('day')
                     <sapn class="text-danger">{{ $message }}</sapn>
                     @enderror
@@ -65,7 +65,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Session</strong>
-                    <input type="text" name="session" class="form-control @error('session') is-invalid @enderror">
+                    <input type="text" name="session"  id="session" class="form-control @error('session') is-invalid @enderror">
                     @error('session')
                     <sapn class="text-danger">{{ $message }}</sapn>
                     @enderror
@@ -74,7 +74,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Time</strong>
-                    <input type="number" name="time" class="form-control @error('time') is-invalid @enderror">
+                    <input type="number" name="time" id="time" class="form-control @error('time') is-invalid @enderror">
                     @error('time')
                     <sapn class="text-danger">{{ $message }}</sapn>
                     @enderror
@@ -91,6 +91,32 @@
 </div>
 
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
+  
+    <script>
+        jQuery('#frm').validate({
+        rules:{
+                hospitalId:"required",
+                doctorId:"required",
+                day:"required",
+                photo:"required",
+                session:"required",
+                time:"required",
+        },messages:{
+                    hospitalId:"Please Select Hospital",
+                    doctorId:"Please Select Doctor",
+                    day:"Please Enter day",
+                    photo:"Please Select Image",
+                    session:"Please Enter Session",
+                    time:"Please Enter Time",
+            },
+        submitHandler:function(form)
+        {
+             form.submit();
+        }
+        });
+     </script>
 
 
 @endsection

@@ -31,7 +31,8 @@
             <tr>
                 <td>{{ $facilities->hospital->hospitalName }}</td>
                 <td>{{ $facilities->title }}</td>
-                <td> <img src="/photo/{{$facilities->photo}}" alt="" style="min-height:100px;min-width:100px;max-height:100px;max-width:100px"> </td>
+                <td> <img src="{{url('/facility')}}/{{$facilities->photo}}" alt="" style="min-height:100px;min-width:100px;max-height:100px;max-width:100px"> </td>
+               
                 <td>{{ $facilities->status }}</td>
                 
                 {{-- <td>

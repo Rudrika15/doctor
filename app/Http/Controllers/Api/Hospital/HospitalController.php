@@ -15,7 +15,7 @@ class HospitalController extends Controller
 {
     function hospitalView()
     {
-        $hospital = Hospital::all();
+        $hospital = HospitalType::all();
 
         if ($hospital) {
             return response([
@@ -29,11 +29,11 @@ class HospitalController extends Controller
         }
     }
 
-    function gallery($id=0)
+    function gallery($id = 0)
     {
-       $gallery = Gallery::where('hospitalId','=',$id)->get();
-       
-        if (count($gallery)>0) {
+        $gallery = Gallery::where('hospitalId', '=', $id)->get();
+
+        if (count($gallery) > 0) {
             return response([
                 'status' => 200,
                 'data' => $gallery,
@@ -41,15 +41,30 @@ class HospitalController extends Controller
         } else {
             return response([
                 'message' => ['Not list found']
-            ],200);
+            ], 200);
         }
     }
-
-    function doctor($id=0)
+    function singlehospital($id = 0)
     {
-       $doctor = Doctor::where('hospitalId','=',$id)->get();
-       
-        if (count($doctor)>0) {
+        $hospital = Hospital::find($id);
+        if ($hospital) {
+            return response([
+                'status' => 200,
+                'data' => $hospital,
+            ]);
+        } else {
+            return response([
+                'message' => ['Not list found']
+            ], 200);
+        }
+    }
+   
+
+    function doctor($id = 0)
+    {
+        $doctor = Doctor::where('hospitalId', '=', $id)->get();
+
+        if (count($doctor) > 0) {
             return response([
                 'status' => 200,
                 'data' => $doctor,
@@ -57,15 +72,15 @@ class HospitalController extends Controller
         } else {
             return response([
                 'message' => ['Not list found']
-            ],200);
+            ], 200);
         }
     }
 
-    function facility($id=0)
+    function facility($id = 0)
     {
-       $facility = Facility::where('hospitalId','=',$id)->get();
-       
-        if (count($facility)>0) {
+        $facility = Facility::where('hospitalId', '=', $id)->get();
+
+        if (count($facility) > 0) {
             return response([
                 'status' => 200,
                 'data' => $facility,
@@ -73,15 +88,15 @@ class HospitalController extends Controller
         } else {
             return response([
                 'message' => ['Not list found']
-            ],200);
+            ], 200);
         }
     }
 
-    function socialLink($id=0)
+    function socialLink($id = 0)
     {
-       $sociallink = socialLink::where('hospitalId','=',$id)->get();
-       
-        if (count($sociallink)>0) {
+        $sociallink = socialLink::where('hospitalId', '=', $id)->get();
+
+        if (count($sociallink) > 0) {
             return response([
                 'status' => 200,
                 'data' => $sociallink,
@@ -89,33 +104,36 @@ class HospitalController extends Controller
         } else {
             return response([
                 'message' => ['Not list found']
-            ],200);
+            ], 200);
         }
     }
-    function hospitaltype($id=0)
+    function hospitaltype($id = 0)
     {
-        if ($id>0) {
-            $hospitaltype=HospitalType::find($id);
+        $hospitaltype = HospitalType::find($id);
+        if ($hospitaltype) {
+            return response([
+                'status' => 200,
+                'data' => $hospitaltype,
+            ]);
         } else {
-          $hospitaltype=HospitalType::where('status','!=','DEleted')->get();
+            return response([
+                'message' => ['Not list found']
+            ], 404);
         }
-        return $hospitaltype;
-    }
-   
-    function hospitaltypeview($id = 0)
-    {
-        if($id>0){
-            $hospital=HospitalType::with('hospital')
-            ->where('id','=',$id)
-            ->get();
-            return $hospital;
-    }else{
-        return response([
-            'message' => 'Not list found'
-        ],200);
-    }
-        
     }
 
-       
+
+    function hospitaltypeview($id = 0)
+    {
+        if ($id > 0) {
+            $hospital = HospitalType::with('hospital')
+                ->where('id', '=', $id)
+                ->get();
+            return $hospital;
+        } else {
+            return response([
+                'message' => 'Not list found'
+            ], 200);
+        }
+    }
 }

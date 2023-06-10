@@ -20,7 +20,6 @@
 
         <table class="table table-bordered">
             <tr>
-                <th>Doctor ID</th>
                 <th>Education</th>
                 <th>Status</th>
                 
@@ -29,10 +28,7 @@
 
             @foreach ($education as $educations)
             <tr>
-                {{-- <td>{{ $educations->doctorId }}</td> --}}
-                @foreach ($educations->doctor as $doctor)
-                <td>{{ $doctor->doctorName }}</td>
-                @endforeach
+               
                 <td>{{ $educations->education }}</td>
               
 
