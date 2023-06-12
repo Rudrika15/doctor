@@ -137,9 +137,9 @@
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Time:</strong>
-                <input type="time" name="time" id="time" value="{{$hospital->time}}" class="form-control @error('time') is-invalid @enderror">
-                @error('time')
+                <strong>Hospital Time:</strong>
+                <input type="hospitalTime" name="hospitalTime" id="hospitalTime" value="{{$hospital->hospitalTime}}" class="form-control @error('hospitalTime') is-invalid @enderror">
+                @error('hospitalTime')
                     <sapn class="text-danger">{{ $message }}</sapn>
                 @enderror
             </div>
@@ -148,8 +148,8 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Service:</strong>
-                <input type="text" name="service" id="service"  value="{{$hospital->service}}" class="form-control @error('service') is-invalid @enderror">
-                @error('service')
+                <input type="text" name="services" id="services"  value="{{$hospital->services}}" class="form-control @error('services') is-invalid @enderror">
+                @error('services')
                     <sapn class="text-danger">{{ $message }}</sapn>
                 @enderror
             </div>
@@ -212,10 +212,10 @@
             category:{
                 required:true,
             },
-            time:{
+            hospitalTime:{
                 required:true,
             },
-            service:{
+            services:{
                 required:true,
             }
             	
@@ -249,11 +249,11 @@
             category:{
                 required:"Please Select Category"
             },
-            time:{
-                required:"Please Enter Time"
+            hospitalTime:{
+                required:"Please Enter Hospital Time"
             },
-            service:{
-                required:"Please Enter Service"
+            services:{
+                required:"Please Enter services"
             }
             
         },

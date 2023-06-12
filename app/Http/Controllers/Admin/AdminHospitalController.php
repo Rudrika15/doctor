@@ -19,7 +19,6 @@ class AdminHospitalController extends Controller
 {
     public function index(Request $request)
     {
-
         $city = City::all();
         $hospitaltype = HospitalType::all();
         $user=User::all();
@@ -95,8 +94,8 @@ class AdminHospitalController extends Controller
             'siteUrl' => 'required',
             'category' => 'required',
             'hospitalLogo'=>'required',
-            'time'=>'required',
-            'service'=>'required'
+            'hospitalTime'=>'required',
+            'services'=>'required'
         ]);
         
         $hospital = new Hospital();
@@ -113,8 +112,8 @@ class AdminHospitalController extends Controller
         $hospital->hospitalLogo = time() . '.' . $request->hospitalLogo->extension();
         $request->hospitalLogo->move(public_path('hospital'), $hospital->hospitalLogo);
     
-        $hospital->time=$request->time;
-        $hospital->service=$request->service;
+        $hospital->hospitalTime=$request->hospitalTime;
+        $hospital->services=$request->services;
 
         if ($hospital->save()) {
             return redirect()->back()->with('success', 'Hospital Added successfully!');
@@ -143,8 +142,8 @@ class AdminHospitalController extends Controller
             'userId' => 'required',
             'siteUrl' => 'required',
             'category' => 'required',
-            'time'=>'required',
-            'service'=>'required'
+            'hospitalTime'=>'required',
+            'services'=>'required'
         ]);
         $id = $request->hospitalId;
         $hospital = Hospital::find($id);
@@ -163,8 +162,8 @@ class AdminHospitalController extends Controller
             $request->hospitalLogo->move(public_path('hospital'), $hospital->hospitalLogo);
         }
         
-        $hospital->time=$request->time;
-        $hospital->service=$request->service;
+        $hospital->hospitalTime=$request->hospitalTime;
+        $hospital->services=$request->services;
         $hospital->status = "Active";
 
         if ($hospital->save()) {
