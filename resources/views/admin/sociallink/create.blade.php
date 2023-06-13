@@ -16,78 +16,81 @@
         </div>
         @endif
 
-    <form id="frm" action="{{route('admin.sociallink.store')}}" method="POST" >
-        @csrf
-        <input type="hidden" name="hospitalId" value="{{ request()->route('id') }}" class="form-control @error('doctorName') is-invalid @enderror">
+        <form id="frm" action="{{route('admin.sociallink.store')}}" method="POST">
+            @csrf
+            <input type="hidden" name="hospitalId" value="{{ request()->route('id') }}" class="form-control @error('doctorName') is-invalid @enderror">
 
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Title:</strong>
-                <input type="text" id="title" name="title" class="form-control @error('title') is-invalid @enderror">
-                @error('title')
-                <sapn class="text-danger">{{ $message }}</sapn>
-                @enderror
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Title:</strong>
+                    <select name="title" id="title" class="form-control @error('title') is-invalid @enderror">
+                        <option disabled selected>--Select title--</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="Twitter">Twitter</option>
+                        <option value="Instagram">Instagram</option>
+                        <option value="Website">Website</option>
+                        <option value="LinkedIn">LinkedIn</option>
+                    </select>
+                    @error('title')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Link:</strong>
-                <input type="text" id="link" name="link" class="form-control @error('link') is-invalid @enderror">
-                @error('link')
-                <sapn class="text-danger">{{ $message }}</sapn>
-                @enderror
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Link:</strong>
+                    <input type="text" id="link" name="link" class="form-control @error('link') is-invalid @enderror">
+                    @error('link')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
             </div>
-        </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-            <button type="submit" class="btn btnsubmit">Submit</button>
-        </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <button type="submit" class="btn btnsubmit">Submit</button>
+            </div>
 
-    </form>
+        </form>
 
 
     </div>
 </div>
 
 {{-- Jquery Validation --}}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 
 <script>
-
     jQuery('#frm').validate({
-        rules:{
-            title:{
-                required:true,
-                minlength:5,
-                maxlength:300
+        rules: {
+            title: {
+                required: true,
             },
-            link:{
-                required:true,
-                minlength:5,   
+            link: {
+                required: true,
+                minlength: 5,
             },
-            hospitalId:{
-                required:true,
+            hospitalId: {
+                required: true,
             }
-            	
+
         },
-        messages:{
-            title:{
-                required:"Please Enter Name",
-                minlength:"Title Minimum of 5 Character Long"
+        messages: {
+            title: {
+                required: "Please Enter Name",
             },
-            link:{
-                required:"Please Enter Name",
-                minlength:"Title Minimum of 5 Character Long"
+            link: {
+                required: "Please Enter Name",
+                minlength: "Title Minimum of 5 Character Long"
             },
-            hospitalId:{
-                required:"Please Select Hospital"
+            hospitalId: {
+                required: "Please Select Hospital"
             }
         },
-        submitHandler:function(form){
+        submitHandler: function(form) {
             form.submit();
         }
     });
-    </script>
+</script>
 
 @endsection

@@ -58,7 +58,7 @@ class HospitalController extends Controller
             ], 200);
         }
     }
-   
+
 
     function doctor($id = 0)
     {
@@ -94,7 +94,7 @@ class HospitalController extends Controller
 
     function socialLink($id = 0)
     {
-        $sociallink = socialLink::where('hospitalId', '=', $id)->get();
+        $sociallink = socialLink::with('hospital')->where('hospitalId', '=', $id)->get();
 
         if (count($sociallink) > 0) {
             return response([
@@ -130,6 +130,21 @@ class HospitalController extends Controller
                 ->where('id', '=', $id)
                 ->get();
             return $hospital;
+        } else {
+            return response([
+                'message' => 'Not list found'
+            ], 200);
+        }
+    }
+
+    function serviceList($id = 0)
+    {
+        if ($id > 0) {
+            $services = Hospital::where('id', '=', $id)->get('services');
+            return response([
+                'status' => 200,
+                'serviceList' => $services,
+            ]);
         } else {
             return response([
                 'message' => 'Not list found'

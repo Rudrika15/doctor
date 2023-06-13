@@ -110,7 +110,7 @@
                 <!-- /.title -->
                 <ul class="menu js__accordion">
                     <li>
-                        <a class="text-white waves-effect" href="/home"><i class="text-white menu-icon fa fa-product-hunt"></i><span>Dashboard</span></a>
+                        <a class="text-white waves-effect" href="{{ url('/home') }}"><i class="text-white menu-icon fa fa-product-hunt"></i><span>Dashboard</span></a>
                     </li>
 
 

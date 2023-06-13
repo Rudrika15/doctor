@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\LeadController;
 use App\Http\Controllers\Api\Admin\SliderController;
 use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\Doctor\BlogListController;
@@ -32,6 +33,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('login', [UserController::class, 'login']);
 Route::post('updateContactNumber', [UserController::class, 'updateNumber']);
 
+// Add Lead
+Route::post('addLead', [LeadController::class, 'addLead']);
 
 
 // specialist list
@@ -71,6 +74,9 @@ Route::get('facility/{id?}', [HospitalController::class, 'facility']);
 
 //sociallink
 Route::get('sociallink/{id?}', [HospitalController::class, 'socialLink']);
+
+//services
+Route::get('serviceList/{id?}', [HospitalController::class, 'serviceList']);
 
 //hospital type all data view
 Route::get('hospitaldata', [HospitalController::class, 'hospitalView']);
