@@ -62,7 +62,7 @@ class HospitalController extends Controller
 
     function doctor($id = 0)
     {
-        $doctor = Doctor::where('hospitalId', '=', $id)->get();
+        $doctor = Doctor::with('specialist')->where('hospitalId', '=', $id)->get();
 
         if (count($doctor) > 0) {
             return response([
