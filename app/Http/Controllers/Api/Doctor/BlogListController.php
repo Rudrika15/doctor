@@ -17,6 +17,7 @@ use App\Models\Schedule;
 use App\Models\Slider;
 use App\Models\SocialLink;
 use App\Models\Specialist;
+use Illuminate\Support\Facades\DB;
 
 class BlogListController extends Controller
 {
@@ -41,8 +42,6 @@ class BlogListController extends Controller
         if ($id > 0) {
             $blog = Blog::find($id);
         } else {
-            // $blog = Blog::where('status','!=','Deleted')->get();
-
             return "not Found";
         }
         return $blog;
@@ -61,74 +60,55 @@ class BlogListController extends Controller
             ], 404);
         }
     }
-    public function search($keyword)
+    public function search($keyword = 0)
     {
+        $blog  = Blog::where("title", "like", "%$keyword%")
+            ->with('doctor')
+            ->get();
 
-        $blog = Blog::where("title", "like", "%" . $keyword . "%")->get();
-        if ($blog) {
+
+        if (count($blog) > 0) {
             return response([
                 'status' => 200,
                 'data' => $blog,
             ]);
         } else {
+            $blog  = DB::table('doctors')
+                ->crossJoin('blogs')
+                ->select('doctors.doctorName', 'blogs.*')
+                ->where('blogs.doctorId', '=', DB::raw('doctors.id'))
+                ->where('doctors.doctorName', 'like', "%$keyword%")
+                ->get();
             return response([
-                'message' => ['Not list found']
-            ], 200);
+                'status' => 200,
+                'data' => $blog,
+            ]);
         }
     }
-    public function hospitalsearch(Request $request, $cityId, $keyword)
+    public function hospitalsearch($cityId, $keyword)
     {
-        $cityId = $request->cityId;
-        $keyword = $request->keyword;
 
-        $search = Hospital::with(['city' => function ($query) use ($cityId) {
-            $query->where('id', '=', $cityId);
-        }])->where('hospitalName', 'like', "%$keyword%")
-            ->with('doctor')->get();
-
+        $search = Hospital::where('hospitalName', 'like', "%$keyword%")
+            ->where('cityId', '=', $cityId)
+            ->with('doctor')
+            ->get();
 
         if (count($search) > 0) {
-            if ($search) {
-                return response([
-                    'status' => 200,
-                    'data' => $search,
-                ]);
-            } else {
-                return response([
-                    'message' => ['Not list found']
-                ], 200);
-            }
+            return response([
+                'status' => 200,
+                'data' => $search,
+            ]);
         } else {
-            $search = Hospital::with(['city' => function ($query) use ($cityId) {
-                $query->where('id', '=', $cityId);
-            }])->with(['doctor' => function ($query) use ($keyword) {
-                $query->where('doctorName', 'like', "%$keyword%");
-            }])->get();
+            $search = Hospital::where('cityId', '=', $cityId)
+                ->whereHas('doctor', function ($q) use ($keyword) {
+                    $q->where('doctorName', 'like', "%$keyword%");
+                })->with('doctor')->get();
 
-            if ($search) {
-                return response([
-                    'status' => 200,
-                    'data' => $search,
-                ]);
-            } else {
-                return response([
-                    'message' => ['Not list found']
-                ], 200);
-            }
+
+            return response([
+                'status' => 200,
+                'data' => $search,
+            ]);
         }
     }
 }
-
-
-// public function search(Request $request)
-// {
-//     $query = $request->input('query'); // The search query from the request
-
-//     $results = YourModel::where(function ($queryBuilder) use ($query) {
-//         $queryBuilder->where('field1', 'like', "%$query%")
-//             ->orWhere('field2', 'like', "%$query%")
-//             ->orWhere('field3', 'like', "%$query%");
-//     })->get();
-
-//     return response()->json($results);
-// }

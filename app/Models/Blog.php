@@ -9,9 +9,8 @@ class Blog extends Model
 {
     use HasFactory;
 
-    function  doctor(){
-        return $this->hasMany(Doctor::class,'id','doctorId');
-       
-
-     }
+    function  doctor()
+    {
+        return $this->hasOne(Doctor::class, 'id', 'doctorId');
+    }
 }
