@@ -96,7 +96,6 @@
     </form>
 
     <div class="card-body">
-
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
@@ -123,6 +122,7 @@
 
                 </tr>
                 @foreach ($hospital as $hospitals)
+                @if($hospitals)
                 <tr>
                     <td>{{$hospitals->hospitalName}}</td>
                     <td>{{$hospitals->address}}</td>
@@ -154,6 +154,9 @@
                         <a class="btn btn-danger mt-2" onclick="return confirm('Are you sure want to delete?')" href="{{route('hospital.delete')}}{{$hospitals->id}}">Delete</a>
                     </td>
                 </tr>
+                @else
+                no record found
+                @endif
                 @endforeach
             </table>
             {!! $hospital->withQueryString()->links('pagination::bootstrap-5') !!}

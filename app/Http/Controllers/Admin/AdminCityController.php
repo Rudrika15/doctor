@@ -14,32 +14,26 @@ class AdminCityController extends Controller
         $cityName = $req->cityName;
         $status = $req->status;
 
-        if(isset($cityName) && isset($status))
-        {
-            $city = City::orderBy('name', 'ASC')->where('name','like','%'.$cityName.'%')
-            ->where('status','=',$status)
-            ->paginate(5);
-            $count=count($city);
-        }
-        else if(!isset($cityName)&&isset($status))
-            {
-                $city = City::orderBy('name', 'ASC')
-                ->where('status','=',$status)
+        if (isset($cityName) && isset($status)) {
+            $city = City::orderBy('name', 'ASC')->where('name', 'like', '%' . $cityName . '%')
+                ->where('status', '=', $status)
                 ->paginate(5);
-                $count=count($city);
-            }
-        else if(isset($cityName)&&!isset($status))
-            {
-                $city = City::orderBy('name', 'ASC')
-                ->where('name','=',$cityName)
+            $count = count($city);
+        } else if (!isset($cityName) && isset($status)) {
+            $city = City::orderBy('name', 'ASC')
+                ->where('status', '=', $status)
                 ->paginate(5);
-                $count=count($city);
-            }
-        else{
+            $count = count($city);
+        } else if (isset($cityName) && !isset($status)) {
+            $city = City::orderBy('name', 'ASC')
+                ->where('name', '=', $cityName)
+                ->paginate(5);
+            $count = count($city);
+        } else {
             $city = City::orderBy('name', 'ASC')->paginate(5);
-            $count=count($city);
+            $count = count($city);
         }
-        return view('admin.city.index', compact('city','count'));
+        return view('admin.city.index', compact('city', 'count'));
     }
 
     public function create()
