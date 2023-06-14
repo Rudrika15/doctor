@@ -48,7 +48,7 @@ class BlogListController extends Controller
     }
     function blogList($id = 0)
     {
-        $blogs = Blog::find($id);
+        $blogs = Blog::with('doctor')->where('id', '=', $id)->get();
         if ($blogs) {
             return response([
                 'status' => 200,
