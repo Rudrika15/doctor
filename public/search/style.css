@@ -36,7 +36,18 @@
 
   /* searchStatus */
 
+
   #status {
+    width: 100% !important;
+    font-size: 16px !important;
+    padding: 12px !important;
+    border: 1px solid #ddd !important;
+    margin-bottom: 12px !important;
+  }
+
+/* Slider Place */
+
+#myPlaceInput {
     background-image: url('/css/searchicon.png');
     background-position: 10px 12px;
     background-repeat: no-repeat;
@@ -47,13 +58,13 @@
     margin-bottom: 12px;
   }
   
-  #searchStatus {
+  #myPlaceUL {
     list-style-type: none;
     padding: 0;
     margin: 0;
   }
   
-  #searchStatus li a {
+  #myPlaceUL li a {
     border: 1px solid #ddd;
     margin-top: -1px; /* Prevent double borders */
     background-color: #f6f6f6;
@@ -64,6 +75,7 @@
     display: block;
   }
   
-  #searchStatus li a:hover:not(.header) {
+  #myPlaceUL li a:hover:not(.header) {
     background-color: #eee;
   }
+  

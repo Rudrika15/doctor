@@ -11,14 +11,18 @@
 
             <div class="col-lg-4">
                 <div class="form-group">
-
-                    <input type="text" name="hospitalName" id="hospitalName" class="form-control @error('hospitalName') is-invalid @enderror" placeholder="Enter Hoapital Name">
+                    <input autocomplete="off" type="text" id="myInput" onfocus="showList()" onkeyup="myFunction()" name="hospitalName" class="form-control @error('hospitalName') is-invalid @enderror" placeholder="Enter Hospital Name"> 
+                    <ul id="myUL" style="display:none">
+                        @foreach ($hospital as $hspitalsearch)
+                        <li><a href="#">{{$hspitalsearch->hospitalName}}</a></li>
+                        @endforeach
+                    </ul>
                     @error('hospitalName')
                     <sapn class="text-danger">{{ $message }}</sapn>
                     @enderror
                 </div>
-            </div>
-
+            </div> 
+        
             <div class="col-lg-4">
                 <div class="form-group">
 
@@ -165,4 +169,27 @@
     </div>
 </div>
 
+<script>
+    function showList() {
+      document.getElementById("myUL").style.display = "block";
+    }
+    
+    function myFunction() {
+      var input, filter, ul, li, a, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      ul = document.getElementById("myUL");
+      li = ul.getElementsByTagName("li");
+      
+      for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          li[i].style.display = "";
+        } else {
+          li[i].style.display = "none";
+        }
+      }
+    }
+</script>
 @endsection

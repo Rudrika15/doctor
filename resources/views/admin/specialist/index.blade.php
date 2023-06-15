@@ -14,34 +14,34 @@
 
         <div class="col-lg-4">
             <div class="form-group">
-                <input type="text" list="magicHoues1" id="specialistName" name="specialistName" class="form-control @error('name') is-invalid @enderror" placeholder="Enter Specialist Name">
-                <datalist id="magicHoues1">
+                <input autocomplete="off" type="text" id="myInput" onfocus="showList()" onkeyup="myFunction()" name="specialistName" class="form-control @error('specialistName') is-invalid @enderror" placeholder="Enter Speciaist Name "> 
+                <ul id="myUL" style="display:none">
                     @foreach ($specialist as $specialistName)
-                        <option value="{{$specialistName->specialistName}}"></option>    
+                    <li><a href="#">{{$specialistName->specialistName}}</a></li>
                     @endforeach
-                </datalist>
+                </ul>
                 @error('specialistName')
                 <sapn class="text-danger">{{ $message }}</sapn>
                 @enderror
             </div>
         </div>
-
+        
         <div class="col-lg-4">
             <div class="form-group">
-                <input type="text" list="magicHoues2" id="status" name="status" class="form-control @error('status') is-invalid @enderror" placeholder="Enter Status">
-                <datalist id="magicHoues2">
-                    @foreach ($specialist as $status)
-                        <option value="{{$status->status}}"></option>    
-                    @endforeach
-                </datalist>
-                @error('specialistName')
-                <sapn class="text-danger">{{ $message }}</sapn>
-                @enderror
+                    <select class="form-select form-control-user  @error('status') is-invalid @enderror"
+                        name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;"
+                         aria-label="Default select example">
+                             <option selected disabled class="text-center">---Select status---</option>
+                             <option value="Active">Active</option> 
+                             <option value="Delete">Delete</option> 
+                    </select>
+                    @error('status')
+                        <span class="invalid-feedback" role="alert">
+                        {{$message}}
+                        </span>
+                    @enderror
             </div>
         </div>
-    
-        
-        
         <div class="col-lg-4 text-center gap-5">
             <button type="submit" class="btn btn-primary">Search</button>
             <a class=" btn btnsubmit" href="{{route('specialist.index')}}">Clear</a>
@@ -77,7 +77,7 @@
                 @endforeach
 
                 @if ($count==0)
-                    <td colspan="3" class="display-3 text-center text-danger">No data found</td>
+                    <td colspan="3" class="display-3 text-center text-danger">Record Not Found</td>
                 @endif
             </table>
             {!! $specialist->withQueryString()->links('pagination::bootstrap-5') !!}
@@ -86,7 +86,27 @@
     </div>
 </div>
 
-
-
-
+<script>
+    function showList() {
+      document.getElementById("myUL").style.display = "block";
+    }
+    
+    function myFunction() {
+      var input, filter, ul, li, a, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      ul = document.getElementById("myUL");
+      li = ul.getElementsByTagName("li");
+      
+      for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          li[i].style.display = "";
+        } else {
+          li[i].style.display = "none";
+        }
+      }
+    }
+</script>
 @endsection

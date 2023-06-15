@@ -11,31 +11,25 @@
     
         <div class="col-lg-4">
                 <div class="form-group">
-                    <input autocomplete="off" type="text" id="myInput" onfocus="showList()" onkeyup="myFunction()" name="cityName" class="form-control @error('cityName') is-invalid @enderror" placeholder="Enter City Name">
-                    {{-- <datalist id="magicHouses">
-                        @foreach ($city as $cityname)
-                        <option value={{$cityname->name}}>
-                         @endforeach
-                    </datalist> --}}
+                    <input autocomplete="off" type="text" id="myInput" onfocus="showList()" onkeyup="myFunction()" name="cityName" class="form-control @error('cityName') is-invalid @enderror" placeholder="Enter City Name"> 
                     <ul id="myUL" style="display:none">
                         @foreach ($city as $citysearch)
                         <li><a href="#">{{$citysearch->name}}</a></li>
                         @endforeach
                     </ul>
-                   
                     @error('cityName')
                     <sapn class="text-danger">{{ $message }}</sapn>
                     @enderror
                 </div>
-        </div>
+        </div> 
        
         <div class="col-lg-4">
             <div class="form-group">
-                    <select class="form-select form-control-user @error('status') is-invalid @enderror"
+                    <select class="form-select form-control-user  @error('status') is-invalid @enderror"
                         name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
                              <option selected disabled class="text-center">---Select status---</option>
-                             <option value="Active">Acive</option> 
+                             <option value="Active">Active</option> 
                              <option value="Delete">Delete</option> 
                     </select>
                     @error('status')
@@ -80,7 +74,7 @@
                 @endforeach
 
                 @if ($count==0)
-                    <td colspan="3" class="display-3 text-center text-danger">No data found</td>
+                    <td colspan="3" class="display-3 text-center text-danger">Record Not Found</td>
                 @endif
             </table>
             {!! $city->withQueryString()->links('pagination::bootstrap-5') !!}
@@ -88,6 +82,7 @@
         {{-- {!! $data->render() !!} --}}
     </div>
 </div>
+
 
 <script>
     function showList() {
@@ -101,7 +96,7 @@
       ul = document.getElementById("myUL");
       li = ul.getElementsByTagName("li");
       
-      for (i = 0; i <script li.length; i++) {
+      for (i = 0; i < li.length; i++) {
         a = li[i].getElementsByTagName("a")[0];
         txtValue = a.textContent || a.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -111,9 +106,8 @@
         }
       }
     }
-    function showList() {
-      document.getElementById("myUL").style.display = "block";
-    }
 </script>
+    
+
 @endsection
 
