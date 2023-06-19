@@ -24,7 +24,7 @@ class BlogListController extends Controller
 
     function blogView()
     {
-        $blogview = Blog::all();
+        $blogview = Blog::with('doctor')->get();
 
         if ($blogview) {
             return response([
