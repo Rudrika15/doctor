@@ -18,7 +18,7 @@ class AdminSliderController extends Controller
 
         if(isset($title) && isset($place) && isset($status)){
             $slider=Slider::orderBy('title', 'ASC')
-                ->where('title','=',$title)
+                ->where('title','like',"%$title%")
                 ->where('place','=',$place)
                 ->where('status','=',$status)
                 ->paginate(5);
@@ -26,7 +26,7 @@ class AdminSliderController extends Controller
         }
         else if(isset($title) && !isset($place) && !isset($status)){
             $slider=Slider::orderBy('title', 'ASC')
-                ->where('title','=',$title)
+                ->where('title','like',"%$title%")
                 ->paginate(5);
                 $count = count($slider);
         }
@@ -44,7 +44,7 @@ class AdminSliderController extends Controller
         }
         else if(isset($title) && isset($place) && !isset($status)){
             $slider=Slider::orderBy('title', 'ASC')
-                ->where('title','=',$title)
+                ->where('title','like',"%$title%")
                 ->where('place','=',$place)
                 ->paginate(5);
                 $count = count($slider);

@@ -15,7 +15,8 @@ class AdminCityController extends Controller
         $status = $req->status;
 
         if (isset($cityName) && isset($status)) {
-            $city = City::orderBy('name', 'ASC')->where('name', 'like', '%' . $cityName . '%')
+            $city = City::orderBy('name', 'ASC')
+                ->where('name', 'like', "%$cityName%")
                 ->where('status', '=', $status)
                 ->paginate(5);
             $count = count($city);
@@ -26,11 +27,12 @@ class AdminCityController extends Controller
             $count = count($city);
         } else if (isset($cityName) && !isset($status)) {
             $city = City::orderBy('name', 'ASC')
-                ->where('name', '=', $cityName)
+                ->where('name', 'like', "%$cityName%")
                 ->paginate(5);
             $count = count($city);
         } else {
-            $city = City::orderBy('name', 'ASC')->paginate(5);
+            $city = City::orderBy('name', 'ASC')
+                ->paginate(5);
             $count = count($city);
         }
         return view('admin.city.index', compact('city', 'count'));

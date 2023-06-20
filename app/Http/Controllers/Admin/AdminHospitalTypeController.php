@@ -15,14 +15,14 @@ class AdminHospitalTypeController extends Controller
        
         if(isset($typeName) && isset($status)){
             $hospitaltype=HospitalType::orderBy('typeName', 'ASC')
-                ->where('typeName','=',$typeName)
+                ->where('typeName','like',"%$typeName%")
                 ->where('status','=',$status)
                 ->paginate(3);
                 $count = count($hospitaltype);
         }
         else if(isset($typeName) && !isset($status)){
             $hospitaltype=HospitalType::orderBy('typeName', 'ASC')
-                ->where('typeName','=',$typeName)->paginate(3);
+                ->where('typeName','like',"%$typeName%")->paginate(3);
                 $count = count($hospitaltype);
         }
         else if(!isset($typeName) && isset($status)){

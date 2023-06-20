@@ -15,14 +15,14 @@ class AdminSpecialistController extends Controller
 
         if(isset($specialistName) && isset($status)){
             $specialist=Specialist::orderBy('specialistName', 'ASC')
-                ->where('specialistName','=',$specialistName)
+                ->where('specialistName','like',"%$specialistName%")
                 ->where('status','=',$status)
                 ->paginate(5);
                 $count=count($specialist);
         }
         else if(isset($specialistName) && !isset($status)){
             $specialist=Specialist::orderBy('specialistName', 'ASC')
-                ->where('specialistName','=',$specialistName)
+                ->where('specialistName','like',"%$specialistName%")
                 ->paginate(5);
                 $count=count($specialist);
         }
@@ -33,7 +33,8 @@ class AdminSpecialistController extends Controller
                 $count=count($specialist);
         }
         else{
-            $specialist = Specialist::orderBy('specialistName', 'ASC')->paginate(5); 
+            $specialist = Specialist::orderBy('specialistName', 'ASC')
+                    ->paginate(5); 
             $count=count($specialist);  
         }
         return view('admin.specialist.index', compact('specialist','count'));

@@ -11,21 +11,20 @@
         <div class="pt-2"><a class="btn addbtn" href="{{ route('specialist.create') }}"> Add Specialist</a></div>
     </div>
     <form id="frm" class="mt-5" action="{{route('specialist.index')}}" method="get" >
-
+       
         <div class="col-lg-4">
             <div class="form-group">
-                <input autocomplete="off" type="text" id="myInput" onfocus="showList()" onkeyup="myFunction()" name="specialistName" class="form-control @error('specialistName') is-invalid @enderror" placeholder="Enter Speciaist Name "> 
-                <ul id="myUL" style="display:none">
-                    @foreach ($specialist as $specialistName)
-                    <li><a href="#">{{$specialistName->specialistName}}</a></li>
-                    @endforeach
-                </ul>
+                <input type="text" autocomplete="off" id="searchInput" onkeyup="filterList()" onfocus="showItems()" name="specialistName" class="form-control @error('specialistName') is-invalid @enderror" placeholder="Enter Speciaist Name ">
+                @foreach ($specialist as $specialistName)
+                    <div class="item text-center p-2 border" style="display: none;">{{$specialistName->specialistName}}</div>
+                @endforeach
+                    
                 @error('specialistName')
                 <sapn class="text-danger">{{ $message }}</sapn>
                 @enderror
             </div>
         </div>
-        
+ 
         <div class="col-lg-4">
             <div class="form-group">
                     <select class="form-select form-control-user  @error('status') is-invalid @enderror"
@@ -87,6 +86,38 @@
 </div>
 
 <script>
+    function showItems() {
+       
+      var items = document.getElementsByClassName("item");
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        item.style.display = "";
+        
+      }
+    }
+  
+    function filterList() {
+      var input = document.getElementById("searchInput").value.toLowerCase();
+      var items = document.getElementsByClassName("item");
+      
+      if (input === "") {
+        showItems();
+      } else {
+        for (var i = 0; i < items.length; i++) {
+          var item = items[i];
+          var text = item.textContent.toLowerCase();
+          
+          if (text.indexOf(input) > -1) {
+            item.style.display = "";
+          } else {
+            item.style.display = "none";
+            
+          }
+        }
+      }
+    }
+  </script>
+{{-- <script>
     function showList() {
       document.getElementById("myUL").style.display = "block";
     }
@@ -108,5 +139,5 @@
         }
       }
     }
-</script>
+</script> --}}
 @endsection

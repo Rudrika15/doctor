@@ -25,32 +25,32 @@
                     <form  action="" method="get" class="mb-5">
                         <div class="row">
                         <input type="hidden" name="hospitalId" value="{{ request()->route('id') }}" class="form-control @error('doctorName') is-invalid @enderror" >
+                        
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <input type="text" list="magicHouses" name="doctorName" id="doctorName" placeholder="Enter Doctor Name"class="form-control @error('doctorName') is-invalid @enderror">
-                                <datalist id="magicHouses">
-                                    @foreach ($doctor as $doctorName)
-                                        <option value={{$doctorName->doctorName}}>
+                                <input type="text" autocomplete="off" id="searchInput" onkeyup="filterList()" onfocus="showItems()" name="doctorName" placeholder="Enter Doctor Name"class="form-control @error('doctorName') is-invalid @enderror">
+                                @foreach ($doctor as $doctorName)
+                                    <div class="item text-center p-2 border" style="display: none;">{{$doctorName->doctorName}}</div>
                                     @endforeach
                                     
-                                </datalist>
                                 @error('doctorName')
-                                    <sapn class="text-danger">{{ $message }}</sapn>
+                                <sapn class="text-danger">{{ $message }}</sapn>
                                 @enderror
                             </div>
-                        </div>
+                        </div> 
+                   
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <input type="text" list="magicHousess1" name="specialistId" id="specialistId" placeholder="Enter Specialist Name" class="form-control @error('specialistId') is-invalid @enderror">
-                                <datalist id="magicHousess1">
-                                    {{-- <td>{{$doctors->specialist->specialistId}}</td> --}}
-                                    @foreach ($doctor as $specialist)
-                                        <option value={{$specialist->specialistName}}>
+                                <select class="form-select form-control-user @error('specialistId') is-invalid @enderror" name="specialistId" id="specialistId" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;" aria-label="Default select example">
+                                    <option selected disabled>---Select Specialist---</option>
+                                    @foreach ($doctor as $doctorsspecialist)
+                                        <option value={{$doctorsspecialist->specialistId}}>{{$doctorsspecialist->specialist->specialistName}}</option>
                                     @endforeach
-                                    
-                                </datalist>
-                                @error('specialistName')
-                                    <sapn class="text-danger">{{ $message }}</sapn>
+                                </select>
+                                @error('specialistId')
+                                <span class="invalid-feedback" role="alert">
+                                    {{$message}}
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -117,11 +117,15 @@
                                 </td>
                             </tr>
                         @endforeach
+                        @if ($doctorcount==0)
+                        <td colspan="10" class="display-3 text-center text-danger">Record Not Found</td>
+                    @endif
                     </table>
                     
                     {!! $doctor->withQueryString()->links('pagination::bootstrap-5') !!}
                  </div>
             </div>
+            {{-- Gallery Start --}}
             <div class="tab-pane" id="gallery">
                                                                                                
                 <form action="{{ route('admin.hospital.viewdetails',['id' => request()->route('id')]) }}" method="get" class="mb-5">
@@ -130,17 +134,17 @@
                   
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <input autocomplete="off" type="text" id="myInput" onfocus="showList()" onkeyup="myFunction()" name="title" class="form-control @error('title') is-invalid @enderror" placeholder="Enter Title"> 
-                                <ul id="myUL" style="display:none">
-                                    @foreach ($gallery as $title)
-                                    <li><a href="#">{{$title->title}}</a></li>
+                                <input type="text" autocomplete="off" id="searchGalleryInput" onkeyup="filterGalleryList()" onfocus="showGalleryItems()" name="title" placeholder="Enter title"class="form-control @error('title') is-invalid @enderror">
+                                @foreach ($gallery as $title)
+                                    <div class="itemGallery text-center p-2 border" style="display: none;">{{$title->title}}</div>
                                     @endforeach
-                                </ul>
+                                    
                                 @error('title')
                                 <sapn class="text-danger">{{ $message }}</sapn>
                                 @enderror
                             </div>
-                        </div> 
+                        </div>
+                        
                         <div class="col-lg-4">
                             <div class="form-group">
                                     <select class="form-select form-control-user  @error('status') is-invalid @enderror"
@@ -200,31 +204,11 @@
                  </div>
                 {{-- {!! $data->render() !!} --}}
 
-                <script>
-                    function showList() {
-                    document.getElementById("myUL").style.display = "block";
-                    }
-                    
-                    function myFunction() {
-                    var input, filter, ul, li, a, i, txtValue;
-                    input = document.getElementById("myInput");
-                    filter = input.value.toUpperCase();
-                    ul = document.getElementById("myUL");
-                    li = ul.getElementsByTagName("li");
-                    
-                    for (i = 0; i < li.length; i++) {
-                        a = li[i].getElementsByTagName("a")[0];
-                        txtValue = a.textContent || a.innerText;
-                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        li[i].style.display = "";
-                        } else {
-                        li[i].style.display = "none";
-                        }
-                    }
-                    }
-                </script>
-   {{-- ----------------------------------------------- --}}
+                
             </div>
+            {{-- Gallery End --}}
+
+            {{-- Facility Start --}}
             <div class="tab-pane" id="facility">
                 <form class="mb-5" action="{{ route('admin.hospital.viewdetails',['id' => request()->route('id')]) }}" method="get">
                     <div class="row">
@@ -232,31 +216,33 @@
               
                     <div class="col-lg-4">
                         <div class="form-group">
-                           
-                            <input type="text" list="magicMouses3" name="title" id="title" class="form-control @error('title') is-invalid @enderror" placeholder="Enter Facility Title">
-                            <datalist id="magicMouses3">
-                                @foreach ($facility as $title)
-                                    <option value={{$title->title}}>
+                            <input type="text" autocomplete="off" id="searchFacilityInput" onkeyup="filterFacilityList()" onfocus="showFacilityItems()" name="title" class="form-control @error('title') is-invalid @enderror" placeholder="Enter Title">
+                            @foreach ($facility as $title)
+                                <div class="itemFacility text-center p-2 border" style="display: none;">{{$title->title}}</div>
                                 @endforeach
-                            </datalist>
+                                
                             @error('title')
-                                <sapn class="text-danger">{{ $message }}</sapn>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <input type="text" list="magicHouses4" id="status" name="status" class="form-control @error('status') is-invalid @enderror" placeholder="Enter Status">
-                            <datalist id="magicHouses4">
-                                @foreach ($facility as $status)
-                                    <option value={{$status->status}}>
-                                @endforeach
-                            </datalist>
-                            @error('place')
                             <sapn class="text-danger">{{ $message }}</sapn>
                             @enderror
                         </div>
-                    </div>   
+                </div> 
+                   
+                <div class="col-lg-4">
+                    <div class="form-group">
+                            <select class="form-select form-control-user  @error('status') is-invalid @enderror"
+                                name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;"
+                                 aria-label="Default select example">
+                                     <option selected disabled class="text-center">---Select status---</option>
+                                     <option value="Active">Active</option> 
+                                     <option value="Delete">Delete</option> 
+                            </select>
+                            @error('status')
+                                <span class="invalid-feedback" role="alert">
+                                {{$message}}
+                                </span>
+                            @enderror
+                    </div>
+                </div>  
                     
                     
                     <div class="col-lg-4 mt-4 text-center">
@@ -295,16 +281,61 @@
                         @endforeach
 
                         @if ($facilitycount==0)
-                            <td colspan="5" class="display-3 text-center text-danger">No data found</td>
+                            <td colspan="5" class="display-3 text-center text-danger">Record Not Found</td>
                         @endif
                     </table>
                     {!! $facility->withQueryString()->links('pagination::bootstrap-5') !!}
                  </div>
                 {{-- {!! $data->render() !!} --}}
             </div>
+            {{-- Facility End --}}
 
+            {{-- Social Link Start --}}
             <div class="tab-pane" id="sociallink">
                
+                <form class="mb-5" action="{{ route('admin.hospital.viewdetails',['id' => request()->route('id')]) }}" method="get">
+                    <div class="row">
+                    <input type="hidden" name="hospitalId" value="{{ request()->route('id') }}" class="form-control @error('doctorName') is-invalid @enderror">
+              
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <input type="text" autocomplete="off" id="searchSocialInput" onkeyup="filterSocialList()" onfocus="showSocialItems()" name="title" class="form-control @error('title') is-invalid @enderror" placeholder="Enter Title">
+                            @foreach ($sociallink as $title)
+                                <div class="itemSocial text-center p-2 border" style="display: none;">{{$title->title}}</div>
+                                @endforeach
+                                
+                            @error('title')
+                            <sapn class="text-danger">{{ $message }}</sapn>
+                            @enderror
+                        </div>
+                </div> 
+                   
+                <div class="col-lg-4">
+                    <div class="form-group">
+                            <select class="form-select form-control-user  @error('status') is-invalid @enderror"
+                                name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;"
+                                 aria-label="Default select example">
+                                     <option selected disabled class="text-center">---Select status---</option>
+                                     <option value="Active">Active</option> 
+                                     <option value="Delete">Delete</option> 
+                            </select>
+                            @error('status')
+                                <span class="invalid-feedback" role="alert">
+                                {{$message}}
+                                </span>
+                            @enderror
+                    </div>
+                </div>  
+                    
+                    
+                    <div class="col-lg-4 mt-4 text-center">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                        <a class=" btn btnsubmit" href="{{route('admin.hospital.viewdetails',['id' => request()->route('id')])}}">Clear</a>
+
+                    </div>
+                 </div>
+                </form>
+            
                 <div class="table-responsive">
                     <div class="mb-4 pull-right"><a class="btn addbtn" href="{{ route('admin.sociallink.create',['id' => request()->route('id')]) }}"> Add Social Link</a></div>
 
@@ -329,9 +360,9 @@
                             </tr>
                         @endforeach
 
-                        {{-- @if ($facilitycount==0)
-                            <td colspan="5" class="display-3 text-center text-danger">No data found</td>
-                        @endif --}}
+                        @if ($socialcount==0)
+                            <td colspan="5" class="display-3 text-center text-danger">Record Not Found</td>
+                        @endif
                     </table>
                     {!! $sociallink->withQueryString()->links('pagination::bootstrap-5') !!}
                  </div>
@@ -342,5 +373,147 @@
     </div>
 </div>
 
+{{-- For Doctor --}}
+<script>
+    function showItems() {
+       
+      var items = document.getElementsByClassName("item");
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        item.style.display = "";
+        
+      }
+    }
   
+    function filterList() {
+      var input = document.getElementById("searchInput").value.toLowerCase();
+      var items = document.getElementsByClassName("item");
+      
+      if (input === "") {
+        showItems();
+      } else {
+        for (var i = 0; i < items.length; i++) {
+          var item = items[i];
+          var text = item.textContent.toLowerCase();
+          
+          if (text.indexOf(input) > -1) {
+            item.style.display = "";
+          } else {
+            item.style.display = "none";
+            
+          }
+        }
+      }
+    }
+  </script> 
+  {{-- ------------------------------------------ --}}
+
+  {{-- For Gallery --}}
+  <script>
+    function showGalleryItems() {
+       
+      var itemGallerys = document.getElementsByClassName("itemGallery");
+      for (var i = 0; i < itemGallerys.length; i++) {
+        var itemGallery = itemGallerys[i];
+        itemGallery.style.display = "";
+        
+      }
+    }
+  
+    function filterGalleryList() {
+      var input = document.getElementById("searchGalleryInput").value.toLowerCase();
+      var itemGallerys = document.getElementsByClassName("itemGallery");
+      
+      if (input === "") {
+        showitemGallerys();
+      } else {
+        for (var i = 0; i < itemGallerys.length; i++) {
+          var itemGallery = itemGallerys[i];
+          var text = itemGallery.textContent.toLowerCase();
+          
+          if (text.indexOf(input) > -1) {
+            itemGallery.style.display = "";
+          } else {
+            itemGallery.style.display = "none";
+            
+          }
+        }
+      }
+    }
+  </script>
+  {{-- ---------------------------------- --}}
+
+  {{-- Fro Facility --}}
+
+  <script>
+    function showFacilityItems() {
+       
+      var itemFacilitys = document.getElementsByClassName("itemFacility");
+      for (var i = 0; i < itemFacilitys.length; i++) {
+        var itemFacility = itemFacilitys[i];
+        itemFacility.style.display = "";
+        
+      }
+    }
+  
+    function filterFacilityList() {
+      var input = document.getElementById("searchFacilityInput").value.toLowerCase();
+      var itemFacilitys = document.getElementsByClassName("itemFacility");
+      
+      if (input === "") {
+        showitemFacilitys();
+      } else {
+        for (var i = 0; i < itemFacilitys.length; i++) {
+          var itemFacility = itemFacilitys[i];
+          var text = itemFacility.textContent.toLowerCase();
+          
+          if (text.indexOf(input) > -1) {
+            itemFacility.style.display = "";
+          } else {
+            itemFacility.style.display = "none";
+            
+          }
+        }
+      }
+    }
+  </script>
+
+  {{-- ----------------------------------  --}}
+
+  {{-- For Social Link --}}
+
+  <script>
+    function showSocialItems() {
+       
+      var itemSocials = document.getElementsByClassName("itemSocial");
+      for (var i = 0; i < itemSocials.length; i++) {
+        var itemSocial = itemSocials[i];
+        itemSocial.style.display = "";
+        
+      }
+    }
+  
+    function filterSocialList() {
+      var input = document.getElementById("searchSocialInput").value.toLowerCase();
+      var itemSocials = document.getElementsByClassName("itemSocial");
+      
+      if (input === "") {
+        showitemSocials();
+      } else {
+        for (var i = 0; i < itemSocials.length; i++) {
+          var itemSocial = itemSocials[i];
+          var text = itemSocial.textContent.toLowerCase();
+          
+          if (text.indexOf(input) > -1) {
+            itemSocial.style.display = "";
+          } else {
+            itemSocial.style.display = "none";
+            
+          }
+        }
+      }
+    }
+  </script>
+
+  {{-- ----------------------------------- --}}
 @endsection

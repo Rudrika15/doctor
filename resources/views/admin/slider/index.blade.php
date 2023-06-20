@@ -9,33 +9,35 @@
 
     <form id="frm" class="mt-5" action="{{route('admin.slider.index')}}" method="get" >
 
-        <div class="col-lg-4">
-            <div class="form-group">
-                <input autocomplete="off" type="text" id="myInput" onfocus="showList()" onkeyup="myFunction()" name="title" class="form-control @error('title') is-invalid @enderror" placeholder="Enter Title "> 
-                <ul id="myUL" style="display:none">
-                    @foreach ($slider as $searchslider)
-                    <li><a href="#">{{$searchslider->title}}</a></li>
-                    @endforeach
-                </ul>
-                @error('title')
-                <sapn class="text-danger">{{ $message }}</sapn>
-                @enderror
-            </div>
+      <div class="col-lg-4">
+        <div class="form-group">
+            <input type="text" autocomplete="off" id="searchInput" onkeyup="filterList()" onfocus="showItems()" name="title" class="form-control @error('title') is-invalid @enderror" placeholder="Enter Title ">
+            @foreach ($slider as $searchslider)
+            <div class="item text-center p-2 border" style="display: none;">{{$searchslider->title}}</div>
+            @endforeach
+                
+            @error('title')
+            <sapn class="text-danger">{{ $message }}</sapn>
+            @enderror
         </div>
+      </div>
 
-        <div class="col-lg-4">
-            <div class="form-group">
-                <input autocomplete="off" type="text" id="myPlaceInput" onfocus="showPlaceList()" onkeyup="myPlaceFunction()" name="place" class="form-control @error('place') is-invalid @enderror" placeholder="Enter Place "> 
-                <ul id="myPlaceUL" style="display:none">
-                    @foreach ($slider as $place)
-                    <li><a href="#">{{$place->place}}</a></li>
-                    @endforeach
-                </ul>
+      <div class="col-lg-4">
+        <div class="form-group">
+                <select class="form-select form-control-user  @error('place') is-invalid @enderror"
+                    name="place" id="place" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;"
+                     aria-label="Default select example">
+                         <option selected disabled class="text-center">---Select place---</option>
+                         <option value="inside">inside</option> 
+                         <option value="outside">outside</option> 
+                </select>
                 @error('place')
-                <sapn class="text-danger">{{ $message }}</sapn>
+                    <span class="invalid-feedback" role="alert">
+                    {{$message}}
+                    </span>
                 @enderror
-            </div>
         </div>
+    </div>
 
         <div class="col-lg-4">
             <div class="form-group">
@@ -109,52 +111,47 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
   
 <script>
-    function showList() {
-      document.getElementById("myUL").style.display = "block";
-    }
-    
-    function myFunction() {
-      var input, filter, ul, li, a, i, txtValue;
-      input = document.getElementById("myInput");
-      filter = input.value.toUpperCase();
-      ul = document.getElementById("myUL");
-      li = ul.getElementsByTagName("li");
+  function showItems() { 
+    var items = document.getElementsByClassName("item");
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i];
+      item.style.display = "";
       
-      for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          li[i].style.display = "";
+    }
+  }
+
+  function filterList() {
+    var input = document.getElementById("searchInput").value.toLowerCase();
+    var items = document.getElementsByClassName("item");
+    
+    if (input === "") {
+      showItems();
+    } else {
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        var text = item.textContent.toLowerCase();
+        
+        if (text.indexOf(input) > -1) {
+          item.style.display = "";
         } else {
-          li[i].style.display = "none";
+          item.style.display = "none";
+          
         }
       }
     }
+  }
 </script>
 
 <script>
-    function showPlaceList() {
-      document.getElementById("myPlaceUL").style.display = "block";
-    }
-    
-    function myPlaceFunction() {
-      var input, filter, ul, li, a, i, txtValue;
-      input = document.getElementById("myPlaceInput");
-      filter = input.value.toUpperCase();
-      ul = document.getElementById("myPlaceUL");
-      li = ul.getElementsByTagName("li");
+  function showPlace() { 
+    var itemPlaces = document.getElementsByClassName("itemPlace");
+    for (var i = 0; i < itemPlaces.length; i++) {
+      var itemPlace = itemPlaces[i];
+      itemPlace.style.display = "";
       
-      for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          li[i].style.display = "";
-        } else {
-          li[i].style.display = "none";
-        }
-      }
     }
-</script>
+  }
+
 @endsection
 
 

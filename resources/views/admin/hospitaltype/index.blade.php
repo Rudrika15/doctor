@@ -11,20 +11,20 @@
     </div>
      {{-- For Filler And Search Data Star --}}
      <form id="frm" action="{{route('hospitaltype.index')}}" method="get" class="mt-5">
-           
+          
         <div class="col-lg-4">
             <div class="form-group">
-                <input autocomplete="off" type="text" id="myInput" onfocus="showList()" onkeyup="myFunction()" name="typeName" class="form-control @error('typeName') is-invalid @enderror" placeholder="Enter Hospital Type "> 
-                <ul id="myUL" style="display:none">
-                    @foreach ($hospitaltype as $typeName)
-                    <li><a href="#">{{$typeName->typeName}}</a></li>
+                <input type="text" autocomplete="off" id="searchInput" onkeyup="filterList()" onfocus="showItems()" name="typeName" class="form-control @error('typeName') is-invalid @enderror" placeholder="Enter Hospital Type">
+                @foreach ($hospitaltype as $typeName)
+                    <div class="item text-center p-2 border" style="display: none;">{{$typeName->typeName}}</div>
                     @endforeach
-                </ul>
-                @error('typeName')
+                    
+                @error('cityName')
                 <sapn class="text-danger">{{ $message }}</sapn>
                 @enderror
             </div>
-        </div>
+    </div> 
+        
         <div class="col-lg-4">
             <div class="form-group">
                     <select class="form-select form-control-user  @error('status') is-invalid @enderror"
@@ -91,28 +91,38 @@
     </div>
 </div>
 
+  
 <script>
-    function showList() {
-      document.getElementById("myUL").style.display = "block";
+    function showItems() {
+       
+      var items = document.getElementsByClassName("item");
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        item.style.display = "";
+        
+      }
     }
-    
-    function myFunction() {
-      var input, filter, ul, li, a, i, txtValue;
-      input = document.getElementById("myInput");
-      filter = input.value.toUpperCase();
-      ul = document.getElementById("myUL");
-      li = ul.getElementsByTagName("li");
+  
+    function filterList() {
+      var input = document.getElementById("searchInput").value.toLowerCase();
+      var items = document.getElementsByClassName("item");
       
-      for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          li[i].style.display = "";
-        } else {
-          li[i].style.display = "none";
+      if (input === "") {
+        showItems();
+      } else {
+        for (var i = 0; i < items.length; i++) {
+          var item = items[i];
+          var text = item.textContent.toLowerCase();
+          
+          if (text.indexOf(input) > -1) {
+            item.style.display = "";
+          } else {
+            item.style.display = "none";
+            
+          }
         }
       }
     }
-</script>
+  </script>
 
 @endsection

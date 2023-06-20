@@ -28,43 +28,188 @@ class AdminHospitalController extends Controller
         $hospitalTypeId = $request->hospitalTypeId;
         $category = $request->category;
         $status = $request->status;
-
+        //For all inputs
         if (isset($hospitalName) && isset($cityId) && isset($hospitalTypeId) && isset($category) && isset($status)) {
             $hospital = Hospital::orderBy('hospitalName', 'ASC')
-                ->where('hospitalName', '=', $hospitalName)
+                ->where('hospitalName', 'like',"%$hospitalName%")
                 ->where('cityId', '=', $cityId)
                 ->where('hospitalTypeId', '=', $hospitalTypeId)
                 ->where('category', '=', $category)
                 ->where('status', '=', $status)
-                ->paginate(5);
-        } else if (isset($hospitalName) && !isset($cityId) && !isset($hospitalTypeId) && !isset($category) && !isset($status)) {
+                ->paginate(20);
+                $count = count($hospital);
+        } 
+        //For Only Hospital Name
+        else if (isset($hospitalName) && !isset($cityId) && !isset($hospitalTypeId) && !isset($category) && !isset($status)) {
             $hospital = Hospital::orderBy('hospitalName', 'ASC')
-                ->where('hospitalName', 'like', "%$hospitalName%")
-                ->paginate(5);
-        } else if (!isset($hospitalName) && isset($cityId) && !isset($hospitalTypeId) && !isset($category) && !isset($status)) {
+                ->where('hospitalName', 'like',"%$hospitalName%")
+                ->paginate(20);
+                $count = count($hospital);
+        }
+        //For Hospital name and City 
+        else if (isset($hospitalName) && isset($cityId) && !isset($hospitalTypeId) && !isset($category) && !isset($status)) {
+            $hospital = Hospital::orderBy('hospitalName', 'ASC')
+                ->where('hospitalName', 'like',"%$hospitalName%")
+                ->where('cityId','=',$cityId)
+                ->paginate(20);
+                $count = count($hospital);
+        }
+        //For Hospital name and Hospital type
+        else if (isset($hospitalName) && isset($hospitalTypeId) && !isset($cityId)  && !isset($category) && !isset($status)) {
+            $hospital = Hospital::orderBy('hospitalName', 'ASC')
+                ->where('hospitalName', 'like',"%$hospitalName%")
+                ->where('hospitalTypeId', '=', $hospitalTypeId)
+                ->paginate(20);
+                $count = count($hospital);
+        }
+        //For Hospital name and category
+        else if (isset($hospitalName) && isset($category) && !isset($cityId) && !isset($hospitalTypeId)  && !isset($status)) {
+            $hospital = Hospital::orderBy('hospitalName', 'ASC')
+                ->where('hospitalName', 'like',"%$hospitalName%")
+                ->where('category', '=', $category)
+                ->paginate(20);
+                $count = count($hospital);
+        }
+        //For Hoapital name and status
+        else if (isset($hospitalName) && isset($status) && !isset($cityId) && !isset($hospitalTypeId) && !isset($category) ) {
+            $hospital = Hospital::orderBy('hospitalName', 'ASC')
+                ->where('hospitalName', 'like',"%$hospitalName%")
+                ->where('status', '=', $status)
+                ->paginate(20);
+                $count = count($hospital);
+        }
+        //For Hospital city and hospital type
+        else if (isset($hospitalName) && isset($cityId) && isset($hospitalTypeId) && !isset($category) && !isset($status)) {
+            $hospital = Hospital::orderBy('hospitalName', 'ASC')
+                ->where('hospitalName', 'like',"%$hospitalName%")
+                ->where('cityId','=',$cityId)
+                ->where('hospitalTypeId', '=', $hospitalTypeId)
+                ->paginate(20);
+                $count = count($hospital);
+        }
+        //For Hospital, city, hospital type and category
+        else if (isset($hospitalName) && isset($cityId) && isset($hospitalTypeId) && isset($category) && !isset($status)) {
+            $hospital = Hospital::orderBy('hospitalName', 'ASC')
+                ->where('hospitalName', 'like',"%$hospitalName%")
+                ->where('cityId','=',$cityId)
+                ->where('hospitalTypeId', '=', $hospitalTypeId)
+                ->where('category', '=', $category)
+                ->paginate(20);
+                $count = count($hospital);
+        }
+        //Only for city
+        else if (!isset($hospitalName) && isset($cityId) && !isset($hospitalTypeId) && !isset($category) && !isset($status)) {
             $hospital = Hospital::orderBy('hospitalName', 'ASC')
                 ->where('cityId', '=', $cityId)
-                ->paginate(5);
-        } else if (!isset($hospitalName) && !isset($cityId) && isset($hospitalTypeId) && !isset($category) && !isset($status)) {
+                ->paginate(20);
+                $count = count($hospital);
+        } 
+        //For City and Hospital type
+        else if (!isset($hospitalName) && isset($cityId) && isset($hospitalTypeId) && !isset($category) && !isset($status)) {
+            $hospital = Hospital::orderBy('hospitalName', 'ASC')
+                ->where('cityId', '=', $cityId)
+                ->where('hospitalTypeId', '=', $hospitalTypeId)
+                ->paginate(20);
+                $count = count($hospital);
+        } 
+        //For City and category
+        else if (!isset($hospitalName) && isset($cityId) && !isset($hospitalTypeId) && isset($category) && !isset($status)) {
+            $hospital = Hospital::orderBy('hospitalName', 'ASC')
+                ->where('cityId', '=', $cityId)
+                ->where('category', '=', $category)
+                ->paginate(20);
+                $count = count($hospital);
+        }
+        //For City and status 
+        else if (!isset($hospitalName) && isset($cityId) && !isset($hospitalTypeId) && !isset($category) && isset($status)) {
+            $hospital = Hospital::orderBy('hospitalName', 'ASC')
+                ->where('cityId', '=', $cityId)
+                ->where('status', '=', $status)
+                ->paginate(20);
+                $count = count($hospital);
+        }
+        //For City , Hospital type and Category 
+        else if (!isset($hospitalName) && isset($cityId) && isset($hospitalTypeId) && isset($category) && !isset($status)) {
+            $hospital = Hospital::orderBy('hospitalName', 'ASC')
+                ->where('cityId', '=', $cityId)
+                ->where('hospitalTypeId', '=', $hospitalTypeId)
+                ->where('category', '=', $category)
+                ->paginate(20);
+                $count = count($hospital);
+        }
+        //For City , Hospital type , category and status
+        else if (!isset($hospitalName) && isset($cityId) && isset($hospitalTypeId) && isset($category) && isset($status)) {
+            $hospital = Hospital::orderBy('hospitalName', 'ASC')
+                ->where('cityId', '=', $cityId)
+                ->where('hospitalTypeId', '=', $hospitalTypeId)
+                ->where('category', '=', $category)
+                ->where('status', '=', $status)
+                ->paginate(20);
+                $count = count($hospital);
+        }
+        //Only For Hospital Type
+        else if (!isset($hospitalName) && !isset($cityId) && isset($hospitalTypeId) && !isset($category) && !isset($status)) {
             $hospital = Hospital::orderBy('hospitalName', 'ASC')
                 ->where('hospitalTypeId', '=', $hospitalTypeId)
-                ->paginate(5);
-        } else if (!isset($hospitalName) && !isset($cityId) && !isset($hospitalTypeId) && isset($category) && !isset($status)) {
+                ->paginate(20);
+                $count = count($hospital);
+        }
+        //For Hospital type and category
+        else if (!isset($hospitalName) && !isset($cityId) && isset($hospitalTypeId) && isset($category) && !isset($status)) {
+            $hospital = Hospital::orderBy('hospitalName', 'ASC')
+                ->where('hospitalTypeId', '=', $hospitalTypeId)
+                ->where('category', '=', $category)
+                ->paginate(20);
+                $count = count($hospital);
+        } 
+        //For Hospital Type and status
+        else if (!isset($hospitalName) && !isset($cityId) && isset($hospitalTypeId) && !isset($category) && isset($status)) {
+            $hospital = Hospital::orderBy('hospitalName', 'ASC')
+                ->where('hospitalTypeId', '=', $hospitalTypeId)
+                ->where('status', '=', $status)
+                ->paginate(20);
+                $count = count($hospital);
+        }
+        //For Hospital type , category and status
+        else if (!isset($hospitalName) && !isset($cityId) && isset($hospitalTypeId) && isset($category) && isset($status)) {
+            $hospital = Hospital::orderBy('hospitalName', 'ASC')
+                ->where('hospitalTypeId', '=', $hospitalTypeId)
+                ->where('category', '=', $category)
+                ->where('status', '=', $status)
+                ->paginate(20);
+                $count = count($hospital);
+        }
+        //Only for Category
+        else if (!isset($hospitalName) && !isset($cityId) && !isset($hospitalTypeId) && isset($category) && !isset($status)) {
             $hospital = Hospital::orderBy('hospitalName', 'ASC')
                 ->where('category', '=', $category)
-                ->paginate(5);
-        } else if (!isset($hospitalName) && !isset($cityId) && !isset($hospitalTypeId) && !isset($category) && isset($status)) {
+                ->paginate(20);
+                $count = count($hospital);
+        } 
+        //For Category and status
+        else if (!isset($hospitalName) && !isset($cityId) && !isset($hospitalTypeId) && isset($category) && isset($status)) {
+            $hospital = Hospital::orderBy('hospitalName', 'ASC')
+                ->where('category', '=', $category)
+                ->where('status', '=', $status)
+                ->paginate(20);
+                $count = count($hospital);
+        } 
+        //Only For Status
+        else if (!isset($hospitalName) && !isset($cityId) && !isset($hospitalTypeId) && !isset($category) && isset($status)) {
             $hospital = Hospital::orderBy('hospitalName', 'ASC')
                 ->where('status', '=', $status)
-                ->paginate(5);
-        } else {
+                ->paginate(20);
+                $count = count($hospital);
+        } 
+        else {
             $hospital = Hospital::orderBy('hospitalName', 'ASC')
                 ->with('hospitalType')
                 ->with('city')
                 ->with('user')
-                ->paginate(5);
+                ->paginate(20);
+                $count = count($hospital);
         }
-        return view('admin.hospital.index', compact('hospital', 'city', 'hospitaltype', 'user'));
+        return view('admin.hospital.index', compact('hospital', 'city', 'hospitaltype', 'user','count'));
     }
 
     public function create()
@@ -183,43 +328,83 @@ class AdminHospitalController extends Controller
         $hospital = Hospital::find($id);
         $hospitalId = $request->id;
 
-        //For Doctor
+    //For Doctor
         $specialist = Specialist::all();
         $doctorName = $request->doctorName;
         $specialistId = $request->specialistId;
 
         $status = $request->status;
-        if (isset($doctorName) && isset($specialistId) && isset($registerNumber) && isset($status)) {
-
+        //For All docotor data
+        if (isset($doctorName) && isset($specialistId) && isset($status)) {
             $doctor = Doctor::orderBy('doctorName', 'ASC')
-                ->where('doctorName', '=', $doctorName)
+                ->where('hospitalId', $hospitalId)
+                ->where('doctorName', 'like',"%$doctorName%")
                 ->where('specialistId', '=', $specialistId)
                 ->where('status', '=', $status)
-                ->paginate(5);
-        } else if (isset($doctorName) && !isset($specialistId) && !isset($status)) {
-
+                ->paginate(20);
+                $doctorcount = count($doctor);
+        }
+        //Only for doctor 
+        else if (isset($doctorName) && !isset($specialistId) && !isset($status)) {
             $doctor = Doctor::orderBy('doctorName', 'ASC')
-                ->where('doctorName', '=', $doctorName)
-                ->paginate(5);
-        } else if (!isset($doctorName) && isset($specialistId) && !isset($status)) {
-
-
+                 ->where('hospitalId', $hospitalId)
+                ->where('doctorName', 'like', "%$doctorName%")
+                ->paginate(20);
+                $doctorcount = count($doctor);
+        }
+        //For Doctor and specialist
+        else if (isset($doctorName) && isset($specialistId) && !isset($status)) {
             $doctor = Doctor::orderBy('doctorName', 'ASC')
+                ->where('hospitalId', $hospitalId)
+                ->where('doctorName', 'like',"%$doctorName%")
+                ->where('specialistId', $specialistId)
+                ->paginate(20);
+                $doctorcount = count($doctor);
+        }
+        //For Doctor and status
+        else if (isset($doctorName) && !isset($specialistId) &&  isset($status)) {
+            $doctor = Doctor::orderBy('doctorName', 'ASC')
+                ->where('hospitalId', $hospitalId)
+                ->where('doctorName', 'like', "%$doctorName%")
+                ->where('status', '=', $status)
+                ->paginate(20);
+                $doctorcount = count($doctor);
+        } 
+        //Only For Specialitst
+        else if (!isset($doctorName) && isset($specialistId) && !isset($status)) {
+            $doctor = Doctor::orderBy('doctorName', 'ASC')
+                ->where('hospitalId', $hospitalId)
                 ->with('specialist')
                 ->where('specialistId', $specialistId)
-                ->paginate(5);
-        } else if (!isset($doctorName) && !isset($specialistId) &&  isset($status)) {
+                ->paginate(20);
+                $doctorcount = count($doctor);
+        }
+        //For Specialist and status
+        else if (!isset($doctorName) && isset($specialistId) && isset($status)) {
+            $doctor = Doctor::orderBy('doctorName', 'ASC')
+                ->where('hospitalId', $hospitalId)
+                ->with('specialist')
+                ->where('specialistId', $specialistId)
+                ->where('status', '=', $status)
+                ->paginate(20);
+                $doctorcount = count($doctor);
+        }
+        //Only for status 
+        else if (!isset($doctorName) && !isset($specialistId) &&  isset($status)) {
 
             $doctor = Doctor::orderBy('doctorName', 'ASC')
+                ->where('hospitalId', $hospitalId)
                 ->where('status', '=', $status)
-                ->paginate(5);
-        } else {
-
+                ->paginate(20);
+                $doctorcount = count($doctor);
+        } 
+        else {
             $doctor = Doctor::orderBy('doctorName', 'ASC')
                 ->where('hospitalId', $hospitalId)
                 ->with('hospital')
                 ->with('user')
-                ->paginate(5);
+                ->paginate(20);
+                $doctorcount = count($doctor);
         }
         //-------------------------------------------------------------------------
 
@@ -230,59 +415,103 @@ class AdminHospitalController extends Controller
 
         if (isset($title) && isset($status)) {
             $gallery = Gallery::orderBy('title', 'ASC')
-                ->where('title', '=', $title)
+                ->where('hospitalId', $hospitalId)
+                ->where('title', 'like', "%$title%")
                 ->where('status', '=', $status)
-                ->paginate(5);
+                ->paginate(20);
             $gallerycount = count($gallery);
-        } else if (isset($title) && !isset($status)) {
+        }
+        else if (isset($title) && !isset($status)) {
             $gallery = Gallery::orderBy('title', 'ASC')
-                ->where('title', '=', $title)
-                ->paginate(5);
+            ->where('hospitalId', $hospitalId)    
+            ->where('title', 'like', "%$title%")
+                ->paginate(20);
             $gallerycount = count($gallery);
-        } else if (!isset($title) && isset($status)) {
+        } 
+        else if (!isset($title) && isset($status)) {
             $gallery = Gallery::orderBy('title', 'ASC')
+                ->where('hospitalId', $hospitalId)
                 ->where('status', '=', $status)
-                ->paginate(5);
+                ->paginate(20);
             $gallerycount = count($gallery);
-        } else {
+        } 
+        else {
             $gallery = Gallery::orderBy('title', 'ASC')
                 ->where('hospitalId', $hospitalId)
                 ->with('hospital')
-                ->paginate(5);
+                ->paginate(20);
             $gallerycount = count($gallery);
         }
 
-        //For Facility
+    //For Facility
+
         $facilityTitle = $request->title;
         $facilityStatus = $request->status;
         if (isset($facilityTitle) && isset($facilityStatus)) {
             $facility = Facility::orderBy('title', 'ASC')
-                ->where('title', '=', $facilityTitle)
+                ->where('hospitalId', $hospitalId)    
+                ->where('title', 'like', "%$facilityTitle%")
                 ->where('status', '=', $facilityStatus)
-                ->paginate(5);
+                ->paginate(20);
             $facilitycount = count($facility);
-        } else  if (isset($facilityTitle) && !isset($facilityStatus)) {
+        } 
+        else  if (isset($facilityTitle) && !isset($facilityStatus)) {
             $facility = Facility::orderBy('title', 'ASC')
-                ->where('title', '=', $facilityTitle)
-                ->paginate(5);
+                ->where('hospitalId', $hospitalId)
+                ->where('title', 'like', "%$facilityTitle%")
+                ->paginate(20);
             $facilitycount = count($facility);
-        } else if (!isset($facilityTitle) && isset($facilityStatus)) {
+        } 
+        else if (!isset($facilityTitle) && isset($facilityStatus)) {
             $facility = Facility::orderBy('title', 'ASC')
+                ->where('hospitalId', $hospitalId)
                 ->where('status', '=', $facilityStatus)
-                ->paginate(5);
+                ->paginate(20);
             $facilitycount = count($facility);
         } else {
             $facility = Facility::orderBy('title', 'ASC')
                 ->where('hospitalId', $hospitalId)
                 ->with('hospital')
-                ->paginate(5);
+                ->paginate(20);
             $facilitycount = count($facility);
         }
 
         //For Social Link.
-        $sociallink = SocialLink::where('hospitalId', $hospitalId)
+        $socialtitle=$request->title;
+        $socialstatus=$request->status;
+
+        //For both input data
+        if(isset($socialtitle) && isset($socialstatus)){
+            $sociallink = SocialLink::orderBy('title','ASC')
+                        ->where('hospitalId', $hospitalId)
+                        ->where('title','like',"%$socialtitle%")
+                        ->where('status','=',$socialstatus)
+                        ->paginate(20);
+                        $socialcount=count($sociallink);  
+        }
+        //For Only Social Title
+        else if(isset($socialtitle) && !isset($socialstatus)){
+            $sociallink = SocialLink::orderBy('title','ASC')
+                        ->where('hospitalId', $hospitalId)
+                        ->where('title','like',"%$socialtitle%")
+                        ->paginate(20);
+                        $socialcount=count($sociallink);  
+        }
+        //For Only Social status
+        else if(!isset($socialtitle) && isset($socialstatus)){
+            $sociallink = SocialLink::orderBy('title','ASC')
+                        ->where('hospitalId', $hospitalId)
+                        ->where('status','=',$socialstatus)
+                        ->paginate(20);
+                        $socialcount=count($sociallink);  
+        }
+        else{
+            $sociallink = SocialLink::where('hospitalId', $hospitalId)
             ->with('hospital')
-            ->paginate(5);
-        return view('admin.hospital.viewdetails', compact('hospital', 'doctor', 'gallery', 'facility', 'specialist', 'gallerycount', 'facilitycount', 'sociallink'));
+            ->paginate(20);
+            $socialcount=count($sociallink);  
+        }
+        
+        return view('admin.hospital.viewdetails', compact('hospital', 'doctor', 'gallery', 'facility', 'specialist', 'gallerycount', 'facilitycount', 'sociallink','doctorcount','socialcount'));
     }
 }

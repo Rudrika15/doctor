@@ -11,12 +11,11 @@
     
         <div class="col-lg-4">
                 <div class="form-group">
-                    <input autocomplete="off" type="text" id="myInput" onfocus="showList()" onkeyup="myFunction()" name="cityName" class="form-control @error('cityName') is-invalid @enderror" placeholder="Enter City Name"> 
-                    <ul id="myUL" style="display:none">
-                        @foreach ($city as $citysearch)
-                        <li><a href="#">{{$citysearch->name}}</a></li>
+                    <input type="text" autocomplete="off" id="searchInput" onkeyup="filterList()" onfocus="showItems()" name="cityName" class="form-control @error('cityName') is-invalid @enderror" placeholder="Enter City Name">
+                        @foreach ($city as $cityName)
+                        <div class="item text-center p-2 border" style="display: none;">{{$cityName->name}}</div>
                         @endforeach
-                    </ul>
+                        
                     @error('cityName')
                     <sapn class="text-danger">{{ $message }}</sapn>
                     @enderror
@@ -83,31 +82,39 @@
     </div>
 </div>
 
-
+  
 <script>
-    function showList() {
-      document.getElementById("myUL").style.display = "block";
+    function showItems() {
+       
+      var items = document.getElementsByClassName("item");
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        item.style.display = "";
+        
+      }
     }
-    
-    function myFunction() {
-      var input, filter, ul, li, a, i, txtValue;
-      input = document.getElementById("myInput");
-      filter = input.value.toUpperCase();
-      ul = document.getElementById("myUL");
-      li = ul.getElementsByTagName("li");
+  
+    function filterList() {
+      var input = document.getElementById("searchInput").value.toLowerCase();
+      var items = document.getElementsByClassName("item");
       
-      for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          li[i].style.display = "";
-        } else {
-          li[i].style.display = "none";
+      if (input === "") {
+        showItems();
+      } else {
+        for (var i = 0; i < items.length; i++) {
+          var item = items[i];
+          var text = item.textContent.toLowerCase();
+          
+          if (text.indexOf(input) > -1) {
+            item.style.display = "";
+          } else {
+            item.style.display = "none";
+            
+          }
         }
       }
     }
-</script>
-    
+  </script>
 
 @endsection
 
