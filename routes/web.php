@@ -20,6 +20,7 @@ use App\Http\Controllers\Hospital\DoctorController;
 use App\Http\Controllers\Hospital\FacilityController;
 use App\Http\Controllers\Hospital\ScheduleController;
 use Spatie\Permission\Contracts\Role;
+use App\Http\Controllers\Visitor\VisitorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
 
+    // ------------------ Visitor Side  -----------------------------------------
+
+    Route::controller(VisitorController::class)->group(function (){
+        route::get('visitor/index','index')->name('visitor.index');
+    });
 
     // ----------------------------------------Admin Side-------------------------------------------------
 
