@@ -2,13 +2,32 @@
 @section('content')
 
   <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center">
-    <div class="container">
-      <h1>Welcome to Medilab</h1>
-      <h2>We are team of talented designers making websites with Bootstrap</h2>
-      <a href="#about" class="btn-get-started scrollto">Get Started</a>
+
+{{-- Slider Section  --}}
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="2000">
+  <!-- Indicators -->
+  {{-- <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+    <li data-target="#myCarousel" data-slide-to="3"></li>
+  </ol> --}}
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    @foreach ($slider as $slider)
+    <div class="item {{ $loop->first ? 'active' : '' }}">
+      <img src="{{url('/slider')}}/{{$slider->image}}" alt="" width="100%">
     </div>
-  </section><!-- End Hero -->
+    @endforeach
+    
+    <script>
+      $(document).ready(function(){
+          $('.carousel-inner .item:first-child').addClass('active');
+      });
+    </script>
+{{-- Slider Section End --}}
+
 
   <main id="main">
 
@@ -107,24 +126,24 @@
           <div class="col-lg-3 col-md-6">
             <div class="count-box">
               <i class="fas fa-user-md"></i>
-              <span data-purecounter-start="0" data-purecounter-end="{{$hospitalcount}}" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Hospitals</p>
+              <span data-purecounter-start="0" data-purecounter-end="{{$doctorcount}}" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Doctors</p>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
             <div class="count-box">
               <i class="far fa-hospital"></i>
-              <span data-purecounter-start="0" data-purecounter-end="{{$specialistcount}}" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Specialists</p>
+              <span data-purecounter-start="0" data-purecounter-end="{{$hospitalcount}}" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Hospitals</p>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
             <div class="count-box">
               <i class="fas fa-flask"></i>
-              <span data-purecounter-start="0" data-purecounter-end="12" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Doctors</p>
+              <span data-purecounter-start="0" data-purecounter-end="{{$specialistcount}}" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Specialists</p>
             </div>
           </div>
 
@@ -146,59 +165,21 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Services</h2>
+          <h2>Specialist</h2>
           <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
         </div>
 
+        
         <div class="row">
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="icon-box">
-              <div class="icon"><i class="fas fa-heartbeat"></i></div>
-              <h4><a href="">Lorem Ipsum</a></h4>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <div class="icon-box">
-              <div class="icon"><i class="fas fa-pills"></i></div>
-              <h4><a href="">Sed ut perspiciatis</a></h4>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-            <div class="icon-box">
-              <div class="icon"><i class="fas fa-hospital-user"></i></div>
-              <h4><a href="">Magni Dolores</a></h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
-              <div class="icon"><i class="fas fa-dna"></i></div>
-              <h4><a href="">Nemo Enim</a></h4>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
-              <div class="icon"><i class="fas fa-wheelchair"></i></div>
-              <h4><a href="">Dele cardo</a></h4>
-              <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
-              <div class="icon"><i class="fas fa-notes-medical"></i></div>
-              <h4><a href="">Divera don</a></h4>
-              <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-            </div>
-          </div>
-
+            @foreach ($specialist as $specialist)
+              <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 md-0">
+                <div class="icon-box">
+                  <div class="icon"><i class="fas fa-pills"></i></div>
+                  <h4><a href="">{{$specialist->specialistName}}</a></h4>
+                  <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                </div>
+              </div>
+            @endforeach
         </div>
 
       </div>
@@ -371,18 +352,25 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Doctors</h2>
+          <h2>Hospitals</h2>
           <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
         </div>
-
+        
         <div class="row">
 
-          <div class="col-lg-6">
+         
+          @foreach ($hospital as $hospital)
+          
+          <div class="col-lg-6 mt-4 lg-0">
             <div class="member d-flex align-items-start">
-              <div class="pic"><img src="assets/img/doctors/doctors-1.jpg" class="img-fluid" alt=""></div>
-              <div class="member-info">
-                <h4>Walter White</h4>
+              <div class="pic">
+                <a href="{{route('visitor.hospitalDetails')}}/{{$hospital->id}}">
+                  <img src="{{url('/hospital')}}/{{$hospital->hospitalLogo}}" class="img-fluid" alt=""></div>
+                </a>
+                <div class="member-info">
+                <h4>{{$hospital->hospitalName}}</h4>
                 <span>Chief Medical Officer</span>
+                
                 <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
                 <div class="social">
                   <a href=""><i class="ri-twitter-fill"></i></a>
@@ -394,7 +382,9 @@
             </div>
           </div>
 
-          <div class="col-lg-6 mt-4 mt-lg-0">
+          @endforeach
+          
+          {{-- <div class="col-lg-6 mt-4 mt-lg-0">
             <div class="member d-flex align-items-start">
               <div class="pic"><img src="assets/img/doctors/doctors-2.jpg" class="img-fluid" alt=""></div>
               <div class="member-info">
@@ -443,7 +433,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> --}}
 
         </div>
 

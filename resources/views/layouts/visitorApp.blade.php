@@ -16,6 +16,12 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
+  {{-- Bootstrap link --}}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
   <!-- Vendor CSS Files -->
   <link href="{{asset('visitor/assets/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
   <link href="{{asset('visitor/assets/vendor/animate.css/animate.min.css')}}" rel="stylesheet">
@@ -97,13 +103,17 @@
 
     </div>
   </header><!-- End Header -->
+  
+    
+  <main id="main">
 
-    @yield('content')
-
+      @yield('content')
+   
+  </main>
     <!-- ======= Footer ======= -->
     <footer id="footer">
 
-<div class="footer-top">
+<div class="footer-top ">
   <div class="container">
     <div class="row">
 
