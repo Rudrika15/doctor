@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('userId');
             $table->integer('hospitalId');
             $table->date('date');
-            $table->string('type');
+            $table->string('title');
             $table->timestamps();
         });
     }

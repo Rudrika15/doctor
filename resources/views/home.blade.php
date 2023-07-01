@@ -1,5 +1,6 @@
-@extends('layouts.app')
+@if(Auth::user()->role="Admin"){
 
+@extends('layouts.app')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -21,3 +22,7 @@
     </div>
 </div>
 @endsection
+
+@else
+ user
+@endif

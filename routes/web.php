@@ -39,7 +39,6 @@ use App\Http\Controllers\Visitor\VisitorController;
 
 // ------------------ Visitor Side  -----------------------------------------
 Route::get('/',[VisitorController::class,'index'])->name('visitor.index');
-Route::get('/visitors/hospitalDetails/{id?}',[VisitorController::class,'hospitalDetails'])->name('visitor.hospitalDetails');
 
 Auth::routes();
 
@@ -51,7 +50,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
 
+    Route::controller(VisitorController::class)->group(function(){
+        Route::get('/visitors/hospitalDetails/{id?}','hospitalDetails')->name('visitor.hospitalDetails');
 
+    });
 
 
     // ----------------------------------------Admin Side-------------------------------------------------

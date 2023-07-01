@@ -4,28 +4,24 @@
   <!-- ======= Hero Section ======= -->
 
 {{-- Slider Section  --}}
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="2000">
-  <!-- Indicators -->
-  {{-- <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-    <li data-target="#myCarousel" data-slide-to="3"></li>
-  </ol> --}}
-
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
     @foreach ($slider as $slider)
-    <div class="item {{ $loop->first ? 'active' : '' }}">
-      <img src="{{url('/slider')}}/{{$slider->image}}" alt="" width="100%">
+    <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+      <img src="{{url('/slider')}}/{{$slider->image}}" class="d-block w-100" alt="...">
     </div>
     @endforeach
-    
-    <script>
-      $(document).ready(function(){
-          $('.carousel-inner .item:first-child').addClass('active');
-      });
-    </script>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
 {{-- Slider Section End --}}
 
 
@@ -123,7 +119,7 @@
 
         <div class="row">
 
-          <div class="col-lg-3 col-md-6">
+          <div class="col-lg-4 col-md-6">
             <div class="count-box">
               <i class="fas fa-user-md"></i>
               <span data-purecounter-start="0" data-purecounter-end="{{$doctorcount}}" data-purecounter-duration="1" class="purecounter"></span>
@@ -131,7 +127,7 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
+          <div class="col-lg-4 col-md-6 mt-5 mt-md-0">
             <div class="count-box">
               <i class="far fa-hospital"></i>
               <span data-purecounter-start="0" data-purecounter-end="{{$hospitalcount}}" data-purecounter-duration="1" class="purecounter"></span>
@@ -139,22 +135,13 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+          <div class="col-lg-4 col-md-6 mt-5 mt-lg-0">
             <div class="count-box">
               <i class="fas fa-flask"></i>
               <span data-purecounter-start="0" data-purecounter-end="{{$specialistcount}}" data-purecounter-duration="1" class="purecounter"></span>
               <p>Specialists</p>
             </div>
           </div>
-
-          <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
-            <div class="count-box">
-              <i class="fas fa-award"></i>
-              <span data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Awards</p>
-            </div>
-          </div>
-
         </div>
 
       </div>
