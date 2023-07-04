@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class AdminHospitalTypeController extends Controller
 {
+
+    // function __construct()
+    // {
+    //     $this->middleware('permission:hospitaltype-list|hospitaltype-create|hospitaltype-edit|hospitaltype-delete', ['only' => ['index', 'store']]);
+    //     $this->middleware('permission:hospitaltype-create', ['only' => ['create', 'store']]);
+    //     $this->middleware('permission:hospitaltype-edit', ['only' => ['edit', 'update']]);
+    //     $this->middleware('permission:hospitaltype-delete', ['only' => ['delete']]);
+    // }
+
     public function index(Request $request)
     {
         $typeName=$request->typeName;

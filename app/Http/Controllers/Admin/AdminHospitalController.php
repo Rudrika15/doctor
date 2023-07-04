@@ -17,6 +17,16 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminHospitalController extends Controller
 {
+
+    // function __construct()
+    // {
+    //      $this->middleware('permission:hospital-list|hospital-create|hospital-edit|hospital-delete|hospital-viewdetails', ['only' => ['index', 'store']]);
+    //      $this->middleware('permission:hospital-create', ['only' => ['create', 'store']]);
+    //      $this->middleware('permission:hospital-edit', ['only' => ['edit', 'update']]);
+    //      $this->middleware('permission:hospital-delete', ['only' => ['delete']]);
+    //      $this->middleware('permission:hospital-viewdetails', ['only' => ['viewDetails']]);
+    // }
+
     public function index(Request $request)
     {
         $city = City::all();

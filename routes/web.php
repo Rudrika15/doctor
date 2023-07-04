@@ -21,6 +21,7 @@ use App\Http\Controllers\Hospital\FacilityController;
 use App\Http\Controllers\Hospital\ScheduleController;
 use Spatie\Permission\Contracts\Role;
 use App\Http\Controllers\Visitor\VisitorController;
+use App\Http\Controllers\Admin\AdminStateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,13 +52,22 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('products', ProductController::class);
 
     Route::controller(VisitorController::class)->group(function(){
-        Route::get('/visitors/hospitalDetails/{id?}','hospitalDetails')->name('visitor.hospitalDetails');
-
+        Route::get('hospitalDetails/{id?}','hospitalDetails')->name('visitor.hospitalDetails');
+        Route::get('/profile','profile')->name('visitor.profile');
     });
 
 
     // ----------------------------------------Admin Side-------------------------------------------------
 
+    // Admin State
+    Route::controller(AdminStateController::class)->group(function () {
+        Route::get('admin/state-index', 'index')->name('state.index');
+        Route::get('admin/state-create', 'create')->name('state.create');
+        Route::post('admin/state-store', 'store')->name('state.store');
+        Route::get('admin/state-edit-{id?}', 'edit')->name('state.edit');
+        Route::post('admin/state-update', 'update')->name('state.update');
+        Route::get('admin/state-delete-{id?}', 'delete')->name('state.delete');
+    });
     // Admin City 
     Route::controller(AdminCityController::class)->group(function () {
         Route::get('admin/city-create', 'create')->name('city.create');
@@ -67,6 +77,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('admin/city-update', 'update')->name('city.update');
         Route::get('admin/city-delete-{id?}', 'delete')->name('city.delete');
     });
+
 
     // Admin Hospital
     Route::controller(AdminHospitalController::class)->group(function () {
@@ -147,6 +158,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('admin/sociallink-delete-{id?}', 'delete')->name('admin.sociallink.delete');
     });
 
+    
 
 
     //-------------------------------------- Hospital Side------------------------------------------

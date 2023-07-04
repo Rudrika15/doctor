@@ -1,5 +1,3 @@
-@if(Auth::user()->role="Admin"){
-
 @extends('layouts.app')
 @section('content')
 <div class="container">
@@ -22,7 +20,3 @@
     </div>
 </div>
 @endsection
-
-@else
- user
-@endif

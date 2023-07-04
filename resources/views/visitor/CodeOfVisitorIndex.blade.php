@@ -84,7 +84,7 @@
                                 <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Password Confirm') }}</label>
     
                                 <div class="frm-input" style="width: 90%;">
-                                    <input id="password-confirm" type="password" class="frm-inp @error('password-confirm') is-invalid @enderror" name="password_confirmation" value="{{ old('password-confirm') }}" required autocomplete="password-confirm" autofocus>
+                                    <input id="password-confirm" type="password" class="frm-inp @error('password-confirm') is-invalid @enderror" name="password-confirm" value="{{ old('password-confirm') }}" required autocomplete="password-confirm" autofocus>
                                 
                                     @error('password-confirm')
                                     <span class="invalid-feedback" role="alert">
@@ -106,83 +106,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <label for="address" class="col-md-4 col-form-label text-md-end">{{ __('Address') }}</label>
-    
-                                <div class="frm-input" style="width: 90%;">
-                                    <input id="address" type="address" class="frm-inp @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address" autofocus>
-                                
-                                    @error('address')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="gender" class="col-md-4 col-form-label text-md-end">{{ __('Gender') }}</label>
-                                
-                                    <div class="frm-input" style="width: 90%;">
-                                        <div class="col">
-                                            <input type="radio" id="Male" name="gender" value="Male">
-                                            <label for="html">Male</label>
-                                        </div>
-                                        <div>
-                                            <input type="radio" id="Female" name="gender" value="Female">
-                                            <label for="css">Female</label>
-                                         
-                                        </div>
-                                       
-                                    
-                                        @error('gender')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="age" class="col-md-4 col-form-label text-md-end">{{ __('Age') }}</label>
-                                <div class="frm-input" style="width: 90%;">
-                                    <input id="age" type="age" class="frm-inp @error('age') is-invalid @enderror" name="age" value="{{ old('age') }}" required autocomplete="age" autofocus>
-                                
-                                    @error('age')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="address" class="col-md-4 col-form-label text-md-end">{{ __('Select State') }}</label>
-    
-                                <div class="frm-input" style="width: 90%;">
-                                    <select class="frm-inp" name="stateId" aria-label="Default select example">
-                                        <option selected>Open this select state</option>
-                                        <option value=1>One</option>
-                                        
-                                      </select>
-                                   
-                                    @error('address')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-4">
-                                    <input type="file" accept='image/*' onchange="readURL(this,'#img1')" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo">
-                                    @error('photo')
-                                    <sapn class="text-danger">{{ $message }}</sapn>
-                                    @enderror
-                                </div>
-                
-                                <div class="col-md-4">
-                                    <label for="image"></label>
-                                    <img src="{{url('gallery/default.jpg')}}" alt="{{__('main image')}}" id="img1" style='min-height:100px;min-width:100px;max-height:100px;max-width:100px'>
-                                </div>
-                            </div>
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn addbtn frm-submit">
@@ -196,20 +119,8 @@
             
         </div>
     </div>
-
-    <script>
-        function readURL(input, tgt) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    document.querySelector(tgt).setAttribute("src",
-                        e.target.result);
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
-       <!--/#single-wrapper -->
+</div>
+   <!--/#single-wrapper -->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

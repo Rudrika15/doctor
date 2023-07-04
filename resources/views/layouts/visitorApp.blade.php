@@ -77,9 +77,9 @@
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
+          <li><a class="nav-link scrollto" href="#services">Specialist</a></li>
           <li><a class="nav-link scrollto" href="#departments">Departments</a></li>
-          <li><a class="nav-link scrollto" href="#doctors">Doctors</a></li>
+          <li><a class="nav-link scrollto" href="#doctors">Hospitals</a></li>
           <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
@@ -98,6 +98,36 @@
             </ul>
           </li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          
+              @if (Route::has('login'))
+                
+                    @auth
+                    {{-- <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a> --}}
+                    <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
+                      <ul>
+                        <li class="dropdown"><a href="{{route('visitor.profile')}}"><span>Profile</span></a>
+
+                        <li>
+                          <a class="dropdown" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                <i class="fa fa-sign-out"></i> {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                      </ul>
+                    </li>
+                    @else
+                            <li>
+                              <a href="{{ route('login') }}" class="nav-link scrollto">Log in</a>
+                            </li>
+                              @if (Route::has('register'))
+                                  <li><a href="{{ route('register') }}" class="nav-link scrollto">Register</a> </li>
+                              @endif
+                    @endauth
+                      
+              @endif
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

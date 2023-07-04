@@ -8,6 +8,15 @@ use App\Models\City;
 
 class AdminCityController extends Controller
 {
+
+    // function __construct()
+    // {
+    //     $this->middleware('permission:city-list|city-create|city-edit|city-delete', ['only' => ['index', 'store']]);
+    //     $this->middleware('permission:city-create', ['only' => ['create', 'store']]);
+    //     $this->middleware('permission:city-edit', ['only' => ['edit', 'update']]);
+    //     $this->middleware('permission:city-delete', ['only' => ['delete']]);
+    // }
+
     public function index(Request $req)
     {
 

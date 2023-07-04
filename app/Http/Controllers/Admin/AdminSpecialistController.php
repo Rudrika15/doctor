@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class AdminSpecialistController extends Controller
 {
+
+    // function __construct()
+    // {
+    //     $this->middleware('permission:specialist-list|specialist-create|specialist-edit|specialist-delete', ['only' => ['index', 'store']]);
+    //     $this->middleware('permission:specialist-create', ['only' => ['create', 'store']]);
+    //     $this->middleware('permission:specialist-edit', ['only' => ['edit', 'update']]);
+    //     $this->middleware('permission:specialist-delete', ['only' => ['delete']]);
+    // }
+
     public function index(Request $request)
     {
         $specialistName=$request->specialistName;

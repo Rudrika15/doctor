@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 
 class AdminFacilityController extends Controller
 {
+
+    // function __construct()
+    // {
+    //      $this->middleware('permission:facility-list|facility-create|facility-edit|facility-delete', ['only' => ['index', 'store']]);
+    //      $this->middleware('permission:facility-create', ['only' => ['create', 'store']]);
+    //      $this->middleware('permission:facility-edit', ['only' => ['edit', 'update']]);
+    //      $this->middleware('permission:facility-delete', ['only' => ['delete']]);
+    // }
+    
     public function index(Request $request, $id)
     {
         $hospitalId = $request->id;

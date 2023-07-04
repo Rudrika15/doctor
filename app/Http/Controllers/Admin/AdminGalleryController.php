@@ -10,6 +10,15 @@ use PhpParser\Node\Expr\FuncCall;
 
 class AdminGalleryController extends Controller
 {
+
+    // function __construct()
+    // {
+    //      $this->middleware('permission:gallery-list|gallery-create|gallery-edit|gallery-delete', ['only' => ['index', 'store']]);
+    //      $this->middleware('permission:gallery-create', ['only' => ['create', 'store']]);
+    //      $this->middleware('permission:gallery-edit', ['only' => ['edit', 'update']]);
+    //      $this->middleware('permission:gallery-delete', ['only' => ['delete']]);
+    // }
+
     public function index(Request $request, $id)
     {
         $hospital = $request->id;

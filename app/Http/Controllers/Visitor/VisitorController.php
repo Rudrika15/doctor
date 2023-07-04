@@ -12,6 +12,7 @@ use App\Models\Gallery;
 use App\Models\Facility;
 use App\Models\SocialLink;
 
+
 class VisitorController extends Controller
 {
     public function index(){
@@ -49,5 +50,8 @@ class VisitorController extends Controller
 
         $sociallink=SocialLink::where('hospitalId','=',$hospitalId)->get();
         return view('visitor.hospitalDetails',compact('hospital','doctor','specialist','gallery','facility','sociallink'));
+    }
+    public function profile(){
+        return view('visitor.profile');
     }
 }

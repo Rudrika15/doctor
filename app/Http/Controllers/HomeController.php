@@ -24,15 +24,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $userId = Auth::user()->id;
+        $userId = Auth::user()->role="Admin";
         if($userId)
         {
-return view('home');
+            return view('home');
         }
         else{
-            return "i am User";
+            return view('visitor.index');
         }
 
+       return view('home');
         
     }
 }

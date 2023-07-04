@@ -12,6 +12,14 @@ use Illuminate\Http\Request;
 
 class AdminDoctorController extends Controller
 {
+
+    // function __construct()
+    //  {
+    //      $this->middleware('permission:doctor-list|doctor-create|doctor-edit|doctor-delete', ['only' => ['index', 'store']]);
+    //      $this->middleware('permission:doctor-create', ['only' => ['create', 'store']]);
+    //      $this->middleware('permission:doctor-edit', ['only' => ['edit', 'update']]);
+    //      $this->middleware('permission:doctor-delete', ['only' => ['delete']]);
+    // }
     public function index(Request $request, $id)
     {
         $hospitalId = $request->id;
