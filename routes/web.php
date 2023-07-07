@@ -22,6 +22,7 @@ use App\Http\Controllers\Hospital\ScheduleController;
 use Spatie\Permission\Contracts\Role;
 use App\Http\Controllers\Visitor\VisitorController;
 use App\Http\Controllers\Admin\AdminStateController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,21 +40,22 @@ use App\Http\Controllers\Admin\AdminStateController;
 // });
 
 // ------------------ Visitor Side  -----------------------------------------
-Route::get('/',[VisitorController::class,'index'])->name('visitor.index');
+Route::get('/', [VisitorController::class, 'index'])->name('visitor.index');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+//For state list in resgitration page
+//Route::get('register', [RegisterController::class, 'state'])->name('register.state');
 // Auth
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
 
-    Route::controller(VisitorController::class)->group(function(){
-        Route::get('hospitalDetails/{id?}','hospitalDetails')->name('visitor.hospitalDetails');
-        Route::get('/profile','profile')->name('visitor.profile');
+    Route::controller(VisitorController::class)->group(function () {
+        Route::get('hospitalDetails/{id?}', 'hospitalDetails')->name('visitor.hospitalDetails');
+        Route::get('/profile', 'profile')->name('visitor.profile');
     });
 
 
@@ -158,7 +160,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('admin/sociallink-delete-{id?}', 'delete')->name('admin.sociallink.delete');
     });
 
-    
+
 
 
     //-------------------------------------- Hospital Side------------------------------------------

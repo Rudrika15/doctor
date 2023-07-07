@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('gender');
             $table->string('age');
             $table->integer('cityId');
+            $table->string('photo');
+            $table->integer('stateId');
+            
             $table->string('status')->default('Active');
             $table->timestamps();
         });

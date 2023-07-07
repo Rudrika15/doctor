@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\City;
+use App\Models\State;
 
 class AdminCityController extends Controller
 {
@@ -19,7 +20,6 @@ class AdminCityController extends Controller
 
     public function index(Request $req)
     {
-
         $cityName = $req->cityName;
         $status = $req->status;
 
@@ -27,39 +27,47 @@ class AdminCityController extends Controller
             $city = City::orderBy('name', 'ASC')
                 ->where('name', 'like', "%$cityName%")
                 ->where('status', '=', $status)
+
                 ->paginate(5);
             $count = count($city);
         } else if (!isset($cityName) && isset($status)) {
             $city = City::orderBy('name', 'ASC')
                 ->where('status', '=', $status)
+
                 ->paginate(5);
             $count = count($city);
         } else if (isset($cityName) && !isset($status)) {
             $city = City::orderBy('name', 'ASC')
                 ->where('name', 'like', "%$cityName%")
+
                 ->paginate(5);
             $count = count($city);
         } else {
             $city = City::orderBy('name', 'ASC')
+                ->with('state')
                 ->paginate(5);
             $count = count($city);
         }
+
         return view('admin.city.index', compact('city', 'count'));
     }
 
     public function create()
     {
-        return view('admin.city.create');
+        $state = State::all();
+        return view('admin.city.create', compact('state'));
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
             'name' => 'required',
+            'stateId' => 'required'
         ]);
 
         $city = new City();
         $city->name = $request->name;
+        $city->stateId = $request->stateId;
 
         if ($city->save()) {
             return redirect('admin/city-index')->with('success', 'City Added successfully!');
@@ -70,8 +78,9 @@ class AdminCityController extends Controller
 
     public function edit($id)
     {
+        $state = State::all();
         $city = City::find($id);
-        return view('admin.city.edit', compact('city'));
+        return view('admin.city.edit', compact('city', 'state'));
     }
 
     public function update(Request $request)

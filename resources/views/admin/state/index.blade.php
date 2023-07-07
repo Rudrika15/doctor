@@ -55,13 +55,13 @@
         <div class="table-responsive">
             <table class="table table-bordered">
                 <tr>
-                    <th>Name</th>
+                    <th>State Name</th>
                     <th>Status</th>
                     <th width="280px">Action</th>
                 </tr>
                 @foreach ($state as $states)
                 <tr>
-                    <td>{{$states->name}}</td>
+                    <td>{{$states->stateName}}</td>
                     <td>{{$states->status}}</td>
                     <td>
                         <a class="btn btn-primary" href="{{route('state.edit')}}{{$states->id}}">Edit</a>

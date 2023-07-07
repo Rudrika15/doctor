@@ -9,32 +9,33 @@ use App\Models\State;
 class AdminStateController extends Controller
 {
     //
-    public function index(Request $req){
+    public function index(Request $req)
+    {
         $stateName = $req->stateName;
         $status = $req->status;
 
         if (isset($stateName) && isset($status)) {
-            $state = State::orderBy('name', 'ASC')
-                ->where('name', 'like', "%$stateName%")
+            $state = State::orderBy('stateName', 'ASC')
+                ->where('stateName', 'like', "%$stateName%")
                 ->where('status', '=', $status)
                 ->paginate(5);
             $count = count($state);
         } else if (!isset($stateName) && isset($status)) {
-            $state = State::orderBy('name', 'ASC')
+            $state = State::orderBy('stateName', 'ASC')
                 ->where('status', '=', $status)
                 ->paginate(5);
             $count = count($state);
         } else if (isset($stateName) && !isset($status)) {
-            $state = State::orderBy('name', 'ASC')
-                ->where('name', 'like', "%$stateName%")
+            $state = State::orderBy('stateName', 'ASC')
+                ->where('stateName', 'like', "%$stateName%")
                 ->paginate(5);
             $count = count($state);
         } else {
-            $state = State::orderBy('name', 'ASC')
+            $state = State::orderBy('stateName', 'ASC')
                 ->paginate(5);
             $count = count($state);
         }
-        return view('admin.state.index',compact('state','count'));
+        return view('admin.state.index', compact('state', 'count'));
     }
 
     public function create()
@@ -45,13 +46,13 @@ class AdminStateController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'stateName' => 'required',
         ]);
 
         $state = new State();
-        $state->name = $request->name;
+        $state->stateName = $request->stateName;
         $state->status = "Active";
-    
+
 
         if ($state->save()) {
             return redirect('admin/state-index')->with('success', 'state Added successfully!');
@@ -61,21 +62,21 @@ class AdminStateController extends Controller
     }
     public function edit($id)
     {
-        $state=State::find($id);
-        return view('admin.state.edit',compact('state'));
+        $state = State::find($id);
+        return view('admin.state.edit', compact('state'));
     }
 
     public function update(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'stateName' => 'required',
         ]);
 
-        $id=$request->id;
-        $state =State::find($id);
-        $state->name = $request->name;
+        $id = $request->id;
+        $state = State::find($id);
+        $state->stateName = $request->stateName;
         $state->status = "Active";
-    
+
 
         if ($state->save()) {
             return redirect('admin/state-index')->with('success', 'state Update successfully!');
@@ -93,5 +94,4 @@ class AdminStateController extends Controller
             return back()->with('error', 'You have no permission for this page!');
         }
     }
-
 }

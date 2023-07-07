@@ -21,9 +21,9 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Name:</strong>
-                    <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror">
-                    @error('name')
+                    <strong>State Name:</strong>
+                    <input type="text" id="stateName" name="stateName" class="form-control @error('stateName') is-invalid @enderror">
+                    @error('stateName')
                     <sapn class="text-danger">{{ $message }}</sapn>
                     @enderror
                 </div>
@@ -47,7 +47,7 @@
 <script>
     jQuery('#frm').validate({
         rules: {
-            name: {
+            stateName: {
                 required: true,
                 minlength: 5,
                 maxlength: 200
@@ -55,7 +55,7 @@
 
         },
         messages: {
-            name: {
+            stateName: {
                 required: "Please Enter Name",
                 minlength: "Title Minimum of 5 Character Long"
             },

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Patient;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -56,7 +57,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'contactNumber'=>['required']
+            'contactNumber' => ['required']
         ]);
     }
 
@@ -66,14 +67,20 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
+    // public function showRegistrationForm()
+    // {
+    //     $states = State::all();
+    //     return view('auth.register', compact('states'));
+    // }
     protected function create(array $data)
     {
-        $user= User::create([
+        //$state=State::all();
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'contactNumber' => $data['contactNumber'],
-            
+
         ]);
         $user->assignRole('User');
 
