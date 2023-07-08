@@ -55,7 +55,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::controller(VisitorController::class)->group(function () {
         Route::get('hospitalDetails/{id?}', 'hospitalDetails')->name('visitor.hospitalDetails');
-        Route::get('/profile', 'profile')->name('visitor.profile');
+        Route::get('profile/{id?}', 'profile')->name('visitor.profile');
+        Route::post('profile/patientUpdate', 'patientUpdate')->name('visitor.profile.patientUpdate');
     });
 
 

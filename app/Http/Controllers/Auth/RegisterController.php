@@ -84,9 +84,10 @@ class RegisterController extends Controller
         ]);
         $user->assignRole('User');
 
-        $profile = new Patient();
-        $profile->userId = $user->id;
-        $profile->save();
+        $patient = new Patient();
+        $patient->userId = $user->id;
+        $patient->contactNo = $user->contactNumber;
+        $patient->save();
         return $user;
     }
 }
