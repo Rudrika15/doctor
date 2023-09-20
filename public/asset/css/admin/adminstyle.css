@@ -1,0 +1,13 @@
+body {
+    /* font-family: "Inter", sans-serif; */
+    font-family: "Poppins", Poppins, Arial, sans-serif;
+}
+
+.btnback {
+    color: white;
+    background-color: #01b9f1;
+}
+
+.font {
+    color: #01b9f1;
+}

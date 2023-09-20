@@ -1,0 +1,305 @@
+{
+	"info": {
+		"_postman_id": "fc4a3154-491c-42f3-a650-b2ffd0c3a27f",
+		"name": "doctor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26844695"
+	},
+	"item": [
+		{
+			"name": "specialist",
+			"item": [
+				{
+					"name": "specialistList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/specialist",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"specialist"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "hospitalList",
+			"item": [
+				{
+					"name": "hospitalList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/hospital",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"hospital"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "slider",
+			"item": []
+		},
+		{
+			"name": "cityList",
+			"item": [
+				{
+					"name": "cityList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/city",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"city"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "blogView",
+			"item": [
+				{
+					"name": "blog",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/blog",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"blog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "blogView",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/blog/view/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"blog",
+								"view",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "blogFilter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/blog/search?title=kkkkk",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"blog",
+								"search"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "kkkkk"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "hospital",
+			"item": [
+				{
+					"name": "singlehospital",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/hospitaldata",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"hospitaldata"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hospital wise gallery",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/gallery/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"gallery",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hospital wise doctor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/doctor/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"doctor",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hospital wise facility",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/facility/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"facility",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hospital wise social links",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/sociallink/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"sociallink",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

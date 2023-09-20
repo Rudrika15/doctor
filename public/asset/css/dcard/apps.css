@@ -1,0 +1,122 @@
+body {
+  background-color: #F3F4F6;
+  font-family: "Poppins", Poppins, Arial, sans-serif;
+}
+
+.section {
+  text-align: center;
+
+}
+
+.section1 {
+  color: white;
+  font-size: 18px;
+}
+
+.w3-teal,
+.w3-hover-teal:hover {
+  color: black !important;
+  /* border-color: black; */
+  background-color: white !important;
+}
+
+/* .w3-card, .w3-card-2 {
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+} */
+
+.w3-sidebar {
+  height: 100%;
+  width: 130px !important;
+  background-color: #6D28D9;
+  position: absolute !important;
+  z-index: 1;
+  overflow: auto;
+}
+
+.w3-button:hover {
+  /* color: #000!important; */
+  background-color: #5B21B6 !important;
+}
+
+.img-fluid {
+  margin-left: 40px;
+  margin-top: 20px;
+
+}
+
+
+
+
+/* card blade */
+
+.box1 {
+  border-radius: 15px;
+}
+
+.draft {
+  border-radius: 50px;
+  font-size: 12px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.img1 {
+  border-radius: 100%;
+}
+
+
+
+.secondnav {
+  font-size: 15px;
+}
+
+.a {
+  text-decoration: none !important;
+
+}
+
+li a,
+.dropbtn {
+  display: inline-block;
+  color: black;
+  text-align: center;
+  /* padding: 7px 10px; */
+  text-decoration: none;
+}
+
+
+li.dropdown {
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 5px 10px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.mycard {
+  display: inline-block;
+  font-size: 18px;
+  text-decoration: none;
+  color: black;
+  padding-left: 10px;
+}

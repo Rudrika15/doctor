@@ -1,0 +1,16 @@
+.thead-dark{
+    background-color: #dce2e4;
+    text-align: center;
+}
+.hover{
+    text-align: center;
+}
+.hover:hover{
+    background-color: #44494b;
+}
+.hover:hover{
+    color: white;
+}
+.b{
+    color: black !important;
+}
