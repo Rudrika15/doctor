@@ -7,7 +7,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
         <h2 class="p-3">Hospital Type Management</h2>
-        <div class="pt-2"><a class="btn addbtn" href="{{ route('hospitaltype.index') }}">Add Hospital Type</a></div>
+        <div class="pt-2"><a class="btn addbtn" href="{{ route('hospitaltype.create') }}">Add Hospital Type</a></div>
     </div>
      {{-- For Filler And Search Data Star --}}
      <form id="frm" action="{{route('hospitaltype.index')}}" method="get" class="mt-5">

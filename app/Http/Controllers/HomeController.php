@@ -24,16 +24,27 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $userId = Auth::user()->role="Admin";
-        if($userId)
-        {
+        if (Auth::user()->hasRole('Admin')) {
             return view('home');
+        }elseif(Auth::user()->hasRole('User')){
+            return redirect('/');
+        }elseif(Auth::user()->hasRole('Hospital')){
+            return view('/home');
+        }elseif(Auth::user()->hasRole('Doctor')){
+            return view('/home');
+        }else{
+            return redirect('/');
         }
-        else{
-            return view('visitor.index');
-        }
+        // $userId = Auth::user()->role="Admin";
+        // if($userId)
+        // {
+        //     return view('home');
+        // }
+        // else{
+        //     return view('visitor.index');
+        // }
 
-       return view('home');
+    //    return view('home');
         
     }
 }

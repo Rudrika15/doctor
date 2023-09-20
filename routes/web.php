@@ -41,10 +41,7 @@ use App\Http\Controllers\Auth\RegisterController;
 
 // ------------------ Visitor Side  -----------------------------------------
 Route::get('/', [VisitorController::class, 'index'])->name('visitor.index');
-<<<<<<< HEAD
 Route::get('hospitalDetails/{id?}', [VisitorController::class, 'hospitalDetails'])->name('visitor.hospitalDetails');
-=======
->>>>>>> 0d10d27629db5bb6510a32f93ae4fb02fd155de3
 
 Auth::routes();
 
@@ -58,11 +55,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('products', ProductController::class);
 
     Route::controller(VisitorController::class)->group(function () {
-<<<<<<< HEAD
         // Route::get('hospitalDetails/{id?}', 'hospitalDetails')->name('visitor.hospitalDetails');
-=======
-        Route::get('hospitalDetails/{id?}', 'hospitalDetails')->name('visitor.hospitalDetails');
->>>>>>> 0d10d27629db5bb6510a32f93ae4fb02fd155de3
         Route::get('profile/{id?}', 'profile')->name('visitor.profile');
         Route::post('profile/patientUpdate', 'patientUpdate')->name('visitor.profile.patientUpdate');
     });
