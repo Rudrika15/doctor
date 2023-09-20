@@ -72,6 +72,7 @@
                   
                       <div class="container">
                         <div class="row mt-5">
+<<<<<<< HEAD
                           @if (Auth::user())
                               <div class="col-lg-4">
                                 <div class="info">
@@ -121,6 +122,32 @@
                               </div>  
                           @endif
                           
+=======
+                
+                          <div class="col-lg-4">
+                            <div class="info">
+                              <div class="address">
+                                <i class="bi bi-geo-alt"></i>
+                                <h4>Location:</h4>
+                                <p>{{$hospital->address}}</p>
+                              </div>
+                
+                              <div class="email">
+                                <i class="bi bi-envelope"></i>
+                                <h4>Email:</h4>
+                                <p>info@example.com</p>
+                              </div>
+                
+                              <div class="phone">
+                                <i class="bi bi-phone"></i>
+                                <h4>Call:</h4>
+                                <p>{{$hospital->contactNo}}</p>
+                              </div>
+                
+                            </div>
+                
+                          </div>
+>>>>>>> 0d10d27629db5bb6510a32f93ae4fb02fd155de3
                 
                           <div class="col-lg-8 mt-5 mt-lg-0">
                 
@@ -229,6 +256,7 @@
 
   </main><!-- End #main -->
 
+<<<<<<< HEAD
   <script>
     $(document).ready(function(){
       $("#seelocation").click(function(){
@@ -243,6 +271,8 @@
         });
       });
       </script>
+=======
+>>>>>>> 0d10d27629db5bb6510a32f93ae4fb02fd155de3
     
 @endsection
 

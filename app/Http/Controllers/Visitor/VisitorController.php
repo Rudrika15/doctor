@@ -13,7 +13,10 @@ use App\Models\Facility;
 use App\Models\SocialLink;
 use App\Models\Patient;
 use App\Models\State;
+<<<<<<< HEAD
 use App\Models\User;
+=======
+>>>>>>> 0d10d27629db5bb6510a32f93ae4fb02fd155de3
 use Auth;
 
 class VisitorController extends Controller
@@ -68,24 +71,34 @@ class VisitorController extends Controller
     // }
     public function patientUpdate(Request $request)
     {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0d10d27629db5bb6510a32f93ae4fb02fd155de3
         $id = $request->userId;
         $patient = Patient::where('userId', '=', $id)->first();
         $patient->address = $request->address;
         $patient->gender = $request->gender;
         $patient->age = $request->age;
+<<<<<<< HEAD
         $patient->contactNo = $request->contactNo;
+=======
+>>>>>>> 0d10d27629db5bb6510a32f93ae4fb02fd155de3
         $patient->stateId = $request->stateId;
         if ($request->photo) {
             $photo = $request->photo;
             $patient->photo = time() . '.' . $request->photo->extension();
             $request->photo->move(public_path('profile'), $patient->photo);
         }
+<<<<<<< HEAD
 
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->contactNumber = $request->contactNo;
         $user->save();
+=======
+>>>>>>> 0d10d27629db5bb6510a32f93ae4fb02fd155de3
         $patient->save();
 
         return redirect()->back();

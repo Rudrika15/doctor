@@ -346,7 +346,14 @@
         </div>
         
         <div class="row">
+<<<<<<< HEAD
           @foreach ($hospital as $hospital)
+=======
+
+         
+          @foreach ($hospital as $hospital)
+          
+>>>>>>> 0d10d27629db5bb6510a32f93ae4fb02fd155de3
           <div class="col-lg-6 mt-4 lg-0">
             <div class="member d-flex align-items-start">
               <div class="pic">
