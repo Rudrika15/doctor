@@ -20,20 +20,7 @@
 
         <form id="frm" action="{{route('doctor.store')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
             @csrf
-          <div class="col-xs-12 col-sm-12 col-md-12">
-              <div class="form-group">
-                      <strong>Hospital Name </strong> 
-                    <select type="text" name="hospitalId" id="hospitalId" class="form-control @error('hospitalId') is-invalid @enderror">
-                    <option selected disabled><strong >Select here...  </strong></option>
-                   @foreach ($hospital as $hospital)
-                <option value="{{$hospital->id}}">{{$hospital->hospitalName}}</option>
-                   @endforeach
-                    </select>
-                    @error('hospitalId')
-                    <sapn class="text-danger">{{ $message }}</sapn>
-                    @enderror
-                </div>
-            </div>
+          
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -126,7 +113,7 @@
         hospitalId:"required",
         doctorName:{
         required:true,
-        maxlength:15
+        minlength:5
     },
         contactNo:{
             required:true,
@@ -138,7 +125,7 @@
         photo:"required",
         experience:{
                 required:true,
-                maxlength:25,
+               
 
         },
         registerNumber:"required",

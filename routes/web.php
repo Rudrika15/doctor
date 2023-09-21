@@ -23,6 +23,7 @@ use Spatie\Permission\Contracts\Role;
 use App\Http\Controllers\Visitor\VisitorController;
 use App\Http\Controllers\Admin\AdminStateController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Doctor\ProfileUpdateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -214,27 +215,24 @@ Route::group(['middleware' => ['auth']], function () {
     // --------------------------------------Doctor Side---------------------------------------------
 
     Route::controller(BlogController::class)->group(function () {
-
         Route::get('doctor/blog-index', 'index')->name('blog.index');
-
         Route::get('doctor/blog-create', 'create')->name('blog.create');
         Route::post('doctor/blog-store', 'store')->name('blog.store');
-
         Route::get('doctor/blog-edit-{id?}', 'edit')->name('blog.edit');
         Route::post('doctor/blog-update', 'update')->name('blog.update');
-
         Route::get('doctor/blog-destroy-{id?}', 'destroy')->name('blog.destroy');
     });
 
     Route::controller(EducationController::class)->group(function () {
         Route::get('doctor/education-index', 'index')->name('education.index');
-
         Route::get('doctor/education-create', 'create')->name('education.create');
         Route::post('doctor/education-store', 'store')->name('education.store');
-
         Route::get('doctor/education-edit-{id?}', 'edit')->name('education.edit');
         Route::post('doctor/education-update', 'update')->name('education.update');
-
         Route::get('doctor/education-destroy-{id?}', 'destroy')->name('education.destroy');
+    });
+    Route::controller(ProfileUpdateController::class)->group(function () {
+        Route::get('doctor/profile-edit', 'edit')->name('doctor.profile.edit');
+        Route::post('doctor/education-update', 'update')->name('education.update');
     });
 });

@@ -9,20 +9,22 @@ use App\Models\Hospital;
 use App\Models\Schedule;
 use App\Models\Specialist;
 use App\Models\User;
-
+use Auth;
 class DoctorController extends Controller
 {
 
     public function index()
     {
-        $doctor = Doctor::paginate(5);
+        $hospitalId=Auth::user()->id;
+        $doctor = Doctor::where('hospitalId','=',$hospitalId)->paginate(5);
 
         return view('hospital.doctor.index', compact('doctor'));
     }
 
     public function create()
     {
-        $hospital=Hospital::all();
+
+        $hospital=Auth::user()->id;
         $specialist=Specialist::all();
         $user=User::all();
         return view('hospital.doctor.create',compact('hospital','specialist','user'));
@@ -40,13 +42,13 @@ class DoctorController extends Controller
             'experience' => 'required',
             'registerNumber' => 'required',
         ]);
-
+        $hospitalId=Auth::user()->id;
         $doctor = new Doctor();
-        $doctor->hospitalId = $request->hospitalId;
+        $doctor->hospitalId = $hospitalId;
         $doctor->doctorName = $request->doctorName;
         $doctor->contactNo = $request->contactNo;
         $doctor->specialistId = $request->specialistId;
-        $doctor->userId = $request->userId;
+        $doctor->userId = $hospitalId;
         $photo = $request->photo;
         $doctor->photo = time() . '.' . $request->photo->extension();
         $request->photo->move(public_path('doctor'), $doctor->photo);

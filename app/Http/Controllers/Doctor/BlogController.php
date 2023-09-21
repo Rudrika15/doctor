@@ -53,7 +53,6 @@ class BlogController extends Controller
         $request->validate([
             'title' => 'required',
             'detail' => 'required',
-            'photo' => 'required',
             'doctorId' => 'required'
         ]);
 
@@ -61,7 +60,6 @@ class BlogController extends Controller
         $blog = Blog::find($id);
         $blog->title = $request->title;
         $blog->detail = $request->detail;
-        $blog->photo = $request->photo;
         if ($request->photo) {
             $photo = $request->photo;
             $blog->photo = time() . '.' . $request->photo->extension();
@@ -69,7 +67,7 @@ class BlogController extends Controller
         }
         $blog->doctorId = $request->doctorId;
         $blog->status = "Active";
-        if ($blog->update()) {
+        if ($blog->save()) {
             return redirect('doctor/blog-index')->with('success', 'record updated successfully');
         } else {
             return back()->with('error', 'you have no permission');

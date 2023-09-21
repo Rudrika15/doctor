@@ -82,7 +82,7 @@ class RegisterController extends Controller
             'contactNumber' => $data['contactNumber'],
 
         ]);
-        $user->assignRole('User');
+        $user->assignRole('Hospital');
 
         $patient = new Patient();
         $patient->userId = $user->id;

@@ -11,7 +11,7 @@
                                     <div class="w-50">
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <img src="{{url('profile')}}/{{$patient->photo}}" alt="" class="ms-3" width="300px" height="300px">
+                                                <img src="{{url('profile')}}/{{$patient->photo}}" alt="" class="ms-5 mt-5 rounded-circle" width="200px" height="200px">
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mt-3 ms-5">

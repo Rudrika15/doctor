@@ -51,7 +51,7 @@ class EducationController extends Controller
         $education->doctorId=$request->doctorId;
         $education->education=$request->education;
         $education->status="Active";
-       if( $education->update()){
+       if( $education->save()){
         return redirect('doctor/education-index')->with('success', 'record updated successfully');
 
        }else{

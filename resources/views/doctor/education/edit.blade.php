@@ -7,7 +7,7 @@
 
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
-        <h2 class="p-3">Education</h2>
+        <h2 class="p-3">Update Education</h2>
         <div class="pt-2"><a class="btn addbtn" href="{{route('education.index')}}"> Back</a></div>
     </div>
     <div class="card-body">
@@ -21,8 +21,8 @@
         <form id="frm" action="{{route('education.update')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden"  value="{{$education->id}}" name="id">
-           
-          
+            <input type="hidden"  value="{{Auth::user()->id}}" name="doctorId">
+
              <div class="col-xs-12 col-sm-12 col-md-12">
                  <div class="form-group">
                        <strong> Education</strong>
