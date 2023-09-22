@@ -127,7 +127,13 @@
                               <a href="{{ route('login') }}" class="nav-link scrollto">Log in</a>
                             </li>
                               @if (Route::has('register'))
-                                  <li><a href="{{ route('register') }}" class="nav-link scrollto">Register</a> </li>
+                                  {{-- <li><a href="" class="nav-link scrollto">Register</a></li> --}}
+                                  <li class="dropdown"><a href="#"><span>Register</span> <i class="bi bi-chevron-down"></i></a>
+                                    <ul>
+                                      <li><a href="#">As a Hospital</a></li>
+                                      <li><a href="{{ route('register') }}">As a User</a></li>
+                                    </ul>
+                                  </li>
                               @endif
                     @endauth
                       

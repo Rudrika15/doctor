@@ -9,6 +9,7 @@ use App\Models\Hospital;
 use App\Models\Schedule;
 use App\Models\Specialist;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Auth;
 class DoctorController extends Controller
 {
@@ -16,7 +17,7 @@ class DoctorController extends Controller
     public function index()
     {
         $hospitalId=Auth::user()->id;
-        $doctor = Doctor::where('hospitalId','=',$hospitalId)->paginate(5);
+        $doctor = Doctor::with('hospital')->where('hospitalId','=',$hospitalId)->paginate(5);
 
         return view('hospital.doctor.index', compact('doctor'));
     }
@@ -35,6 +36,8 @@ class DoctorController extends Controller
         $request->validate([
             'hospitalId' => 'required',
             'doctorName' => 'required',
+            'email' => 'required',
+            'password' => 'required',
             'contactNo' => 'required',
             'specialistId' => 'required',
             'userId' => 'required',
@@ -42,20 +45,29 @@ class DoctorController extends Controller
             'experience' => 'required',
             'registerNumber' => 'required',
         ]);
-        $hospitalId=Auth::user()->id;
+        // $hospitalId=Auth::user()->id;
         $doctor = new Doctor();
-        $doctor->hospitalId = $hospitalId;
+        $doctor->hospitalId = $request->hospitalId;
         $doctor->doctorName = $request->doctorName;
         $doctor->contactNo = $request->contactNo;
         $doctor->specialistId = $request->specialistId;
-        $doctor->userId = $hospitalId;
+        $doctor->userId = $request->hospitalId;
         $photo = $request->photo;
         $doctor->photo = time() . '.' . $request->photo->extension();
         $request->photo->move(public_path('doctor'), $doctor->photo);
         $doctor->experience = $request->experience;
         $doctor->registerNumber = $request->registerNumber;
+        $doctor->save();
 
-        if ($doctor->save()) {
+        $user=new User();
+        $user->name=$request->doctorName;
+        $user->email=$request->email;
+        $user->password=Hash::make($request->password);
+        $user->contactNumber=$request->contactNo;
+        $user->assignRole('Doctor');
+        $user->save();
+
+        if ($doctor) {
             return redirect()->back()->with('success', 'Record Added successfully!');
         } else {
             return back()->with('error', 'You have no permission for this page!');

@@ -20,7 +20,7 @@
 
         <form id="frm" action="{{route('doctor.store')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
             @csrf
-          
+          <input type="text" name="hospitalId" id="" value="{{Auth::user()->id}}">
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -32,6 +32,24 @@
                 </div>
             </div>
 
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Email </strong>
+                    <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror">
+                    @error('email')
+                    <sapn class="text-danger">{{ $message }}</sapn>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Password </strong>
+                    <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror">
+                    @error('password')
+                    <sapn class="text-danger">{{ $message }}</sapn>
+                    @enderror
+                </div>
+            </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Contact No.  </strong>

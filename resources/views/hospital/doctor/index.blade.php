@@ -20,7 +20,7 @@
 <div class="table-responsive">
         <table class="table table-bordered">
             <tr>
-                <th>Hospital Name</th>
+                {{-- <th>Hospital Name</th> --}}
                 <th>Doctor Name</th>
                 <th>Contact Number</th>
                 <th>Specialist Name</th>
@@ -34,7 +34,7 @@
             @foreach ($doctor as $doctors)
             <tr>
 
-                <td>{{ $doctors->hospital->hospitalName }}</td>
+                {{-- <td>{{ $doctors->hospital->hospitalName }}</td> --}}
                 <td>{{ $doctors->doctorName }}</td>
                 <td>{{ $doctors->contactNo }}</td>
                 <td>{{ $doctors->specialist->specialistName	 }}</td>
