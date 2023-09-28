@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
+
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
         <h2 class="p-3">Doctor Management</h2>
@@ -24,6 +25,24 @@
                 <input type="text" name="doctorName" id="doctorName" class="form-control @error('doctorName') is-invalid @enderror">
                 @error('doctorName')
                     <sapn class="text-danger">{{ $message }}</sapn>
+                @enderror
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Email </strong>
+                <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror">
+                @error('email')
+                <sapn class="text-danger">{{ $message }}</sapn>
+                @enderror
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Password </strong>
+                <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror">
+                @error('password')
+                <sapn class="text-danger">{{ $message }}</sapn>
                 @enderror
             </div>
         </div>
@@ -59,7 +78,6 @@
         </div>
 
         {{-- Auth User --}}
-        <input type="hidden" name="userId" value="{{Auth::User()->id}}">
         {{--  --}}
 
         <div class="col-xs-12 col-sm-12 col-md-12">

@@ -27,6 +27,24 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
+                <strong>Email </strong>
+                <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror">
+                @error('email')
+                <sapn class="text-danger">{{ $message }}</sapn>
+                @enderror
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Password </strong>
+                <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror">
+                @error('password')
+                <sapn class="text-danger">{{ $message }}</sapn>
+                @enderror
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
                 <strong>Address:</strong>
                 <textarea name="address" id="address" class="form-control @error('address') is-invalid @enderror" cols="10" rows="5"></textarea>
                 @error('address')
@@ -188,6 +206,13 @@
                 minlength:5,
                 maxlength:200
             },
+            email:{
+                required:true,
+            },
+            password:{
+                required:true,
+                minlength:6,
+            },
             address:{
                 required:true,
                 minlength:10,
@@ -224,6 +249,13 @@
             hospitalName:{
                 required:"Please Enter Hospital Name",
                 minlength:"Enter Title Minimum of 5 Characters"
+            },
+            email:{
+                required:"Please Enter Email",
+            },
+            password:{
+                required:"Please Enter password",
+                minlength:"Enter Title Minimum of 6 Characters"
             },
             address:{
                 required:"Please Enter Address",

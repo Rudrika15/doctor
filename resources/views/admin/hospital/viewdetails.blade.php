@@ -96,7 +96,7 @@
                         </tr>
                         @foreach ($doctor as $doctors)
                             <tr>
-                                 <td>{{$doctors->hospital->hospitalName}}</td>
+                                <td>{{$doctors->hospital->hospitalName}}</td>
                                 <td>{{$doctors->doctorName}}</td>
                                 <td>{{$doctors->contactNo}}</td>
                                 <td>{{$doctors->specialist->specialistName}}</td>

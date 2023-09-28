@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
+use App\Models\Hospital;
+use App\Models\HospitalType;
 use App\Models\Patient;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -82,12 +85,62 @@ class RegisterController extends Controller
             'contactNumber' => $data['contactNumber'],
 
         ]);
-        $user->assignRole('Hospital');
+        $user->assignRole('User');
 
         $patient = new Patient();
         $patient->userId = $user->id;
         $patient->contactNo = $user->contactNumber;
         $patient->save();
         return $user;
+    }
+
+    public function hospitalCreate(){
+        $city = City::all();
+        $hospitaltype = HospitalType::all();
+        return view('auth.registerHospital',compact('city','hospitaltype'));
+    }
+    public function registerhospitalStore(Request $request){
+        // $this->validate($request, [
+        //     'hospitalName' => 'required',
+        //     'address' => 'required',
+        //     'cityId' => 'required',
+        //     'hospitalTypeId' => 'required',
+        //     'userId' => 'required',
+        //     'siteUrl' => 'required',
+        //     'category' => 'required',
+        //     'hospitalLogo' => 'required',
+        //     'hospitalTime' => 'required',
+        //     'services' => 'required',
+        // ]);
+        
+        $user=new User();
+        $user->name=$request->hospitalName;
+        $user->email=$request->email;
+        $user->password=$request->password;
+        $user->contactNumber=$request->contactNo;
+        $user->assignRole('Hospital');
+        $user->save();
+        
+        $hospital=new Hospital();
+        $hospital->hospitalName=$user->name;
+        $hospital->address=$request->address;
+        $hospital->cityId=$request->cityId;
+        
+        $hospital->contactNo=$request->contactNo;
+        $hospital->hospitalTypeId=$request->hospitalTypeId;
+        $hospital->userId=$user->id;
+        $hospital->siteUrl=$request->siteUrl;
+        $hospital->category=$request->category;
+        
+        $hospital->hospitalLogo=$request->hospitalLogo;
+        $hospital->hospitalTime=$request->hospitalTime;
+        $hospital->services=$request->services;
+        $hospital->status="Active";
+        $hospital->save();
+
+        if($hospital){
+            return redirect('/home');
+        }
+        
     }
 }

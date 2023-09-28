@@ -84,7 +84,7 @@
           <li><a class="nav-link scrollto" href="#services">Specialist</a></li>
           <li><a class="nav-link scrollto" href="#departments">Departments</a></li>
           <li><a class="nav-link scrollto" href="#doctors">Hospitals</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+          {{-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
               <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
@@ -100,7 +100,7 @@
               <li><a href="#">Drop Down 3</a></li>
               <li><a href="#">Drop Down 4</a></li>
             </ul>
-          </li>
+          </li> --}}
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           
               @if (Route::has('login'))
@@ -130,7 +130,7 @@
                                   {{-- <li><a href="" class="nav-link scrollto">Register</a></li> --}}
                                   <li class="dropdown"><a href="#"><span>Register</span> <i class="bi bi-chevron-down"></i></a>
                                     <ul>
-                                      <li><a href="#">As a Hospital</a></li>
+                                      <li><a href="{{route('registerHospital')}}">As a Hospital</a></li>
                                       <li><a href="{{ route('register') }}">As a User</a></li>
                                     </ul>
                                   </li>

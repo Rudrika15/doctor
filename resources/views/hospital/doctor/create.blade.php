@@ -20,7 +20,6 @@
 
         <form id="frm" action="{{route('doctor.store')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
             @csrf
-          <input type="text" name="hospitalId" id="" value="{{Auth::user()->id}}">
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">

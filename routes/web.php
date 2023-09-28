@@ -43,13 +43,19 @@ use App\Http\Controllers\Doctor\ProfileUpdateController;
 // ------------------ Visitor Side  -----------------------------------------
 Route::get('/', [VisitorController::class, 'index'])->name('visitor.index');
 Route::get('hospitalDetails/{id?}', [VisitorController::class, 'hospitalDetails'])->name('visitor.hospitalDetails');
+Route::get('Register/hospital',[RegisterController::class,'hospitalCreate'])->name('registerHospital');
+Route::post('Register/hospitalStore',[RegisterController::class,'registerhospitalStore'])->name('registerhospitalStore');
+
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 //For state list in resgitration page
 //Route::get('register', [RegisterController::class, 'state'])->name('register.state');
 // Auth
+
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);

@@ -14,6 +14,8 @@ use App\Models\SocialLink;
 use App\Models\Specialist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 
 class AdminHospitalController extends Controller
 {
@@ -235,6 +237,8 @@ class AdminHospitalController extends Controller
     {
         $this->validate($request, [
             'hospitalName' => 'required',
+            'email' => 'required',
+            'password' => 'required',
             'address' => 'required',
             'cityId' => 'required',
             'contactNo' => 'required',
@@ -264,7 +268,16 @@ class AdminHospitalController extends Controller
         $hospital->hospitalTime = $request->hospitalTime;
         $hospital->services = $request->services;
 
-        if ($hospital->save()) {
+        $hospital->save();
+
+        $user=new User();
+        $user->name=$request->hospitalName;
+        $user->email=$request->email;
+        $user->password=Hash::make($request->password);
+        $user->contactNumber=$request->contactNo;
+        $user->assignRole('Hospital');
+        $user->save();
+        if ($hospital) {
             return redirect()->back()->with('success', 'Hospital Added successfully!');
         } else {
             return back()->with('error', 'You have no permission for this page!');

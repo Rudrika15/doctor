@@ -17,14 +17,13 @@ class DoctorController extends Controller
     public function index()
     {
         $hospitalId=Auth::user()->id;
-        $doctor = Doctor::with('hospital')->where('hospitalId','=',$hospitalId)->paginate(5);
 
+         $doctor = Doctor::with('hospital')->where('hospitalId','=',$hospitalId)->paginate(5);
         return view('hospital.doctor.index', compact('doctor'));
     }
 
     public function create()
     {
-
         $hospital=Auth::user()->id;
         $specialist=Specialist::all();
         $user=User::all();
@@ -34,7 +33,7 @@ class DoctorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'hospitalId' => 'required',
+            // 'hospitalId' => 'required',
             'doctorName' => 'required',
             'email' => 'required',
             'password' => 'required',
@@ -45,13 +44,13 @@ class DoctorController extends Controller
             'experience' => 'required',
             'registerNumber' => 'required',
         ]);
-        // $hospitalId=Auth::user()->id;
+        $hospitalId=Auth::user()->id;
         $doctor = new Doctor();
-        $doctor->hospitalId = $request->hospitalId;
+        $doctor->hospitalId = $hospitalId;
         $doctor->doctorName = $request->doctorName;
         $doctor->contactNo = $request->contactNo;
         $doctor->specialistId = $request->specialistId;
-        $doctor->userId = $request->hospitalId;
+        $doctor->userId = $hospitalId;
         $photo = $request->photo;
         $doctor->photo = time() . '.' . $request->photo->extension();
         $request->photo->move(public_path('doctor'), $doctor->photo);

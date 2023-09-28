@@ -7,8 +7,9 @@ use App\Models\Doctor;
 use App\Models\Hospital;
 use App\Models\Specialist;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminDoctorController extends Controller
 {
@@ -37,15 +38,15 @@ class AdminDoctorController extends Controller
         $user = User::all();
         return view('admin.doctor.create', compact('user', 'specialist',));
     }
-
     public function store(Request $request)
     {
         $this->validate($request, [
-            'hospitalId' => 'required',
+
             'doctorName' => 'required',
+            'email' => 'required',
+            'password' => 'required',
             'contactNo' => 'required',
             'specialistId' => 'required',
-            'userId' => 'required',
             'photo' => 'required',
             'experience' => 'required',
             'registerNumber' => 'required'
@@ -56,7 +57,7 @@ class AdminDoctorController extends Controller
         $doctor->doctorName = $request->doctorName;
         $doctor->contactNo = $request->contactNo;
         $doctor->specialistId = $request->specialistId;
-        $doctor->userId = $request->userId;
+        $doctor->userId = Auth::user()->id;
 
         $photo = $request->photo;
         $doctor->photo = time() . '.' . $request->photo->extension();
@@ -64,8 +65,17 @@ class AdminDoctorController extends Controller
 
         $doctor->experience = $request->experience;
         $doctor->registerNumber = $request->registerNumber;
+        $doctor->save();
 
-        if ($doctor->save()) {
+        $user = new User();
+        $user->name = $request->doctorName;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->contactNumber = $request->contactNo;
+        $user->assignRole('Doctor');
+        $user->save();
+
+        if ($doctor) {
             return redirect()->back()->with('success', 'Doctor Added successfully!');
         } else {
             return back()->with('error', 'You have no permission for this page!');
