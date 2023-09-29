@@ -12,7 +12,9 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $blog = Blog::paginate(5);
+        $user=Auth::user()->id;
+        $doctorId=Doctor::where('userId','=',$user)->first();
+        $blog = Blog::where('doctorId','=',$doctorId->id)->paginate(5);
         return view('doctor.blog.index', compact('blog'));
     }
     public function create()
@@ -27,14 +29,15 @@ class BlogController extends Controller
             'detail' => 'required',
             'photo' => 'required',
         ]);
-            $doctorId = Auth::user()->id;
+        $user = Auth::user()->id;
+        $doctorId=Doctor::where('userId','=',$user)->first();
         $blog = new Blog();
         $blog->title = $request->title;
         $blog->detail = $request->detail;
         $photo = $request->photo;
         $blog->photo = time() . '.' . $request->photo->extension();
         $request->photo->move(public_path('blog'), $blog->photo);
-        $blog->doctorId = $doctorId;
+        $blog->doctorId = $doctorId->id;
         if ($blog->save()) {
 
             return redirect()->back()->with('success', 'Record Added successfully!');
@@ -55,7 +58,8 @@ class BlogController extends Controller
             'detail' => 'required',
             'doctorId' => 'required'
         ]);
-
+        $user = Auth::user()->id;
+        $doctorId=Doctor::where('userId','=',$user)->first();
         $id = $request->id;
         $blog = Blog::find($id);
         $blog->title = $request->title;
@@ -65,7 +69,7 @@ class BlogController extends Controller
             $blog->photo = time() . '.' . $request->photo->extension();
             $request->photo->move(public_path('blog'), $blog->photo);
         }
-        $blog->doctorId = $request->doctorId;
+        $blog->doctorId = $doctorId->id;
         $blog->status = "Active";
         if ($blog->save()) {
             return redirect('doctor/blog-index')->with('success', 'record updated successfully');

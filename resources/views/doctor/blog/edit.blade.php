@@ -20,7 +20,7 @@
         <form id="frm" action="{{route('blog.update')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" value="{{$blog->id}}" name="id">
-            <input type="hidden" value="{{Auth::user()->id}}" name="doctorId">
+            {{-- <input type="hidden" value="{{Auth::user()->id}}" name="doctorId"> --}}
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">

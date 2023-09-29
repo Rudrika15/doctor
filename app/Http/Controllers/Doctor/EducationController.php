@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\Auth;
 class EducationController extends Controller
 {
     public function index(){
-
-        $education=Education::paginate(5);
+        $user=Auth::user()->id;
+        $doctorId=Doctor::where('userId','=',$user)->first();
+        $education=Education::where('doctorId','=',$doctorId->id)->paginate(5);
         return view('doctor.education.index',compact('education'));
     }
     public function create(){
@@ -24,9 +25,10 @@ class EducationController extends Controller
         $request->validate([
             'education'=>'required'
         ]);
-        $doctorId = Auth::user()->id;
+        $user=Auth::user()->id;
+        $doctorId=Doctor::where('userId','=',$user)->first();
         $education=New Education();
-        $education->doctorId=$doctorId;
+        $education->doctorId=$doctorId->id;
         $education->education=$request->education;
         if($education->save())
         {
@@ -37,23 +39,22 @@ class EducationController extends Controller
     }
     public function edit($id){
         $education =Education::find($id);
-        $doctor=Doctor::all();
-        return view('doctor.education.edit',compact('education','doctor'));
+        $user=Auth::user()->id;
+        $doctorId=Doctor::where('userId','=',$user)->first();
+        return view('doctor.education.edit',compact('education','doctorId'));
     }
     public function update(Request $request){
         $request->validate([
-            'doctorId'=>'required',
             'education'=>'required'
         ]);
-
+        
         $id=$request->id;
         $education=Education::find($id);
-        $education->doctorId=$request->doctorId;
         $education->education=$request->education;
         $education->status="Active";
-       if( $education->save()){
+        
+       if($education->save()){
         return redirect('doctor/education-index')->with('success', 'record updated successfully');
-
        }else{
         return back()->with('error','you have no permission');
 
