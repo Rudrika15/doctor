@@ -7,26 +7,28 @@ use App\Models\Doctor;
 use App\Models\Hospital;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
-
+use Auth;
 class ScheduleController extends Controller
 {
     public function index()
     {
-        $schedule = Schedule::paginate(5);
+        $user=Auth::user()->id;
+        $hospital=Hospital::where('userId','=',$user)->first();
+        $schedule = Schedule::where('hospitalId','=',$hospital->id)->paginate(5);
         return view('hospital.schedule.index', compact('schedule'));
     }
 
     public function create()
     {
-        $doctor=Doctor::all();
-        $hospital=Hospital::all();
+        $user=Auth::user()->id;
+        $hospital=Hospital::where('userId','=',$user)->first();
+        $doctor=Doctor::where('hospitalId','=',$user)->get();
         return view('hospital.schedule.create',compact('doctor','hospital'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'hospitalId' => 'required',
             'doctorId' => 'required',
             'day' => 'required',
             'session' => 'required',
@@ -48,16 +50,16 @@ class ScheduleController extends Controller
 
     public function edit($id)
     {
+        $user=Auth::user()->id;
+        $hospital=Hospital::where('userId','=',$user)->first();
         $schedule = Schedule::find($id);
-        $doctor=Doctor::all();
-        $hospital=Hospital::all();
+        $doctor=Doctor::where('hospitalId','=',$user)->get();
         return view('hospital.schedule.edit', compact('schedule','doctor','hospital'));
     }
 
     public function update(Request $request)
     {
         $request->validate([
-            'hospitalId' => 'required',
             'doctorId' => 'required',
             'day' => 'required',
             'session' => 'required',
@@ -65,9 +67,7 @@ class ScheduleController extends Controller
         ]);
 
         $id = $request->id;
-
         $schedule = Schedule::find($id);
-        $schedule->hospitalId = $request->hospitalId;
         $schedule->doctorId = $request->doctorId;
         $schedule->day = $request->day;
         $schedule->session = $request->session;

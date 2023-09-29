@@ -39,24 +39,10 @@ class DoctorController extends Controller
             'password' => 'required',
             'contactNo' => 'required',
             'specialistId' => 'required',
-            'userId' => 'required',
             'photo' => 'required',
             'experience' => 'required',
-            'registerNumber' => 'required',
+            'registerNumber' => 'required|unique:doctors,registerNumber,'
         ]);
-        $hospitalId=Auth::user()->id;
-        $doctor = new Doctor();
-        $doctor->hospitalId = $hospitalId;
-        $doctor->doctorName = $request->doctorName;
-        $doctor->contactNo = $request->contactNo;
-        $doctor->specialistId = $request->specialistId;
-        $doctor->userId = $hospitalId;
-        $photo = $request->photo;
-        $doctor->photo = time() . '.' . $request->photo->extension();
-        $request->photo->move(public_path('doctor'), $doctor->photo);
-        $doctor->experience = $request->experience;
-        $doctor->registerNumber = $request->registerNumber;
-        $doctor->save();
 
         $user=new User();
         $user->name=$request->doctorName;
@@ -65,6 +51,22 @@ class DoctorController extends Controller
         $user->contactNumber=$request->contactNo;
         $user->assignRole('Doctor');
         $user->save();
+
+        $hospitalId= Auth::user()->id;
+        $doctor = new Doctor();
+        $doctor->hospitalId = $hospitalId;
+        $doctor->doctorName = $request->doctorName;
+        $doctor->contactNo = $request->contactNo;
+        $doctor->specialistId = $request->specialistId;
+        $doctor->userId = $user->id;
+        $photo = $request->photo;
+        $doctor->photo = time() . '.' . $request->photo->extension();
+        $request->photo->move(public_path('doctor'), $doctor->photo);
+        $doctor->experience = $request->experience;
+        $doctor->registerNumber = $request->registerNumber;
+        $doctor->save();
+
+        
 
         if ($doctor) {
             return redirect()->back()->with('success', 'Record Added successfully!');
@@ -85,15 +87,11 @@ class DoctorController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'hospitalId' => 'required',
             'doctorName' => 'required',
             'contactNo' => 'required',
             'specialistId' => 'required',
-            'userId' => 'required',
-            'photo' => 'required',
             'experience' => 'required',
             'registerNumber' => 'required',
-
         ]);
         $id = $request->Id;
         $doctor = Doctor::find($id);
@@ -101,8 +99,6 @@ class DoctorController extends Controller
         $doctor->doctorName = $request->doctorName;
         $doctor->contactNo = $request->contactNo;
         $doctor->specialistId = $request->specialistId;
-        $doctor->userId = $request->userId;
-        $doctor->photo = $request->photo;
         if ($request->photo) {
             $photo = $request->photo;
             $doctor->photo = time() . '.' . $request->photo->extension();

@@ -41,7 +41,6 @@ class AdminDoctorController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-
             'doctorName' => 'required',
             'email' => 'required',
             'password' => 'required',
@@ -49,15 +48,25 @@ class AdminDoctorController extends Controller
             'specialistId' => 'required',
             'photo' => 'required',
             'experience' => 'required',
-            'registerNumber' => 'required'
+            'registerNumber' => 'required|unique:doctors,registerNumber,'
         ]);
+        $user = new User();
+        $user->name = $request->doctorName;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->contactNumber = $request->contactNo;
+        $user->assignRole('Doctor');
+        $user->save();
 
+        $hId = $request->hospitalId;
+        $hospitalData = Hospital::find($hId);
+        $hospitalId = $hospitalData->userId;
         $doctor = new Doctor();
-        $doctor->hospitalId = $request->hospitalId;
+        $doctor->hospitalId = $hospitalId;
         $doctor->doctorName = $request->doctorName;
         $doctor->contactNo = $request->contactNo;
         $doctor->specialistId = $request->specialistId;
-        $doctor->userId = Auth::user()->id;
+        $doctor->userId = $user->id;
 
         $photo = $request->photo;
         $doctor->photo = time() . '.' . $request->photo->extension();
@@ -66,14 +75,6 @@ class AdminDoctorController extends Controller
         $doctor->experience = $request->experience;
         $doctor->registerNumber = $request->registerNumber;
         $doctor->save();
-
-        $user = new User();
-        $user->name = $request->doctorName;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->contactNumber = $request->contactNo;
-        $user->assignRole('Doctor');
-        $user->save();
 
         if ($doctor) {
             return redirect()->back()->with('success', 'Doctor Added successfully!');
@@ -94,23 +95,24 @@ class AdminDoctorController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
-            'hospitalId' => 'required',
             'doctorName' => 'required',
             'contactNo' => 'required',
             'specialistId' => 'required',
-            'userId' => 'required',
             'experience' => 'required',
-            'registerNumber' => 'required'
+            // 'registerNumber' => 'required|unique:doctors,registerNumber,'
+
         ]);
 
-        $hospiId = $request->hospitalId;
+        // $hospitalId=$request->hospitalId;
+        $hospitalIdData=Hospital::where('userId','=',$request->hospitalId)->first();
+        $hospitalID=$hospitalIdData->id;
         $id = $request->doctorId;
         $doctor = Doctor::find($id);
         $doctor->hospitalId = $request->hospitalId;
         $doctor->doctorName = $request->doctorName;
         $doctor->contactNo = $request->contactNo;
         $doctor->specialistId = $request->specialistId;
-        $doctor->userId = $request->userId;
+        // $doctor->userId = $request->userId;
 
         if ($request->photo) {
             $photo = $request->photo;
@@ -122,8 +124,9 @@ class AdminDoctorController extends Controller
 
         $doctor->status = "Active";
         if ($doctor->save()) {
+            return redirect()->route("admin.hospital.viewdetails", $hospitalID)->with('success', 'Doctor Updated successfully!');
+            //  return redirect()->back()->with('success', 'Doctor Updated successfully!');
 
-            return redirect()->route("admin.hospital.viewdetails", $hospiId)->with('success', 'Doctor Updated successfully!');
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }

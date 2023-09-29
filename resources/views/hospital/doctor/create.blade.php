@@ -108,7 +108,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Register No.  </strong>
-                    <input type="number" name="registerNumber" id="registerNumber" class="form-control @error('registerNumber') is-invalid @enderror">
+                    <input type="text" name="registerNumber" id="registerNumber" class="form-control @error('registerNumber') is-invalid @enderror">
                     @error('registerNumber')
                     <sapn class="text-danger">{{ $message }}</sapn>
                     @enderror
@@ -132,6 +132,13 @@
         required:true,
         minlength:5
     },
+    email:{
+        required:true,
+    }, 
+    password:{
+        required:true,
+        minlength:6,
+    }, 
         contactNo:{
             required:true,
             minlength:10,
@@ -145,7 +152,10 @@
                
 
         },
-        registerNumber:"required",
+        registerNumber:{
+            required:true,
+            minlength:12,
+        },
           
            
        },messages:{
@@ -153,6 +163,14 @@
         doctorName:{
         required:"Please Enter Doctor Name",
     },
+        email:{
+            required:"Please Enter Email",
+        },
+        password:{
+            required:"Please Enter Password",
+            minlength:"Please Enter Minimum of 6 Charatcres"
+
+        },
         contactNo:{
             required:"Please Enter Contact Number",
            
@@ -162,7 +180,10 @@
           experience:{
             required:"Please Enter Your Experiance",
           },
-          registerNumber:"Please Enter Register Number",
+          registerNumber:{
+            required:"Please Enter Register Number",
+            minlength:"Please Enter Minimum of 12 Digit Or Charatcres"
+          }
            
        },
        submitHandler:function(form){

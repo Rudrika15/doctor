@@ -1,10 +1,5 @@
 @extends('layouts.app')
-
-
 @section('content')
-
-
-
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
         <h2 class="p-3">Gallery</h2>
@@ -20,7 +15,6 @@
 <div class="table-responsive">
         <table class="table table-bordered">
             <tr>
-                <th>Hospital Name</th>
                 <th>Title</th>
                 <th>Photo</th>
                 <th>Status</th>
@@ -29,7 +23,6 @@
             </tr>
             @foreach ($gallery as $galleries)
             <tr>
-                <td>{{ $galleries->hospital->hospitalName }}</td>
                 <td>{{ $galleries->title }}</td>
                 <td> <img src="{{url('/gallery')}}/{{$galleries->photo}}" alt="" style="min-height:100px;min-width:100px;max-height:100px;max-width:100px"> </td>
                 <td>{{ $galleries->status }}</td>

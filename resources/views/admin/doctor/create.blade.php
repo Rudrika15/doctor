@@ -173,6 +173,7 @@
             },
             registerNumber:{
                 required:true,
+                minlength:12,
             }
         },
         messages:{
@@ -182,7 +183,7 @@
             },
             contactNo:{
                         required:"Please Enter Contact Number",
-                        minlength:"Enter Contact Number Minimum of 10 Charactrs",
+                        minlength:"Enter Contact Number Minimum of 10 Digit",
                         maxlength:"Can't Enter Contact Number  More Then of 12 Didgit"
             },
             specialistId:{
@@ -198,7 +199,9 @@
                 required:"Please Enter Experience"
             },
             registerNumber:{
-                required:"Please Enter Registation Number"
+                required:"Please Enter Registation Number",
+                minlength:"Enter Registration Number Minimum of 12 Charactrs",
+
             }
         },
         submitHandler:function(form){

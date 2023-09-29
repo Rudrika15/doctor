@@ -243,7 +243,6 @@ class AdminHospitalController extends Controller
             'cityId' => 'required',
             'contactNo' => 'required',
             'hospitalTypeId' => 'required',
-            'userId' => 'required',
             'siteUrl' => 'required',
             'category' => 'required',
             'hospitalLogo' => 'required',
@@ -251,13 +250,21 @@ class AdminHospitalController extends Controller
             'services' => 'required'
         ]);
 
+        $user=new User();
+        $user->name=$request->hospitalName;
+        $user->email=$request->email;
+        $user->password=Hash::make($request->password);
+        $user->contactNumber=$request->contactNo;
+        $user->assignRole('Hospital');
+        $user->save();
+
         $hospital = new Hospital();
         $hospital->hospitalName = $request->hospitalName;
         $hospital->address = $request->address;
         $hospital->cityId = $request->cityId;
         $hospital->contactNo = $request->contactNo;
         $hospital->hospitalTypeId = $request->hospitalTypeId;
-        $hospital->userId = $request->userId;
+        $hospital->userId = $user->id;
         $hospital->siteUrl = $request->siteUrl;
         $hospital->category = $request->category;
 
@@ -270,13 +277,7 @@ class AdminHospitalController extends Controller
 
         $hospital->save();
 
-        $user=new User();
-        $user->name=$request->hospitalName;
-        $user->email=$request->email;
-        $user->password=Hash::make($request->password);
-        $user->contactNumber=$request->contactNo;
-        $user->assignRole('Hospital');
-        $user->save();
+        
         if ($hospital) {
             return redirect()->back()->with('success', 'Hospital Added successfully!');
         } else {
@@ -301,7 +302,7 @@ class AdminHospitalController extends Controller
             'cityId' => 'required',
             'contactNo' => 'required',
             'hospitalTypeId' => 'required',
-            'userId' => 'required',
+            
             'siteUrl' => 'required',
             'category' => 'required',
             'hospitalTime' => 'required',
@@ -314,7 +315,7 @@ class AdminHospitalController extends Controller
         $hospital->cityId = $request->cityId;
         $hospital->contactNo = $request->contactNo;
         $hospital->hospitalTypeId = $request->hospitalTypeId;
-        $hospital->userId = $request->userId;
+        // $hospital->userId = $request->userId;
         $hospital->siteUrl = $request->siteUrl;
         $hospital->category = $request->category;
 
@@ -355,12 +356,12 @@ class AdminHospitalController extends Controller
         $specialist = Specialist::all();
         $doctorName = $request->doctorName;
         $specialistId = $request->specialistId;
-
         $status = $request->status;
+
         //For All docotor data
         if (isset($doctorName) && isset($specialistId) && isset($status)) {
             $doctor = Doctor::orderBy('doctorName', 'ASC')
-                ->where('hospitalId', $hospitalId)
+                ->where('hospitalId', $hospital->userId)
                 ->where('doctorName', 'like',"%$doctorName%")
                 ->where('specialistId', '=', $specialistId)
                 ->where('status', '=', $status)
@@ -370,7 +371,7 @@ class AdminHospitalController extends Controller
         //Only for doctor 
         else if (isset($doctorName) && !isset($specialistId) && !isset($status)) {
             $doctor = Doctor::orderBy('doctorName', 'ASC')
-                 ->where('hospitalId', $hospitalId)
+                 ->where('hospitalId', $hospital->userId)
                 ->where('doctorName', 'like', "%$doctorName%")
                 ->paginate(20);
                 $doctorcount = count($doctor);
@@ -378,7 +379,7 @@ class AdminHospitalController extends Controller
         //For Doctor and specialist
         else if (isset($doctorName) && isset($specialistId) && !isset($status)) {
             $doctor = Doctor::orderBy('doctorName', 'ASC')
-                ->where('hospitalId', $hospitalId)
+                ->where('hospitalId', $hospital->userId)
                 ->where('doctorName', 'like',"%$doctorName%")
                 ->where('specialistId', $specialistId)
                 ->paginate(20);
@@ -387,7 +388,7 @@ class AdminHospitalController extends Controller
         //For Doctor and status
         else if (isset($doctorName) && !isset($specialistId) &&  isset($status)) {
             $doctor = Doctor::orderBy('doctorName', 'ASC')
-                ->where('hospitalId', $hospitalId)
+                ->where('hospitalId', $hospital->userId)
                 ->where('doctorName', 'like', "%$doctorName%")
                 ->where('status', '=', $status)
                 ->paginate(20);
@@ -396,7 +397,7 @@ class AdminHospitalController extends Controller
         //Only For Specialitst
         else if (!isset($doctorName) && isset($specialistId) && !isset($status)) {
             $doctor = Doctor::orderBy('doctorName', 'ASC')
-                ->where('hospitalId', $hospitalId)
+                ->where('hospitalId', $hospital->userId)
                 ->with('specialist')
                 ->where('specialistId', $specialistId)
                 ->paginate(20);
@@ -405,7 +406,7 @@ class AdminHospitalController extends Controller
         //For Specialist and status
         else if (!isset($doctorName) && isset($specialistId) && isset($status)) {
             $doctor = Doctor::orderBy('doctorName', 'ASC')
-                ->where('hospitalId', $hospitalId)
+                ->where('hospitalId', $hospital->userId)
                 ->with('specialist')
                 ->where('specialistId', $specialistId)
                 ->where('status', '=', $status)
@@ -416,14 +417,14 @@ class AdminHospitalController extends Controller
         else if (!isset($doctorName) && !isset($specialistId) &&  isset($status)) {
 
             $doctor = Doctor::orderBy('doctorName', 'ASC')
-                ->where('hospitalId', $hospitalId)
+                ->where('hospitalId', $hospital->userId)
                 ->where('status', '=', $status)
                 ->paginate(20);
                 $doctorcount = count($doctor);
         } 
         else {
             $doctor = Doctor::orderBy('doctorName', 'ASC')
-                ->where('hospitalId', $hospitalId)
+                ->where('hospitalId','=',$hospital->userId)
                 ->with('hospital')
                 ->with('user')
                 ->paginate(20);

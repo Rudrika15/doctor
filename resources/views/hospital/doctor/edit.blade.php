@@ -21,23 +21,8 @@
         <form id="frm" action="{{route('doctor.update')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" value="{{$doctor->id}}" name="Id">
-
-          <div class="col-xs-12 col-sm-12 col-md-12">
-              <div class="form-group">
-                      <strong>Hospital Name </strong> 
-                    <select type="text" value="{{$doctor->hospitalId}}" name="hospitalId" id="hospitalId" class="form-control @error('hospitalId') is-invalid @enderror">
-                    <option selected disabled><strong >Select here...  </strong></option>
-                    @foreach ($hospital as $hospitaldata)
-                    <option value="{{$hospitaldata->id}}" {{$hospitaldata->id==old('hospitalId',$doctor->hospitalId)? 'selected':''}}>{{$hospitaldata->hospitalName}}</option>
-           
-                    @endforeach
-                    </select>
-                    @error('hospitalId')
-                    <sapn class="text-danger">{{ $message }}</sapn>
-                    @enderror
-                </div>
-            </div>
-
+            <input type="hidden"  name="hospitalId" value="{{$doctor->hospitalId}}">
+          
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Doctor Name </strong>
@@ -74,13 +59,13 @@
                   </div>
               </div>
 
-              <input type="hidden" name="userId" value="{{Auth::User()->id}}">
+            
              
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <strong>Select Image </strong>
                 <div class="row">
                     <div class="col-md-4">
-                        <input type="file"  accept='image/*' onchange="readURL(this,'#img1')" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo">
+                        <input type="file" value="{{$doctor->photo}}"  accept='image/*' onchange="readURL(this,'#img1')" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo">
                         @error('photo')
                         <sapn class="text-danger">{{ $message }}</sapn>
                         @enderror
@@ -140,42 +125,49 @@
 <script>
     jQuery('#frm').validate({
        rules:{
-        hospitalId:"required",
+        
         doctorName:{
-        required:true,
-        maxlength:15
-    },
+            required:true,
+            minlength:5
+        },
         contactNo:{
             required:true,
             minlength:10,
             maxlength:12,
 
         },
-        specialistId:"required",
-        photo:"required",
+        specialistId:{
+            required:true,
+        },
         experience:{
                 required:true,
                 maxlength:25,
 
         },
-        registerNumber:"required",
+        registerNumber:{
+            required:true,
+            minlength:12,
+        },
           
            
-       },messages:{
-        hospitalId:"Please Enter Hospital Name",
+       },
+       messages:{
         doctorName:{
-        required:"Please Enter Doctor Name",
-    },
+            required:"Please Enter Doctor Name",
+        },
         contactNo:{
-            required:"Please Enter Contact Number",
-           
-          },
-          specialistId:"Please Select Specialist Name",
-          photo:"Please Select Image",
-          experience:{
+            required:"Please Enter Contact Number",  
+        },
+        specialistId:{
+            required:"Please Select Specialist Name",
+        },  
+        experience:{
             required:"Please Enter Your Experiance",
-          },
-          registerNumber:"Please Enter Register Number",
+        },
+        registerNumber:{
+            required:"Please Enter Register Number",
+            minlength:"Please Enter Minimum of 12 Digit Or Charatcres"
+          }
            
        },
        submitHandler:function(form){

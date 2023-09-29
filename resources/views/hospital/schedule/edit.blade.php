@@ -21,22 +21,6 @@
         <form id="frm" action="{{route('schedule.update')}}"  method="POST" >
             @csrf
             <input type="hidden" value="{{$schedule->id}}" name="id">
-          <div class="col-xs-12 col-sm-12 col-md-12">
-              <div class="form-group">
-                      <strong>Hospital Name </strong> 
-                    <select type="text" value="{{$schedule->hospitalId}}" name="hospitalId" id="hospitalId" class="form-control @error('hospitalId') is-invalid @enderror">
-                    <option selected disabled><strong >Select here...  </strong></option>
-                   @foreach ($hospital as $hospitaldata)
-                   <option value="{{$hospitaldata->id}}" {{$hospitaldata->id==old('hospitalId',$schedule->hospitalId)? 'selected':''}}>{{$hospitaldata->hospitalName}}</option>
-          
-                   @endforeach
-                    </select>
-                    @error('hospitalId')
-                    <sapn class="text-danger">{{ $message }}</sapn>
-                    @enderror
-                </div>
-            </div>
-
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                         <strong>Doctor Name </strong> 
@@ -75,7 +59,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Time</strong>
-                    <input type="number" value="{{$schedule->time}}" name="time" id="time" class="form-control @error('time') is-invalid @enderror">
+                    <input type="time" value="{{$schedule->time}}" name="time" id="time" class="form-control @error('time') is-invalid @enderror">
                     @error('time')
                     <sapn class="text-danger">{{ $message }}</sapn>
                     @enderror

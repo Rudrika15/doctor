@@ -83,7 +83,7 @@
                     <div class="mb-4 pull-right"><a class="btn addbtn" href="{{route('admin.doctor.create',['id' => request()->route('id')])}}"> Add Doctor</a></div>
                     <table class="table table-bordered">
                         <tr>
-                            <th>Hospital</th>
+                           
                             <th>Doctor Name</th>
                             <th>Contact No</th>
                             <th>Specialist</th>
@@ -96,7 +96,6 @@
                         </tr>
                         @foreach ($doctor as $doctors)
                             <tr>
-                                <td>{{$doctors->hospital->hospitalName}}</td>
                                 <td>{{$doctors->doctorName}}</td>
                                 <td>{{$doctors->contactNo}}</td>
                                 <td>{{$doctors->specialist->specialistName}}</td>
@@ -173,7 +172,6 @@
                     <div class="mb-4 pull-right"><a class="btn addbtn" href="{{ route('admin.gallery.create',['id' => request()->route('id')])}}"> Add Gallery</a></div>
                     <table class="table table-bordered">
                         <tr>
-                            <th>Hospital</th>
                             <th>Title</th>
                             <th>Photo</th>
                             <th>Status</th>
@@ -182,7 +180,6 @@
                         </tr>
                         @foreach ($gallery as $gallerys)
                             <tr>
-                                <td>{{$gallerys->hospital->hospitalName}}</td>
                                 <td>{{$gallerys->title}}</td>
                                 <td>
                                     <img src="{{url('gallery')}}/{{$gallerys->photo}}" alt="" width="200" height="200">
@@ -267,7 +264,6 @@
                         </tr>
                         @foreach ($facility as $facilitys)
                             <tr>
-                                <td>{{$facilitys->hospital->hospitalName}}</td>
                                 <td>{{$facilitys->title}}</td>
                                 <td>
                                     <img src="{{url('facility')}}/{{$facilitys->photo}}" alt="" width="200" height="200">
@@ -341,7 +337,6 @@
 
                     <table class="table table-bordered">
                         <tr>
-                            <th>Hospital</th>
                             <th>Title</th>
                             <th>Link</th>
                             <th>Status</th>
@@ -349,7 +344,6 @@
                         </tr>
                         @foreach ($sociallink as $sociallinks)
                             <tr>
-                                <td>{{$sociallinks->hospital->hospitalName}}</td>
                                 <td>{{$sociallinks->title}}</td>
                                 <td>{{$sociallinks->link}}</td>
                                 <td>{{$sociallinks->status}}</td>

@@ -102,7 +102,7 @@
             </div>
         </div>
         {{-- Auth User --}}
-        <input type="hidden" name="userId" value="{{Auth::User()->id}}">
+        
         {{--  --}}
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
