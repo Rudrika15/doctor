@@ -56,7 +56,6 @@ class BlogController extends Controller
         $request->validate([
             'title' => 'required',
             'detail' => 'required',
-            'doctorId' => 'required'
         ]);
         $user = Auth::user()->id;
         $doctorId=Doctor::where('userId','=',$user)->first();

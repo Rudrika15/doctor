@@ -239,6 +239,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::controller(ProfileUpdateController::class)->group(function () {
         Route::get('doctor/profile-edit', 'edit')->name('doctor.profile.edit');
+        Route::post('doctor/profile-update', 'update')->name('doctor.profile.update');
         Route::post('doctor/education-update', 'update')->name('education.update');
     });
 });

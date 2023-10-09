@@ -30,7 +30,7 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Select Specialist</strong>
+                <strong>Select State</strong>
                     <br>
                     <select class="form-select form-control-user @error('specialistId') is-invalid @enderror"
                         name="stateId"  id="stateId" value="{{$city->stateId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"

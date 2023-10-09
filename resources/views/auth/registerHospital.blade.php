@@ -27,16 +27,16 @@
 
 <body style="background-color: #1977CC;">
     <div class="container">
-        <div class="d-flex justify-content-center mt-3 mb-3">
-            <div class="card mt-5 w-75" >
-                <div class="card-body mt-3 mb-3 ms-3 me-3" style="border: 2px solid #1977CC;">
-                    <h3 class="card-title text-center">Hospital Register</h3>
+        <div class="d-flex justify-content-center mt-2 mb-3">
+            <div class="card mt-4 w-75 shadow-lg p-3  bg-body rounded">
+                <div class="card-body mt-1 ms-3 me-3" >
+                    <h2 class="card-title text-center">Register</h2>
                    
                         <form id="frm" action="{{route('registerhospitalStore')}}" method="POST"  class="mt-2 mb-2" enctype="multipart/form-data">
                            @csrf
                             <div class="row">
                             <div class="col-md-4 mt-3">
-                                <label for="hospitalName">{{_('Hospital Name')}}<span class="text-danger">*</span></label>
+                                <label for="hospitalName"><b>{{_('Hospital Name')}}<span class="text-danger">*</span></b></label>
                                 <input type="text" name="hospitalName" id="hospitalName" class="form-control mt-2 @error('hospitalName') is-invalid @enderror" >
                                 @error('hospitalName')
                                     <sapn class="text-danger">{{ $message }}</sapn>
@@ -44,14 +44,14 @@
                             </div>
                             
                             <div class="col-md-4 mt-3">
-                                <label for="email">{{_('Email')}}<span class="text-danger">*</span></label>
+                                <label for="email"><b>{{_('Email')}}<span class="text-danger">*</span></b></label>
                                 <input type="email" name="email" id="email" class="form-control mt-2 @error('email') is-invalid @enderror">
                                 @error('email')
                                     <sapn class="text-danger">{{ $message }}</sapn>
                                 @enderror
                             </div>
                             <div class="col-md-4 mt-3">
-                                <label for="password">{{_('Password')}}<span class="text-danger">*</span></label>
+                                <label for="password"><b>{{_('Password')}}<span class="text-danger">*</span></b></label>
                                 <input type="password" name="password" id="password" class="form-control mt-2 @error('password') is-invalid @enderror">
                                 @error('password')
                                     <sapn class="text-danger">{{ $message }}</sapn>
@@ -60,7 +60,7 @@
                             
                            
                             <div class="col-md-12 mt-3">
-                                <label for="address">{{_('Address')}}<span class="text-danger">*</span></label>
+                                <label for="address"><b>{{_('Address')}}<span class="text-danger">*</span></b></label>
 
                                 <textarea name="address" id="address" name="address" class="form-control mt-2 @error('address') is-invalid @enderror" cols="10" rows="3"></textarea>
                                 @error('address')
@@ -68,7 +68,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mt-3">
-                                <label for="cityId">{{_('City')}}<span class="text-danger">*</span></label>
+                                <label for="cityId"><b>{{_('City')}}<span class="text-danger">*</span></b></label>
 
                                 <select name="cityId" id="cityId" class="form-control mt-2 @error('cityId') is-invalid @enderror">
                                     <option selected disabled>Select City</option>
@@ -81,7 +81,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mt-3">
-                                <label for="hospitalTypeId">{{_('Hospital Type')}}<span class="text-danger">*</span></label>
+                                <label for="hospitalTypeId"><b>{{_('Hospital Type')}}<span class="text-danger">*</span></b></label>
 
                                 <select class="form-control mt-2 @error('hospitalTypeId') is-invalid @enderror" name="hospitalTypeId" id="hospitalTypeId">
                                     <option selected>--Select Hospital Type--</option>
@@ -94,7 +94,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mt-3">
-                                <label for="siteUrl">{{_('Site Url')}}<span class="text-danger">*</span></label>
+                                <label for="siteUrl"><b>{{_('Site Url')}}<span class="text-danger">*</span></b></label>
 
                                 <input type="text" class="form-control @error('siteUrl') is-invalid @enderror" name="siteUrl" id="siteUrl">
                                 @error('siteUrl')
@@ -102,7 +102,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mt-3">
-                                <label for="category">{{_('Category')}}<span class="text-danger">*</span></label>
+                                <label for="category"><b>{{_('Category')}}<span class="text-danger">*</span></b></label>
 
                                 <select name="category" id="category" class="form-control mt-2 @error('category') is-invalid @enderror">
                                     <option selected>--Select Category--</option>
@@ -115,7 +115,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mt-3">
-                                <label for="hospitalTime">{{_('Hospital Time')}}<span class="text-danger">*</span></label>
+                                <label for="hospitalTime"><b>{{_('Hospital Time')}}<span class="text-danger">*</span></b></label>
 
                                 <input type="time" class="form-control mt-2 @error('hospitalTime') is-invalid @enderror" name="hospitalTime" id="hospitalTime">
                                 @error('hospitalTime')
@@ -123,23 +123,23 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mt-3">
-                                <label for="services">{{_('Services')}}<span class="text-danger">*</span></label>
+                                <label for="services"><b>{{_('Services')}}<span class="text-danger">*</span></b></label>
 
                                 <input type="text" class="form-control mt-2 @error('services') is-invalid @enderror" name="services" id="services" >
                                 @error('services')
                                   <span class="text-danger">{{$message}}</span>  
                                 @enderror
                             </div>
-                            <div class="col-md-4 mt-5">
-                                <label for="contactNo">{{_('Contact No')}}<span class="text-danger">*</span></label>
+                            <div class="col-md-4 mt-3">
+                                <label for="contactNo"><b>{{_('Contact No')}}<span class="text-danger">*</span></b></label>
 
                                 <input type="text" class="form-control  mt-2 @error('contactNo') is-invalid @enderror" id="contactNo" name="contactNo">
                                 @error('contactNo')
                                   <span class="text-danger">{{$message}}</span>  
                                 @enderror
                             </div>
-                            <div class="col-md-6 mt-5">
-                                <label for="hospitalLogo">{{_('Hospital Logo')}}<span class="text-danger">*</span></label>
+                            <div class="col-md-6 mt-3">
+                                <label for="hospitalLogo"><b>{{_('Hospital Logo')}}<span class="text-danger">*</span></b></label>
 
                                 <input type="file" accept='image/*'onchange="readURL(this,'#img1')" class="form-control mt-2 @error('hospitalLogo') is-invalid @enderror" id="hospitalLogo" name="hospitalLogo">
                                 @error('hospitalLogo')
@@ -151,6 +151,9 @@
                             </div>
                             <div class="col-md-12 mt-3 text-center">
                                 <button type="submit" class="btn btn-primary">Submit</button>
+                                <a  href="/" class="btn btn-dark">
+                                    {{ __('Cancel') }}
+                                </a>
                             </div>
                             </div>
                         </form>

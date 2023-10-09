@@ -38,27 +38,26 @@ class EducationController extends Controller
         }
     }
     public function edit($id){
-        $education =Education::find($id);
-        $user=Auth::user()->id;
-        $doctorId=Doctor::where('userId','=',$user)->first();
-        return view('doctor.education.edit',compact('education','doctorId'));
+        $education = Education::find($id);
+        return view('doctor.education.edit',compact('education'));
     }
     public function update(Request $request){
         $request->validate([
             'education'=>'required'
         ]);
-        
+        $user=Auth::user()->id;
+        $doctorId=Doctor::where('userId','=',$user)->first();
         $id=$request->id;
         $education=Education::find($id);
+        $education->doctorId=$doctorId->id;
         $education->education=$request->education;
         $education->status="Active";
-        
-       if($education->save()){
-        return redirect('doctor/education-index')->with('success', 'record updated successfully');
-       }else{
-        return back()->with('error','you have no permission');
+        if($education->save()){
+            return redirect('doctor/education-index')->with('success', 'record updated successfully');
+        }else{
+            return back()->with('error','you have no permission');
 
-       }
+        }
         
     }
     public function destroy($id){

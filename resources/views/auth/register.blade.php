@@ -25,17 +25,17 @@
 
     <div class="container">
         <div class="d-flex justify-content-center mt-3 mb-3">
-            <div class="card mt-5 w-75" >
-                <div class="card-body mt-3 mb-3 ms-3 me-3" style="border: 2px solid #1977CC;">
+            <div class="card mt-5 w-50 shadow-lg p-3 mb-5 bg-body rounded">
+                <div class="card-body mt-3 mb-3 ms-3 me-3">
                     <h2 class="card-title text-center">Register</h2> 
                
-                    <form method="POST" action="{{ route('register') }}" class="frm-single">
+                    <form method="POST" action="{{ route('register') }}" class="">
                         @csrf
                         
                             <div class="row mb-3">
-                                <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+                                <label for="name"><b>{{ __('Name') }}<span style="color: red;">*</span></b></label>
     
-                                <div class="col-md-4 mt-3">
+                                <div class="col-md-12 mt-3">
                                     <input id="name" type="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                                 
                                     @error('name')
@@ -46,9 +46,9 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                                <label for="email" ><b>{{ __('Email Address') }}<span style="color: red;">*</span></b></label>
     
-                                <div class="col-md-4 mt-3">
+                                <div class="col-md-12 mt-3">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                 
                                     @error('email')
@@ -59,9 +59,9 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                                <label for="password"><b>{{ __('Password') }}<span style="color: red;">*</span></b></label>
     
-                                <div class="col-md-4 mt-3">
+                                <div class="col-md-12 mt-3">
                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="password" autofocus>
                                 
                                     @error('password')
@@ -72,9 +72,9 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Password Confirm') }}</label>
+                                <label for="password-confirm"><b>{{ __('Password Confirm') }}<span style="color: red;">*</span></b></label>
     
-                                <div class="col-md-4 mt-3">
+                                <div class="col-md-12 mt-3">
                                     <input id="password-confirm" type="password" class="form-control @error('password-confirm') is-invalid @enderror" name="password_confirmation" value="{{ old('password-confirm') }}" required autocomplete="password-confirm" autofocus>
                                 
                                     @error('password-confirm')
@@ -85,9 +85,9 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="contactNumber" class="col-md-4 col-form-label text-md-end">{{ __('Contact Number') }}</label>
+                                <label for="contactNumber"><b>{{ __('Contact Number') }}<span style="color: red;">*</span></b></label>
     
-                                <div class="col-md-4 mt-3">
+                                <div class="col-md-12 mt-3">
                                     <input id="contactNumber" type="contactNumber" class="form-control @error('contactNumber') is-invalid @enderror" name="contactNumber" value="{{ old('contactNumber') }}" required autocomplete="contactNumber" autofocus>
                                 
                                     @error('contactNumber')
@@ -103,6 +103,9 @@
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Register') }}
                                     </button>
+                                    <a  href="/" class="btn btn-dark">
+                                        {{ __('Back') }}
+                                    </a>
                                 </div>
                             </div>
                         
