@@ -2,6 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
+use App\Models\City;
+use App\Models\Doctor;
+use App\Models\Facility;
+use App\Models\Gallery;
+use App\Models\Hospital;
+use App\Models\HospitalType;
+use App\Models\Role;
+use App\Models\Schedule;
+use App\Models\Slider;
+use App\Models\SocialLink;
+use App\Models\Specialist;
+use App\Models\State;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -25,11 +39,74 @@ class HomeController extends Controller
     public function index()
     {
         if (Auth::user()->hasRole('Admin')) {
-            return view('home');
+            $slider=Slider::where('status','=','Active')->get();
+            $slidercount=count($slider);
+
+            $hospital=Hospital::where('status','=','Active')->get();
+            $hospitalcount=count($hospital);
+
+            $city=City::where('status','=','Active')->get();
+            $citycount=count($city);
+
+            $state=State::where('status','=','Active')->get();
+            $statecount=count($state);
+
+            $hospitalType=HospitalType::where('status','=','Active')->get();
+            $hospitalTypecount=count($hospitalType);
+
+            $specialist=Specialist::where('status','=','Active')->get();
+            $specialistcount=count($specialist);
+
+            $doctor=Doctor::where('status','=','Active')->get();
+            $doctorcount=count($doctor);
+
+            $gallery=Gallery::where('status','=','Active')->get();
+            $gallerycount=count($gallery);
+
+            $facility=Facility::where('status','=','Active')->get();
+            $facilitycount=count($facility);
+
+            $socialLink=SocialLink::where('status','=','Active')->get();
+            $socialLinkcount=count($socialLink);
+
+            $user=User::all();
+            $usercount=count($user);
+
+            $role=Role::all();
+            $rolecount=count($role);
+
+            return view('home',compact('slidercount','hospitalcount','citycount',
+                            'statecount','hospitalTypecount','specialistcount',
+                            'doctorcount','gallerycount','facilitycount',
+                            'socialLinkcount','usercount','rolecount'));
         }elseif(Auth::user()->hasRole('User')){
             return redirect('/');
         }elseif(Auth::user()->hasRole('Hospital')){
-            return view('/home');
+            $userId=Auth::user()->id;
+    
+            $doctor=Doctor::where('hospitalId','=',$userId)->get();
+            $doctorcount=count($doctor);
+
+            $hospital=Hospital::where('userId','=',$userId)->first();
+
+            $gallery=Gallery::where('hospitalId',$hospital->id)->get();
+            $gallerycount=count($gallery);
+
+            $facility=Facility::where('hospitalId',$hospital->id)->get();
+            $facilitycount=count($facility);
+
+            $socialLink=SocialLink::where('hospitalId',$hospital->id)->get();
+            $socialLinkcount=count($socialLink);
+
+            $appointment=Appointment::where('hospitalId',$hospital->id)->get();
+            $appointmentcount=count($appointment);
+
+            $schedule=Schedule::where('hospitalId',$hospital->id)->get();
+            $schedulecount=count($schedule);
+
+            return view('/home',compact('doctorcount','gallerycount',
+                                'facilitycount','socialLinkcount',
+                                'appointmentcount','schedulecount'));
         }elseif(Auth::user()->hasRole('Doctor')){
             return view('/home');
         }else{

@@ -61,7 +61,7 @@
                                 </div>
                             </div>
         
-                            <div class="row mb-3 mt-5">
+                            <div class="row mt-4">
                                 <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
         
                                 <div class="" style="width: 50%;">
@@ -76,7 +76,7 @@
                             </div>
         
         
-                            <div class="d-flex justify-content-center">
+                            <div class="d-flex justify-content-center mt-4">
                                 <div>
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Login') }}
@@ -87,7 +87,7 @@
                                 </div>
                                 
                             </div>
-                            <div class="d-flex justify-content-center mt-3">
+                            <div class="d-flex justify-content-center mt-4">
                                 <div>
                                     @if (Route::has('password.request'))
                                 <a class="text-muted" href="{{ route('password.request') }}">

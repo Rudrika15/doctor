@@ -14,6 +14,8 @@
     {{-- For Search List Designing --}}
 
     <link rel="stylesheet" href="/search/style.css">
+    
+    
     {{-- ------------------- --}}
 
 
@@ -23,6 +25,8 @@
     <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> --}}
 
     <title>Doctor</title>
+
+    <link rel="stylesheet" href="{{ asset('asset/css/admin/admindashboard.css') }}">
 
     <!-- Main Styles -->
     <link rel="stylesheet" href="{{ asset('assets/styles/style.min.css') }}">
@@ -105,7 +109,6 @@
         </header>
         <!-- /.header -->
         <div class="content">
-
             <div class="navigation ">
                 <!-- /.title -->
                 <ul class="menu js__accordion">
