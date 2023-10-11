@@ -5,7 +5,8 @@
     @include('dashboard.admin')
 @elseif(Auth::user()->hasRole('Hospital'))
     @include('dashboard.hospital')
-@else
+@elseif(Auth::user()->hasRole('Doctor'))
+    @include('dashboard.doctor')
 @endif
 @endsection
 

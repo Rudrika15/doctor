@@ -9,8 +9,8 @@
                             <div class="col-8 mt-3">
                                 <h1>Doctor</h1>
                             </div>
-                            <div class="col-4 mt-3">
-                                <h1 class="fw-bold rounded-circle">{{$doctorcount}}</h1>
+                            <div class="col-4 p-3 rounded-circle text-center" style="background-color:#0CA798;">
+                                <h1 class="fw-bold text-white pt-3">{{$doctorcount}}</h1>
                             </div>
                         </div> 
                     </div>
@@ -25,8 +25,8 @@
                         <div class="col-8 mt-3">
                             <h1>Gallery</h1>
                         </div>
-                        <div class="col-4 mt-3">
-                            <h1 class="fw-bold rounded-circle">{{$gallerycount}}</h1>
+                        <div class="col-4 p-3 rounded-circle text-center" style="background-color:#0CA798;">
+                            <h1 class="fw-bold text-white pt-3">{{$gallerycount}}</h1>
                         </div>
                     </div> 
                 </div>
@@ -41,8 +41,8 @@
                         <div class="col-8 mt-3">
                             <h1>Facility</h1>
                         </div>
-                        <div class="col-4 mt-3">
-                            <h1 class="fw-bold rounded-circle">{{$facilitycount}}</h1>
+                        <div class="col-4 p-3 rounded-circle text-center" style="background-color:#0CA798;">
+                            <h1 class="fw-bold text-white pt-3">{{$facilitycount}}</h1>
                         </div>
                     </div> 
                 </div>
@@ -57,8 +57,8 @@
                         <div class="col-8 mt-3">
                             <h1>Social Link</h1>
                         </div>
-                        <div class="col-4 mt-3">
-                            <h1 class="fw-bold rounded-circle">{{$socialLinkcount}}</h1>
+                        <div class="col-4 p-3 rounded-circle text-center" style="background-color:#0CA798;">
+                            <h1 class="fw-bold text-white pt-3">{{$socialLinkcount}}</h1>
                         </div>
                     </div> 
                 </div>
@@ -73,8 +73,8 @@
                         <div class="col-8 mt-3">
                             <h1>Appoinments</h1>
                         </div>
-                        <div class="col-4 mt-3">
-                            <h1 class="fw-bold rounded-circle">{{$appointmentcount}}</h1>
+                        <div class="col-4 p-3 rounded-circle text-center" style="background-color:#0CA798;">
+                            <h1 class="fw-bold text-white pt-3">{{$appointmentcount}}</h1>
                         </div>
                     </div> 
                 </div>
@@ -89,15 +89,13 @@
                         <div class="col-8 mt-3">
                             <h1>Schedule</h1>
                         </div>
-                        <div class="col-4 mt-3">
-                            <h1 class="fw-bold rounded-circle">{{$schedulecount}}</h1>
+                        <div class="col-4 p-3 rounded-circle text-center" style="background-color:#0CA798;">
+                            <h1 class="fw-bold text-white pt-3">{{$schedulecount}}</h1>
                         </div>
                     </div> 
                 </div>
             </div>
             </a>
-        </div>
-        
-        
+        </div>  
     </div>
 </div>

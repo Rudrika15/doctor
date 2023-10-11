@@ -236,10 +236,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('doctor/education-edit-{id?}', 'edit')->name('education.edit');
         Route::post('doctor/education-update', 'update')->name('education.update');
         Route::get('doctor/education-destroy-{id?}', 'destroy')->name('education.destroy');
+        // Route::post('doctor/test', 'test')->name('education.test');
+    
     });
     Route::controller(ProfileUpdateController::class)->group(function () {
         Route::get('doctor/profile-edit', 'edit')->name('doctor.profile.edit');
         Route::post('doctor/profile-update', 'update')->name('doctor.profile.update');
-        Route::post('doctor/education-update', 'update')->name('education.update');
+        // Route::post('doctor/education-update', 'update')->name('education.update');
     });
 });

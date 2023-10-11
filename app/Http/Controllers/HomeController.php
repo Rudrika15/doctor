@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\Blog;
 use App\Models\City;
 use App\Models\Doctor;
+use App\Models\Education;
 use App\Models\Facility;
 use App\Models\Gallery;
 use App\Models\Hospital;
@@ -108,7 +110,16 @@ class HomeController extends Controller
                                 'facilitycount','socialLinkcount',
                                 'appointmentcount','schedulecount'));
         }elseif(Auth::user()->hasRole('Doctor')){
-            return view('/home');
+            $user=Auth::user()->id;
+            $doctor=Doctor::where('userId','=',$user)->first();
+            
+            $blog=Blog::where('doctorId','=',$doctor->id)->get();
+            $blogcount=count($blog);
+
+            $education=Education::where('doctorId','=',$doctor->id)->get();
+            $educationcount=count($education);
+
+            return view('/home',compact('blogcount','educationcount'));
         }else{
             return redirect('/');
         }

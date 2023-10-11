@@ -8,8 +8,8 @@
                             <div class="col-8 mt-3">
                                 <h1>Slider</h1>
                             </div>
-                            <div class="col-4 mt-3">
-                                <h1 class="fw-bold">{{$slidercount}}</h1>
+                            <div class="col-4 p-3 rounded-circle text-center" style="background-color:#0CA798;">
+                                <h1 class="fw-bold text-white pt-3">{{$slidercount}}</h1>
                             </div>
                         </div> 
                     </div>
@@ -24,8 +24,8 @@
                             <div class="col-8 mt-3">
                                 <h1>Hospital</h1>
                             </div>
-                            <div class="col-4 mt-3">
-                                <h1 class="fw-bold rounded-circle">{{$hospitalcount}}</h1>
+                            <div class="col-4 p-3 rounded-circle text-center" style="background-color:#0CA798;">
+                                <h1 class="fw-bold text-white pt-3">{{$hospitalcount}}</h1>
                             </div>
                         </div> 
                     </div>
@@ -40,8 +40,8 @@
                             <div class="col-8 mt-3">
                                 <h1>Doctor</h1>
                             </div>
-                            <div class="col-4 mt-3">
-                                <h1 class="fw-bold rounded-circle">{{$doctorcount}}</h1>
+                            <div class="col-4 p-3 rounded-circle text-center" style="background-color:#0CA798;"">
+                                <h1 class="fw-bold text-white pt-3">{{$doctorcount}}</h1>
                             </div>
                         </div> 
                     </div>
@@ -56,8 +56,8 @@
                         <div class="col-8 mt-3">
                             <h1>Specialist</h1>
                         </div>
-                        <div class="col-4 mt-3">
-                            <h1 class="fw-bold rounded-circle">{{$specialistcount}}</h1>
+                        <div class="col-4 p-3 rounded-circle text-center" style="background-color:#0CA798;">
+                            <h1 class="fw-bold text-white pt-3">{{$specialistcount}}</h1>
                         </div>
                     </div> 
                 </div>
@@ -72,8 +72,8 @@
                         <div class="col-8 mt-3">
                             <h1>Hospital Type</h1>
                         </div>
-                        <div class="col-4 mt-3">
-                            <h1 class="fw-bold rounded-circle">{{$hospitalTypecount}}</h1>
+                        <div class="col-4 p-3 rounded-circle text-center" style="background-color:#0CA798;">
+                            <h1 class="fw-bold text-white pt-3">{{$hospitalTypecount}}</h1>
                         </div>
                     </div> 
                 </div>
@@ -88,8 +88,8 @@
                         <div class="col-8 mt-3">
                             <h1>City</h1>
                         </div>
-                        <div class="col-4 mt-3">
-                            <h1 class="fw-bold rounded-circle">{{$citycount}}</h1>
+                        <div class="col-4 p-3 rounded-circle text-center" style="background-color:#0CA798;">
+                            <h1 class="fw-bold text-white pt-3">{{$citycount}}</h1>
                         </div>
                     </div> 
                 </div>
@@ -104,8 +104,8 @@
                         <div class="col-8 mt-3">
                             <h1>State</h1>
                         </div>
-                        <div class="col-4 mt-3">
-                            <h1 class="fw-bold rounded-circle">{{$statecount}}</h1>
+                        <div class="col-4 p-3 rounded-circle text-center" style="background-color:#0CA798;">
+                            <h1 class="fw-bold text-white pt-3">{{$statecount}}</h1>
                         </div>
                     </div> 
                 </div>
@@ -120,8 +120,8 @@
                         <div class="col-8 mt-3">
                             <h1>Gallery</h1>
                         </div>
-                        <div class="col-4 mt-3">
-                            <h1 class="fw-bold rounded-circle">{{$gallerycount}}</h1>
+                        <div class="col-4 p-3 rounded-circle text-center" style="background-color:#0CA798;">
+                            <h1 class="fw-bold text-white pt-3">{{$gallerycount}}</h1>
                         </div>
                     </div> 
                 </div>
@@ -136,8 +136,8 @@
                         <div class="col-8 mt-3">
                             <h1>Facility</h1>
                         </div>
-                        <div class="col-4 mt-3">
-                            <h1 class="fw-bold rounded-circle">{{$facilitycount}}</h1>
+                        <div class="col-4 p-3 rounded-circle text-center" style="background-color:#0CA798;">
+                            <h1 class="fw-bold text-white pt-3">{{$facilitycount}}</h1>
                         </div>
                     </div> 
                 </div>
@@ -152,8 +152,8 @@
                         <div class="col-8 mt-3">
                             <h1>Social Link</h1>
                         </div>
-                        <div class="col-4 mt-3">
-                            <h1 class="fw-bold rounded-circle">{{$socialLinkcount}}</h1>
+                        <div class="col-4 p-3 rounded-circle text-center" style="background-color:#0CA798;">
+                            <h1 class="fw-bold text-white pt-3">{{$socialLinkcount}}</h1>
                         </div>
                     </div> 
                 </div>
@@ -168,8 +168,8 @@
                         <div class="col-8 mt-3">
                             <h1>User</h1>
                         </div>
-                        <div class="col-4 mt-3">
-                            <h1 class="fw-bold rounded-circle">{{$usercount}}</h1>
+                        <div class="col-4 p-3 rounded-circle text-center" style="background-color:#0CA798;"">
+                            <h1 class="fw-bold text-white pt-3">{{$usercount}}</h1>
                         </div>
                     </div> 
                 </div>
@@ -184,8 +184,8 @@
                         <div class="col-8 mt-3">
                             <h1>Role</h1>
                         </div>
-                        <div class="col-4 mt-3">
-                            <h1 class="fw-bold rounded-circle">{{$rolecount}}</h1>
+                        <div class="col-4 p-3 rounded-circle text-center" style="background-color:#0CA798;"">
+                            <h1 class="fw-bold text-white pt-3">{{$rolecount}}</h1>
                         </div>
                     </div> 
                 </div>

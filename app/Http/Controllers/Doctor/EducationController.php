@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Doctor;
 use App\Http\Controllers\Controller;
 use App\Models\Doctor;
 use App\Models\Education;
+use App\Models\Hospital;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,23 +43,22 @@ class EducationController extends Controller
         return view('doctor.education.edit',compact('education'));
     }
     public function update(Request $request){
+       
         $request->validate([
             'education'=>'required'
         ]);
-        $user=Auth::user()->id;
-        $doctorId=Doctor::where('userId','=',$user)->first();
-        $id=$request->id;
+        $userId=Auth::user()->id;
+        $doctor=Doctor::where('userId','=',$userId)->first();
+        $id=$request->educationId;
         $education=Education::find($id);
-        $education->doctorId=$doctorId->id;
+        $education->doctorId=$doctor->id;
         $education->education=$request->education;
-        $education->status="Active";
         if($education->save()){
-            return redirect('doctor/education-index')->with('success', 'record updated successfully');
+            return redirect()->back()->with('success','Education Updated Succesfully');
         }else{
             return back()->with('error','you have no permission');
-
         }
-        
+       
     }
     public function destroy($id){
         $education=Education::find($id);

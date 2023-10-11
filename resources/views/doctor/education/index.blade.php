@@ -7,7 +7,7 @@
 
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
-        <h2 class="p-3">Blog </h2>
+        <h2 class="p-3">Education </h2>
         <div class="pt-2"><a class="btn addbtn" href="{{route('education.create')}}"> Add Education</a></div>
     </div>
     <div class="card-body">
