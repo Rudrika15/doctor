@@ -7,7 +7,7 @@
 
     <!-- ======= Breadcrumbs Section ======= -->
     <section class="breadcrumbs">
-      <div class="container mt-5">
+      <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
           @foreach ($hospital as $hospitalName)
@@ -57,7 +57,7 @@
                         <p style="color: #2c4964;">Hospital is well-designed with internationally standardized wards. 
                           It will be well-furnished and having a comfort zone for patients as 
                           well as their relatives.</p>
-                          <button class="btn btn-primary text-white mt-4 mb-5" style="border-radius:25px;">Read More</button>
+                          <button class="btn text-white mt-4 mb-5" style="border-radius:25px;background-color:#1977CC;">Read More</button>
                     </div>
                     <div class="col-lg-6">
                         <img src="{{url('/hospital')}}/{{$hospital->hospitalLogo}}" alt="" class="img-fluid" >
@@ -98,7 +98,7 @@
                               </div>   
                             @else
                               <div class="col-lg-4">
-                                <a class="btn btn-primary mb-3" href="{{route('login')}}">Login to see Details</a>
+                                <a class="btn text-white mb-3" href="{{route('visitor.visitorsDetail')}}/{{$hospital->id}}" style="background-color:#1977CC">Click to see Details</a>
                                 <div class="info">
                                   <div class="address">
                                     <i class="bi bi-geo-alt"></i>
@@ -163,7 +163,7 @@
                 <div class="row">
                   @foreach ($doctor as $doctor)
                       <div class="col-lg-4 mt-5">
-                        <div class="card" style="width: 18rem;box-shadow: 0 5px 10px rgba(0,0,0,.2);">
+                        <div class="card"  style="height:300px;width: 18rem;box-shadow: 0 5px 10px rgba(0,0,0,.2);">
                           <img src="{{url('/doctor')}}/{{$doctor->photo}}" class="img-fluid mt-5" alt="..." 
                                 style="width: 150px;height:150px;
                                     border-radius: 50%;

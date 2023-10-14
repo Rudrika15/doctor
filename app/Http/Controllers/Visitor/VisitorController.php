@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Visitor;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
 use Illuminate\Http\Request;
 use App\Models\Hospital;
 use App\Models\Doctor;
@@ -14,12 +15,14 @@ use App\Models\SocialLink;
 use App\Models\Patient;
 use App\Models\State;
 use App\Models\User;
+use App\Models\Visitor;
 use Auth;
 
 class VisitorController extends Controller
 {
     public function index()
     {
+        $city=City::all();
         $doctor = Doctor::all();
         if ($doctor) {
             $doctorcount = count($doctor);
@@ -34,7 +37,7 @@ class VisitorController extends Controller
             $specialistcount = count($specialist);
         }
         $slider = Slider::all();
-        return view('visitor.index', compact('specialist', 'specialists', 'hospital', 'doctor', 'slider', 'hospitalcount', 'specialistcount', 'doctorcount'));
+        return view('visitor.index', compact('city','specialist', 'specialists', 'hospital', 'doctor', 'slider', 'hospitalcount', 'specialistcount', 'doctorcount'));
     }
     public function hospitalDetails(Request $request)
     {
@@ -49,7 +52,13 @@ class VisitorController extends Controller
         $facility = Facility::where('hospitalId', '=', $hospitalId)->get();
 
         $sociallink = SocialLink::where('hospitalId', '=', $hospitalId)->get();
-        return view('visitor.hospitalDetails', compact('hospital', 'doctor', 'specialist', 'gallery', 'facility', 'sociallink'));
+        $city=City::all();
+        return view('visitor.hospitalDetails', compact('city','hospital', 'doctor', 'specialist', 'gallery', 'facility', 'sociallink'));
+    }
+    public function hospitalList(){
+        $city=City::all();
+        $hospital=Hospital::all();
+        return view('visitor.hospitals', compact('hospital','city'));
     }
     public function profile()
     {
@@ -89,5 +98,26 @@ class VisitorController extends Controller
         $patient->save();
 
         return redirect()->back();
+    }
+
+    public function visitorsDetail($hospitalId){
+        return view('visitor.visitorsDetail');
+    }
+    public function storVisitorsDetail(Request $request){
+        $this->validate($request,[
+            'name'=>'required',
+            'phone'=>'required',
+            'age'=>'required',
+        ]);
+        $hospitalId=$request->hospitalId;
+        $vistor=new Visitor();
+        $vistor->name=$request->name;
+        $vistor->phone=$request->phone;
+        $vistor->age=$request->age;
+        $vistor->hospitalId=$request->hospitalId;
+
+        $vistor->save();
+        
+        return redirect('/');
     }
 }

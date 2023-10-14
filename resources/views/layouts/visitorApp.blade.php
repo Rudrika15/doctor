@@ -20,6 +20,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
 
   {{-- Jquery Link --}}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -57,10 +62,40 @@
   <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex justify-content-between">
       <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope"></i> <a href="mailto:contact@example.com">contact@example.com</a>
-        <i class="bi bi-phone"></i> +1 5589 55488 55
+        
+          <i class="bi bi-geo-alt-fill"></i>
+          <select class="form-select" aria-label="Default select example" style="border:0px;outline:0px;">
+            <option selected>Location</option>
+            @foreach ($city as $city)
+                <option value="{{$city->id}}">{{$city->name}}</option>  
+            @endforeach
+          </select>
       </div>
       <div class="d-none d-lg-flex social-links align-items-center">
+        <span style="color:#1977CC;">As a Hospital</span>&nbsp;<i style="color:#1977CC;" class="fa fa-angle-right"></i>
+        {{-- <button class="btn" style="background-color:#1977CC;"><i class="text-white fa fa-angle-double-right"></i></button> --}}
+       @if (Route::has('login'))
+       @auth
+       
+       <a href="{{route('visitor.profile')}}//{{Auth::user()->id}}"><i class="fa fa-user"></i>&nbsp;&nbsp;Profile</a>
+       <a class="dropdown" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                <i class="fa fa-sign-out"></i>&nbsp;&nbsp;{{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>  
+       @else
+       <a href="{{route('login')}}"><i class="fa fa-sign-in"></i>&nbsp;&nbsp;Login</a>
+       <a href="{{route('registerHospital')}}"><i class="fa fa-registered"></i>&nbsp;&nbsp;Rgister</a>
+       
+       @endauth
+       
+       @endif
+        
+       
+          
+        
         <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
         <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
         <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
@@ -83,7 +118,7 @@
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#services">Specialist</a></li>
           <li><a class="nav-link scrollto" href="#departments">Departments</a></li>
-          <li><a class="nav-link scrollto" href="#doctors">Hospitals</a></li>
+          <li><a class="nav-link scrollto" href="{{route('visitor.hospitalList')}}">Hospitals</a></li>
           {{-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
@@ -103,41 +138,39 @@
           </li> --}}
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           
-              @if (Route::has('login'))
+          {{-- @if (Route::has('login'))
                 
-                    @auth
-                    {{-- <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a> --}}
-                    <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
-                      <ul>
-                        <li class="dropdown"><a href="{{route('visitor.profile')}}/{{Auth::user()->id}}"><span>Profile</span></a>
+          @auth
+          <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li class="dropdown"><a href="{{route('visitor.profile')}}/{{Auth::user()->id}}"><span>Profile</span></a>
 
-                        <li>
-                          <a class="dropdown" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
+              <li>
+                <a class="dropdown" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                              document.getElementById('logout-form').submit();">
+                      {{ __('Logout') }}
+                  </a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      @csrf
+                  </form>
+              </li>
+            </ul>
+          </li>
+          @else
+                  <li>
+                    <a href="{{ route('login') }}" class="nav-link scrollto">Log in</a>
+                  </li>
+                    @if (Route::has('register'))
+                        <li class="dropdown"><a href="#"><span>Register</span> <i class="bi bi-chevron-down"></i></a>
+                          <ul>
+                            <li><a href="{{route('registerHospital')}}">As a Hospital</a></li>
+                            <li><a href="{{ route('register') }}">As a User</a></li>
+                          </ul>
                         </li>
-                      </ul>
-                    </li>
-                    @else
-                            <li>
-                              <a href="{{ route('login') }}" class="nav-link scrollto">Log in</a>
-                            </li>
-                              @if (Route::has('register'))
-                                  {{-- <li><a href="" class="nav-link scrollto">Register</a></li> --}}
-                                  <li class="dropdown"><a href="#"><span>Register</span> <i class="bi bi-chevron-down"></i></a>
-                                    <ul>
-                                      <li><a href="{{route('registerHospital')}}">As a Hospital</a></li>
-                                      <li><a href="{{ route('register') }}">As a User</a></li>
-                                    </ul>
-                                  </li>
-                              @endif
-                    @endauth
-                      
-              @endif
+                    @endif
+          @endauth
+            
+    @endif   --}}
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

@@ -42,7 +42,13 @@ use App\Http\Controllers\Doctor\ProfileUpdateController;
 
 // ------------------ Visitor Side  -----------------------------------------
 Route::get('/', [VisitorController::class, 'index'])->name('visitor.index');
+Route::get('hospitals', [VisitorController::class, 'hospitalList'])->name('visitor.hospitalList');
 Route::get('hospitalDetails/{id?}', [VisitorController::class, 'hospitalDetails'])->name('visitor.hospitalDetails');
+Route::get('visitorDetail/{hospitalId?}', [VisitorController::class, 'visitorsDetail'])->name('visitor.visitorsDetail');
+Route::post('storVisitorsDetail', [VisitorController::class, 'storVisitorsDetail'])->name('visitor.storVisitorsDetail');
+
+
+
 Route::get('Register/hospital',[RegisterController::class,'hospitalCreate'])->name('registerHospital');
 Route::post('Register/hospitalStore',[RegisterController::class,'registerhospitalStore'])->name('registerhospitalStore');
 
