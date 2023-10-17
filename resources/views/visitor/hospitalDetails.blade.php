@@ -72,54 +72,43 @@
                   
                       <div class="container">
                         <div class="row mt-5">
-                          @if (Auth::user())
-                              <div class="col-lg-4">
-                                <div class="info">
-                                  <div class="address">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <h4>Location:</h4>
-                                    <button type="submit" id="seelocation" class="btn btn-primary ms-2">See Location</button>
-                                    <p id="location" style="display:none;" class="mt-2">{{$hospital->address}}</p>
-                                  </div>
-                    
-                                  <div class="email">
-                                    <i class="bi bi-envelope"></i>
-                                    <h4>Email:</h4>
-                                    <p>info@example.com</p>
-                                  </div>
-                    
-                                  <div class="phone">
-                                    <i class="bi bi-phone"></i>
-                                    <h4>Call:</h4>
-                                    <button type="submit" id="seecontact" class="btn btn-primary ms-2">See Contact No</button>
-                                    <p id="seecontactNo" style="display:none;" class="mt-2">{{$hospital->contactNo}}</p>
-                                  </div>
-                                </div>
-                              </div>   
-                            @else
                               <div class="col-lg-4">
                                 <a class="btn text-white mb-3" href="{{route('visitor.visitorsDetail')}}/{{$hospital->id}}" style="background-color:#1977CC">Click to see Details</a>
                                 <div class="info">
                                   <div class="address">
                                     <i class="bi bi-geo-alt"></i>
                                     <h4>Location:</h4>
-                                    <p>********</p>
+                                    @if (cookie('address'))
+                                        <p>{{$hospital->address}}</p>
+                                    @else
+                                        <p>********</p>
+                                    @endif
+                                     
                                   </div>
                     
                                   <div class="email">
                                     <i class="bi bi-envelope"></i>
                                     <h4>Email:</h4>
-                                    <p>*********</p>
+                                    @if (cookie('email'))
+                                     <p>{{$hospital->user->email}}</p>
+                                    @else 
+                                      <p>********</p>
+                                    @endif
+                                    
                                   </div>
                     
                                   <div class="phone">
                                     <i class="bi bi-phone"></i>
                                     <h4>Call:</h4>
-                                    <p>***********</p>
+                                    @if (cookie('contactNo'))
+                                    <p>{{$hospital->contactNo}}</p>
+                                    @else
+                                     <p>********</p>
+                                    @endif
                                   </div>
                                 </div>
                               </div>  
-                          @endif
+                         
                           
                 
                           <div class="col-lg-8 mt-5 mt-lg-0">
@@ -188,7 +177,7 @@
                 @foreach ($gallery as $gallery)
                 <div class="col-lg-3 mt-5">
                     <div class="w-75">
-                      <img src="{{url('/gallery')}}/{{$gallery->photo}}" alt=" " class="img-fluid" widht="200px" height="200px">
+                      <img src="{{url('/gallery')}}/{{$gallery->photo}}"  widht="200px" height="200px">
                       <h5 class="card-text text-center mt-3" style="color: #2c4964;">{{$gallery->title}}</h4>
                     </div>
                 </div>
@@ -201,7 +190,7 @@
               @foreach ($facility as $facility)
               <div class="col-lg-3 mt-5">
                   <div class="w-75">
-                    <img src="{{url('/facility')}}/{{$facility->photo}}" alt=" " class="img-fluid" widht="200px" height="200px">
+                    <img src="{{url('/facility')}}/{{$facility->photo}}" widht="200px" height="200px">
                     <h5 class="card-text text-center mt-3" style="color: #2c4964;">{{$facility->title}}</h4>
                   </div>
               </div>

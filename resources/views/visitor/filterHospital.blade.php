@@ -41,23 +41,20 @@
         </div>
         
         <div class="row">
-          {{-- <h1>Hello{{ request()->route('hospitalTypeId') }}</h1> --}}
          
-          @foreach ($hospital as $hospital)
-          
+          @foreach ($filterHospital as $filterHospital)
+ 
           <div class="col-lg-6 mt-4 lg-0">
             <div class="member d-flex align-items-start">
               <div class="pic">
-                  <img src="{{url('/hospital')}}/{{$hospital->hospitalLogo}}" class="img-fluid rounded-circle" alt=""></div>
+                  <img src="{{url('/hospital')}}/{{$filterHospital->hospitalLogo}}" class="img-fluid rounded-circle" alt=""></div>
                 <div class="member-info">
-                  {{-- <div class="d-flex justify-content-end">
-                    <button>See Details</button>
-                  </div> --}}
-                <h4>{{$hospital->hospitalName}}</h4>
+                  
+                <h4>{{$filterHospital->hospitalName}}</h4>
                 <span>Chief Medical Officer</span>
                   
                 <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
-                <a href="{{route('visitor.hospitalDetails')}}/{{$hospital->id}}" class="btn text-white mt-2" style="background-color:#A1BDD6;">SeeDetails</a>
+                <a href="{{route('visitor.hospitalDetails')}}/{{$filterHospital->id}}" class="btn text-white mt-2" style="background-color:#A1BDD6;">SeeDetails</a>
 
                 <div class="social">
                   <a href=""><i class="ri-twitter-fill"></i></a>
@@ -96,6 +93,3 @@
       </script>
     
 @endsection
-
-
-

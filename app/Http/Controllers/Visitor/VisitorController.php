@@ -11,11 +11,12 @@ use App\Models\Specialist;
 use App\Models\Slider;
 use App\Models\Gallery;
 use App\Models\Facility;
+use App\Models\HospitalType;
 use App\Models\SocialLink;
 use App\Models\Patient;
 use App\Models\State;
 use App\Models\User;
-use App\Models\Visitor;
+use App\Models\Lead;
 use Auth;
 
 class VisitorController extends Controller
@@ -42,7 +43,7 @@ class VisitorController extends Controller
     public function hospitalDetails(Request $request)
     {
         $hospitalId = $request->id;
-        $hospital = Hospital::where('id', '=', $hospitalId)->get();
+        $hospital = Hospital::with('user')->where('id', '=', $hospitalId)->get();
 
         $specialist = Specialist::all();
         $doctor = Doctor::where('hospitalId', '=', $hospitalId)->get();
@@ -53,12 +54,26 @@ class VisitorController extends Controller
 
         $sociallink = SocialLink::where('hospitalId', '=', $hospitalId)->get();
         $city=City::all();
-        return view('visitor.hospitalDetails', compact('city','hospital', 'doctor', 'specialist', 'gallery', 'facility', 'sociallink'));
+
+        
+        $visitor=Lead::where('hospitalId','=',$hospitalId)->first();
+    
+        return view('visitor.hospitalDetails', compact('visitor','city','hospital', 'doctor', 'specialist', 'gallery', 'facility', 'sociallink'));
     }
     public function hospitalList(){
         $city=City::all();
         $hospital=Hospital::all();
-        return view('visitor.hospitals', compact('hospital','city'));
+        $hospitalType=HospitalType::all();
+
+        
+        return view('visitor.hospitals', compact('hospitalType','hospital','city'));
+    }
+    public function filterHospital(Request $request){
+        $hospitalTypeId=$request->hospitalTypeId;
+        $hospitalType=HospitalType::all();
+        $city=City::all();
+        $filterHospital=Hospital::where('hospitalTypeId','=',$hospitalTypeId)->get();
+        return view('visitor.filterHospital',compact('filterHospital','hospitalType','city')); 
     }
     public function profile()
     {
@@ -110,14 +125,26 @@ class VisitorController extends Controller
             'age'=>'required',
         ]);
         $hospitalId=$request->hospitalId;
-        $vistor=new Visitor();
-        $vistor->name=$request->name;
-        $vistor->phone=$request->phone;
-        $vistor->age=$request->age;
-        $vistor->hospitalId=$request->hospitalId;
+        $hospital=Hospital::with('user')->where('id','=',$hospitalId)->first();
 
-        $vistor->save();
+        $user=User::where('id','=',$hospital->userId)->first();
+
+        cookie()->queue('address', $hospital->address, 60); // 1440 minutes (1 day)
+        cookie()->queue('email', $user->email, 60); // 1440 minutes (1 day)
+        cookie()->queue('contactNo', $hospital->contactNo, 60); // 1440 minutes (1 day)
+
+        $lead=new Lead();
+        $lead->name=$request->name;
+        $lead->phone=$request->phone;
+        $lead->age=$request->age;
+        $lead->hospitalId=$request->hospitalId;
+        $lead->save();
         
-        return redirect('/');
+        return redirect()->route('visitor.hospitalDetails', ['id' => $hospitalId]);
+    }
+    public function specialist(){
+        $city=City::all();
+        $specialist=Specialist::all();
+        return view('visitor.specialist',compact('specialist','city'));
     }
 }

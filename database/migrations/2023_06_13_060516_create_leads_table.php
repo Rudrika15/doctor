@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('leads', function (Blueprint $table) {
             $table->id();
-            $table->integer('userId');
+            $table->string('name');
+            $table->string('phone');
+            $table->integer('age');
             $table->integer('hospitalId');
-            $table->date('date');
-            $table->string('title');
-            $table->string('status')->default('Active');
             $table->timestamps();
         });
     }

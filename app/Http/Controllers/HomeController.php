@@ -121,7 +121,8 @@ class HomeController extends Controller
 
             return view('/home',compact('blogcount','educationcount'));
         }else{
-            return redirect('/');
+            $city=City::all();
+            return redirect('/',compact('city'));
         }
         // $userId = Auth::user()->role="Admin";
         // if($userId)
