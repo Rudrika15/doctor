@@ -7,6 +7,7 @@ use App\Models\City;
 use Illuminate\Http\Request;
 use App\Models\Hospital;
 use App\Models\Doctor;
+use App\Models\Education;
 use App\Models\Specialist;
 use App\Models\Slider;
 use App\Models\Gallery;
@@ -24,21 +25,50 @@ class VisitorController extends Controller
     public function index()
     {
         $city=City::all();
-        $doctor = Doctor::all();
-        if ($doctor) {
-            $doctorcount = count($doctor);
+            $doctor = Doctor::all();
+            if ($doctor) {
+                $doctorcount = count($doctor);
+            }
+           
+            $hospital = Hospital::latest()->take(5)->get();
+            if ($hospital) {
+                $hospitallist=Hospital::all();
+                $hospitalcount = count($hospitallist);
+            }
+            $specialist = Specialist::all();
+            $departments = Specialist::paginate(5);
+            $specialists = $specialist;
+            if ($specialist) {
+                $specialistcount = count($specialist);
+            }
+            $slider = Slider::all();        
+            return view('visitor.index', compact('departments','city','specialist', 'specialists', 'hospital', 'doctor', 'slider', 'hospitalcount', 'specialistcount', 'doctorcount'));
+        
+        
+    }
+    public function searchCityWiseData(Request $request){
+        $cityId=$request->cityId;
+        $city=City::all();
+        
+        if($cityId){
+            $doctor = Doctor::all();
+            if ($doctor) {
+                $doctorcount = count($doctor);
+            }
+            $hospital = Hospital::where('cityId','=',$cityId)->get();
+            if ($hospital) {
+                $hospitalcount = count($hospital);
+            }
+            $specialist = Specialist::all();
+            $departments = Specialist::paginate(5);
+            $specialists = $specialist;
+            if ($specialist) {
+                $specialistcount = count($specialist);
+            }
+            $slider = Slider::all();        
+            return view('visitor.index', compact('departments','city','specialist', 'specialists', 'hospital', 'doctor', 'slider', 'hospitalcount', 'specialistcount', 'doctorcount'));
+        
         }
-        $hospital = Hospital::all();
-        if ($hospital) {
-            $hospitalcount = count($hospital);
-        }
-        $specialist = Specialist::all();
-        $specialists = $specialist;
-        if ($specialist) {
-            $specialistcount = count($specialist);
-        }
-        $slider = Slider::all();
-        return view('visitor.index', compact('city','specialist', 'specialists', 'hospital', 'doctor', 'slider', 'hospitalcount', 'specialistcount', 'doctorcount'));
     }
     public function hospitalDetails(Request $request)
     {
@@ -146,5 +176,29 @@ class VisitorController extends Controller
         $city=City::all();
         $specialist=Specialist::all();
         return view('visitor.specialist',compact('specialist','city'));
+    }
+
+    public function doctorList(Request $request, $id){
+        $specialistId=$request->id;
+        $city=City::all();
+       
+        $doctor=Doctor::where('specialistId','=',$specialistId)->get();
+       // $education=Education::where('doctorId','=',$)->first();
+        return view('visitor.doctor',compact('doctor','city'));
+    }
+    
+    public function doctorDetails(Request $request){
+        $city=City::all();
+        $doctorId=$request->id;
+        $doctor=Doctor::with('hospital')->with('education')->where('id','=',$doctorId)->get();
+        return view('visitor.doctorDetails',compact('city','doctor'));
+    }
+    public function makeAnApoinment(){
+        $city=City::all();
+        return view('visitor.makeAnApoinment',compact('city'));
+    }
+    public function contact(){
+        $city=City::all();
+        return view('visitor.contact',compact('city'));
     }
 }

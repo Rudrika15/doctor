@@ -160,11 +160,13 @@
         <div class="row">
             @foreach ($specialist as $specialist)
               <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 md-0">
-                <div class="icon-box">
-                  <div class="icon"><i class="fas fa-pills"></i></div>
-                  <h4><a href="">{{$specialist->specialistName}}</a></h4>
-                  <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-                </div>
+                <a href="{{route('visitor.doctorList')}}/{{$specialist->id}}">
+                  <div class="icon-box">
+                    <div class="icon"><i class="fas fa-pills"></i></div>
+                    <h4><a href="">{{$specialist->specialistName}}</a></h4>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                  </div>
+                </a>
               </div>
             @endforeach
         </div>
@@ -246,11 +248,16 @@
         </div>
 
         <div class="row gy-4">
+         
+          
           <div class="col-lg-3">
             <ul class="nav nav-tabs flex-column">
+              {{-- @foreach ($departments as $departments)
+               --}}
               <li class="nav-item">
-                <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">Cardiology</a>
+                <a class="nav-link " data-bs-toggle="tab" href="#tab-1">Cardiology</a>
               </li>
+              {{-- @endforeach --}}
               <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" href="#tab-2">Neurology</a>
               </li>
@@ -267,10 +274,10 @@
           </div>
           <div class="col-lg-9">
             <div class="tab-content">
-              <div class="tab-pane active show" id="tab-1">
+              <div class="tab-pane" id="tab-1">
                 <div class="row gy-4">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Cardiology</h3>
+                    {{-- <h3>{{$departments->specialistName}}</h3> --}}
                     <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
                     <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero</p>
                   </div>
@@ -279,7 +286,7 @@
                   </div>
                 </div>
               </div>
-              <div class="tab-pane" id="tab-2">
+              {{-- <div class="tab-pane" id="tab-2">
                 <div class="row gy-4">
                   <div class="col-lg-8 details order-2 order-lg-1">
                     <h3>Et blanditiis nemo veritatis excepturi</h3>
@@ -326,9 +333,11 @@
                     <img src="assets/img/departments-5.jpg" alt="" class="img-fluid">
                   </div>
                 </div>
-              </div>
+              </div> --}}
             </div>
           </div>
+
+          {{-- @endforeach --}}
         </div>
 
       </div>
@@ -349,7 +358,7 @@
             <div class="member d-flex align-items-start">
               <div class="pic">
                 <a href="{{route('visitor.hospitalDetails')}}/{{$hospital->id}}">
-                  <img src="{{url('/hospital')}}/{{$hospital->hospitalLogo}}" class="img-fluid" alt=""></div>
+                  <img src="{{url('/hospital')}}/{{$hospital->hospitalLogo}}" class="img-fluid rounded-circle" width="200px" height="200px" alt=""></div>
                 </a>
                 <div class="member-info">
                 <h4>{{$hospital->hospitalName}}</h4>

@@ -17,7 +17,7 @@
             </a>
         </div>
         <div class="col-md-3">
-            <a href="{{route('hospital.index')}}">
+            <a href="{{route('hospital.index',[])}}">
                 <div class="card shadow p-3 mb-5 bg-white rounded">
                     <div class="card-body" style="color:#0CA798;">
                         <div class="row">

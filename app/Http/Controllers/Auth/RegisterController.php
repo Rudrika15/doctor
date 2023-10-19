@@ -123,6 +123,7 @@ class RegisterController extends Controller
         
         $hospital=new Hospital();
         $hospital->hospitalName=$user->name;
+        $hospital->slug = $user->name;
         $hospital->address=$request->address;
         $hospital->cityId=$request->cityId;
         

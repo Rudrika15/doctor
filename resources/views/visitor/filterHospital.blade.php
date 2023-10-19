@@ -28,6 +28,7 @@
                 @endforeach
               </select>
               <button type="submit" class="btn ms-3" style="background-color: #1977CC;color:white">Search</button>
+              <a href="{{route('visitor.hospitalList')}}" class="btn ms-3 btn-dark">Back</a>
 
              </div>
             </form>

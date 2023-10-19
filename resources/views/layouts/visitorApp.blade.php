@@ -60,17 +60,22 @@
 
   <!-- ======= Top Bar ======= -->
   <div id="topbar" class="d-flex align-items-center fixed-top">
+    
     <div class="container d-flex justify-content-between">
+      <form action="{{ route('visitor.searchCityWiseData') }}" method="get">
       <div class="contact-info d-flex align-items-center">
-        
+       
           <i class="bi bi-geo-alt-fill"></i>
-          <select class="form-select" aria-label="Default select example" style="border:0px;outline:0px;">
+          <select class="form-select" name="cityId" id="cityId" aria-label="Default select example" style="border:0px;outline:0px;">
             <option selected>Location</option>
             @foreach ($city as $city)
                 <option value="{{$city->id}}">{{$city->name}}</option>  
             @endforeach
           </select>
+          <button type="submit" class="btn appointment-btn scrollto" style="background-color:#1977CC;">Search</button>
+        
       </div>
+    </form>
       <div class="d-none d-lg-flex social-links align-items-center">
         <span style="color:#1977CC;">As a Hospital</span>&nbsp;<i style="color:#1977CC;" class="fa fa-angle-right"></i>
         {{-- <button class="btn" style="background-color:#1977CC;"><i class="text-white fa fa-angle-double-right"></i></button> --}}
@@ -102,6 +107,7 @@
         <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
       </div>
     </div>
+  
   </div>
 
   <!-- ======= Header ======= -->
@@ -136,7 +142,7 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li> --}}
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="nav-link scrollto" href="{{route('visitor.contact')}}">Contact</a></li>
           
           {{-- @if (Route::has('login'))
                 
@@ -175,7 +181,7 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span> Appointment</a>
+      <a href="{{route('visitor.makeAnApoinment')}}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span> Appointment</a>
 
     </div>
   </header><!-- End Header -->

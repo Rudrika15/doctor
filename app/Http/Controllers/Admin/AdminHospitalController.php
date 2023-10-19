@@ -260,6 +260,7 @@ class AdminHospitalController extends Controller
 
         $hospital = new Hospital();
         $hospital->hospitalName = $request->hospitalName;
+        $hospital->slug = $hospital->hospitalName;
         $hospital->address = $request->address;
         $hospital->cityId = $request->cityId;
         $hospital->contactNo = $request->contactNo;

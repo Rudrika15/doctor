@@ -42,12 +42,17 @@ use App\Http\Controllers\Doctor\ProfileUpdateController;
 
 // ------------------ Visitor Side  -----------------------------------------
 Route::get('/', [VisitorController::class, 'index'])->name('visitor.index');
+Route::get('/searchCityWiseData', [VisitorController::class, 'searchCityWiseData'])->name('visitor.searchCityWiseData');
 Route::get('hospitals', [VisitorController::class, 'hospitalList'])->name('visitor.hospitalList');
 Route::get('filterHospitals/', [VisitorController::class, 'filterHospital'])->name('visitor.filterHospital');
 Route::get('hospitalDetails/{id?}', [VisitorController::class, 'hospitalDetails'])->name('visitor.hospitalDetails');
 Route::get('specialist', [VisitorController::class, 'specialist'])->name('visitor.specialist');
 Route::get('visitorDetail/{hospitalId?}', [VisitorController::class, 'visitorsDetail'])->name('visitor.visitorsDetail');
 Route::post('storVisitorsDetail', [VisitorController::class, 'storVisitorsDetail'])->name('visitor.storVisitorsDetail');
+Route::get('doctorList/{id?}', [VisitorController::class, 'doctorList'])->name('visitor.doctorList');
+Route::get('makeAnApoinment', [VisitorController::class, 'makeAnApoinment'])->name('visitor.makeAnApoinment');
+Route::get('contact', [VisitorController::class, 'contact'])->name('visitor.contact');
+Route::get('doctorDetails/{id?}', [VisitorController::class, 'doctorDetails'])->name('visitor.doctorDetails');
 
 
 
