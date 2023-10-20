@@ -55,9 +55,9 @@
                   </div> --}}
                 <h4>{{$hospital->hospitalName}}</h4>
                 <span>Chief Medical Officer</span>
-                  
+                
                 <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
-                <a href="{{route('visitor.hospitalDetails')}}/{{$hospital->id}}" class="btn text-white mt-2" style="background-color:#A1BDD6;">SeeDetails</a>
+                <a href="{{route('visitor.hospitalDetails')}}/{{$hospital->userId}}" class="btn text-white mt-2" style="background-color:#A1BDD6;">SeeDetails</a>
 
                 <div class="social">
                   <a href=""><i class="ri-twitter-fill"></i></a>

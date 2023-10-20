@@ -152,6 +152,8 @@
                 <div class="row">
                   @foreach ($doctor as $doctor)
                       <div class="col-lg-4 mt-5">
+                        <a href="{{route('visitor.doctorDetails')}}/{{$doctor->id}}">
+
                         <div class="card"  style="height:300px;width: 18rem;box-shadow: 0 5px 10px rgba(0,0,0,.2);">
                           <img src="{{url('/doctor')}}/{{$doctor->photo}}" class="img-fluid mt-5" alt="..." 
                                 style="width: 150px;height:150px;
@@ -167,6 +169,7 @@
                             {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
                           </div>
                         </div>
+                        </a>
                       </div>
                   @endforeach
                 </div>

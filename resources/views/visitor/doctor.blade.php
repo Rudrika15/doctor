@@ -43,7 +43,7 @@
                                 <h5 class="card-title text-center">{{$doctor->doctorName}}</h5>
                                 <hr>
                                 
-                                <h4 class="card-text text-center" style="color: #2c4964;">{{$doctor->specialist->specialistName}}</p>
+                                <h4 class="card-text text-center" style="color: #2c4964;">{{$doctor->hospital->hospitalName}}</p>
                                 {{---<p class="card-text text-center">{{$doctor->contactNo	}}</p> --}}
                                 {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
                               </div>

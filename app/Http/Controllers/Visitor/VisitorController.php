@@ -30,13 +30,13 @@ class VisitorController extends Controller
                 $doctorcount = count($doctor);
             }
            
-            $hospital = Hospital::latest()->take(5)->get();
+            $hospital = Hospital::latest()->take(4)->get();
             if ($hospital) {
                 $hospitallist=Hospital::all();
                 $hospitalcount = count($hospitallist);
             }
             $specialist = Specialist::all();
-            $departments = Specialist::paginate(5);
+            $departments = Specialist::paginate(3);
             $specialists = $specialist;
             if ($specialist) {
                 $specialistcount = count($specialist);
@@ -73,7 +73,8 @@ class VisitorController extends Controller
     public function hospitalDetails(Request $request)
     {
         $hospitalId = $request->id;
-        $hospital = Hospital::with('user')->where('id', '=', $hospitalId)->get();
+        
+        $hospital = Hospital::with('user')->where('userId', '=', $hospitalId)->get();
 
         $specialist = Specialist::all();
         $doctor = Doctor::where('hospitalId', '=', $hospitalId)->get();
@@ -182,7 +183,7 @@ class VisitorController extends Controller
         $specialistId=$request->id;
         $city=City::all();
        
-        $doctor=Doctor::where('specialistId','=',$specialistId)->get();
+        $doctor=Doctor::with('hospital')->where('specialistId','=',$specialistId)->get();
        // $education=Education::where('doctorId','=',$)->first();
         return view('visitor.doctor',compact('doctor','city'));
     }

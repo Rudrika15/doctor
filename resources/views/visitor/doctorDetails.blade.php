@@ -20,53 +20,60 @@
       <div class="container">
           
         <div class="section-title">
-          <h2>Doctor</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        
-        </div>
-        
+          @foreach ($doctor as $doctor)
+          <h2>{{$doctor->doctorName}}</h2>
+        </div> 
         <div class="row">
             {{-- <h1>Hello{{ request()->route('hospitalTypeId') }}</h1> --}}
-           
-            @foreach ($doctor as $doctor)
-            
-            <div class="col-lg-12 mt-4 lg-0">
-              <div class="member d-flex align-items-start">
-                
-                <div class="pic">
-                    <img src="{{url('/doctor')}}/{{$doctor->photo}}" class="img-fluid rounded-circle" alt=""></div>
-                  <div class="member-info">
-                    
-                    <h1 class="text-center">{{$doctor->doctorName}}<hr></h1>
-                    <h4>Education:-</h4>
-                    <span>{{$doctor->experience}}</span>
-                    <h4>Hospital:-</h4>
-                    <a href="{{route('visitor.hospitalDetails')}}/{{$doctor->hospital->id}}" style="text-decoration:none;"><span>{{$doctor->hospital->hospitalName}}</span></a>
-
-                    
-                    <h4>Education:-</h4>
-                    @foreach ($doctor->education as $education)
-                        <span>{{$education->education}}</span>   
-                    @endforeach
-                    <h4>Specialist:-</h4>
-                    <span>{{$doctor->specialist->specialistName}}</span>
- 
-                  {{-- <a href="{{route('visitor.hospitalDetails')}}/{{$hospital->id}}" class="btn text-white mt-2" style="background-color:#A1BDD6;">SeeDetails</a> --}}
+            <div class="col-lg-12">
+              <div class="card" style="border:none;">
+                <div class="card-body ">
+                  <div class="text-center">
+                    <img src="{{url('/doctor')}}/{{$doctor->photo}}" class="card-img-left rounded-circle" width="250px" height="250px" alt="">
+                  </div>
+                  <div class="row member gap-3 mt-3 pt-5">
+                    <div class="col-lg-2 member-info pt-3 shadow-lg p-3 mb-5 bg-body rounded" style="">
+                      <h4>Experience</h4>
+                      <span class="mt-3">{{$doctor->experience}}</span>
+                      
+                    </div>
+                    <div class="col-lg-2 member-info pt-3 shadow-lg p-3 mb-5 bg-body rounded" style="">
+                      <h4>Education</h4>
+                      @foreach ($doctor->education as $education)
+                          <span class="mt-3">{{$education->education}}</span>   
+                      @endforeach
+                    </div>
+                    <div class="col-lg-3 member-info text-center pt-3 shadow-lg p-3 mb-5 bg-body rounded" style="">
+                      <h4>Hospital</h4>
+                      <a href="{{route('visitor.hospitalDetails')}}/{{$doctor->hospital->id}}">
+                        <div class="d-flex justify-content-start gap-5">
+                          <img src="{{url('/hospital')}}/{{$doctor->hospital->hospitalLogo}}" alt="" class="card-img-left rounded-circle" width="60px" height="60px">
+                          <span class="mt-3">{{$doctor->hospital->hospitalName}}</span>
   
-                  <div class="social">
-                    <a href=""><i class="ri-twitter-fill"></i></a>
-                    <a href=""><i class="ri-facebook-fill"></i></a>
-                    <a href=""><i class="ri-instagram-fill"></i></a>
-                    <a href=""><i class="ri-linkedin-box-fill"></i> </a>
+                        </div>
+  
+                      </a>
+                      
+                    </div>
+                    
+                    <div class="col-lg-2 member-info pt-3 shadow-lg p-3 mb-5 bg-body rounded" style="">
+                      <h4>Specialist</h4>
+                      <span class="mt-3">{{$doctor->specialist->specialistName}}</span>
+                    </div>
+                     
+                    <div class="col-lg-2 member-info pt-3 shadow-lg p-3 mb-5 bg-body rounded" style="">
+                      <h4>Contact No</h4>
+                      <span class="mt-3">{{$doctor->contactNo}}</span>
+                    </div>
                   </div>
                   
                 </div>
               </div>
             </div>
-            @endforeach
-           
+         
           </div>
-      </div>
+          @endforeach
+        </div>
     </section>
     
   </div>

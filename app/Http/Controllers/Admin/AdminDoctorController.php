@@ -8,6 +8,7 @@ use App\Models\Hospital;
 use App\Models\Specialist;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -64,6 +65,7 @@ class AdminDoctorController extends Controller
         $doctor = new Doctor();
         $doctor->hospitalId = $hospitalId;
         $doctor->doctorName = $request->doctorName;
+        $doctor->slug = $this->generateSlug($request->doctorName);
         $doctor->contactNo = $request->contactNo;
         $doctor->specialistId = $request->specialistId;
         $doctor->userId = $user->id;
@@ -103,13 +105,13 @@ class AdminDoctorController extends Controller
 
         ]);
 
-        // $hospitalId=$request->hospitalId;
         $hospitalIdData=Hospital::where('userId','=',$request->hospitalId)->first();
         $hospitalID=$hospitalIdData->id;
         $id = $request->doctorId;
         $doctor = Doctor::find($id);
-        $doctor->hospitalId = $request->hospitalId;
         $doctor->doctorName = $request->doctorName;
+        $doctor->slug = $this->generateSlug($request->doctorName);
+        
         $doctor->contactNo = $request->contactNo;
         $doctor->specialistId = $request->specialistId;
         // $doctor->userId = $request->userId;
@@ -141,5 +143,9 @@ class AdminDoctorController extends Controller
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }
+    }
+    private function generateSlug($hospitalName)
+    {
+        return Str::slug($hospitalName);
     }
 }

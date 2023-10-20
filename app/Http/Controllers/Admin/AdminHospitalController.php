@@ -236,7 +236,7 @@ class AdminHospitalController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'hospitalName' => 'required',
+            'hospitalName' => 'required|unique:hospitals,hospitalName,cityId'.$request->cityId,
             'email' => 'required',
             'password' => 'required',
             'address' => 'required',
@@ -309,6 +309,8 @@ class AdminHospitalController extends Controller
             'hospitalTime' => 'required',
             'services' => 'required'
         ]);
+
+        
         $id = $request->hospitalId;
         $hospital = Hospital::find($id);
         $hospital->hospitalName = $request->hospitalName;
@@ -329,6 +331,12 @@ class AdminHospitalController extends Controller
         $hospital->hospitalTime = $request->hospitalTime;
         $hospital->services = $request->services;
         $hospital->status = "Active";
+
+        
+        $user=User::where('id','=',$hospital->userId)->first();
+        $user->name=$request->hospitalName;
+        $user->contactNumber=$request->contactNo;
+        $user->save();
 
         if ($hospital->save()) {
             return redirect('admin/hospital-index')->with('success', 'Hospital Updated successfully!');
@@ -538,5 +546,10 @@ class AdminHospitalController extends Controller
         }
         
         return view('admin.hospital.viewdetails', compact('hospital', 'doctor', 'gallery', 'facility', 'specialist', 'gallerycount', 'facilitycount', 'sociallink','doctorcount','socialcount'));
+    }
+
+    private function generateSlug($hospitalName)
+    {
+        return Str::slug($hospitalName);
     }
 }

@@ -121,9 +121,9 @@
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="nav-link scrollto active" href="{{route('visitor.index')}}">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          {{-- <li><a class="nav-link scrollto" href="#about">About</a></li> --}}
           <li><a class="nav-link " href="{{route('visitor.specialist')}}">Specialist</a></li>
-          <li><a class="nav-link scrollto" href="#departments">Departments</a></li>
+          {{-- <li><a class="nav-link scrollto" href="#departments">Departments</a></li> --}}
           <li><a class="nav-link scrollto" href="{{route('visitor.hospitalList')}}">Hospitals</a></li>
           {{-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>

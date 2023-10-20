@@ -133,7 +133,13 @@ class RegisterController extends Controller
         $hospital->siteUrl=$request->siteUrl;
         $hospital->category=$request->category;
         
-        $hospital->hospitalLogo=$request->hospitalLogo;
+        if ($request->hospitalLogo) {
+            $hospitalLogo = $request->hospitalLogo;
+            $hospital->hospitalLogo = time() . '.' . $request->hospitalLogo->extension();
+            $request->hospitalLogo->move(public_path('hospital'), $hospital->hospitalLogo);
+        }
+
+        // $hospital->hospitalLogo=$request->hospitalLogo;
         $hospital->hospitalTime=$request->hospitalTime;
         $hospital->services=$request->services;
         $hospital->status="Active";
