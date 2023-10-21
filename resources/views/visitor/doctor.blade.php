@@ -32,7 +32,7 @@
                 
                     @foreach ($doctor as $doctor)
                         <div class="col-lg-3 mt-5">
-                          <a href="{{route('visitor.doctorDetails')}}/{{$doctor->id}}">
+                          <a href="{{route('visitor.doctorDetails')}}/{{$doctor->slug}}">
                             <div class="card h-100"  style="width: 18rem;box-shadow: 0 5px 10px rgba(0,0,0,.2);">
                               <img src="{{url('/doctor')}}/{{$doctor->photo}}" class="img-fluid mt-5" alt="..." 
                                     style="width: 150px;height:150px;
@@ -43,7 +43,7 @@
                                 <h5 class="card-title text-center">{{$doctor->doctorName}}</h5>
                                 <hr>
                                 
-                                <h4 class="card-text text-center" style="color: #2c4964;">{{$doctor->hospital->hospitalName}}</p>
+                                <h4 class="card-text text-center" style="color: #2c4964;">{{$doctor->specialist->specialistName}}</p>
                                 {{---<p class="card-text text-center">{{$doctor->contactNo	}}</p> --}}
                                 {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
                               </div>

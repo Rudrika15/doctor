@@ -18,7 +18,7 @@
 
         <form id="frm" action="{{route('hospitaltype.update')}}" method="POST" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="hospitaltypeId" value="{{$hospitaltype->id}}"> 
+        <input type="hidden" name="slug" value="{{$hospitaltype->slug}}"> 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Type Name:</strong>

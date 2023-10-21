@@ -56,15 +56,17 @@
             <table class="table table-bordered">
                 <tr>
                     <th>State Name</th>
+                    <th>Slug</th>
                     <th>Status</th>
                     <th width="280px">Action</th>
                 </tr>
                 @foreach ($state as $states)
                 <tr>
                     <td>{{$states->stateName}}</td>
+                    <td>{{$states->slug}}</td>
                     <td>{{$states->status}}</td>
                     <td>
-                        <a class="btn btn-primary" href="{{route('state.edit')}}{{$states->id}}">Edit</a>
+                        <a class="btn btn-primary" href="{{route('state.edit')}}{{$states->slug}}">Edit</a>
                     
                         <a class="btn btn-danger" onclick="return confirm('Are you sure want to delete?')" href="{{route('state.delete')}}{{$states->id}}">Delete</a>
                     </td>

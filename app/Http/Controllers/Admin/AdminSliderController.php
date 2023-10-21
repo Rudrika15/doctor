@@ -6,6 +6,7 @@ use App\Models\Slider;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\FuncCall;
+use Illuminate\Support\Str;
 
 class AdminSliderController extends Controller
 {
@@ -79,7 +80,7 @@ class AdminSliderController extends Controller
         ]);
         $slider=new Slider();
         $slider->title=$request->title;
-
+        $slider->slug=$this->generateSlug($request->title);
         $image = $request->image;
         $slider->image = time() . '.' . $request->image->extension();
         $request->image->move(public_path('slider'), $slider->image);
@@ -96,8 +97,8 @@ class AdminSliderController extends Controller
             return back()->with('error', 'You have no permission for this page!');
         }
     }
-    public function edit($id){
-        $slider=Slider::find($id);
+    public function edit($slug){
+        $slider=Slider::where('slug','=',$slug)->first();
         return view('admin.slider.edit',compact('slider'));
     }
     public function update(Request $request){
@@ -107,12 +108,11 @@ class AdminSliderController extends Controller
             'navigate' => 'required'
         ]);
 
-        $id=$request->sliderId;
-        $slider=Slider::find($id);
+        $slug=$request->slug;
+        $slider=Slider::where('slug','=',$slug)->first();
         $slider->title=$request->title;
-
+        $slider->slug=$this->generateSlug($request->title);
         if($request->image){
-            
             $image = $request->image;
             $slider->image = time() . '.' . $request->image->extension();
             $request->image->move(public_path('slider'), $slider->image);
@@ -136,5 +136,10 @@ class AdminSliderController extends Controller
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }
+    }
+
+    private function generateSlug($hospitalName)
+    {
+        return Str::slug($hospitalName);
     }
 }

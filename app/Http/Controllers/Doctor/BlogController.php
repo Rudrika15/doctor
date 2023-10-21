@@ -7,6 +7,7 @@ use App\Models\Blog;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -33,6 +34,7 @@ class BlogController extends Controller
         $doctorId=Doctor::where('userId','=',$user)->first();
         $blog = new Blog();
         $blog->title = $request->title;
+        $blog->slug =$this->generateSlug($request->title);
         $blog->detail = $request->detail;
         $photo = $request->photo;
         $blog->photo = time() . '.' . $request->photo->extension();
@@ -63,6 +65,7 @@ class BlogController extends Controller
         $blog = Blog::find($id);
         $blog->title = $request->title;
         $blog->detail = $request->detail;
+        $blog->slug =$this->generateSlug($request->title);
         if ($request->photo) {
             $photo = $request->photo;
             $blog->photo = time() . '.' . $request->photo->extension();
@@ -85,5 +88,9 @@ class BlogController extends Controller
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }
+    }
+
+    private function generateSlug($title){
+        return Str::slug($title);
     }
 }

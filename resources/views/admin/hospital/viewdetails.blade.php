@@ -173,6 +173,7 @@
                     <table class="table table-bordered">
                         <tr>
                             <th>Title</th>
+                            <th>Slug</th>
                             <th>Photo</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -181,6 +182,7 @@
                         @foreach ($gallery as $gallerys)
                             <tr>
                                 <td>{{$gallerys->title}}</td>
+                                <td>{{$gallerys->slug}}</td>
                                 <td>
                                     <img src="{{url('gallery')}}/{{$gallerys->photo}}" alt="" width="200" height="200">
                                 </td>
@@ -255,8 +257,9 @@
 
                     <table class="table table-bordered">
                         <tr>
-                            <th>Hospital</th>
+                            
                             <th>Title</th>
+                            <th>Slug</th>
                             <th>Photo</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -265,6 +268,7 @@
                         @foreach ($facility as $facilitys)
                             <tr>
                                 <td>{{$facilitys->title}}</td>
+                                <td>{{$facilitys->slug}}</td>
                                 <td>
                                     <img src="{{url('facility')}}/{{$facilitys->photo}}" alt="" width="200" height="200">
                                 </td>
@@ -338,6 +342,7 @@
                     <table class="table table-bordered">
                         <tr>
                             <th>Title</th>
+                            <th>Slug</th>
                             <th>Link</th>
                             <th>Status</th>
                             <th>Action</th>  
@@ -345,6 +350,7 @@
                         @foreach ($sociallink as $sociallinks)
                             <tr>
                                 <td>{{$sociallinks->title}}</td>
+                                <td>{{$sociallinks->slug}}</td>
                                 <td>{{$sociallinks->link}}</td>
                                 <td>{{$sociallinks->status}}</td>
                                 <td>

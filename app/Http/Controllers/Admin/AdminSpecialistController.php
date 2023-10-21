@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Specialist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AdminSpecialistController extends Controller
 {
@@ -61,6 +62,7 @@ class AdminSpecialistController extends Controller
         ]);
         $specialist = new Specialist();
         $specialist->specialistName = $request->specialistName;
+        $specialist->slug = $this->generateSlug($request->specialistName);
         $specialist->save();
 
         if ($specialist->save()) {
@@ -70,9 +72,9 @@ class AdminSpecialistController extends Controller
         }
     }
 
-    public function edit($id)
+    public function edit($slug)
     {
-        $specialist = Specialist::find($id);
+        $specialist = Specialist::where('slug','=',$slug)->first();
         return view('admin.specialist.edit', compact('specialist'));
     }
 
@@ -81,9 +83,10 @@ class AdminSpecialistController extends Controller
         $this->validate($request, [
             'specialistName' => 'required'
         ]);
-        $id = $request->specialistId;
-        $specialist = Specialist::find($id);
+        $slug = $request->slug;
+        $specialist = Specialist::where('slug','=',$slug)->first();
         $specialist->specialistName = $request->specialistName;
+        $specialist->slug = $this->generateSlug($request->specialistName);
         $specialist->status = "Active";
 
         if ($specialist->save()) {
@@ -103,5 +106,9 @@ class AdminSpecialistController extends Controller
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }
+    }
+
+    private function generateSlug($specialistName){
+        return Str::slug($specialistName);
     }
 }

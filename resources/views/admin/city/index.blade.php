@@ -56,6 +56,7 @@
             <table class="table table-bordered">
                 <tr>
                     <th>Name</th>
+                    <th>Slug</th>
                     <th>State</th>
                     <th>Status</th>
                     <th width="280px">Action</th>
@@ -63,10 +64,11 @@
                 @foreach ($city as $citys)
                 <tr>
                     <td>{{$citys->name}}</td>
+                    <td>{{$citys->slug}}</td>
                     <td>{{$citys->state->stateName}}</td>
                     <td>{{$citys->status}}</td>
                     <td>
-                        <a class="btn btn-primary" href="{{route('city.edit')}}{{$citys->id}}">Edit</a>
+                        <a class="btn btn-primary" href="{{route('city.edit')}}{{$citys->slug}}">Edit</a>
                     
                         <a class="btn btn-danger" onclick="return confirm('Are you sure want to delete?')" href="{{route('city.delete')}}{{$citys->id}}">Delete</a>
                     </td>

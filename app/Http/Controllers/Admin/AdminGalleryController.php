@@ -7,6 +7,7 @@ use App\Models\Gallery;
 use App\Models\Hospital;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\FuncCall;
+use Illuminate\Support\Str;
 
 class AdminGalleryController extends Controller
 {
@@ -45,6 +46,7 @@ class AdminGalleryController extends Controller
         $gallery = new Gallery();
         $gallery->hospitalId = $request->hospitalId;
         $gallery->title = $request->title;
+        $gallery->slug = $this->generateSlug($request->title);
         $photo = $request->photo;
         $gallery->photo = time() . '.' . $request->photo->extension();
         $request->photo->move(public_path('gallery'), $gallery->photo);
@@ -75,6 +77,7 @@ class AdminGalleryController extends Controller
         $gallery = Gallery::find($id);
         $gallery->hospitalId = $request->hospitalId;
         $gallery->title = $request->title;
+        $gallery->slug = $this->generateSlug($request->title);
         if ($request->photo) {
             $photo = $request->photo;
             $gallery->photo = time() . '.' . $request->photo->extension();
@@ -99,5 +102,9 @@ class AdminGalleryController extends Controller
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }
+    }
+
+    private function generateSlug($title){
+        return Str::slug($title);
     }
 }

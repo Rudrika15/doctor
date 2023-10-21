@@ -61,15 +61,17 @@
             <table class="table table-bordered">
                 <tr>
                     <th>Type Name</th>
+                    <th>Slug</th>
                     <th>Status</th>
                     <th width="280px">Action</th>
                 </tr>
                 @foreach ($hospitaltype as $hospitaltypes)
                 <tr>
                     <td>{{$hospitaltypes->typeName}}</td>
+                    <td>{{$hospitaltypes->slug}}</td>
                     <td>{{$hospitaltypes->status}}</td>
                     <td>
-                        <a class="btn btn-primary" href="{{route('hospitaltype.edit')}}{{$hospitaltypes->id}}">Edit</a>
+                        <a class="btn btn-primary" href="{{route('hospitaltype.edit')}}{{$hospitaltypes->slug}}">Edit</a>
                     
                         <a class="btn btn-danger" onclick="return confirm('Are you sure want to delete?')" href="{{route('hospitaltype.delete')}}{{$hospitaltypes->id}}">Delete</a>
                     </td>

@@ -21,6 +21,7 @@
         <table class="table table-bordered">
             <tr>
                 <th>Title</th>
+                <th>Slug</th>
                 <th>Detail</th>
                 <th>Photo</th>
                 <th> Status</th>
@@ -30,6 +31,7 @@
             @foreach ($blog as $blogs)
             <tr>
                 <td>{{ $blogs->title }}</td>
+                <td>{{ $blogs->slug }}</td>
                 <td>{{ $blogs->detail }}</td>
                 <td> <img src="{{url('/blog')}}/{{$blogs->photo}}" alt="" style="min-height:100px;min-width:100px;max-height:100px;max-width:100px"> </td>
 

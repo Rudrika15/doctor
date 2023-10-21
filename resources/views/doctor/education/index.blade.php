@@ -21,6 +21,7 @@
         <table class="table table-bordered">
             <tr>
                 <th>Education</th>
+                <th>Slug</th>
                 <th>Status</th>
                 
                 <th>Action</th>
@@ -30,8 +31,8 @@
             <tr>
                
                 <td>{{ $educations->education }}</td>
-              
-
+                <td>{{ $educations->slug }}</td>
+            
                 <td>{{ $educations->status }}</td>
 
                 <td>

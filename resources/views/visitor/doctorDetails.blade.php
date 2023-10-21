@@ -20,7 +20,7 @@
       <div class="container">
           
         <div class="section-title">
-          @foreach ($doctor as $doctor)
+          {{-- @foreach ($doctor as $doctor) --}}
           <h2>{{$doctor->doctorName}}</h2>
         </div> 
         <div class="row">
@@ -45,15 +45,12 @@
                     </div>
                     <div class="col-lg-3 member-info text-center pt-3 shadow-lg p-3 mb-5 bg-body rounded" style="">
                       <h4>Hospital</h4>
-                      <a href="{{route('visitor.hospitalDetails')}}/{{$doctor->hospital->id}}">
+                      <a href="{{route('visitor.hospitalDetails')}}/{{$hospital->slug}}">
                         <div class="d-flex justify-content-start gap-5">
-                          <img src="{{url('/hospital')}}/{{$doctor->hospital->hospitalLogo}}" alt="" class="card-img-left rounded-circle" width="60px" height="60px">
-                          <span class="mt-3">{{$doctor->hospital->hospitalName}}</span>
-  
+                          <img src="{{url('/hospital')}}/{{$hospital->hospitalLogo}}" alt="" class="card-img-left rounded-circle" width="60px" height="60px">
+                          <span class="mt-3">{{$hospital->hospitalName}}</span>
                         </div>
-  
-                      </a>
-                      
+                      </a> 
                     </div>
                     
                     <div class="col-lg-2 member-info pt-3 shadow-lg p-3 mb-5 bg-body rounded" style="">
@@ -72,7 +69,7 @@
             </div>
          
           </div>
-          @endforeach
+          {{-- @endforeach --}}
         </div>
     </section>
     

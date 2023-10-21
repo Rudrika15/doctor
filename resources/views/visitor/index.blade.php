@@ -357,14 +357,15 @@
           <div class="col-lg-6 mt-4 lg-0">
             <div class="member d-flex align-items-start">
               <div class="pic">
-                <a href="{{route('visitor.hospitalDetails')}}/{{$hospital->id}}">
+                <a href="{{route('visitor.hospitalDetails')}}/{{$hospital->slug}}">
                   <img src="{{url('/hospital')}}/{{$hospital->hospitalLogo}}" class="img-fluid rounded-circle" width="200px" height="200px" alt=""></div>
                 </a>
                 <div class="member-info">
                 <h4>{{$hospital->hospitalName}}</h4>
                 <span>Chief Medical Officer</span>
-                
                 <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
+                <a href="{{route('visitor.hospitalDetails')}}/{{$hospital->slug}}" class="btn text-white mt-2" style="background-color:#A1BDD6;">SeeDetails</a>
+
                 <div class="social">
                   <a href=""><i class="ri-twitter-fill"></i></a>
                   <a href=""><i class="ri-facebook-fill"></i></a>

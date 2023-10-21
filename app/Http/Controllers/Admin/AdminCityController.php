@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\City;
 use App\Models\State;
-
+use Illuminate\Support\Str;
 class AdminCityController extends Controller
 {
 
@@ -67,6 +67,7 @@ class AdminCityController extends Controller
 
         $city = new City();
         $city->name = $request->name;
+        $city->slug =$this->generateSlug($request->name);
         $city->stateId = $request->stateId;
 
         if ($city->save()) {
@@ -76,10 +77,10 @@ class AdminCityController extends Controller
         }
     }
 
-    public function edit($id)
+    public function edit($slug)
     {
         $state = State::all();
-        $city = City::find($id);
+        $city = City::where('slug','=',$slug)->first();
         return view('admin.city.edit', compact('city', 'state'));
     }
 
@@ -89,9 +90,10 @@ class AdminCityController extends Controller
             'name' => 'required',
         ]);
 
-        $id = $request->id;
-        $city = City::find($id);
+        $slug = $request->slug;
+        $city = City::where('slug','=',$slug)->first();
         $city->name = $request->name;
+        $city->slug =$this->generateSlug($request->name);
         $city->status = "Active";
 
         if ($city->save()) {
@@ -110,5 +112,9 @@ class AdminCityController extends Controller
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }
+    }
+    private function generateSlug($name)
+    {
+        return Str::slug($name);
     }
 }

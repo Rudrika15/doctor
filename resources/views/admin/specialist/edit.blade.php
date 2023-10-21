@@ -16,7 +16,7 @@
 
         <form id="frm" action="{{route('specialist.update')}}" method="POST" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="specialistId" value="{{$specialist->id}}">
+        <input type="hiddenn" name="slug" value="{{$specialist->slug}}">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Specialist Name:</strong>

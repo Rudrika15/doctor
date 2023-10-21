@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\State;
-
+use Illuminate\Support\Str;
 class AdminStateController extends Controller
 {
     //
@@ -51,6 +51,7 @@ class AdminStateController extends Controller
 
         $state = new State();
         $state->stateName = $request->stateName;
+        $state->slug = $this->generateSlug($request->stateName);
         $state->status = "Active";
 
 
@@ -60,9 +61,9 @@ class AdminStateController extends Controller
             return back()->with('error', 'You have no permission for this page!');
         }
     }
-    public function edit($id)
+    public function edit($slug)
     {
-        $state = State::find($id);
+        $state = State::where('slug','=',$slug)->first();
         return view('admin.state.edit', compact('state'));
     }
 
@@ -72,9 +73,10 @@ class AdminStateController extends Controller
             'stateName' => 'required',
         ]);
 
-        $id = $request->id;
-        $state = State::find($id);
+        $slug = $request->slug;
+        $state = State::where('slug','=',$slug)->first();
         $state->stateName = $request->stateName;
+        $state->slug = $this->generateSlug($request->stateName);
         $state->status = "Active";
 
 
@@ -93,5 +95,8 @@ class AdminStateController extends Controller
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }
+    }
+    private function generateSlug($stateName){
+        return Str::slug($stateName);
     }
 }

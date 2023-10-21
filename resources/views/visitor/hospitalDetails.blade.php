@@ -73,7 +73,7 @@
                       <div class="container">
                         <div class="row mt-5">
                               <div class="col-lg-4">
-                                <a class="btn text-white mb-3" href="{{route('visitor.visitorsDetail')}}/{{$hospital->id}}" style="background-color:#1977CC">Click to see Details</a>
+                                <a class="btn text-white mb-3" href="{{route('visitor.visitorsDetail')}}/{{$hospital->slug}}" style="background-color:#1977CC">Click to see Details</a>
                                 <div class="info">
                                   <div class="address">
                                     <i class="bi bi-geo-alt"></i>
@@ -152,7 +152,7 @@
                 <div class="row">
                   @foreach ($doctor as $doctor)
                       <div class="col-lg-4 mt-5">
-                        <a href="{{route('visitor.doctorDetails')}}/{{$doctor->id}}">
+                        <a href="{{route('visitor.doctorDetails')}}/{{$doctor->slug}}">
 
                         <div class="card"  style="height:300px;width: 18rem;box-shadow: 0 5px 10px rgba(0,0,0,.2);">
                           <img src="{{url('/doctor')}}/{{$doctor->photo}}" class="img-fluid mt-5" alt="..." 
@@ -164,7 +164,7 @@
                             <h5 class="card-title text-center">{{$doctor->doctorName}}</h5>
                             <hr>
                             
-                            <h4 class="card-text text-center" style="color: #2c4964;">{{$doctor->specialist->specialistName}}</p>
+                            <h4 class="card-text text-center" style="color: #2c4964;">{{$hospital->hospitalName}}</p>
                             {{---<p class="card-text text-center">{{$doctor->contactNo	}}</p> --}}
                             {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
                           </div>

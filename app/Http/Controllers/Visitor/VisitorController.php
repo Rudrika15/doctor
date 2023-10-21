@@ -72,12 +72,14 @@ class VisitorController extends Controller
     }
     public function hospitalDetails(Request $request)
     {
-        $hospitalId = $request->id;
-        
+        $slug = $request->slug;
+        $hospital=Hospital::where('slug','=',$slug)->first();
+        $hospitalId=$hospital->userId;
         $hospital = Hospital::with('user')->where('userId', '=', $hospitalId)->get();
-
+        
         $specialist = Specialist::all();
-        $doctor = Doctor::where('hospitalId', '=', $hospitalId)->get();
+
+        $doctor = Doctor::with('hospital')->where('hospitalId', '=', $hospitalId)->get();
 
         $gallery = Gallery::where('hospitalId', '=', $hospitalId)->get();
 
@@ -94,9 +96,7 @@ class VisitorController extends Controller
     public function hospitalList(){
         $city=City::all();
         $hospital=Hospital::all();
-        $hospitalType=HospitalType::all();
-
-        
+        $hospitalType=HospitalType::all();        
         return view('visitor.hospitals', compact('hospitalType','hospital','city'));
     }
     public function filterHospital(Request $request){
@@ -155,9 +155,8 @@ class VisitorController extends Controller
             'phone'=>'required',
             'age'=>'required',
         ]);
-        $hospitalId=$request->hospitalId;
-        $hospital=Hospital::with('user')->where('id','=',$hospitalId)->first();
-
+        $slug=$request->slug;
+        $hospital=Hospital::with('user')->where('slug','=',$slug)->first();
         $user=User::where('id','=',$hospital->userId)->first();
 
         cookie()->queue('address', $hospital->address, 60); // 1440 minutes (1 day)
@@ -168,10 +167,10 @@ class VisitorController extends Controller
         $lead->name=$request->name;
         $lead->phone=$request->phone;
         $lead->age=$request->age;
-        $lead->hospitalId=$request->hospitalId;
+        $lead->hospitalId=$hospital->id;
         $lead->save();
         
-        return redirect()->route('visitor.hospitalDetails', ['id' => $hospitalId]);
+        return redirect()->route('visitor.hospitalDetails', ['slug' => $slug]);
     }
     public function specialist(){
         $city=City::all();
@@ -179,20 +178,24 @@ class VisitorController extends Controller
         return view('visitor.specialist',compact('specialist','city'));
     }
 
-    public function doctorList(Request $request, $id){
-        $specialistId=$request->id;
+    public function doctorList(Request $request, $slug){
+        $slug=$request->slug;
+        $specialist=Specialist::where('slug','=',$slug)->first();
+        $specialistId=$specialist->id;
         $city=City::all();
        
-        $doctor=Doctor::with('hospital')->where('specialistId','=',$specialistId)->get();
+        $doctor=Doctor::with('specialist')->where('specialistId','=',$specialistId)->get();
        // $education=Education::where('doctorId','=',$)->first();
         return view('visitor.doctor',compact('doctor','city'));
     }
     
     public function doctorDetails(Request $request){
         $city=City::all();
-        $doctorId=$request->id;
-        $doctor=Doctor::with('hospital')->with('education')->where('id','=',$doctorId)->get();
-        return view('visitor.doctorDetails',compact('city','doctor'));
+        $slug=$request->slug;
+        $doctor=Doctor::with('hospital')->with('education')->where('slug','=',$slug)->first();
+       
+        $hospital=Hospital::where('userId','=',$doctor->hospitalId)->first();
+        return view('visitor.doctorDetails',compact('city','doctor','hospital'));
     }
     public function makeAnApoinment(){
         $city=City::all();

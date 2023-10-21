@@ -18,7 +18,7 @@
 
         <form id="frm" action="{{route('city.update')}}" method="POST" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="id" value="{{$city->id}}">
+        <input type="hidden" name="slug" value="{{$city->slug}}">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>

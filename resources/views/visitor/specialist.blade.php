@@ -27,7 +27,7 @@
           <div class="row">
               @foreach ($specialist as $specialist)
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 md-0">
-                  <a href="{{route('visitor.doctorList')}}/{{$specialist->id}}">
+                  <a href="{{route('visitor.doctorList')}}/{{$specialist->slug}}">
                     <div class="icon-box">
                       <div class="icon"><i class="fas fa-pills"></i></div>
                       <h4><a href="">{{$specialist->specialistName}}</a></h4>

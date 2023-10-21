@@ -42,7 +42,7 @@
                     <form method="POST" action="{{ route('visitor.storVisitorsDetail') }}" >
                         @csrf
                         <div class="">
-                            <input type="hidden" name="hospitalId" value="{{ request()->route('hospitalId') }}" class="form-control @error('doctorName') is-invalid @enderror">
+                            <input type="hidden" name="slug" value="{{ request()->route('slug') }}" class="form-control @error('doctorName') is-invalid @enderror">
 
                             <div class="frm-title text-center"><h3>Add Your Details</h3></div>
                             <div class="row mt-5">

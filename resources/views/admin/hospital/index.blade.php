@@ -110,6 +110,7 @@
 
 
                     <th>Hospital Name</th>
+                    <th>Slug</th>
                     <th>Address</th>
                     <th>City</th>
                     <th>Contact No</th>
@@ -128,6 +129,7 @@
                 
                 <tr>
                     <td>{{$hospitals->hospitalName}}</td>
+                    <td>{{$hospitals->slug}}</td>
                     <td>{{$hospitals->address}}</td>
 
                     <td>{{$hospitals->city->name}}</td>

@@ -74,6 +74,7 @@
             <table class="table table-bordered">
                 <tr>
                     <th>Title</th>
+                    <th>Slug</th>
                     <th>Image</th>
                     <th>Place</th>
                     <th>Navigate</th>
@@ -83,12 +84,13 @@
                 @foreach ($slider as $sliders)
                     <tr>
                         <td>{{$sliders->title}}</td>
+                        <td>{{$sliders->slug}}</td>
                         <td><img src="{{url('slider')}}/{{$sliders->image}}" alt="" width="200px" height="200px"></td>
                         <td>{{$sliders->place}}</td>
                         <td>{{$sliders->navigate}}</td>
                         <td>{{$sliders->status}}</td>
                         <td>
-                            <a class="btn btn-primary mt-2" href="{{route('admin.slider.edit')}}{{$sliders->id}}">Edit</a>
+                            <a class="btn btn-primary mt-2" href="{{route('admin.slider.edit')}}{{$sliders->slug}}">Edit</a>
                     
                             <a class="btn btn-danger mt-2" onclick="return confirm('Are you sure want to delete?')" href="{{route('admin.slider.delete')}}{{$sliders->id}}">Delete</a>
                         </td>

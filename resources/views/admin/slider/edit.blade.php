@@ -16,7 +16,7 @@
 
         <form id="frm" action="{{route('admin.slider.update')}}" method="POST" enctype="multipart/form-data">
         @csrf
-      <input type="hidden" name="sliderId" value="{{$slider->id}}">
+      <input type="hidden" name="slug" value="{{$slider->slug}}">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Title</strong>

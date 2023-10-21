@@ -45,14 +45,14 @@ Route::get('/', [VisitorController::class, 'index'])->name('visitor.index');
 Route::get('/searchCityWiseData', [VisitorController::class, 'searchCityWiseData'])->name('visitor.searchCityWiseData');
 Route::get('hospitals', [VisitorController::class, 'hospitalList'])->name('visitor.hospitalList');
 Route::get('filterHospitals/', [VisitorController::class, 'filterHospital'])->name('visitor.filterHospital');
-Route::get('hospitalDetails/{id?}', [VisitorController::class, 'hospitalDetails'])->name('visitor.hospitalDetails');
+Route::get('hospitalDetails/{slug?}', [VisitorController::class, 'hospitalDetails'])->name('visitor.hospitalDetails');
 Route::get('specialist', [VisitorController::class, 'specialist'])->name('visitor.specialist');
-Route::get('visitorDetail/{hospitalId?}', [VisitorController::class, 'visitorsDetail'])->name('visitor.visitorsDetail');
+Route::get('visitorDetail/{slug?}', [VisitorController::class, 'visitorsDetail'])->name('visitor.visitorsDetail');
 Route::post('storVisitorsDetail', [VisitorController::class, 'storVisitorsDetail'])->name('visitor.storVisitorsDetail');
-Route::get('doctorList/{id?}', [VisitorController::class, 'doctorList'])->name('visitor.doctorList');
+Route::get('doctorList/{slug?}', [VisitorController::class, 'doctorList'])->name('visitor.doctorList');
 Route::get('makeAnApoinment', [VisitorController::class, 'makeAnApoinment'])->name('visitor.makeAnApoinment');
 Route::get('contact', [VisitorController::class, 'contact'])->name('visitor.contact');
-Route::get('doctorDetails/{id?}', [VisitorController::class, 'doctorDetails'])->name('visitor.doctorDetails');
+Route::get('doctorDetails/{slug?}', [VisitorController::class, 'doctorDetails'])->name('visitor.doctorDetails');
 
 
 
@@ -88,7 +88,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('admin/state-index', 'index')->name('state.index');
         Route::get('admin/state-create', 'create')->name('state.create');
         Route::post('admin/state-store', 'store')->name('state.store');
-        Route::get('admin/state-edit-{id?}', 'edit')->name('state.edit');
+        Route::get('admin/state-edit-{slug?}', 'edit')->name('state.edit');
         Route::post('admin/state-update', 'update')->name('state.update');
         Route::get('admin/state-delete-{id?}', 'delete')->name('state.delete');
     });
@@ -97,7 +97,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('admin/city-create', 'create')->name('city.create');
         Route::post('admin/city-store', 'store')->name('city.store');
         Route::get('admin/city-index', 'index')->name('city.index');
-        Route::get('admin/city-edit-{id?}', 'edit')->name('city.edit');
+        Route::get('admin/city-edit-{slug?}', 'edit')->name('city.edit');
         Route::post('admin/city-update', 'update')->name('city.update');
         Route::get('admin/city-delete-{id?}', 'delete')->name('city.delete');
     });
@@ -119,7 +119,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('admin/hospitaltype-index', 'index')->name('hospitaltype.index');
         Route::get('admin/hospitaltype-create', 'create')->name('hospitaltype.create');
         Route::post('admin/hospitaltype-store', 'store')->name('hospitaltype.store');
-        Route::get('admin/hospitaltype-edit-{id?}', 'edit')->name('hospitaltype.edit');
+        Route::get('admin/hospitaltype-edit-{slug?}', 'edit')->name('hospitaltype.edit');
         Route::post('admin/hospitaltype-update', 'update')->name('hospitaltype.update');
         Route::get('admin/hospitaltype-delete-{id?}', 'delete')->name('hospitaltype.delete');
     });
@@ -138,7 +138,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('admin/specialist-index', 'index')->name('specialist.index');
         Route::get('admin/specialist-create', 'create')->name('specialist.create');
         Route::post('admin/specialist-store', 'store')->name('specialist.store');
-        Route::get('admin/specialist-edit-{id?}', 'edit')->name('specialist.edit');
+        Route::get('admin/specialist-edit-{slug?}', 'edit')->name('specialist.edit');
         Route::post('admin/specialist-update', 'update')->name('specialist.update');
         Route::get('admin/specialist-delete-{id?}', 'delete')->name('specialist.delete');
     });
@@ -167,7 +167,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('admin/slider-index', 'index')->name('admin.slider.index');
         Route::get('admin/slider-create', 'create')->name('admin.slider.create');
         Route::post('admin/slider-store', 'store')->name('admin.slider.store');
-        Route::get('admin/slider-edit-{id?}', 'edit')->name('admin.slider.edit');
+        Route::get('admin/slider-edit-{slug?}', 'edit')->name('admin.slider.edit');
         Route::post('admin/slider-update', 'update')->name('admin.slider.update');
         Route::get('admin/slider-delete-{id?}', 'delete')->name('admin.slider.delete');
     });

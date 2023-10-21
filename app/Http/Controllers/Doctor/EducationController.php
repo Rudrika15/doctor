@@ -8,7 +8,7 @@ use App\Models\Education;
 use App\Models\Hospital;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Str;
 
 class EducationController extends Controller
 {
@@ -31,6 +31,7 @@ class EducationController extends Controller
         $education=New Education();
         $education->doctorId=$doctorId->id;
         $education->education=$request->education;
+        $education->slug=$this->generateSlug($request->education);
         if($education->save())
         {
             return redirect()->back()->with('success','redord added succesfully');
@@ -53,6 +54,7 @@ class EducationController extends Controller
         $education=Education::find($id);
         $education->doctorId=$doctor->id;
         $education->education=$request->education;
+        $education->slug=$this->generateSlug($request->education);
         if($education->save()){
             return redirect()->back()->with('success','Education Updated Succesfully');
         }else{
@@ -68,5 +70,9 @@ class EducationController extends Controller
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }
+    }
+
+    private function generateSlug($education){
+        return Str::slug($education);
     }
 }
