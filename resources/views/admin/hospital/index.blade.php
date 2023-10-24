@@ -143,7 +143,7 @@
 
 
                     <td>{{$hospitals->siteUrl}}</td>
-                    <td>{{$hospitals->category}}</td>
+                    <td>{{$hospitals->category->categoryName}}</td>
                     <td><img src="{{url('/hospital')}}/{{$hospitals->hospitalLogo}}"></td>
 
 

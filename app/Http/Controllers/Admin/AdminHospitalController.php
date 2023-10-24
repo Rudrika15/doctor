@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\User;
 use App\Models\City;
 use App\Models\Doctor;
@@ -10,6 +11,7 @@ use App\Models\Hospital;
 use App\Models\HospitalType;
 use App\Models\Gallery;
 use App\Models\Facility;
+use App\Models\Lead;
 use App\Models\SocialLink;
 use App\Models\Specialist;
 use Illuminate\Http\Request;
@@ -218,6 +220,7 @@ class AdminHospitalController extends Controller
                 ->with('hospitalType')
                 ->with('city')
                 ->with('user')
+                ->with('category')
                 ->paginate(20);
                 $count = count($hospital);
         }
@@ -229,14 +232,16 @@ class AdminHospitalController extends Controller
 
         $user = User::all();
         $city = City::all();
+        $category = Category::all();
         $hospitaltype = HospitalType::all();
-        return view('admin.hospital.create', compact('city', 'hospitaltype', 'user'));
+        return view('admin.hospital.create', compact('category','city', 'hospitaltype', 'user'));
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
-            'hospitalName' => 'required|unique:hospitals,hospitalName,cityId'.$request->cityId,
+            'hospitalName' => 'required|unique:hospitals,hospitalName,slug'.$request->slug.'cityId'.$request->cityId,
+            'slug'=>'required',
             'email' => 'required',
             'password' => 'required',
             'address' => 'required',
@@ -244,7 +249,7 @@ class AdminHospitalController extends Controller
             'contactNo' => 'required',
             'hospitalTypeId' => 'required',
             'siteUrl' => 'required',
-            'category' => 'required',
+            'categoryId' => 'required',
             'hospitalLogo' => 'required',
             'hospitalTime' => 'required',
             'services' => 'required'
@@ -267,7 +272,7 @@ class AdminHospitalController extends Controller
         $hospital->hospitalTypeId = $request->hospitalTypeId;
         $hospital->userId = $user->id;
         $hospital->siteUrl = $request->siteUrl;
-        $hospital->category = $request->category;
+        $hospital->categoryId = $request->categoryId;
 
         $hospitalLogo = $request->hospitalLogo;
         $hospital->hospitalLogo = time() . '.' . $request->hospitalLogo->extension();
@@ -290,9 +295,10 @@ class AdminHospitalController extends Controller
     {
         $user = User::all();
         $city = City::all();
+        $category = Category::all();
         $hospitaltype = HospitalType::all();
         $hospital = Hospital::find($id);
-        return view('admin.hospital.edit', compact('hospital', 'city', 'hospitaltype', 'user'));
+        return view('admin.hospital.edit', compact('category','hospital', 'city', 'hospitaltype', 'user'));
     }
 
     public function update(Request $request)
@@ -305,7 +311,7 @@ class AdminHospitalController extends Controller
             'hospitalTypeId' => 'required',
             
             'siteUrl' => 'required',
-            'category' => 'required',
+            'categoryId' => 'required',
             'hospitalTime' => 'required',
             'services' => 'required'
         ]);
@@ -320,7 +326,7 @@ class AdminHospitalController extends Controller
         $hospital->hospitalTypeId = $request->hospitalTypeId;
         // $hospital->userId = $request->userId;
         $hospital->siteUrl = $request->siteUrl;
-        $hospital->category = $request->category;
+        $hospital->categoryId = $request->categoryId;
 
         if ($request->hospitalLogo) {
             $hospitalLogo = $request->hospitalLogo;
@@ -441,7 +447,7 @@ class AdminHospitalController extends Controller
         }
         //-------------------------------------------------------------------------
 
-        //For Gallery
+    //For Gallery
 
         $title = $request->title;
         $status = $request->status;
@@ -509,7 +515,7 @@ class AdminHospitalController extends Controller
             $facilitycount = count($facility);
         }
 
-        //For Social Link.
+    //For Social Link.
         $socialtitle=$request->title;
         $socialstatus=$request->status;
 
@@ -545,7 +551,20 @@ class AdminHospitalController extends Controller
             $socialcount=count($sociallink);  
         }
         
-        return view('admin.hospital.viewdetails', compact('hospital', 'doctor', 'gallery', 'facility', 'specialist', 'gallerycount', 'facilitycount', 'sociallink','doctorcount','socialcount'));
+    // For Leads
+        $leadUserName=$request->name;
+        $phone=$request->phone;
+        $age=$request->age;
+        if(isset($leadUserName)){
+            $lead=Lead::orderBy('title','ASC')
+                  ->where('hospitalId','=',$hospitalId)
+                  ->where('name','=',"%$leadUserName%")
+                  ->get();
+        }else{
+            $lead=Lead::where('hospitalId','=',$hospitalId)->paginate(10);
+            $leadcount=count($lead);
+        }
+        return view('admin.hospital.viewdetails', compact('lead','hospital', 'doctor', 'gallery', 'facility', 'specialist', 'gallerycount', 'facilitycount', 'sociallink','doctorcount','socialcount','leadcount'));
     }
 
     private function generateSlug($hospitalName)

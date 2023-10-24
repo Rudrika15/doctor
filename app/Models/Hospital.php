@@ -46,6 +46,10 @@ class Hospital extends Model
     {
         return $this->belongsTo(City::class, 'cityId');
     }
+    function category()
+    {
+        return $this->hasOne(Category::class,'id','categoryId');
+    }
     function user()
     {
         return $this->hasOne(User::class, 'id', 'userId');

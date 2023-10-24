@@ -95,7 +95,7 @@
                                 </a>
                                 @endif
                                 &nbsp; &nbsp; &nbsp;
-                                <a class="text-muted" href="{{route('register')}}">Create Account</a>
+                                <a class="text-muted" href="{{route('registerHospital')}}">Create Account As A Hospitals</a>
                            
                                 </div>
                                 

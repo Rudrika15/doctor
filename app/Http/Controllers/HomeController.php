@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Blog;
+use App\Models\Category;
 use App\Models\City;
 use App\Models\Doctor;
 use App\Models\Education;
@@ -11,6 +12,7 @@ use App\Models\Facility;
 use App\Models\Gallery;
 use App\Models\Hospital;
 use App\Models\HospitalType;
+use App\Models\Lead;
 use App\Models\Role;
 use App\Models\Schedule;
 use App\Models\Slider;
@@ -62,6 +64,12 @@ class HomeController extends Controller
             $doctor=Doctor::where('status','=','Active')->get();
             $doctorcount=count($doctor);
 
+            $lead=Lead::all();
+            $leadcount=count($lead);
+
+            $category=Category::all();
+            $categorycount=count($category);
+
             $gallery=Gallery::where('status','=','Active')->get();
             $gallerycount=count($gallery);
 
@@ -80,7 +88,8 @@ class HomeController extends Controller
             return view('home',compact('slidercount','hospitalcount','citycount',
                             'statecount','hospitalTypecount','specialistcount',
                             'doctorcount','gallerycount','facilitycount',
-                            'socialLinkcount','usercount','rolecount'));
+                            'socialLinkcount','usercount','rolecount',
+                            'leadcount','categorycount'));
         }elseif(Auth::user()->hasRole('User')){
             return redirect('/');
         }elseif(Auth::user()->hasRole('Hospital')){
@@ -90,6 +99,9 @@ class HomeController extends Controller
             $doctorcount=count($doctor);
 
             $hospital=Hospital::where('userId','=',$userId)->first();
+
+            $lead=Lead::where('hospitalId','=',$hospital->id)->get();
+            $leadcount=count($lead);
 
             $gallery=Gallery::where('hospitalId',$hospital->id)->get();
             $gallerycount=count($gallery);
@@ -108,7 +120,7 @@ class HomeController extends Controller
 
             return view('/home',compact('doctorcount','gallerycount',
                                 'facilitycount','socialLinkcount',
-                                'appointmentcount','schedulecount'));
+                                'appointmentcount','schedulecount','leadcount'));
         }elseif(Auth::user()->hasRole('Doctor')){
             $user=Auth::user()->id;
             $doctor=Doctor::where('userId','=',$user)->first();

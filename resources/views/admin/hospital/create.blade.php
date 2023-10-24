@@ -118,16 +118,15 @@
             <div class="form-group">
                 <strong>Select Category</strong>
                     <br>
-                    <select class="form-select form-control-user @error('category') is-invalid @enderror"
-                        name="category" id="category" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
+                    <select class="form-select form-control-user @error('categoryId') is-invalid @enderror"
+                        name="categoryId" id="categoryId" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
-                             <option selected disabled>Select Category</option>
-                             <option value="Alopethi">Alopethi</option>
-                             <option value="Homiopethi">Homiopethi</option>
-                             <option value="Aayurvedi">Aayurvedi</option>
-                             
+                            <option selected disabled>Select Category</option> 
+                            @foreach ($category as $category)
+                                <option value="{{$category->id}}">{{$category->categoryName}}</option>
+                            @endforeach
                     </select>
-                    @error('category')
+                    @error('categoryId')
                         <span class="invalid-feedback" role="alert">
                         {{$message}}
                         </span>

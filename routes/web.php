@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminGalleryController;
 use App\Http\Controllers\Admin\AdminCityController;
 use App\Http\Controllers\UserController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Hospital\GalleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHospitalController;
 use App\Http\Controllers\Admin\AdminHospitalTypeController;
+// use App\Http\Controllers\Admin\AdminLeadController;
 use App\Http\Controllers\Admin\AdminSocialLinkController;
 use App\Http\Controllers\Doctor\BlogController;
 use App\Http\Controllers\Doctor\EducationController;
@@ -24,6 +26,7 @@ use App\Http\Controllers\Visitor\VisitorController;
 use App\Http\Controllers\Admin\AdminStateController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Doctor\ProfileUpdateController;
+use App\Http\Controllers\Hospital\LeadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +86,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     // ----------------------------------------Admin Side-------------------------------------------------
 
+    
+
     // Admin State
     Route::controller(AdminStateController::class)->group(function () {
         Route::get('admin/state-index', 'index')->name('state.index');
@@ -92,6 +97,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('admin/state-update', 'update')->name('state.update');
         Route::get('admin/state-delete-{id?}', 'delete')->name('state.delete');
     });
+
     // Admin City 
     Route::controller(AdminCityController::class)->group(function () {
         Route::get('admin/city-create', 'create')->name('city.create');
@@ -102,6 +108,16 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('admin/city-delete-{id?}', 'delete')->name('city.delete');
     });
 
+    // Admin Category
+    Route::controller(AdminCategoryController::class)->group(function () {        Route::get('admin/category-create', 'create')->name('admin.category.create');
+        Route::get('admin/category-index', 'index')->name('admin.category.index');
+        Route::get('admin/category-create', 'create')->name('admin.category.create');
+        Route::post('admin/category-store', 'store')->name('admin.category.store');
+        Route::get('admin/category-edit-{slug?}', 'edit')->name('admin.category.edit');
+        Route::post('admin/category-update', 'update')->name('admin.category.update');
+        Route::get('admin/category-delete-{id?}', 'delete')->name('admin.category.delete');
+
+    });
 
     // Admin Hospital
     Route::controller(AdminHospitalController::class)->group(function () {
@@ -227,7 +243,10 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::get('index', [AppointmentController::class, 'index'])->name('appointment.index');
 
-
+    // Hospital Leads
+    Route::controller(LeadController::class)->group(function(){
+        Route::get('hospital/lead-index','index')->name('hospital.lead.index');
+    });
     //Route::get('/', 'HomeController@index')->name('home');
 
 

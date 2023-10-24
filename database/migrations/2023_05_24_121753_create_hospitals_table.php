@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('hospitalTypeId');
             $table->integer('userId');
             $table->string('siteUrl');
-            $table->string('category');
+            $table->integer('categoryId');
             $table->string('hospitalLogo');
             $table->string('hospitalTime');
             $table->string('services');

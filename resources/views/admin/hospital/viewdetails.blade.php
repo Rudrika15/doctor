@@ -18,6 +18,7 @@
             <li><a href="#gallery" data-toggle="tab">Gallery</a></li>
             <li><a href="#facility" data-toggle="tab">Facility</a></li>
             <li><a href="#sociallink" data-toggle="tab">Social Link</a></li>
+            <li><a href="#leads" data-toggle="tab">Leads</a></li>
 
         </ul>
         <div class="tab-content">
@@ -368,6 +369,78 @@
                  </div>
                 {{-- {!! $data->render() !!} --}}
             </div>
+            {{-- End Social Link --}}
+
+            {{-- Start Leads --}}
+            <div class="tab-pane" id="leads">
+               
+                <form class="mb-5" action="{{ route('admin.hospital.viewdetails',['id' => request()->route('id')]) }}" method="get">
+                    <div class="row">
+                    <input type="hidden" name="hospitalId" value="{{ request()->route('id') }}" class="form-control @error('doctorName') is-invalid @enderror">
+              
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <input type="text" autocomplete="off" id="searchLeadInput" onkeyup="filterLeadList()" onfocus="showLeadItems()" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Enter Name">
+                                @foreach ($lead as $name)
+                                <div class="itemLead text-center p-2 border" style="display: none;">{{$title->name}}</div>
+                                @endforeach
+                                
+                            @error('name')
+                            <sapn class="text-danger">{{ $message }}</sapn>
+                            @enderror
+                        </div>
+                    </div> 
+                   
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                                <select class="form-select form-control-user  @error('status') is-invalid @enderror"
+                                    name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;"
+                                    aria-label="Default select example">
+                                        <option selected disabled class="text-center">---Select status---</option>
+                                        <option value="Active">Active</option> 
+                                        <option value="Delete">Delete</option> 
+                                </select>
+                                @error('status')
+                                    <span class="invalid-feedback" role="alert">
+                                    {{$message}}
+                                    </span>
+                                @enderror
+                        </div>
+                    </div>  
+                    
+                    
+                    <div class="col-lg-4 mt-4 text-center">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                        <a class=" btn btnsubmit" href="{{route('admin.hospital.viewdetails',['id' => request()->route('id')])}}">Clear</a>
+
+                    </div>
+                 </div>
+                </form>
+            
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Age</th> 
+                        </tr>
+                        @foreach ($lead as $leads)
+                        <tr>
+                            <td>{{$leads->name}}</td>   
+                            <td>{{$leads->phone}}</td>   
+                            <td>{{$leads->age}}</td>   
+                        </tr>   
+                        @endforeach
+                        @if ($leadcount==0)
+                            <td colspan="5" class="display-3 text-center text-danger">Record Not Found</td>
+                        @endif
+                    </table>
+                    {!! $lead->withQueryString()->links('pagination::bootstrap-5') !!}
+
+                 </div>
+                {{-- {!! $data->render() !!}  --}}
+            </div>
+            {{-- End Leads --}}
         </div>
  
     </div>
@@ -514,6 +587,13 @@
       }
     }
   </script>
+
+  {{-- ----------------------------------- --}}
+
+
+  {{-- For User Leads --}}
+
+  
 
   {{-- ----------------------------------- --}}
 @endsection
