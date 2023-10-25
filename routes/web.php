@@ -53,9 +53,10 @@ Route::get('specialist', [VisitorController::class, 'specialist'])->name('visito
 Route::get('visitorDetail/{slug?}', [VisitorController::class, 'visitorsDetail'])->name('visitor.visitorsDetail');
 Route::post('storVisitorsDetail', [VisitorController::class, 'storVisitorsDetail'])->name('visitor.storVisitorsDetail');
 Route::get('doctorList/{slug?}', [VisitorController::class, 'doctorList'])->name('visitor.doctorList');
-Route::get('makeAnApoinment', [VisitorController::class, 'makeAnApoinment'])->name('visitor.makeAnApoinment');
 Route::get('contact', [VisitorController::class, 'contact'])->name('visitor.contact');
 Route::get('doctorDetails/{slug?}', [VisitorController::class, 'doctorDetails'])->name('visitor.doctorDetails');
+Route::get('makeAnApoinment', [VisitorController::class, 'makeAnApoinment'])->name('visitor.makeAnApoinment');
+Route::post('/fetchHospital', [VisitorController::class, 'fetchHospital'])->name('fetchHospital');
 
 
 

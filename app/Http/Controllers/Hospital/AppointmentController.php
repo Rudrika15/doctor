@@ -14,7 +14,6 @@ class AppointmentController extends Controller
     public function index()
     {
         $appointment=Appointment::paginate(5);
-       
         return view('hospital.appointment.index',compact('appointment'));
 
     }

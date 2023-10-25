@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Visitor;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\City;
 use Illuminate\Http\Request;
 use App\Models\Hospital;
@@ -18,8 +19,9 @@ use App\Models\Patient;
 use App\Models\State;
 use App\Models\User;
 use App\Models\Lead;
+use App\Models\Schedule;
 use Auth;
-
+use Illuminate\Cookie\CookieJar;
 class VisitorController extends Controller
 {
     public function index()
@@ -51,6 +53,7 @@ class VisitorController extends Controller
         $city=City::all();
         
         if($cityId){
+            session()->put('cityId', $cityId);
             $doctor = Doctor::all();
             if ($doctor) {
                 $doctorcount = count($doctor);
@@ -158,19 +161,16 @@ class VisitorController extends Controller
         $slug=$request->slug;
         $hospital=Hospital::with('user')->where('slug','=',$slug)->first();
         $user=User::where('id','=',$hospital->userId)->first();
-
-        cookie()->queue('address', $hospital->address, 60); // 1440 minutes (1 day)
-        cookie()->queue('email', $user->email, 60); // 1440 minutes (1 day)
-        cookie()->queue('contactNo', $hospital->contactNo, 60); // 1440 minutes (1 day)
-
         $lead=new Lead();
         $lead->name=$request->name;
         $lead->phone=$request->phone;
         $lead->age=$request->age;
         $lead->hospitalId=$hospital->id;
         $lead->save();
-        
-        return redirect()->route('visitor.hospitalDetails', ['slug' => $slug]);
+
+
+        return redirect()->route('visitor.hospitalDetails', ['slug' => $slug])
+                        ->withCookie(cookie('name', $request->name, 60));
     }
     public function specialist(){
         $city=City::all();
@@ -199,7 +199,30 @@ class VisitorController extends Controller
     }
     public function makeAnApoinment(){
         $city=City::all();
-        return view('visitor.makeAnApoinment',compact('city'));
+        
+        $doctor=Doctor::all();
+        $hospital=Hospital::all();
+        $category=Category::all();
+        $schedule=Schedule::all();
+
+        $data['cities'] = City::get(["name", "id"]);
+        return view('visitor.makeAnApoinment',compact('city','doctor','hospital','category','schedule'),$data);
+    }
+
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function fetchHospital(Request $request)
+    {
+        $data['hospitals'] = Hospital::where("cityId", $request->cityId)
+                                    ->get(["hospitalName", "id"]);
+                                      
+        return response()->json($data);
+    }
+    public function createMakeAnAppoinment(Request $request){
+
     }
     public function contact(){
         $city=City::all();

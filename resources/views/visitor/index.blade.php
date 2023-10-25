@@ -160,7 +160,7 @@
         <div class="row">
             @foreach ($specialist as $specialist)
               <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 md-0">
-                <a href="{{route('visitor.doctorList')}}/{{$specialist->id}}">
+                <a href="{{route('visitor.doctorList')}}/{{$specialist->slug}}">
                   <div class="icon-box">
                     <div class="icon"><i class="fas fa-pills"></i></div>
                     <h4><a href="">{{$specialist->specialistName}}</a></h4>
@@ -356,9 +356,14 @@
           @foreach ($hospital as $hospital)
           <div class="col-lg-6 mt-4 lg-0">
             <div class="member d-flex align-items-start">
-              <div class="pic">
+              <div class="">
                 <a href="{{route('visitor.hospitalDetails')}}/{{$hospital->slug}}">
-                  <img src="{{url('/hospital')}}/{{$hospital->hospitalLogo}}" class="img-fluid rounded-circle" width="200px" height="200px" alt=""></div>
+                  <img src="{{url('/hospital')}}/{{$hospital->hospitalLogo}}" class="rounded-circle mt-3" alt=""
+                        style="width: 150px;height:150px;
+                        border-radius: 50%;
+                        margin: 0 auto;
+                        box-shadow: 0 0 10px rgba(0,0,0,.2);">                
+                </div>
                 </a>
                 <div class="member-info">
                 <h4>{{$hospital->hospitalName}}</h4>

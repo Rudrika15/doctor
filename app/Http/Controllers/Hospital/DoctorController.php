@@ -11,14 +11,14 @@ use App\Models\Specialist;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+
 class DoctorController extends Controller
 {
-
     public function index()
     {
         $hospitalId=Auth::user()->id;
 
-         $doctor = Doctor::with('hospital')->where('hospitalId','=',$hospitalId)->paginate(5);
+        $doctor = Doctor::with('hospital')->where('hospitalId','=',$hospitalId)->paginate(5);
         return view('hospital.doctor.index', compact('doctor'));
     }
 

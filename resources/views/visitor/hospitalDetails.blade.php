@@ -78,12 +78,11 @@
                                   <div class="address">
                                     <i class="bi bi-geo-alt"></i>
                                     <h4>Location:</h4>
-                                    @if (cookie('address'))
-                                        <p>{{$hospital->address}}</p>
+                                    @if (cookie('name'))
+                                      <p>{{$hospital->address}}</p>
                                     @else
-                                        <p>********</p>
+                                      <p>********</p>
                                     @endif
-                                     
                                   </div>
                     
                                   <div class="email">
@@ -149,17 +148,18 @@
             </div>
           <div class="tab-pane fade mt-5" id="doctor">
               <div class="container-fluid">
-                <div class="row">
+                <div class="row"> 
                   @foreach ($doctor as $doctor)
                       <div class="col-lg-4 mt-5">
                         <a href="{{route('visitor.doctorDetails')}}/{{$doctor->slug}}">
 
-                        <div class="card"  style="height:300px;width: 18rem;box-shadow: 0 5px 10px rgba(0,0,0,.2);">
+                        <div class="card h-100"  style="width: 18rem;box-shadow: 0 5px 10px rgba(0,0,0,.2);">
                           <img src="{{url('/doctor')}}/{{$doctor->photo}}" class="img-fluid mt-5" alt="..." 
                                 style="width: 150px;height:150px;
                                     border-radius: 50%;
                                     margin: 0 auto;
                                     box-shadow: 0 0 10px rgba(0,0,0,.2);">
+                                    
                           <div class="card-body">
                             <h5 class="card-title text-center">{{$doctor->doctorName}}</h5>
                             <hr>

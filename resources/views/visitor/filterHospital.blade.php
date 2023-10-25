@@ -2,7 +2,9 @@
 @section('content')
 
 {{-- Hospital Sectoion --}}
-
+@php
+    $cityId = session('cityId');
+@endphp
 <main id="main">
 
     <!-- ======= Breadcrumbs Section ======= -->
@@ -44,29 +46,35 @@
         <div class="row">
          
           @foreach ($filterHospital as $filterHospital)
- 
-          <div class="col-lg-6 mt-4 lg-0">
-            <div class="member d-flex align-items-start">
-              <div class="pic">
-                  <img src="{{url('/hospital')}}/{{$filterHospital->hospitalLogo}}" class="img-fluid rounded-circle" alt=""></div>
-                <div class="member-info">
-                  
-                <h4>{{$filterHospital->hospitalName}}</h4>
-                <span>Chief Medical Officer</span>
-                  
-                <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
-                <a href="{{route('visitor.hospitalDetails')}}/{{$filterHospital->slug}}" class="btn text-white mt-2" style="background-color:#A1BDD6;">SeeDetails</a>
+            @if ($filterHospital->cityId == $cityId)
+              <div class="col-lg-6 mt-4 lg-0">
+                <div class="member d-flex align-items-start">
+                  <div class="">
+                    <img src="{{url('/hospital')}}/{{$filterHospital->hospitalLogo}}" class="rounded-circle mt-3" alt=""
+                          style="width: 150px;height:150px;
+                          border-radius: 50%;
+                          margin: 0 auto;
+                          box-shadow: 0 0 10px rgba(0,0,0,.2);">
+                  </div>
+                    <div class="member-info">
+                      
+                    <h4>{{$filterHospital->hospitalName}}</h4>
+                    <span>Chief Medical Officer</span>
+                      
+                    <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
+                    <a href="{{route('visitor.hospitalDetails')}}/{{$filterHospital->slug}}" class="btn text-white mt-2" style="background-color:#A1BDD6;">SeeDetails</a>
 
-                <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""><i class="ri-linkedin-box-fill"></i> </a>
+                    <div class="social">
+                      <a href=""><i class="ri-twitter-fill"></i></a>
+                      <a href=""><i class="ri-facebook-fill"></i></a>
+                      <a href=""><i class="ri-instagram-fill"></i></a>
+                      <a href=""><i class="ri-linkedin-box-fill"></i> </a>
+                    </div>
+                    
+                  </div>
                 </div>
-                
               </div>
-            </div>
-          </div>
+            @endif
           @endforeach
          
         </div>

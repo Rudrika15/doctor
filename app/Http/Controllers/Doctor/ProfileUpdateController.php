@@ -8,6 +8,7 @@ use App\Models\Specialist;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ProfileUpdateController extends Controller
 {
@@ -29,6 +30,7 @@ class ProfileUpdateController extends Controller
         $id=$request->doctorId;
         $doctor=Doctor::find($id);
         $doctor->doctorName=$request->doctorName;
+        $doctor->slug=$this->generateSlug($request->doctorName);
         $doctor->specialistId=$request->specialistId;
         $doctor->contactNo=$request->contactNo;
         if($request->photo){
@@ -47,5 +49,9 @@ class ProfileUpdateController extends Controller
         $user->save();
 
         return redirect()->back()->with('success', 'Doctor Profile Updated Successfully');
+    }
+
+    private function generateSlug($doctorName){
+        return Str::slug($doctorName);
     }
 }
