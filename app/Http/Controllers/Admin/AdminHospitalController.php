@@ -355,7 +355,14 @@ class AdminHospitalController extends Controller
     {
         $hospital = Hospital::find($id);
         $hospital->status = "Delete";
-        if ($hospital->save()) {
+        $hospital->save();
+        $doctor=Doctor::where('hospitalId','=',$hospital->userId)->get();
+        foreach($doctor as $doctor){
+            $doctor->status="Delete";
+            $doctor->save();
+        }
+        return $doctor;
+        if ($hospital) {
             return redirect('admin/hospital-index')->with('success', 'Hospital Deleted successfully!');
         } else {
             return back()->with('error', 'You have no permission for this page!');

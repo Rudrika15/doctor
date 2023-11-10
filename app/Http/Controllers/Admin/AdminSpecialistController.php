@@ -58,11 +58,13 @@ class AdminSpecialistController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'specialistName' => 'required'
+            'specialistName' => 'required',
+            'details' => 'required'
         ]);
         $specialist = new Specialist();
         $specialist->specialistName = $request->specialistName;
         $specialist->slug = $this->generateSlug($request->specialistName);
+        $specialist->details = $request->details;
         $specialist->save();
 
         if ($specialist->save()) {
@@ -81,12 +83,14 @@ class AdminSpecialistController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
-            'specialistName' => 'required'
+            'specialistName' => 'required',
+            'details' => 'required',
         ]);
         $slug = $request->slug;
         $specialist = Specialist::where('slug','=',$slug)->first();
         $specialist->specialistName = $request->specialistName;
         $specialist->slug = $this->generateSlug($request->specialistName);
+        $specialist->details = $request->details;
         $specialist->status = "Active";
 
         if ($specialist->save()) {

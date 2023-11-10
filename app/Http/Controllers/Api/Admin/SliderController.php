@@ -10,7 +10,7 @@ class SliderController extends Controller
 {
     function slider()
     {
-        $sliderView = Slider::all();
+        $sliderView = Slider::paginate(10);
 
         if ($sliderView) {
             return response([

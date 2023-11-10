@@ -46,7 +46,7 @@
           {{-- <h1>Hello{{ request()->route('hospitalTypeId') }}</h1> --}}
          
           @foreach ($hospital as $hospital)
-            @if ($hospital->cityId == $cityId)
+            {{-- @if ($hospital->cityId == $cityId) --}}
               <div class="col-lg-6 mt-4 lg-0">
                 <div class="member d-flex align-items-start">
                   <div class="">
@@ -75,7 +75,7 @@
                 </div>
               </div>
             
-            @endif
+            {{-- @endif --}}
           @endforeach
          
         </div>

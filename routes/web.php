@@ -56,8 +56,11 @@ Route::get('doctorList/{slug?}', [VisitorController::class, 'doctorList'])->name
 Route::get('contact', [VisitorController::class, 'contact'])->name('visitor.contact');
 Route::get('doctorDetails/{slug?}', [VisitorController::class, 'doctorDetails'])->name('visitor.doctorDetails');
 Route::get('makeAnApoinment', [VisitorController::class, 'makeAnApoinment'])->name('visitor.makeAnApoinment');
+Route::post('/fetchCity', [VisitorController::class, 'fetchCity'])->name('fetchCity');
 Route::post('/fetchHospital', [VisitorController::class, 'fetchHospital'])->name('fetchHospital');
-
+Route::post('/fetchDoctor', [VisitorController::class, 'fetchDoctor'])->name('fetchDoctor');
+Route::post('/fetchSchedule', [VisitorController::class, 'fetchSchedule'])->name('fetchSchedule');
+Route::post('/createMakeAnAppoinment', [VisitorController::class, 'createMakeAnAppoinment'])->name('createMakeAnAppoinment');
 
 
 Route::get('Register/hospital',[RegisterController::class,'hospitalCreate'])->name('registerHospital');
@@ -78,6 +81,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
 
+    
     Route::controller(VisitorController::class)->group(function () {
         // Route::get('hospitalDetails/{id?}', 'hospitalDetails')->name('visitor.hospitalDetails');
         Route::get('profile/{id?}', 'profile')->name('visitor.profile');
@@ -87,7 +91,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     // ----------------------------------------Admin Side-------------------------------------------------
 
-    
+    Route::get('users-export',[UserController::class,'export'] )->name('users.export');
+    Route::post('users-import', [UserController::class,'import'])->name('users.import');
 
     // Admin State
     Route::controller(AdminStateController::class)->group(function () {

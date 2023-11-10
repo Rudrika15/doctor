@@ -57,6 +57,7 @@
                 <tr>
                     <th>Category Name</th>
                     <th>Slug</th>
+                    <th>Details</th>
                     <th>Status</th>
                     <th width="280px">Action</th>
                 </tr>
@@ -64,6 +65,7 @@
                 <tr>
                     <td>{{$categorys->categoryName}}</td>
                     <td>{{$categorys->slug}}</td>
+                    <td>{{$categorys->details}}</td>
                     <td>{{$categorys->status}}</td>
                     <td>
                         <a class="btn btn-primary" href="{{route('admin.category.edit')}}{{$categorys->slug}}">Edit</a>

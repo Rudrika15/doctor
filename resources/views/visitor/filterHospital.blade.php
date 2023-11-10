@@ -46,7 +46,7 @@
         <div class="row">
          
           @foreach ($filterHospital as $filterHospital)
-            @if ($filterHospital->cityId == $cityId)
+            {{-- @if ($filterHospital->cityId == $cityId) --}}
               <div class="col-lg-6 mt-4 lg-0">
                 <div class="member d-flex align-items-start">
                   <div class="">
@@ -74,7 +74,7 @@
                   </div>
                 </div>
               </div>
-            @endif
+            {{-- @endif --}}
           @endforeach
          
         </div>

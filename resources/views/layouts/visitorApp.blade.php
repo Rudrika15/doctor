@@ -66,7 +66,7 @@
       <div class="contact-info d-flex align-items-center">
        
           <i class="bi bi-geo-alt-fill"></i>
-          <select class="form-select" name="cityId" id="cityId" aria-label="Default select example" style="border:0px;outline:0px;">
+          <select class="form-select" name="cityId" id="cityIdData" aria-label="Default select example" style="border:0px;outline:0px;">
             <option selected>Location</option>
             @foreach ($city as $city)
                 <option value="{{$city->id}}">{{$city->name}}</option>  
@@ -213,12 +213,12 @@
       <div class="col-lg-2 col-md-6 footer-links">
         <h4>Useful Links</h4>
         <ul>
-          <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+          <li><i class="bx bx-chevron-right"></i> <a href="{{route('visitor.index')}}">Home</a></li>
           <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-          <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-          <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-          <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-        </ul>
+          <li><i class="bx bx-chevron-right"></i> <a href="{{route('visitor.hospitalList')}}">Hospital</a></li>
+          <li><i class="bx bx-chevron-right"></i> <a href="{{route('visitor.specialist')}}">Specialist</a></li>
+          <li><i class="bx bx-chevron-right"></i> <a href="{{route('visitor.contact')}}">Contact us</a></li>
+        </ul> 
       </div>
 
       <div class="col-lg-3 col-md-6 footer-links">

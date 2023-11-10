@@ -60,6 +60,7 @@
                 <tr>
                     <th>Specialist Name</th>
                     <th>Slug</th>
+                    <th>Details</th>
                     <th>Status</th>
                     <th width="280px">Action</th>
                 </tr>
@@ -67,6 +68,7 @@
                 <tr>
                     <td>{{$specialists->specialistName}}</td>
                     <td>{{$specialists->slug}}</td>
+                    <td>{{$specialists->details}}</td>
                     <td>{{$specialists->status}}</td>
                     <td>
                         <a class="btn btn-primary" href="{{route('specialist.edit')}}{{$specialists->slug}}">Edit</a>

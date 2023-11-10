@@ -69,7 +69,7 @@
                           <h2>Contact</h2>
                         </div>
                       </div>
-                  
+                   
                       <div class="container">
                         <div class="row mt-5">
                               <div class="col-lg-4">
@@ -78,7 +78,7 @@
                                   <div class="address">
                                     <i class="bi bi-geo-alt"></i>
                                     <h4>Location:</h4>
-                                    @if (cookie('name'))
+                                    @if (Cookie::has('name'))
                                       <p>{{$hospital->address}}</p>
                                     @else
                                       <p>********</p>
@@ -88,7 +88,7 @@
                                   <div class="email">
                                     <i class="bi bi-envelope"></i>
                                     <h4>Email:</h4>
-                                    @if (cookie('email'))
+                                    @if (Cookie::has('name'))
                                      <p>{{$hospital->user->email}}</p>
                                     @else 
                                       <p>********</p>
@@ -99,7 +99,7 @@
                                   <div class="phone">
                                     <i class="bi bi-phone"></i>
                                     <h4>Call:</h4>
-                                    @if (cookie('contactNo'))
+                                    @if (Cookie::has('name'))
                                     <p>{{$hospital->contactNo}}</p>
                                     @else
                                      <p>********</p>
@@ -148,9 +148,9 @@
             </div>
           <div class="tab-pane fade mt-5" id="doctor">
               <div class="container-fluid">
-                <div class="row"> 
+                <div class="d-flex justify-content-start gap-4 flex-wrap ms-lg-3"> 
                   @foreach ($doctor as $doctor)
-                      <div class="col-lg-4 mt-5">
+                      <div class="mt-5">
                         <a href="{{route('visitor.doctorDetails')}}/{{$doctor->slug}}">
 
                         <div class="card h-100"  style="width: 18rem;box-shadow: 0 5px 10px rgba(0,0,0,.2);">
@@ -164,7 +164,7 @@
                             <h5 class="card-title text-center">{{$doctor->doctorName}}</h5>
                             <hr>
                             
-                            <h4 class="card-text text-center" style="color: #2c4964;">{{$hospital->hospitalName}}</p>
+                            <h4 class="card-text text-center" style="color: #2c4964;">{{$doctor->specialist->specialistName}}</p>
                             {{---<p class="card-text text-center">{{$doctor->contactNo	}}</p> --}}
                             {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
                           </div>

@@ -41,13 +41,19 @@ class AdminCategoryController extends Controller
     }
     public function store(Request $request){
         $this->validate($request,[
-            'categoryName'=>'required'
+            'categoryName'=>'required',
+            'details'=>'required'
         ]);
         $category=new Category();
         $category->categoryName=$request->categoryName;
         $category->slug=$this->generateSlug($request->categoryName);
+        $category->details=$request->details;
         $category->save();
-        return $category;
+        if ($category->save()) {
+            return redirect()->back()->with('success', 'Category Created successfully!');
+        } else {
+            return back()->with('error', 'You have no permission for this page!');
+        }
     } 
     public function Edit($slug){
         $category=Category::where('slug','=',$slug)->first();
@@ -56,11 +62,13 @@ class AdminCategoryController extends Controller
     public function update(Request $request){
         $this->validate($request,[
             'categoryName'=>'required',
+            'details'=>'required'
         ]);
         $slug=$request->slug;
         $category=Category::where('slug','=',$slug)->first();
         $category->categoryName=$request->categoryName;
         $category->slug=$this->generateSlug($request->categoryName);
+        $category->details=$request->details;
         $category->status="Active";
         if ($category->save()) {
             return redirect('admin/category-index')->with('success', 'Category Updated successfully!');

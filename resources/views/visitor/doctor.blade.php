@@ -27,11 +27,10 @@
           <h2>Doctors</h2>
             
         </div>
-        
-        <div class="row">
-                
+       
+        <div class="d-flex justify-content-start gap-4 ms-lg-3">
                     @foreach ($doctor as $doctor)
-                        <div class="col-lg-3 mt-5">
+                        <div class=" mt-5">
                           <a href="{{route('visitor.doctorDetails')}}/{{$doctor->slug}}">
                             <div class="card h-100"  style="width: 18rem;box-shadow: 0 5px 10px rgba(0,0,0,.2);">
                               <img src="{{url('/doctor')}}/{{$doctor->photo}}" class="img-fluid mt-5" alt="..." 
@@ -52,9 +51,6 @@
                           
                         </div>
                     @endforeach
-                  
-            
-         
         </div>
       </div>
     </section>

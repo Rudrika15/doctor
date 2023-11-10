@@ -19,6 +19,8 @@
         @endif
         <div class="table-responsive">
         <table class="table table-bordered">
+            <a class="btn btn-warning float-end" href="{{ route('users.export') }}">Export User Data</a>
+
             <tr>
                 <th>No</th>
                 <th>Name</th>

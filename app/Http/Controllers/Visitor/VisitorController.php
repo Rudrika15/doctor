@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Visitor;
 
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
 use App\Models\Category;
 use App\Models\City;
 use Illuminate\Http\Request;
@@ -27,24 +28,27 @@ class VisitorController extends Controller
     public function index()
     {
         $city=City::all();
-            $doctor = Doctor::all();
-            if ($doctor) {
-                $doctorcount = count($doctor);
+            $doctorAll = Doctor::all();
+            if ($doctorAll) {
+                $doctorcount = count($doctorAll);
             }
            
-            $hospital = Hospital::latest()->take(4)->get();
+            $hospital = Hospital::where('status','!=','Delete')->latest()->take(4)->get();
             if ($hospital) {
                 $hospitallist=Hospital::all();
                 $hospitalcount = count($hospitallist);
             }
             $specialist = Specialist::all();
-            $departments = Specialist::paginate(3);
+            $departments = Category::paginate(3);
+            $departmentsDetails = Category::paginate(3);
+            $doctor = Doctor::latest()->take(5)->get();
+            
             $specialists = $specialist;
             if ($specialist) {
                 $specialistcount = count($specialist);
             }
             $slider = Slider::all();        
-            return view('visitor.index', compact('departments','city','specialist', 'specialists', 'hospital', 'doctor', 'slider', 'hospitalcount', 'specialistcount', 'doctorcount'));
+            return view('visitor.index', compact('doctor','departmentsDetails','departments','city','specialist', 'specialists', 'hospital', 'doctor', 'slider', 'hospitalcount', 'specialistcount', 'doctorcount'));
         
         
     }
@@ -64,12 +68,13 @@ class VisitorController extends Controller
             }
             $specialist = Specialist::all();
             $departments = Specialist::paginate(5);
+            $departmentsDetails = Category::paginate(3);
             $specialists = $specialist;
             if ($specialist) {
                 $specialistcount = count($specialist);
             }
             $slider = Slider::all();        
-            return view('visitor.index', compact('departments','city','specialist', 'specialists', 'hospital', 'doctor', 'slider', 'hospitalcount', 'specialistcount', 'doctorcount'));
+            return view('visitor.index', compact('departments','departmentsDetails','city','specialist', 'specialists', 'hospital', 'doctor', 'slider', 'hospitalcount', 'specialistcount', 'doctorcount'));
         
         }
     }
@@ -98,7 +103,7 @@ class VisitorController extends Controller
     }
     public function hospitalList(){
         $city=City::all();
-        $hospital=Hospital::all();
+        $hospital=Hospital::where('status','!=','Delete')->get();
         $hospitalType=HospitalType::all();        
         return view('visitor.hospitals', compact('hospitalType','hospital','city'));
     }
@@ -106,7 +111,7 @@ class VisitorController extends Controller
         $hospitalTypeId=$request->hospitalTypeId;
         $hospitalType=HospitalType::all();
         $city=City::all();
-        $filterHospital=Hospital::where('hospitalTypeId','=',$hospitalTypeId)->get();
+        $filterHospital=Hospital::where('hospitalTypeId','=',$hospitalTypeId)->where('status','!=','Delete')->get();
         return view('visitor.filterHospital',compact('filterHospital','hospitalType','city')); 
     }
     public function profile()
@@ -138,14 +143,12 @@ class VisitorController extends Controller
             $patient->photo = time() . '.' . $request->photo->extension();
             $request->photo->move(public_path('profile'), $patient->photo);
         }
-
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->contactNumber = $request->contactNo;
         $user->save();
         $patient->save();
-
         return redirect()->back();
     }
 
@@ -161,6 +164,7 @@ class VisitorController extends Controller
         $slug=$request->slug;
         $hospital=Hospital::with('user')->where('slug','=',$slug)->first();
         $user=User::where('id','=',$hospital->userId)->first();
+        
         $lead=new Lead();
         $lead->name=$request->name;
         $lead->phone=$request->phone;
@@ -168,9 +172,8 @@ class VisitorController extends Controller
         $lead->hospitalId=$hospital->id;
         $lead->save();
 
-
         return redirect()->route('visitor.hospitalDetails', ['slug' => $slug])
-                        ->withCookie(cookie('name', $request->name, 60));
+                        ->withCookie(cookie('name', $request->name,1));
     }
     public function specialist(){
         $city=City::all();
@@ -184,45 +187,84 @@ class VisitorController extends Controller
         $specialistId=$specialist->id;
         $city=City::all();
        
-        $doctor=Doctor::with('specialist')->where('specialistId','=',$specialistId)->get();
+        $doctor=Doctor::with('hospital')->with('specialist')->where('specialistId','=',$specialistId)->where('status','!=','Delete')->get();
        // $education=Education::where('doctorId','=',$)->first();
         return view('visitor.doctor',compact('doctor','city'));
-    }
-    
+    }    
     public function doctorDetails(Request $request){
         $city=City::all();
         $slug=$request->slug;
         $doctor=Doctor::with('hospital')->with('education')->where('slug','=',$slug)->first();
-       
         $hospital=Hospital::where('userId','=',$doctor->hospitalId)->first();
         return view('visitor.doctorDetails',compact('city','doctor','hospital'));
     }
     public function makeAnApoinment(){
         $city=City::all();
-        
-        $doctor=Doctor::all();
-        $hospital=Hospital::all();
         $category=Category::all();
-        $schedule=Schedule::all();
-
-        $data['cities'] = City::get(["name", "id"]);
-        return view('visitor.makeAnApoinment',compact('city','doctor','hospital','category','schedule'),$data);
+        $data['states'] = State::get(["stateName", "id"]);
+        return view('visitor.makeAnApoinment',compact('city','category'),$data);
     }
-
     /**
      * Write code on Method
      *
      * @return response()
      */
-    public function fetchHospital(Request $request)
-    {
+    public function fetchCity(Request $request){
+        $data['cities'] = City::where("stateId", $request->stateId)
+        ->where('status','!=','Delete')
+        ->get(["name", "id"]);                             
+        return response()->json($data);
+    }
+    public function fetchHospital(Request $request){
         $data['hospitals'] = Hospital::where("cityId", $request->cityId)
-                                    ->get(["hospitalName", "id"]);
-                                      
+        ->where('status','!=','Delete')
+        ->get(["hospitalName", "id"]);                             
+        return response()->json($data);
+    }
+    public function fetchDoctor(Request $request){
+        $hospital=Hospital::where('id','=',$request->hospitalId)->first();
+        $data['doctors'] = Doctor::where("hospitalId", $hospital->userId)
+        ->where('status','!=','Delete')
+        ->get(["doctorName", "id"]);                              
+        return response()->json($data);
+    }
+    public function fetchSchedule(Request $request){
+       
+        $data['schedules'] = Schedule::where("doctorId", $request->doctorId)
+                                    ->get(["day","time","id"]);                              
         return response()->json($data);
     }
     public function createMakeAnAppoinment(Request $request){
+        $this->validate($request,[
+            'name'=>'required',
+            'email'=>'required',
+            'contactNo'=>'required',
+            'appointmentDate'=>'required',
+            'hospitalId'=>'required',
+            'doctorId'=>'required',
+            'stateId'=>'required',
+            'cityId'=>'required',
+            'message'=>'required',
+            'categoryId'=>'required',
+        ]);
 
+        //$hospital=Hospital::where('id',$request->hospitalId)->first();
+        $appoinment=new Appointment();
+        $appoinment->name=$request->name;
+        $appoinment->email=$request->email;
+        $appoinment->contactNo=$request->contactNo;
+        $appoinment->stateId=$request->stateId;
+        $appoinment->cityId=$request->cityId;
+        $appoinment->hospitalId=$request->hospitalId;
+        $appoinment->doctorId=$request->doctorId;
+        $appoinment->scheduleId=$request->scheduleId;
+        $appoinment->categoryId=$request->categoryId;
+        $appoinment->appointmentDate=$request->appointmentDate;
+        $appoinment->message=$request->message;
+        $appoinment->patientId=1;
+        $appoinment->save();
+
+        return redirect()->back();
     }
     public function contact(){
         $city=City::all();
