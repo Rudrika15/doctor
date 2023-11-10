@@ -118,7 +118,6 @@ class VisitorController extends Controller
     {
         $userId = Auth::user()->id;
         $patient = Patient::where('userId', '=', $userId)->with('state')->first();
-
         $state = State::all();
         return view('visitor.profile', compact('patient', 'state'));
     }
@@ -151,7 +150,6 @@ class VisitorController extends Controller
         $patient->save();
         return redirect()->back();
     }
-
     public function visitorsDetail($hospitalId){
         return view('visitor.visitorsDetail');
     }

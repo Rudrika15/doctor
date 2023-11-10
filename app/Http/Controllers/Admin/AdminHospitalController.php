@@ -333,16 +333,20 @@ class AdminHospitalController extends Controller
             $hospital->hospitalLogo = time() . '.' . $request->hospitalLogo->extension();
             $request->hospitalLogo->move(public_path('hospital'), $hospital->hospitalLogo);
         }
-
         $hospital->hospitalTime = $request->hospitalTime;
         $hospital->services = $request->services;
         $hospital->status = "Active";
 
-        
         $user=User::where('id','=',$hospital->userId)->first();
         $user->name=$request->hospitalName;
         $user->contactNumber=$request->contactNo;
         $user->save();
+
+        $doctor=Doctor::where('hospitalId','=',$hospital->userId)->get();
+        foreach($doctor as $doctor){
+            $doctor->status="Active";
+            $doctor->save();
+        }
 
         if ($hospital->save()) {
             return redirect('admin/hospital-index')->with('success', 'Hospital Updated successfully!');
@@ -361,7 +365,6 @@ class AdminHospitalController extends Controller
             $doctor->status="Delete";
             $doctor->save();
         }
-        return $doctor;
         if ($hospital) {
             return redirect('admin/hospital-index')->with('success', 'Hospital Deleted successfully!');
         } else {

@@ -81,10 +81,11 @@
                 </form>
                   
                 <div class="table-responsive">
-                    <div class="mb-4 pull-right"><a class="btn addbtn" href="{{route('admin.doctor.create',['id' => request()->route('id')])}}"> Add Doctor</a></div>
+                    @if ($hospital->status!="Delete")
+                        <div class="mb-4 pull-right"><a class="btn addbtn" href="{{route('admin.doctor.create',['id' => request()->route('id')])}}"> Add Doctor</a></div>
+                    @endif
                     <table class="table table-bordered">
                         <tr>
-                           
                             <th>Doctor Name</th>
                             <th>Contact No</th>
                             <th>Specialist</th>
