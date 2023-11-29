@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 
 class VerificationController extends Controller
 {
-   
     public function sendOtp(Request $request) {
         $user = auth()->user();
         $otp = rand(1000, 9999);
