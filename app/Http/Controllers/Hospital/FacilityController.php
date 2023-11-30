@@ -6,18 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Models\Facility;
 use App\Models\Hospital;
 use Illuminate\Http\Request;
-
+use Auth;
 class FacilityController extends Controller
 {
     public function index()
     {
-        $facility = Facility::paginate(5);
+        $user=Auth::user()->id;
+        $hospital=Hospital::where('userId','=',$user)->first();
+        $facility = Facility::where('hospitalId','=',$hospital->id)->paginate(5);
         return view('hospital.facility.index', compact('facility'));
     }
 
     public function create()
     {
-        $hospital=Hospital::all();
+        $user=Auth::user()->id;
+        $hospital=Hospital::where('userId','=',$user)->first();
         return view('hospital.facility.create',compact('hospital'));
     }
 
@@ -53,15 +56,11 @@ class FacilityController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'hospitalId' => 'required',
             'title' => 'required',
-            'photo' => 'required'
         ]);
         $id = $request->id;
         $facility =  Facility::find($id);
-        $facility->hospitalId = $request->hospitalId;
         $facility->title = $request->title;
-        $facility->photo = $request->photo;
         if ($request->photo) {
             $photo = $request->photo;
             $facility->photo = time() . '.' . $request->photo->extension();

@@ -20,20 +20,7 @@
 
         <form id="frm" action="{{route('facility.store')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
             @csrf
-          <div class="col-xs-12 col-sm-12 col-md-12">
-              <div class="form-group">
-                      <strong>Hospital Name </strong> 
-                    <select type="text" name="hospitalId" id="hospitalId" class="form-control @error('hospitalId') is-invalid @enderror">
-                    <option selected disabled><strong >Select here...  </strong></option>
-                    @foreach ($hospital as $hospital)
-                    <option value="{{$hospital->id}}">{{$hospital->hospitalName}}</option>
-                       @endforeach
-                    </select>
-                    @error('hospitalId')
-                    <sapn class="text-danger">{{ $message }}</sapn>
-                    @enderror
-                </div>
-            </div>
+          <input type="hidden" name="hospitalId" value="{{$hospital->id}}">
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">

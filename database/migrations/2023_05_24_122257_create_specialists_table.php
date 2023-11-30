@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('specialists', function (Blueprint $table) {
             $table->id();
             $table->string('specialistName');
+            $table->string('slug');
             $table->string('status')->default('Active');
             $table->timestamps();
         });

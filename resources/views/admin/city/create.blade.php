@@ -29,6 +29,25 @@
                 </div>
             </div>
 
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Select State</strong>
+                        <br>
+                        <select class="form-select form-control-user @error('stateId') is-invalid @enderror"
+                            name="stateId" id="stateId" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
+                             aria-label="Default select example">
+                                 <option selected disabled>Select State</option>
+                                 @foreach ($state as $state)
+                                    <option value={{$state->id}}>{{$state->stateName}}</option> 
+                                 @endforeach
+                        </select>
+                        @error('stateId')
+                            <span class="invalid-feedback" role="alert">
+                            {{$message}}
+                            </span>
+                        @enderror
+                </div>
+            </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btnsubmit">Submit</button>

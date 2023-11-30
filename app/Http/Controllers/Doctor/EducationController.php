@@ -5,15 +5,17 @@ namespace App\Http\Controllers\Doctor;
 use App\Http\Controllers\Controller;
 use App\Models\Doctor;
 use App\Models\Education;
+use App\Models\Hospital;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Str;
 
 class EducationController extends Controller
 {
     public function index(){
-
-        $education=Education::paginate(5);
+        $user=Auth::user()->id;
+        $doctorId=Doctor::where('userId','=',$user)->first();
+        $education=Education::where('doctorId','=',$doctorId->id)->paginate(5);
         return view('doctor.education.index',compact('education'));
     }
     public function create(){
@@ -24,10 +26,12 @@ class EducationController extends Controller
         $request->validate([
             'education'=>'required'
         ]);
-        $doctorId = Auth::user()->id;
+        $user=Auth::user()->id;
+        $doctorId=Doctor::where('userId','=',$user)->first();
         $education=New Education();
-        $education->doctorId=$doctorId;
+        $education->doctorId=$doctorId->id;
         $education->education=$request->education;
+        $education->slug=$this->generateSlug($request->education);
         if($education->save())
         {
             return redirect()->back()->with('success','redord added succesfully');
@@ -36,29 +40,27 @@ class EducationController extends Controller
         }
     }
     public function edit($id){
-        $education =Education::find($id);
-        $doctor=Doctor::all();
-        return view('doctor.education.edit',compact('education','doctor'));
+        $education = Education::find($id);
+        return view('doctor.education.edit',compact('education'));
     }
     public function update(Request $request){
+       
         $request->validate([
-            'doctorId'=>'required',
             'education'=>'required'
         ]);
-
-        $id=$request->id;
+        $userId=Auth::user()->id;
+        $doctor=Doctor::where('userId','=',$userId)->first();
+        $id=$request->educationId;
         $education=Education::find($id);
-        $education->doctorId=$request->doctorId;
+        $education->doctorId=$doctor->id;
         $education->education=$request->education;
-        $education->status="Active";
-       if( $education->update()){
-        return redirect('doctor/education-index')->with('success', 'record updated successfully');
-
-       }else{
-        return back()->with('error','you have no permission');
-
-       }
-        
+        $education->slug=$this->generateSlug($request->education);
+        if($education->save()){
+            return redirect()->back()->with('success','Education Updated Succesfully');
+        }else{
+            return back()->with('error','you have no permission');
+        }
+       
     }
     public function destroy($id){
         $education=Education::find($id);
@@ -68,5 +70,9 @@ class EducationController extends Controller
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }
+    }
+
+    private function generateSlug($education){
+        return Str::slug($education);
     }
 }

@@ -21,23 +21,6 @@
         <form id="frm" action="{{route('gallery.update')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
             @csrf
              <input type="hidden" value="{{$gallery->id}}" name="Id"> 
-
-          <div class="col-xs-12 col-sm-12 col-md-12">
-              <div class="form-group">
-                      <strong>Hospital Name </strong> 
-                    <select type="text" value="{{$gallery->hospitalId}}" name="hospitalId" id="hospitalId" class="form-control @error('hospitalId') is-invalid @enderror">
-                    <option selected disabled><strong >Select here...  </strong></option>
-                    @foreach ($hospital as $hospitaldata)
-                   <option value="{{$hospitaldata->id}}" {{$hospitaldata->id==old('hospitalId',$gallery->hospitalId)? 'selected':''}}>{{$hospitaldata->hospitalName}}</option>
-          
-                   @endforeach
-                    </select>
-                    @error('hospitalId')
-                    <sapn class="text-danger">{{ $message }}</sapn>
-                    @enderror
-                </div>
-            </div>
-
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Title </strong>
@@ -52,7 +35,7 @@
                 <strong>Select Image </strong>
                 <div class="row">
                     <div class="col-md-4">
-                        <input type="file"  accept='image/*' onchange="readURL(this,'#img1')" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo">
+                        <input type="file" value="{{$gallery->photo}}"  accept='image/*' onchange="readURL(this,'#img1')" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo">
                         @error('photo')
                         <sapn class="text-danger">{{ $message }}</sapn>
                         @enderror
@@ -96,18 +79,15 @@
     <script>
          jQuery('#frm').validate({
         rules:{
-                hospitalId:"required",
                 title:{
                     required:true,
                     maxlength:15,
                 },
-                photo:"required",
+                
         },messages:{
-                    hospitalId:"Please Enter Hospital Name",
                     title:{
                         required:"Please Enter Title",
                     },
-                    photo:"Please Select Image",
             },
         submitHandler:function(form)
         {

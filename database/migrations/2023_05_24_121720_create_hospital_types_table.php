@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('hospital_types', function (Blueprint $table) {
             $table->id();
             $table->string('typeName');
+            $table->string('slug');
             $table->string('status')->default('Active');
             $table->timestamps();
         });

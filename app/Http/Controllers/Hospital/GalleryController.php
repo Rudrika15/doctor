@@ -6,25 +6,28 @@ use App\Http\Controllers\Controller;
 use App\Models\Gallery;
 use App\Models\Hospital;
 use Illuminate\Http\Request;
-
+use Auth;
 class GalleryController extends Controller
 {
     public function index()
     {
-        $gallery = Gallery::paginate(5);
+        $user=Auth::user()->id;
+        $hospital=Hospital::where('userId','=',$user)->first();
+
+        $gallery = Gallery::where('hospitalId','=',$hospital->id)->paginate(5);
         return view('hospital.gallery.index', compact('gallery'));
     }
 
     public function create()
     {
-        $hospital=Hospital::all();
+        $user=Auth::user()->id;
+        $hospital=Hospital::where('userId','=',$user)->first();
         return view('hospital.gallery.create',compact('hospital'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'hospitalId' => 'required',
             'title' => 'required',
             'photo' => 'required'
         ]);
@@ -53,16 +56,12 @@ class GalleryController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'hospitalId' => 'required',
             'title' => 'required',
-            'photo' => 'required'
         ]);
 
         $id = $request->Id;
         $gallery = Gallery::find($id);
-        $gallery->hospitalId = $request->hospitalId;
         $gallery->title = $request->title;
-        $gallery->photo = $request->photo;
         if ($request->photo) {
             $photo = $request->photo;
             $gallery->photo = time() . '.' . $request->photo->extension();

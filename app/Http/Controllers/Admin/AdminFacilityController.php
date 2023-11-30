@@ -6,9 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Facility;
 use App\Models\Hospital;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
 class AdminFacilityController extends Controller
 {
+
+    // function __construct()
+    // {
+    //      $this->middleware('permission:facility-list|facility-create|facility-edit|facility-delete', ['only' => ['index', 'store']]);
+    //      $this->middleware('permission:facility-create', ['only' => ['create', 'store']]);
+    //      $this->middleware('permission:facility-edit', ['only' => ['edit', 'update']]);
+    //      $this->middleware('permission:facility-delete', ['only' => ['delete']]);
+    // }
+    
     public function index(Request $request, $id)
     {
         $hospitalId = $request->id;
@@ -34,7 +43,7 @@ class AdminFacilityController extends Controller
         $facility = new Facility();
         $facility->hospitalId = $request->hospitalId;
         $facility->title = $request->title;
-
+        $facility->slug =$this->generateSlug($request->title);
         $photo = $request->photo;
         $facility->photo = time() . '.' . $request->photo->extension();
         $request->photo->move(public_path('facility'), $facility->photo);
@@ -63,6 +72,7 @@ class AdminFacilityController extends Controller
         $facility = Facility::find($id);
         $facility->hospitalId = $request->hospitalId;
         $facility->title = $request->title;
+        $facility->slug =$this->generateSlug($request->title);
         if ($request->photo) {
             $photo = $request->photo;
             $facility->photo = time() . '.' . $request->photo->extension();
@@ -86,5 +96,8 @@ class AdminFacilityController extends Controller
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }
+    }
+    private function generateSlug($title){
+        return Str::slug($title);
     }
 }

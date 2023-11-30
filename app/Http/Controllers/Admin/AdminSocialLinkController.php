@@ -9,6 +9,15 @@ use PhpParser\Node\Stmt\Return_;
 
 class AdminSocialLinkController extends Controller
 {
+
+    // function __construct()
+    // {
+    //     $this->middleware('permission:sociallink-list|sociallink-create|sociallink-edit|sociallink-delete', ['only' => ['index', 'store']]);
+    //     $this->middleware('permission:sociallink-create', ['only' => ['create', 'store']]);
+    //     $this->middleware('permission:sociallink-edit', ['only' => ['edit', 'update']]);
+    //     $this->middleware('permission:sociallink-delete', ['only' => ['delete']]);
+    // }
+
     public function index(){
         $sociallink=SocialLink::all();
         return view('admin.sociallink.index',compact('sociallink'));

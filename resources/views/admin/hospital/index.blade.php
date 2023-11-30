@@ -11,14 +11,17 @@
 
             <div class="col-lg-4">
                 <div class="form-group">
-
-                    <input type="text" name="hospitalName" id="hospitalName" class="form-control @error('hospitalName') is-invalid @enderror" placeholder="Enter Hoapital Name">
+                    <input type="text" autocomplete="off" id="searchInput" onkeyup="filterList()" onfocus="showItems()" name="hospitalName" class="form-control @error('hospitalName') is-invalid @enderror" placeholder="Enter Hospital Name">
+                    @foreach ($hospital as $hspitalsearch)
+                        <div class="item text-center p-2 border" style="display: none;">{{$hspitalsearch->hospitalName}}</div>
+                    @endforeach
+                        
                     @error('hospitalName')
                     <sapn class="text-danger">{{ $message }}</sapn>
                     @enderror
                 </div>
-            </div>
-
+            </div> 
+            
             <div class="col-lg-4">
                 <div class="form-group">
 
@@ -107,6 +110,7 @@
 
 
                     <th>Hospital Name</th>
+                    <th>Slug</th>
                     <th>Address</th>
                     <th>City</th>
                     <th>Contact No</th>
@@ -122,9 +126,10 @@
 
                 </tr>
                 @foreach ($hospital as $hospitals)
-                @if($hospitals)
+                
                 <tr>
                     <td>{{$hospitals->hospitalName}}</td>
+                    <td>{{$hospitals->slug}}</td>
                     <td>{{$hospitals->address}}</td>
 
                     <td>{{$hospitals->city->name}}</td>
@@ -138,7 +143,7 @@
 
 
                     <td>{{$hospitals->siteUrl}}</td>
-                    <td>{{$hospitals->category}}</td>
+                    <td>{{$hospitals->category->categoryName}}</td>
                     <td><img src="{{url('/hospital')}}/{{$hospitals->hospitalLogo}}"></td>
 
 
@@ -154,15 +159,50 @@
                         <a class="btn btn-danger mt-2" onclick="return confirm('Are you sure want to delete?')" href="{{route('hospital.delete')}}{{$hospitals->id}}">Delete</a>
                     </td>
                 </tr>
-                @else
-                no record found
-                @endif
+                
                 @endforeach
+
+                @if ($count==0)
+                 <td colspan="13" class="display-3 text-center text-danger">Record Not Found</td>
+                @endif
+            
             </table>
             {!! $hospital->withQueryString()->links('pagination::bootstrap-5') !!}
         </div>
         {{-- {!! $data->render() !!} --}}
     </div>
 </div>
+<script>
+    function showItems() {
+       
+      var items = document.getElementsByClassName("item");
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        item.style.display = "";
+        
+      }
+    }
+  
+    function filterList() {
+      var input = document.getElementById("searchInput").value.toLowerCase();
+      var items = document.getElementsByClassName("item");
+      
+      if (input === "") {
+        showItems();
+      } else {
+        for (var i = 0; i < items.length; i++) {
+          var item = items[i];
+          var text = item.textContent.toLowerCase();
+          
+          if (text.indexOf(input) > -1) {
+            item.style.display = "";
+          } else {
+            item.style.display = "none";
+            
+          }
+        }
+      }
+    }
+  </script>
 
 @endsection

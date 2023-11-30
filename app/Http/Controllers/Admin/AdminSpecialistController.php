@@ -5,9 +5,19 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Specialist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AdminSpecialistController extends Controller
 {
+
+    // function __construct()
+    // {
+    //     $this->middleware('permission:specialist-list|specialist-create|specialist-edit|specialist-delete', ['only' => ['index', 'store']]);
+    //     $this->middleware('permission:specialist-create', ['only' => ['create', 'store']]);
+    //     $this->middleware('permission:specialist-edit', ['only' => ['edit', 'update']]);
+    //     $this->middleware('permission:specialist-delete', ['only' => ['delete']]);
+    // }
+
     public function index(Request $request)
     {
         $specialistName=$request->specialistName;
@@ -15,14 +25,14 @@ class AdminSpecialistController extends Controller
 
         if(isset($specialistName) && isset($status)){
             $specialist=Specialist::orderBy('specialistName', 'ASC')
-                ->where('specialistName','=',$specialistName)
+                ->where('specialistName','like',"%$specialistName%")
                 ->where('status','=',$status)
                 ->paginate(5);
                 $count=count($specialist);
         }
         else if(isset($specialistName) && !isset($status)){
             $specialist=Specialist::orderBy('specialistName', 'ASC')
-                ->where('specialistName','=',$specialistName)
+                ->where('specialistName','like',"%$specialistName%")
                 ->paginate(5);
                 $count=count($specialist);
         }
@@ -33,7 +43,8 @@ class AdminSpecialistController extends Controller
                 $count=count($specialist);
         }
         else{
-            $specialist = Specialist::orderBy('specialistName', 'ASC')->paginate(5); 
+            $specialist = Specialist::orderBy('specialistName', 'ASC')
+                    ->paginate(5); 
             $count=count($specialist);  
         }
         return view('admin.specialist.index', compact('specialist','count'));
@@ -47,10 +58,13 @@ class AdminSpecialistController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'specialistName' => 'required'
+            'specialistName' => 'required',
+            'details' => 'required'
         ]);
         $specialist = new Specialist();
         $specialist->specialistName = $request->specialistName;
+        $specialist->slug = $this->generateSlug($request->specialistName);
+        $specialist->details = $request->details;
         $specialist->save();
 
         if ($specialist->save()) {
@@ -60,20 +74,23 @@ class AdminSpecialistController extends Controller
         }
     }
 
-    public function edit($id)
+    public function edit($slug)
     {
-        $specialist = Specialist::find($id);
+        $specialist = Specialist::where('slug','=',$slug)->first();
         return view('admin.specialist.edit', compact('specialist'));
     }
 
     public function update(Request $request)
     {
         $this->validate($request, [
-            'specialistName' => 'required'
+            'specialistName' => 'required',
+            'details' => 'required',
         ]);
-        $id = $request->specialistId;
-        $specialist = Specialist::find($id);
+        $slug = $request->slug;
+        $specialist = Specialist::where('slug','=',$slug)->first();
         $specialist->specialistName = $request->specialistName;
+        $specialist->slug = $this->generateSlug($request->specialistName);
+        $specialist->details = $request->details;
         $specialist->status = "Active";
 
         if ($specialist->save()) {
@@ -93,5 +110,9 @@ class AdminSpecialistController extends Controller
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }
+    }
+
+    private function generateSlug($specialistName){
+        return Str::slug($specialistName);
     }
 }

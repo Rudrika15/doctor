@@ -7,12 +7,15 @@ use App\Models\Blog;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
     public function index()
     {
-        $blog = Blog::paginate(5);
+        $user=Auth::user()->id;
+        $doctorId=Doctor::where('userId','=',$user)->first();
+        $blog = Blog::where('doctorId','=',$doctorId->id)->paginate(5);
         return view('doctor.blog.index', compact('blog'));
     }
     public function create()
@@ -27,14 +30,16 @@ class BlogController extends Controller
             'detail' => 'required',
             'photo' => 'required',
         ]);
-            $doctorId = Auth::user()->id;
+        $user = Auth::user()->id;
+        $doctorId=Doctor::where('userId','=',$user)->first();
         $blog = new Blog();
         $blog->title = $request->title;
+        $blog->slug =$this->generateSlug($request->title);
         $blog->detail = $request->detail;
         $photo = $request->photo;
         $blog->photo = time() . '.' . $request->photo->extension();
         $request->photo->move(public_path('blog'), $blog->photo);
-        $blog->doctorId = $doctorId;
+        $blog->doctorId = $doctorId->id;
         if ($blog->save()) {
 
             return redirect()->back()->with('success', 'Record Added successfully!');
@@ -53,23 +58,22 @@ class BlogController extends Controller
         $request->validate([
             'title' => 'required',
             'detail' => 'required',
-            'photo' => 'required',
-            'doctorId' => 'required'
         ]);
-
+        $user = Auth::user()->id;
+        $doctorId=Doctor::where('userId','=',$user)->first();
         $id = $request->id;
         $blog = Blog::find($id);
         $blog->title = $request->title;
         $blog->detail = $request->detail;
-        $blog->photo = $request->photo;
+        $blog->slug =$this->generateSlug($request->title);
         if ($request->photo) {
             $photo = $request->photo;
             $blog->photo = time() . '.' . $request->photo->extension();
             $request->photo->move(public_path('blog'), $blog->photo);
         }
-        $blog->doctorId = $request->doctorId;
+        $blog->doctorId = $doctorId->id;
         $blog->status = "Active";
-        if ($blog->update()) {
+        if ($blog->save()) {
             return redirect('doctor/blog-index')->with('success', 'record updated successfully');
         } else {
             return back()->with('error', 'you have no permission');
@@ -84,5 +88,9 @@ class BlogController extends Controller
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }
+    }
+
+    private function generateSlug($title){
+        return Str::slug($title);
     }
 }

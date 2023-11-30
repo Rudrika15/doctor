@@ -4,6 +4,8 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
         <h2 class="p-3">Doctor Management</h2>
+        {{-- <div class="mb-4 pull-right"><a class="btn addbtn" href="{{route('admin.hospital.viewdetails',['id' => request()->route('id')])}}">Back</a></div> --}}
+
         {{-- <div class="pt-2"><a class="btn addbtn" href="{{ route('admin.doctor.index') }}"> Back</a></div> --}}
     </div>
     <div class="card-body">
@@ -58,7 +60,7 @@
             </div>
         </div>
         {{-- Auth User --}}
-        <input type="hidden" name="userId" value="{{Auth::User()->id}}">
+        
         {{--  --}}
         <div class="col-xs-12 col-sm-12 col-md-12">
             <strong>Select Image </strong>
@@ -141,15 +143,12 @@
             specialistId:{
                 required:true, 
             },
-            userId:{
-                required:true, 
-            },
-           
             experience:{
                 required:true,
             },
             registerNumber:{
                 required:true,
+                minlength:12,
             }
         },
         messages:{
@@ -159,21 +158,20 @@
             },
             contactNo:{
                         required:"Please Enter Contact Number",
-                        minlength:"Enter Contact Number Minimum of 10 Charactrs",
+                        minlength:"Enter Contact Number Minimum of 10 Digite",
                         maxlength:"Can't Enter Contact Number  More Then of 12 Didgit"
             },
             specialistId:{
                 required:"Please Select Specialist"
-            },
-            userId:{
-                required:"Please Select User"
             },
             
             experience:{
                 required:"Please Enter Experience"
             },
             registerNumber:{
-                required:"Please Enter Registation Number"
+                required:"Please Enter Registation Number",
+                minlength:"Enter Registration Number Minimum of 12 Charactrs",
+
             }
         },
         submitHandler:function(form){

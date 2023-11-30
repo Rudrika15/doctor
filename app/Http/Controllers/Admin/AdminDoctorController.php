@@ -7,11 +7,21 @@ use App\Models\Doctor;
 use App\Models\Hospital;
 use App\Models\Specialist;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminDoctorController extends Controller
 {
+
+    // function __construct()
+    //  {
+    //      $this->middleware('permission:doctor-list|doctor-create|doctor-edit|doctor-delete', ['only' => ['index', 'store']]);
+    //      $this->middleware('permission:doctor-create', ['only' => ['create', 'store']]);
+    //      $this->middleware('permission:doctor-edit', ['only' => ['edit', 'update']]);
+    //      $this->middleware('permission:doctor-delete', ['only' => ['delete']]);
+    // }
     public function index(Request $request, $id)
     {
         $hospitalId = $request->id;
@@ -29,26 +39,36 @@ class AdminDoctorController extends Controller
         $user = User::all();
         return view('admin.doctor.create', compact('user', 'specialist',));
     }
-
     public function store(Request $request)
     {
         $this->validate($request, [
-            'hospitalId' => 'required',
             'doctorName' => 'required',
+            'email' => 'required',
+            'password' => 'required',
             'contactNo' => 'required',
             'specialistId' => 'required',
-            'userId' => 'required',
             'photo' => 'required',
             'experience' => 'required',
-            'registerNumber' => 'required'
+            'registerNumber' => 'required|unique:doctors,registerNumber,'
         ]);
+        $user = new User();
+        $user->name = $request->doctorName;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->contactNumber = $request->contactNo;
+        $user->assignRole('Doctor');
+        $user->save();
 
+        $hId = $request->hospitalId;
+        $hospitalData = Hospital::find($hId);
+        $hospitalId = $hospitalData->userId;
         $doctor = new Doctor();
-        $doctor->hospitalId = $request->hospitalId;
+        $doctor->hospitalId = $hospitalId;
         $doctor->doctorName = $request->doctorName;
+        $doctor->slug = $this->generateSlug($request->doctorName);
         $doctor->contactNo = $request->contactNo;
         $doctor->specialistId = $request->specialistId;
-        $doctor->userId = $request->userId;
+        $doctor->userId = $user->id;
 
         $photo = $request->photo;
         $doctor->photo = time() . '.' . $request->photo->extension();
@@ -56,8 +76,9 @@ class AdminDoctorController extends Controller
 
         $doctor->experience = $request->experience;
         $doctor->registerNumber = $request->registerNumber;
+        $doctor->save();
 
-        if ($doctor->save()) {
+        if ($doctor) {
             return redirect()->back()->with('success', 'Doctor Added successfully!');
         } else {
             return back()->with('error', 'You have no permission for this page!');
@@ -76,23 +97,24 @@ class AdminDoctorController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
-            'hospitalId' => 'required',
             'doctorName' => 'required',
             'contactNo' => 'required',
             'specialistId' => 'required',
-            'userId' => 'required',
             'experience' => 'required',
-            'registerNumber' => 'required'
+            // 'registerNumber' => 'required|unique:doctors,registerNumber,'
+
         ]);
 
-        $hospiId = $request->hospitalId;
+        $hospitalIdData=Hospital::where('userId','=',$request->hospitalId)->first();
+        $hospitalID=$hospitalIdData->id;
         $id = $request->doctorId;
         $doctor = Doctor::find($id);
-        $doctor->hospitalId = $request->hospitalId;
         $doctor->doctorName = $request->doctorName;
+        $doctor->slug = $this->generateSlug($request->doctorName);
+        
         $doctor->contactNo = $request->contactNo;
         $doctor->specialistId = $request->specialistId;
-        $doctor->userId = $request->userId;
+        // $doctor->userId = $request->userId;
 
         if ($request->photo) {
             $photo = $request->photo;
@@ -104,8 +126,9 @@ class AdminDoctorController extends Controller
 
         $doctor->status = "Active";
         if ($doctor->save()) {
+            return redirect()->route("admin.hospital.viewdetails", $hospitalID)->with('success', 'Doctor Updated successfully!');
+            //  return redirect()->back()->with('success', 'Doctor Updated successfully!');
 
-            return redirect()->route("admin.hospital.viewdetails", $hospiId)->with('success', 'Doctor Updated successfully!');
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }
@@ -120,5 +143,9 @@ class AdminDoctorController extends Controller
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }
+    }
+    private function generateSlug($hospitalName)
+    {
+        return Str::slug($hospitalName);
     }
 }

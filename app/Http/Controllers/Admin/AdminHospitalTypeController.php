@@ -5,9 +5,18 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\HospitalType;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
 class AdminHospitalTypeController extends Controller
 {
+
+    // function __construct()
+    // {
+    //     $this->middleware('permission:hospitaltype-list|hospitaltype-create|hospitaltype-edit|hospitaltype-delete', ['only' => ['index', 'store']]);
+    //     $this->middleware('permission:hospitaltype-create', ['only' => ['create', 'store']]);
+    //     $this->middleware('permission:hospitaltype-edit', ['only' => ['edit', 'update']]);
+    //     $this->middleware('permission:hospitaltype-delete', ['only' => ['delete']]);
+    // }
+
     public function index(Request $request)
     {
         $typeName=$request->typeName;
@@ -15,14 +24,14 @@ class AdminHospitalTypeController extends Controller
        
         if(isset($typeName) && isset($status)){
             $hospitaltype=HospitalType::orderBy('typeName', 'ASC')
-                ->where('typeName','=',$typeName)
+                ->where('typeName','like',"%$typeName%")
                 ->where('status','=',$status)
                 ->paginate(3);
                 $count = count($hospitaltype);
         }
         else if(isset($typeName) && !isset($status)){
             $hospitaltype=HospitalType::orderBy('typeName', 'ASC')
-                ->where('typeName','=',$typeName)->paginate(3);
+                ->where('typeName','like',"%$typeName%")->paginate(3);
                 $count = count($hospitaltype);
         }
         else if(!isset($typeName) && isset($status)){
@@ -49,6 +58,7 @@ class AdminHospitalTypeController extends Controller
         ]);
         $hospitaltype = new HospitalType();
         $hospitaltype->typeName = $request->typeName;
+        $hospitaltype->slug = $this->generateSlug($request->typeName);
         if ($hospitaltype->save()) {
             return redirect()->back()->with('success', 'Hospital Type Added successfully!');
         } else {
@@ -56,9 +66,9 @@ class AdminHospitalTypeController extends Controller
         }
     }
 
-    public function edit($id)
+    public function edit($slug)
     {
-        $hospitaltype = HospitalType::find($id);
+        $hospitaltype = HospitalType::where('slug','=',$slug)->first();
         return view('admin.hospitaltype.edit', compact('hospitaltype'));
     }
 
@@ -67,9 +77,10 @@ class AdminHospitalTypeController extends Controller
         $this->validate($request, [
             'typeName' => 'required'
         ]);
-        $id = $request->hospitaltypeId;
-        $hospitaltype = HospitalType::find($id);
+        $slug = $request->slug;
+        $hospitaltype = HospitalType::where('slug','=',$slug)->first();
         $hospitaltype->typeName = $request->typeName;
+        $hospitaltype->slug = $this->generateSlug($request->typeName);
         $hospitaltype->status = "Active";
         if ($hospitaltype->save()) {
             return redirect('admin/hospitaltype-index')->with('success', 'Hospital Type Updated successfully!');
@@ -87,5 +98,9 @@ class AdminHospitalTypeController extends Controller
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }
+    }
+
+    private function generateSlug($typeName){
+        return Str::slug($typeName);
     }
 }

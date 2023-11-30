@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminGalleryController;
 use App\Http\Controllers\Admin\AdminCityController;
 use App\Http\Controllers\UserController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Hospital\GalleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHospitalController;
 use App\Http\Controllers\Admin\AdminHospitalTypeController;
+// use App\Http\Controllers\Admin\AdminLeadController;
 use App\Http\Controllers\Admin\AdminSocialLinkController;
 use App\Http\Controllers\Doctor\BlogController;
 use App\Http\Controllers\Doctor\EducationController;
@@ -20,6 +22,11 @@ use App\Http\Controllers\Hospital\DoctorController;
 use App\Http\Controllers\Hospital\FacilityController;
 use App\Http\Controllers\Hospital\ScheduleController;
 use Spatie\Permission\Contracts\Role;
+use App\Http\Controllers\Visitor\VisitorController;
+use App\Http\Controllers\Admin\AdminStateController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Doctor\ProfileUpdateController;
+use App\Http\Controllers\Hospital\LeadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,31 +39,90 @@ use Spatie\Permission\Contracts\Role;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// ------------------ Visitor Side  -----------------------------------------
+Route::get('/', [VisitorController::class, 'index'])->name('visitor.index');
+Route::get('/searchCityWiseData', [VisitorController::class, 'searchCityWiseData'])->name('visitor.searchCityWiseData');
+Route::get('hospitals', [VisitorController::class, 'hospitalList'])->name('visitor.hospitalList');
+Route::get('filterHospitals/', [VisitorController::class, 'filterHospital'])->name('visitor.filterHospital');
+Route::get('hospitalDetails/{slug?}', [VisitorController::class, 'hospitalDetails'])->name('visitor.hospitalDetails');
+Route::get('specialist', [VisitorController::class, 'specialist'])->name('visitor.specialist');
+Route::get('visitorDetail/{slug?}', [VisitorController::class, 'visitorsDetail'])->name('visitor.visitorsDetail');
+Route::post('storVisitorsDetail', [VisitorController::class, 'storVisitorsDetail'])->name('visitor.storVisitorsDetail');
+Route::get('doctorList/{slug?}', [VisitorController::class, 'doctorList'])->name('visitor.doctorList');
+Route::get('contact', [VisitorController::class, 'contact'])->name('visitor.contact');
+Route::get('doctorDetails/{slug?}', [VisitorController::class, 'doctorDetails'])->name('visitor.doctorDetails');
+Route::get('makeAnApoinment', [VisitorController::class, 'makeAnApoinment'])->name('visitor.makeAnApoinment');
+Route::post('/fetchCity', [VisitorController::class, 'fetchCity'])->name('fetchCity');
+Route::post('/fetchHospital', [VisitorController::class, 'fetchHospital'])->name('fetchHospital');
+Route::post('/fetchDoctor', [VisitorController::class, 'fetchDoctor'])->name('fetchDoctor');
+Route::post('/fetchSchedule', [VisitorController::class, 'fetchSchedule'])->name('fetchSchedule');
+Route::post('/createMakeAnAppoinment', [VisitorController::class, 'createMakeAnAppoinment'])->name('createMakeAnAppoinment');
+
+
+Route::get('Register/hospital',[RegisterController::class,'hospitalCreate'])->name('registerHospital');
+Route::post('Register/hospitalStore',[RegisterController::class,'registerhospitalStore'])->name('registerhospitalStore');
+
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+//For state list in resgitration page
+//Route::get('register', [RegisterController::class, 'state'])->name('register.state');
 // Auth
+
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
 
+    
+    Route::controller(VisitorController::class)->group(function () {
+        // Route::get('hospitalDetails/{id?}', 'hospitalDetails')->name('visitor.hospitalDetails');
+        Route::get('profile/{id?}', 'profile')->name('visitor.profile');
+        Route::post('profile/patientUpdate', 'patientUpdate')->name('visitor.profile.patientUpdate');
+    });
+
 
     // ----------------------------------------Admin Side-------------------------------------------------
+
+    Route::get('users-export',[UserController::class,'export'] )->name('users.export');
+    Route::post('users-import', [UserController::class,'import'])->name('users.import');
+
+    // Admin State
+    Route::controller(AdminStateController::class)->group(function () {
+        Route::get('admin/state-index', 'index')->name('state.index');
+        Route::get('admin/state-create', 'create')->name('state.create');
+        Route::post('admin/state-store', 'store')->name('state.store');
+        Route::get('admin/state-edit-{slug?}', 'edit')->name('state.edit');
+        Route::post('admin/state-update', 'update')->name('state.update');
+        Route::get('admin/state-delete-{id?}', 'delete')->name('state.delete');
+    });
 
     // Admin City 
     Route::controller(AdminCityController::class)->group(function () {
         Route::get('admin/city-create', 'create')->name('city.create');
         Route::post('admin/city-store', 'store')->name('city.store');
         Route::get('admin/city-index', 'index')->name('city.index');
-        Route::get('admin/city-edit-{id?}', 'edit')->name('city.edit');
+        Route::get('admin/city-edit-{slug?}', 'edit')->name('city.edit');
         Route::post('admin/city-update', 'update')->name('city.update');
         Route::get('admin/city-delete-{id?}', 'delete')->name('city.delete');
+    });
+
+    // Admin Category
+    Route::controller(AdminCategoryController::class)->group(function () {        Route::get('admin/category-create', 'create')->name('admin.category.create');
+        Route::get('admin/category-index', 'index')->name('admin.category.index');
+        Route::get('admin/category-create', 'create')->name('admin.category.create');
+        Route::post('admin/category-store', 'store')->name('admin.category.store');
+        Route::get('admin/category-edit-{slug?}', 'edit')->name('admin.category.edit');
+        Route::post('admin/category-update', 'update')->name('admin.category.update');
+        Route::get('admin/category-delete-{id?}', 'delete')->name('admin.category.delete');
+
     });
 
     // Admin Hospital
@@ -75,7 +141,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('admin/hospitaltype-index', 'index')->name('hospitaltype.index');
         Route::get('admin/hospitaltype-create', 'create')->name('hospitaltype.create');
         Route::post('admin/hospitaltype-store', 'store')->name('hospitaltype.store');
-        Route::get('admin/hospitaltype-edit-{id?}', 'edit')->name('hospitaltype.edit');
+        Route::get('admin/hospitaltype-edit-{slug?}', 'edit')->name('hospitaltype.edit');
         Route::post('admin/hospitaltype-update', 'update')->name('hospitaltype.update');
         Route::get('admin/hospitaltype-delete-{id?}', 'delete')->name('hospitaltype.delete');
     });
@@ -94,7 +160,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('admin/specialist-index', 'index')->name('specialist.index');
         Route::get('admin/specialist-create', 'create')->name('specialist.create');
         Route::post('admin/specialist-store', 'store')->name('specialist.store');
-        Route::get('admin/specialist-edit-{id?}', 'edit')->name('specialist.edit');
+        Route::get('admin/specialist-edit-{slug?}', 'edit')->name('specialist.edit');
         Route::post('admin/specialist-update', 'update')->name('specialist.update');
         Route::get('admin/specialist-delete-{id?}', 'delete')->name('specialist.delete');
     });
@@ -123,7 +189,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('admin/slider-index', 'index')->name('admin.slider.index');
         Route::get('admin/slider-create', 'create')->name('admin.slider.create');
         Route::post('admin/slider-store', 'store')->name('admin.slider.store');
-        Route::get('admin/slider-edit-{id?}', 'edit')->name('admin.slider.edit');
+        Route::get('admin/slider-edit-{slug?}', 'edit')->name('admin.slider.edit');
         Route::post('admin/slider-update', 'update')->name('admin.slider.update');
         Route::get('admin/slider-delete-{id?}', 'delete')->name('admin.slider.delete');
     });
@@ -137,6 +203,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('admin/sociallink-update', 'update')->name('admin.sociallink.update');
         Route::get('admin/sociallink-delete-{id?}', 'delete')->name('admin.sociallink.delete');
     });
+
 
 
 
@@ -182,34 +249,37 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::get('index', [AppointmentController::class, 'index'])->name('appointment.index');
 
-
+    // Hospital Leads
+    Route::controller(LeadController::class)->group(function(){
+        Route::get('hospital/lead-index','index')->name('hospital.lead.index');
+    });
     //Route::get('/', 'HomeController@index')->name('home');
 
 
     // --------------------------------------Doctor Side---------------------------------------------
 
     Route::controller(BlogController::class)->group(function () {
-
         Route::get('doctor/blog-index', 'index')->name('blog.index');
-
         Route::get('doctor/blog-create', 'create')->name('blog.create');
         Route::post('doctor/blog-store', 'store')->name('blog.store');
-
         Route::get('doctor/blog-edit-{id?}', 'edit')->name('blog.edit');
         Route::post('doctor/blog-update', 'update')->name('blog.update');
-
         Route::get('doctor/blog-destroy-{id?}', 'destroy')->name('blog.destroy');
     });
 
     Route::controller(EducationController::class)->group(function () {
         Route::get('doctor/education-index', 'index')->name('education.index');
-
         Route::get('doctor/education-create', 'create')->name('education.create');
         Route::post('doctor/education-store', 'store')->name('education.store');
-
         Route::get('doctor/education-edit-{id?}', 'edit')->name('education.edit');
         Route::post('doctor/education-update', 'update')->name('education.update');
-
         Route::get('doctor/education-destroy-{id?}', 'destroy')->name('education.destroy');
+        // Route::post('doctor/test', 'test')->name('education.test');
+    
+    });
+    Route::controller(ProfileUpdateController::class)->group(function () {
+        Route::get('doctor/profile-edit', 'edit')->name('doctor.profile.edit');
+        Route::post('doctor/profile-update', 'update')->name('doctor.profile.update');
+        // Route::post('doctor/education-update', 'update')->name('education.update');
     });
 });
