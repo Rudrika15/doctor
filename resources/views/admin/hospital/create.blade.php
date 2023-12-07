@@ -30,7 +30,7 @@
                 <strong>Email </strong>
                 <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror">
                 @error('email')
-                <sapn class="text-danger">{{ $message }}</sapn>
+                <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
         </div>
@@ -39,7 +39,7 @@
                 <strong>Password </strong>
                 <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror">
                 @error('password')
-                <sapn class="text-danger">{{ $message }}</sapn>
+                <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
         </div>
@@ -48,7 +48,7 @@
                 <strong>Address:</strong>
                 <textarea name="address" id="address" class="form-control @error('address') is-invalid @enderror" cols="10" rows="5"></textarea>
                 @error('address')
-                <sapn class="text-danger">{{ $message }}</sapn>
+                <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
         </div>
@@ -61,7 +61,7 @@
                          aria-label="Default select example">
                              <option selected disabled>Select City</option>
                              @foreach ($city as $city)
-                                <option value={{$city->id}}>{{$city->name}}</option> 
+                                <option value="{{$city->id}}">{{$city->name}}</option> 
                              @endforeach
                     </select>
                     @error('cityId')
@@ -77,7 +77,7 @@
                 <strong>Contact No</strong>
                 <input type="text" name="contactNo" id="contactNo" class="form-control @error('contactNo') is-invalid @enderror">
                 @error('contactNo')
-                    <sapn class="text-danger">{{ $message }}</sapn>
+                    <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
         </div>
@@ -91,7 +91,7 @@
                          aria-label="Default select example">
                              <option selected disabled>Select Hospital Type</option>
                              @foreach ($hospitaltype as $hospitaltype)
-                                <option value={{$hospitaltype->id}}>{{$hospitaltype->typeName}}</option>
+                                <option value="{{$hospitaltype->id}}">{{$hospitaltype->typeName}}</option>
                              @endforeach
                     </select>
                     @error('hospitalTypeId')
@@ -140,7 +140,7 @@
                 <div class="col-md-4">
                     <input type="file" accept='image/*' onchange="readURL(this,'#img1')" class="form-control @error('hospitalLogo') is-invalid @enderror" id="hospitalLogo" name="hospitalLogo">
                     @error('hospitalLogo')
-                    <sapn class="text-danger">{{ $message }}</sapn>
+                        <span class="text-danger">{{ $message }}</sapn>
                     @enderror
                 </div>
 
@@ -157,7 +157,7 @@
                 <strong>Hospital Time:</strong>
                 <input type="text" name="hospitalTime" id="hospitalTime" class="form-control @error('hospitalTime') is-invalid @enderror">
                 @error('hospitalTime')
-                    <sapn class="text-danger">{{ $message }}</sapn>
+                        <span class="text-danger">{{ $message }}</sapn>
                 @enderror
             </div>
         </div>
@@ -167,7 +167,7 @@
                 <strong>Services:</strong>
                 <input type="text" name="services" id="services" class="form-control @error('services') is-invalid @enderror">
                 @error('services')
-                    <sapn class="text-danger">{{ $message }}</sapn>
+                    <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
         </div>

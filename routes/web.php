@@ -53,7 +53,9 @@ Route::get('specialist', [VisitorController::class, 'specialist'])->name('visito
 Route::get('visitorDetail/{slug?}', [VisitorController::class, 'visitorsDetail'])->name('visitor.visitorsDetail');
 Route::post('storVisitorsDetail', [VisitorController::class, 'storVisitorsDetail'])->name('visitor.storVisitorsDetail');
 Route::get('doctorList/{slug?}', [VisitorController::class, 'doctorList'])->name('visitor.doctorList');
-Route::get('contact', [VisitorController::class, 'contact'])->name('visitor.contact');
+Route::get('contact', [VisitorController::class, 'createContact'])->name('visitor.contact');
+Route::post('contact/store', [VisitorController::class, 'storeContact'])->name('visitor.storeContact');
+
 Route::get('doctorDetails/{slug?}', [VisitorController::class, 'doctorDetails'])->name('visitor.doctorDetails');
 Route::get('makeAnApoinment', [VisitorController::class, 'makeAnApoinment'])->name('visitor.makeAnApoinment');
 Route::post('/fetchCity', [VisitorController::class, 'fetchCity'])->name('fetchCity');
@@ -61,8 +63,6 @@ Route::post('/fetchHospital', [VisitorController::class, 'fetchHospital'])->name
 Route::post('/fetchDoctor', [VisitorController::class, 'fetchDoctor'])->name('fetchDoctor');
 Route::post('/fetchSchedule', [VisitorController::class, 'fetchSchedule'])->name('fetchSchedule');
 Route::post('/createMakeAnAppoinment', [VisitorController::class, 'createMakeAnAppoinment'])->name('createMakeAnAppoinment');
-
-
 Route::get('Register/hospital',[RegisterController::class,'hospitalCreate'])->name('registerHospital');
 Route::post('Register/hospitalStore',[RegisterController::class,'registerhospitalStore'])->name('registerhospitalStore');
 
@@ -93,7 +93,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('users-export',[UserController::class,'export'] )->name('users.export');
     Route::post('users-import', [UserController::class,'import'])->name('users.import');
-
+    Route::get('contact/index', [VisitorController::class, 'viewContact'])->name('visitor.viewContact');
     // Admin State
     Route::controller(AdminStateController::class)->group(function () {
         Route::get('admin/state-index', 'index')->name('state.index');
@@ -115,14 +115,14 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     // Admin Category
-    Route::controller(AdminCategoryController::class)->group(function () {        Route::get('admin/category-create', 'create')->name('admin.category.create');
+    Route::controller(AdminCategoryController::class)->group(function () {        
+        Route::get('admin/category-create', 'create')->name('admin.category.create');
         Route::get('admin/category-index', 'index')->name('admin.category.index');
         Route::get('admin/category-create', 'create')->name('admin.category.create');
         Route::post('admin/category-store', 'store')->name('admin.category.store');
         Route::get('admin/category-edit-{slug?}', 'edit')->name('admin.category.edit');
         Route::post('admin/category-update', 'update')->name('admin.category.update');
         Route::get('admin/category-delete-{id?}', 'delete')->name('admin.category.delete');
-
     });
 
     // Admin Hospital
@@ -210,7 +210,6 @@ Route::group(['middleware' => ['auth']], function () {
     //-------------------------------------- Hospital Side------------------------------------------
 
     Route::controller(DoctorController::class)->group(function () {
-
         Route::get('hospital/doctor-index', 'index')->name('doctor.index');
         Route::get('hospital/doctor-create', 'create')->name('doctor.create');
         Route::post('doctor-store', 'store')->name('doctor.store');
@@ -247,7 +246,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('hospital/schedule-update', 'update')->name('schedule.update');
         Route::get('schedule-destroy-{id?}', 'destroy')->name('schedule.destroy');
     });
-    Route::get('index', [AppointmentController::class, 'index'])->name('appointment.index');
+    // view appointments
+    // Route::get('viewAppointment', [AdminHospitalController::class, 'viewAppointment'])->name('appointment.index');
 
     // Hospital Leads
     Route::controller(LeadController::class)->group(function(){

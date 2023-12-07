@@ -10,7 +10,6 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('favicon.ico') }}">
-
     {{-- For Search List Designing --}}
 
     <link rel="stylesheet" href="/search/style.css">

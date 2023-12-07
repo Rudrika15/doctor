@@ -20,7 +20,7 @@
                 @endforeach
                     
                 @error('specialistName')
-                <sapn class="text-danger">{{ $message }}</sapn>
+                <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
         </div>

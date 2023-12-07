@@ -19,6 +19,7 @@
             <li><a href="#facility" data-toggle="tab">Facility</a></li>
             <li><a href="#sociallink" data-toggle="tab">Social Link</a></li>
             <li><a href="#leads" data-toggle="tab">Leads</a></li>
+            <li><a href="#appointments" data-toggle="tab">Appointments</a></li>
 
         </ul>
         <div class="tab-content">
@@ -35,7 +36,7 @@
                                     @endforeach
                                     
                                 @error('doctorName')
-                                <sapn class="text-danger">{{ $message }}</sapn>
+                                <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div> 
@@ -141,7 +142,7 @@
                                     @endforeach
                                     
                                 @error('title')
-                                <sapn class="text-danger">{{ $message }}</sapn>
+                                <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
@@ -165,7 +166,6 @@
                         <div class="col-lg-4 mt-4 text-center">
                             <button type="submit" class="btn btn-primary">Search</button>
                             <a class=" btn btnsubmit" href="{{route('admin.hospital.viewdetails',['id' => request()->route('id')])}}">Clear</a>
-
                         </div>
                      </div>
                     </form>
@@ -223,7 +223,7 @@
                                 @endforeach
                                 
                             @error('title')
-                            <sapn class="text-danger">{{ $message }}</sapn>
+                            <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                 </div> 
@@ -249,7 +249,6 @@
                     <div class="col-lg-4 mt-4 text-center">
                         <button type="submit" class="btn btn-primary">Search</button>
                         <a class=" btn btnsubmit" href="{{route('admin.hospital.viewdetails',['id' => request()->route('id')])}}">Clear</a>
-
                     </div>
                  </div>
                 </form>
@@ -258,14 +257,12 @@
                     <div class="mb-4 pull-right"><a class="btn addbtn" href="{{ route('admin.facility.create',['id' => request()->route('id')]) }}"> Add Facility</a></div>
 
                     <table class="table table-bordered">
-                        <tr>
-                            
+                        <tr>      
                             <th>Title</th>
                             <th>Slug</th>
                             <th>Photo</th>
                             <th>Status</th>
-                            <th>Action</th>
-                            
+                            <th>Action</th>  
                         </tr>
                         @foreach ($facility as $facilitys)
                             <tr>
@@ -413,7 +410,6 @@
                     <div class="col-lg-4 mt-4 text-center">
                         <button type="submit" class="btn btn-primary">Search</button>
                         <a class=" btn btnsubmit" href="{{route('admin.hospital.viewdetails',['id' => request()->route('id')])}}">Clear</a>
-
                     </div>
                  </div>
                 </form>
@@ -442,8 +438,116 @@
                 {{-- {!! $data->render() !!}  --}}
             </div>
             {{-- End Leads --}}
+
+            {{-- Start appointments --}}
+            <div class="tab-pane" id="appointments">
+               
+                <form class="mb-5" action="{{ route('admin.hospital.viewdetails',['id' => request()->route('id')]) }}" method="get">
+                    <div class="row">
+                    <input type="hidden" name="hospitalId" value="{{ request()->route('id') }}" class="form-control @error('name') is-invalid @enderror">
+              
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <input type="text" autocomplete="off" id="searchAppointment" onkeyup="filterAppointmentList()" onfocus="showAppointmentItems()" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Enter Name">
+                                @foreach ($appointment as $personName)
+                                <div class="text-center p-2 border" style="display: none;">{{$personName->name}}</div>
+                                @endforeach
+                                
+                            @error('name')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div> 
+                   
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                                <select class="form-select form-control-user  @error('status') is-invalid @enderror"
+                                    name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;"
+                                    aria-label="Default select example">
+                                        <option selected disabled class="text-center">---Select status---</option>
+                                        <option value="Active">Active</option> 
+                                        <option value="Delete">Delete</option> 
+                                </select>
+                                @error('status')
+                                    <span class="invalid-feedback" role="alert">
+                                    {{$message}}
+                                    </span>
+                                @enderror
+                        </div>
+                    </div>  
+                    
+                    
+                    <div class="col-lg-4 mt-4 text-center">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                        <a class="btn btn submit" href="{{route('admin.hospital.viewdetails',['id' => request()->route('id')])}}">Clear</a>
+                    </div>
+                 </div>
+                </form>
+            
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>contact No</th> 
+                            <th>Department</th> 
+                            <th>State</th> 
+                            <th>City</th> 
+                            <th>Hospital</th> 
+                            <th>Doctor</th> 
+                            <th>Schedule</th> 
+                            <th>Appointment Date</th> 
+                            <th>Message</th> 
+                            <th>patientId</th>
+                            <th>Status</th>
+                        </tr>
+                      
+                        @foreach ($appointment as $appointments)
+                        <tr>
+                            <td>{{$appointments->name}}</td>   
+                            <td>{{$appointments->email}}</td>   
+                            <td>{{$appointments->contactNo}}</td>   
+                            <td>{{$appointments->categoryId}}</td>   
+                            <td>{{$appointments->stateId}}</td>   
+                            <td>{{$appointments->cityId}}</td>   
+                            <td>{{$appointments->hospitalId}}</td>   
+                            <td>{{$appointments->doctorId}}</td>   
+                            <td>{{$appointments->scheduleId}}</td>   
+                            <td>{{$appointments->appointmentDate}}</td>   
+                            <td>{{$appointments->message}}</td>   
+                            <td>{{$appointments->patientId}}</td>   
+                            <td>{{$appointments->status}}</td>   
+                        </tr>   
+                        @endforeach
+                        @if ($leadcount==0)
+                            <td colspan="5" class="display-3 text-center text-danger">Record Not Found</td>
+                        @endif
+                    </table>
+                    {!! $lead->withQueryString()->links('pagination::bootstrap-5') !!}
+
+                 </div>
+                {{-- {!! $data->render() !!}  --}}
+            </div>
+            {{-- End appointments --}}
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
  
+
+
+
+
+
     </div>
 </div>
 
@@ -499,7 +603,8 @@
       var itemGallerys = document.getElementsByClassName("itemGallery");
       
       if (input === "") {
-        showitemGallerys();
+        // showitemGallerys();
+        showGalleryItems();
       } else {
         for (var i = 0; i < itemGallerys.length; i++) {
           var itemGallery = itemGallerys[i];
@@ -517,7 +622,7 @@
   </script>
   {{-- ---------------------------------- --}}
 
-  {{-- Fro Facility --}}
+  {{-- For Facility --}}
 
   <script>
     function showFacilityItems() {
@@ -526,7 +631,6 @@
       for (var i = 0; i < itemFacilitys.length; i++) {
         var itemFacility = itemFacilitys[i];
         itemFacility.style.display = "";
-        
       }
     }
   
@@ -544,8 +648,7 @@
           if (text.indexOf(input) > -1) {
             itemFacility.style.display = "";
           } else {
-            itemFacility.style.display = "none";
-            
+            itemFacility.style.display = "none";         
           }
         }
       }
@@ -591,10 +694,41 @@
 
   {{-- ----------------------------------- --}}
 
-
-  {{-- For User Leads --}}
-
   
+  {{-- For Appointment --}}
+
+  <script>
+    function showAppointmentItems() {
+       
+      var itemAppointments = document.getElementsByClassName("itemAppointment");
+      for (var i = 0; i < itemAppointments.length; i++) {
+        var itemAppointment = itemAppointments[i];
+        itemAppointment.style.display = "";
+        
+      }
+    }
+  
+    function filterAppointmentList() {
+      var input = document.getElementById("searchAppointment").value.toLowerCase();
+      var itemAppointment = document.getElementsByClassName("itemAppointment");
+      
+      if (input === "") {
+        showitemFacilitys();
+      } else {
+        for (var i = 0; i < itemAppointments.length; i++) {
+          var itemAppointment = itemAppointments[i];
+          var text = itemAppointment.textContent.toLowerCase();
+          
+          if (text.indexOf(input) > -1) {
+            itemAppointment.style.display = "";
+          } else {
+            itemAppointment.style.display = "none";
+            
+          }
+        }
+      }
+    }
+  </script>
 
   {{-- ----------------------------------- --}}
 @endsection

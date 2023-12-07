@@ -186,11 +186,7 @@ h6 {
 }
 
 #header .logo a {
-    color: #2c4964;
-}
-
-#header .logo img {
-    max-height: 40px;
+   color: #2c4964; 
 }
 
 /**

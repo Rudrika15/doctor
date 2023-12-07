@@ -21,6 +21,7 @@ use App\Models\State;
 use App\Models\User;
 use App\Models\Lead;
 use App\Models\Schedule;
+use App\Models\Contact;
 use Auth;
 use Illuminate\Cookie\CookieJar;
 class VisitorController extends Controller
@@ -155,8 +156,8 @@ class VisitorController extends Controller
     }
     public function storVisitorsDetail(Request $request){
         $this->validate($request,[
-            'name'=>'required',
-            'phone'=>'required',
+            'name'=>'required|regex:/^[\pL\s\-]+$/u',
+            'phone'=>'required|max:10|min:10',
             'age'=>'required',
         ]);
         $slug=$request->slug;
@@ -171,7 +172,9 @@ class VisitorController extends Controller
         $lead->save();
 
         return redirect()->route('visitor.hospitalDetails', ['slug' => $slug])
-                        ->withCookie(cookie('name', $request->name,1));
+                        ->withCookie(cookie('name', $request->name,1))
+                        ->with('message','Details added Successfully');
+                        
     }
     public function specialist(){
         $city=City::all();
@@ -234,15 +237,16 @@ class VisitorController extends Controller
     }
     public function createMakeAnAppoinment(Request $request){
         $this->validate($request,[
-            'name'=>'required',
-            'email'=>'required',
-            'contactNo'=>'required',
-            'appointmentDate'=>'required',
+            'name'=>'required|regex:/^[\pL\s\-]+$/u',
+            'email'=>'required|unique:appointments',
+            'contactNo'=>'required|max:10|min:10',
+            'appointmentDate'=>'required',  
             'hospitalId'=>'required',
             'doctorId'=>'required',
             'stateId'=>'required',
             'cityId'=>'required',
-            'message'=>'required',
+            'message'=>'required|max:2000|min:5',
+            'scheduleId'=>'required',
             'categoryId'=>'required',
         ]);
 
@@ -264,8 +268,55 @@ class VisitorController extends Controller
 
         return redirect()->back();
     }
-    public function contact(){
+    public function createContact(){
         $city=City::all();
-        return view('visitor.contact',compact('city'));
+        return view('visitor.Contact',compact('city'));
+    }
+    public function storeContact(Request $request){
+        $this->validate($request,[
+            'name'=>'required|regex:/^[\pL\s\-]+$/u',
+            'email'=>'required|unique:contacts',
+            'subject'=>'required|min:5',
+            'message'=>'required|min:5',
+        ]);
+        $contact = new Contact();
+        $contact->name = $request->name;
+        $contact->email = $request->email;
+        $contact->subject = $request->subject;
+        $contact->message = $request->message;
+        $contact->save();
+        return redirect()->back()->with('message', ' Thankyou, Message sent successfully');
+    }
+    public function viewContact(Request $request){
+        $city= City::all();
+        $contact = Contact::all();
+        $name=$request->name;
+        $status=$request->status;
+
+        if(isset($name) && isset($status)){
+            $contact=Contact::orderBy('name', 'ASC')
+                ->where('name','like',"%$name%")
+                ->where('status','=',$status)
+                ->paginate(5);
+                $count=count($contact);
+        }
+        else if(isset($name) && !isset($status)){
+            $contact=Contact::orderBy('name', 'ASC')
+                ->where('name','like',"%$name%")
+                ->paginate(5);
+                $count=count($contact);
+        }
+        else if(!isset($name) && isset($status)){
+            $contact=Contact::orderBy('name', 'ASC')
+                ->where('status','=',$status)
+                ->paginate(5);
+                $count=count($contact);
+        }
+        else{
+            $contact = Contact::orderBy('name', 'ASC')
+                    ->paginate(5); 
+            $count=count($contact);  
+        }
+        return view('visitor.viewContact', compact('contact', 'city', 'count'));
     }
 }
