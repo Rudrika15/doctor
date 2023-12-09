@@ -18,29 +18,30 @@
         </div>
         @endif
 
-        <form id="frm" action="{{route('schedule.update')}}"  method="POST" >
+        <form id="frm" action="{{route('schedule.update')}}" method="POST">
             @csrf
             <input type="hidden" value="{{$schedule->id}}" name="id">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                        <strong>Doctor Name </strong> 
-                      <select type="text" value="{{$schedule->doctorId}}" id="doctorId" name="doctorId" class="form-control @error('doctorId') is-invalid @enderror">
-                      <option selected disabled><strong >Select here...  </strong></option>
-                      @foreach ($doctor as $doctordata)
-                      <option value="{{$doctordata->id}}" {{$doctordata->id==old('doctorId',$schedule->doctorId)? 'selected':''}}>{{$doctordata->doctorName}}</option>
+                    <strong>Doctor Name </strong>
+                    <select type="text" value="{{$schedule->doctorId}}" id="doctorId" name="doctorId" class="form-control @error('doctorId') is-invalid @enderror">
+                        <option selected disabled><strong>Select here... </strong></option>
+                        @foreach ($doctor as $doctordata)
+                        <option value="{{$doctordata->id}}" {{$doctordata->id==old('doctorId',$schedule->doctorId)? 'selected':''}}>{{$doctordata->doctorName}}</option>
 
-                      @endforeach
-                      </select>
-                      @error('doctorId')
-                      <sapn class="text-danger">{{ $message }}</sapn>
-                      @enderror
-                  </div>
-              </div>
+                        @endforeach
+                    </select>
+                    @error('doctorId')
+                    <sapn class="text-danger">{{ $message }}</sapn>
+                    @enderror
+                </div>
+            </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Day </strong>
-                    <input type="date" value="{{$schedule->day}}" name="day" id="day" class="form-control @error('day') is-invalid @enderror">
+                    <!-- <input type="text" value="{{$schedule->day}}" name="day" id="day" class="form-control @error('day') is-invalid @enderror"> -->
+                    
                     @error('day')
                     <sapn class="text-danger">{{ $message }}</sapn>
                     @enderror
@@ -66,41 +67,41 @@
                 </div>
             </div>
 
-           
+
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btnsubmit">Update</button>
             </div>
 
-        </form>        
+        </form>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>   
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" ></script>
-  
-    <script>
-        jQuery('#frm').validate({
-        rules:{
-                hospitalId:"required",
-                doctorId:"required",
-                day:"required",
-                photo:"required",
-                session:"required",
-                time:"required",
-        },messages:{
-                    hospitalId:"Please Select Hospital",
-                    doctorId:"Please Select Doctor",
-                    day:"Please Enter day",
-                    photo:"Please Select Image",
-                    session:"Please Enter Session",
-                    time:"Please Enter Time",
-            },
-        submitHandler:function(form)
-        {
-             form.submit();
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+
+<script>
+    jQuery('#frm').validate({
+        rules: {
+            hospitalId: "required",
+            doctorId: "required",
+            day: "required",
+            photo: "required",
+            session: "required",
+            time: "required",
+        },
+        messages: {
+            hospitalId: "Please Select Hospital",
+            doctorId: "Please Select Doctor",
+            day: "Please Enter day",
+            photo: "Please Select Image",
+            session: "Please Enter Session",
+            time: "Please Enter Time",
+        },
+        submitHandler: function(form) {
+            form.submit();
         }
-        });
-     </script>
+    });
+</script>
 
 
 

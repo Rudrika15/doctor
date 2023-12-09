@@ -14,11 +14,12 @@
        
         <div class="col-lg-4">
             <div class="form-group">
-                <input type="text" autocomplete="off" id="searchInput" onkeyup="filterList()" onfocus="showItems()" name="specialistName" class="form-control @error('specialistName') is-invalid @enderror" placeholder="Enter Speciaist Name ">
+                <select name="specialistName" class="search-dropdown form-control @error('specialistName') is-invalid @enderror" placeholder="Enter Speciaist Name ">
+               <option selected disabled>--Select Specialist--</option>
                 @foreach ($specialist as $specialistName)
-                    <div class="item text-center p-2 border" style="display: none;">{{$specialistName->specialistName}}</div>
+                    <option class="item text-center p-2 border" style="display: none;">{{$specialistName->specialistName}}</option>
                 @endforeach
-                    
+                </select> 
                 @error('specialistName')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -27,7 +28,7 @@
  
         <div class="col-lg-4">
             <div class="form-group">
-                    <select class="form-select form-control-user  @error('status') is-invalid @enderror"
+                    <select class="search-dropdown  form-select form-control-user  @error('status') is-invalid @enderror"
                         name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
                              <option selected disabled class="text-center">---Select status---</option>
@@ -89,7 +90,7 @@
     </div>
 </div>
 
-<script>
+<!-- <script>
     function showItems() {
        
       var items = document.getElementsByClassName("item");
@@ -120,8 +121,8 @@
         }
       }
     }
-  </script>
-{{-- <script>
+  </script> -->
+<!-- {{-- <script>
     function showList() {
       document.getElementById("myUL").style.display = "block";
     }
@@ -143,5 +144,5 @@
         }
       }
     }
-</script> --}}
+</script> --}} -->
 @endsection

@@ -297,24 +297,24 @@ class VisitorController extends Controller
             $contact=Contact::orderBy('name', 'ASC')
                 ->where('name','like',"%$name%")
                 ->where('status','=',$status)
-                ->paginate(5);
+                ->paginate(10);
                 $count=count($contact);
         }
         else if(isset($name) && !isset($status)){
             $contact=Contact::orderBy('name', 'ASC')
                 ->where('name','like',"%$name%")
-                ->paginate(5);
+                ->paginate(10);
                 $count=count($contact);
         }
         else if(!isset($name) && isset($status)){
             $contact=Contact::orderBy('name', 'ASC')
                 ->where('status','=',$status)
-                ->paginate(5);
+                ->paginate(10);
                 $count=count($contact);
         }
         else{
             $contact = Contact::orderBy('name', 'ASC')
-                    ->paginate(5); 
+                    ->paginate(20); 
             $count=count($contact);  
         }
         return view('visitor.viewContact', compact('contact', 'city', 'count'));

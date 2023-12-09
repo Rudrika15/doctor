@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Medilab Bootstrap Template - Index</title>
+  <title>Dr at Door</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -197,7 +197,7 @@
     <div class="row">
 
       <div class="col-lg-3 col-md-6 footer-contact">
-        <h3>Medilab</h3>
+        <h3>Dr. at Door</h3>
         <p>
           A108 Adam Street <br>
           New York, NY 535022<br>
@@ -245,7 +245,7 @@
 
   <div class="me-md-auto text-center text-md-start">
     <div class="copyright">
-      &copy; Copyright <strong><span>Medilab</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>Dr. at Door</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->

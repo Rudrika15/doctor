@@ -34,9 +34,9 @@
         <div class="row">
           <div class="col-lg-4 d-flex align-items-stretch">
             <div class="content">
-              <h3>Why Choose Medilab?</h3>
+              <h3>Why Choose Dr. at Door?</h3>
               <p>
-                "Medilab is revolutionizing healthcare by enabling consumers to find the best doctors, book 
+                "Dr. at Door is revolutionizing healthcare by enabling consumers to find the best doctors, book 
                 instant appointments, consultations, and make better, more informed health decisions. It is 
                 our privilege to work with, to scale and bring Medilab to Thousands of consumers around the 
                 globe."
@@ -54,7 +54,7 @@
                     <i class="bx bx-receipt"></i>
                     <h4>Connect</h4>
                     <p>
-                      We ‘Medilab’ understand healthcare goes beyond signs, symptoms, diagnosis, and treatment. It’s about the deep
+                      We Dr. at Door understand healthcare goes beyond signs, symptoms, diagnosis, and treatment. It’s about the deep
                       connection between doctors and patients that leads to continuous care and sustained, better outcomes.
 
                     </p>
@@ -65,7 +65,7 @@
                     <i class="bx bx-cube-alt"></i>
                     <h4>Trust</h4>
                     <p>
-                      Medilab works on trust. We are aware of the responsibility placed on us by 1000+ patients and over 100 doctors. We
+                    Dr. at Door works on trust. We are aware of the responsibility placed on us by 1000+ patients and over 100 doctors. We
                       always have and always will do everything we possibly can to uphold this trust.
                     </p>
                   </div>
@@ -114,7 +114,7 @@
               <h4 class="title"><a href="">Online appointment booking</a></h4>
               <p class="description">
                 at leading hospitals and clinics with doctors who
-                use Medilab as their reception assistance.
+                use Dr. at Door as their reception assistance.
               </p>
             </div>
 
@@ -327,13 +327,13 @@
                 <h4>{{$hospital->hospitalName}}</h4>
                 <span>Chief Medical Officer</span>
                 <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
-                <a href="{{route('visitor.hospitalDetails')}}/{{$hospital->slug}}" class="btn text-white mt-2" style="background-color:#A1BDD6;">SeeDetails</a>
+                <a href="{{route('visitor.hospitalDetails')}}/{{$hospital->slug}}" class="btn text-white mt-2" style="background-color:#1977CC;">SeeDetails</a>
 
                 <div class="social">
-                  <a href=""><i class="ri-twitter-fill"></i></a>
-                  <a href=""><i class="ri-facebook-fill"></i></a>
-                  <a href=""><i class="ri-instagram-fill"></i></a>
-                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                  <a href="" style="background-color: #022B53;"><i class="ri-twitter-fill"></i></a>
+                  <a href="" style="background-color: #022B53;"><i class="ri-facebook-fill"></i></a>
+                  <a href="" style="background-color: #022B53;"><i class="ri-instagram-fill"></i></a>
+                  <a href="" style="background-color: #022B53;"> <i class="ri-linkedin-box-fill"></i> </a>
                 </div>
               </div>
             </div>
@@ -396,7 +396,7 @@
 
       </div>
     </section><!-- End Doctors Section -->
-
+      <!-- FAQ -->
     <!-- ======= Frequently Asked Questions Section ======= -->
     <section id="faq" class="faq section-bg">
       <div class="container">
@@ -404,7 +404,7 @@
         <div class="section-title">
           <h2>Frequently Asked Questions</h2>
           <p>
-            Medilab provides online appointment of Hospitals and doctors who have registered with us and are ready to provide online appointment based on their availability. You search for the doctor whose appointment is required, look for his availability and then select the schedule-slot and get a confirmed appointment.
+          Dr. at Door provides online appointment of Hospitals and doctors who have registered with us and are ready to provide online appointment based on their availability. You search for the doctor whose appointment is required, look for his availability and then select the schedule-slot and get a confirmed appointment.
           </p>
         </div>
 
@@ -412,11 +412,11 @@
           <ul>
             <li data-aos="fade-up">
               <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">
-              What is Medilab and how do I use it?
+              What is Dr. at Door and how do I use it?
                  <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
               <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
                 <p>
-                  Medilab provides online appointment of Hospitals and doctors who have registered with us and 
+                Dr. at Door provides online appointment of Hospitals and doctors who have registered with us and 
                   are ready to provide online appointment based on their availability. You search for the doctor 
                   whose appointment is required, look for his availability and then select the schedule-slot and get 
                   a confirmed appointment
@@ -428,7 +428,7 @@
               <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed"> What is the charges or fees for online appointment? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
               <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
                 <p>
-                  There is not any charges for online appointment booking from Medilab. 
+                  There is not any charges for online appointment booking from Dr. at Door. 
                 </p>
               </div>
             </li>

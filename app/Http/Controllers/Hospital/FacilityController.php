@@ -13,7 +13,7 @@ class FacilityController extends Controller
     {
         $user=Auth::user()->id;
         $hospital=Hospital::where('userId','=',$user)->first();
-        $facility = Facility::where('hospitalId','=',$hospital->id)->paginate(5);
+        $facility = Facility::where('hospitalId','=',$hospital->id)->paginate(10);
         return view('hospital.facility.index', compact('facility'));
     }
 
@@ -33,8 +33,10 @@ class FacilityController extends Controller
         ]);
 
         $facility = new Facility();
+
         $facility->hospitalId = $request->hospitalId;
         $facility->title = $request->title;
+        $facility->slug = $request ->title;
         $photo = $request->photo;
         $facility->photo = time() . '.' . $request->photo->extension();
         $request->photo->move(public_path('facility'), $facility->photo);
@@ -61,6 +63,8 @@ class FacilityController extends Controller
         $id = $request->id;
         $facility =  Facility::find($id);
         $facility->title = $request->title;
+        $facility->slug = $request ->title;
+
         if ($request->photo) {
             $photo = $request->photo;
             $facility->photo = time() . '.' . $request->photo->extension();

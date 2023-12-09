@@ -14,7 +14,7 @@ class ScheduleController extends Controller
     {
         $user=Auth::user()->id;
         $hospital=Hospital::where('userId','=',$user)->first();
-        $schedule = Schedule::where('hospitalId','=',$hospital->id)->paginate(5);
+        $schedule = Schedule::where('hospitalId','=',$hospital->id)->paginate(20);
         return view('hospital.schedule.index', compact('schedule'));
     }
 
@@ -42,7 +42,7 @@ class ScheduleController extends Controller
         $schedule->session = $request->session;
         $schedule->time = $request->time;
         if ($schedule->save()) {
-            return redirect()->back()->with('success', 'record added successfully');
+            return redirect('hospital/schedule-index')->with('success', 'record added successfully');
         } else {
             return back()->with('error', 'you have no permission for this page');
         }

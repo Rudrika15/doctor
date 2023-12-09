@@ -15,4 +15,8 @@ class LeadController extends Controller
         $lead=Lead::with('hospital')->where('hospitalId','=',$hospital->id)->paginate(10);
         return view('hospital.lead.index',compact('lead'));
     }
+    public function leadsDelete($id){
+        Lead::find($id)->delete();
+        return redirect()->back();
+    }
 }

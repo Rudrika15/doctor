@@ -11,11 +11,12 @@
     
         <div class="col-lg-4">
                 <div class="form-group">
-                    <input type="text" autocomplete="off" id="searchInput" onkeyup="filterList()" onfocus="showItems()" name="categoryName" class="form-control @error('categoryName') is-invalid @enderror" placeholder="Enter City Name">
+                    <select  name="categoryName" class="search-dropdown form-control @error('categoryName') is-invalid @enderror">
+                        '<option selected disabled>--Select Category--</option>
                         @foreach ($category as $categoryName)
-                        <div class="item text-center p-2 border" style="display: none;">{{$categoryName->categoryName}}</div>
+                        <option class="item text-center p-2 border" style="display: none;">{{$categoryName->categoryName}}</option>
                         @endforeach
-                        
+                    </select> 
                     @error('categoryName')
                     <sapn class="text-danger">{{ $message }}</sapn>
                     @enderror
@@ -24,7 +25,7 @@
        
         <div class="col-lg-4">
             <div class="form-group">
-                    <select class="form-select form-control-user  @error('status') is-invalid @enderror"
+                    <select class="form-select search-dropdown form-control-user  @error('status') is-invalid @enderror"
                         name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
                              <option selected disabled class="text-center">---Select status---</option>
@@ -87,7 +88,7 @@
 </div>
 
   
-<script>
+<!-- <script>
     function showItems() {
        
       var items = document.getElementsByClassName("item");
@@ -118,7 +119,7 @@
         }
       }
     }
-  </script>
+  </script> -->
 
 @endsection
 

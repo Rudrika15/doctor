@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\City;
 use App\Models\Hospital;
 use App\Models\HospitalType;
@@ -85,7 +86,7 @@ class RegisterController extends Controller
             'contactNumber' => $data['contactNumber'],
 
         ]);
-        $user->assignRole('User');
+        // $user->assignRole('User');
 
         $patient = new Patient();
         $patient->userId = $user->id;
@@ -97,7 +98,8 @@ class RegisterController extends Controller
     public function hospitalCreate(){
         $city = City::all();
         $hospitaltype = HospitalType::all();
-        return view('auth.registerHospital',compact('city','hospitaltype'));
+        $category=Category::all();
+        return view('auth.registerHospital',compact('city','hospitaltype','category'));
     }
     public function registerhospitalStore(Request $request){
         // $this->validate($request, [
@@ -131,7 +133,7 @@ class RegisterController extends Controller
         $hospital->hospitalTypeId=$request->hospitalTypeId;
         $hospital->userId=$user->id;
         $hospital->siteUrl=$request->siteUrl;
-        $hospital->category=$request->category;
+        $hospital->categoryId=$request->categoryId;
         
         if ($request->hospitalLogo) {
             $hospitalLogo = $request->hospitalLogo;

@@ -84,7 +84,7 @@
         rules:{
                 title:{
                     required:true,
-                    maxlength:15,
+                    minlength:4,
                 },
         },messages:{
                     title:{

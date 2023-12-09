@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('phone');
             $table->integer('age');
             $table->integer('hospitalId');
+            $table->string('status')->default('Active');
             $table->timestamps();
         });
     }

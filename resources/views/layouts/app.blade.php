@@ -13,8 +13,8 @@
     {{-- For Search List Designing --}}
 
     <link rel="stylesheet" href="/search/style.css">
-    
-    
+
+
     {{-- ------------------- --}}
 
 
@@ -71,6 +71,14 @@
     <link rel="icon" href="{{ asset('asset/img/favicon.png') }}">
     {{-- For Icon  --}}
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+    span.select2.select2-container.select2-container--classic{
+        width: 100% !important;
+        
+    }
+</style>
+
 
 </head>
 
@@ -172,7 +180,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="{{ asset('assets/scripts/jquery.min.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('.search-dropdown').select2({
+      theme: "classic"
+    });
+  });
+</script>
     <script src="{{ asset('assets/scripts/modernizr.min.js') }}"></script>
     <script src="{{ asset('assets/plugin/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>

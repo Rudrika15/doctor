@@ -27,24 +27,24 @@ class AdminSpecialistController extends Controller
             $specialist=Specialist::orderBy('specialistName', 'ASC')
                 ->where('specialistName','like',"%$specialistName%")
                 ->where('status','=',$status)
-                ->paginate(5);
+                ->paginate(10);
                 $count=count($specialist);
         }
         else if(isset($specialistName) && !isset($status)){
             $specialist=Specialist::orderBy('specialistName', 'ASC')
                 ->where('specialistName','like',"%$specialistName%")
-                ->paginate(5);
+                ->paginate(10);
                 $count=count($specialist);
         }
         else if(!isset($specialistName) && isset($status)){
             $specialist=Specialist::orderBy('specialistName', 'ASC')
                 ->where('status','=',$status)
-                ->paginate(5);
+                ->paginate(10);
                 $count=count($specialist);
         }
         else{
             $specialist = Specialist::orderBy('specialistName', 'ASC')
-                    ->paginate(5); 
+                    ->paginate(10); 
             $count=count($specialist);  
         }
         return view('admin.specialist.index', compact('specialist','count'));

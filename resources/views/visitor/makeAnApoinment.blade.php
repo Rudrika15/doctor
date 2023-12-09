@@ -51,7 +51,7 @@
         <div class="row">
           <div class="col-md-4 form-group mt-3">
             <select name="categoryId" id="categoryId" class="form-select p-3 @error('categoryId') is-invalid @enderror" value="{{old('categoryId')}}" style="border-radius: 0px;">
-              <option value="">Select Department</option>
+              <option value="" disabled selected>Select Department</option>
               @foreach ($category as $category)
               <option value="{{$category->id}}">{{$category->categoryName}}</option>
               @endforeach

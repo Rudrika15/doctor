@@ -41,7 +41,7 @@ class AdminHospitalController extends Controller
         $hospitalName = $request->hospitalName;
         $cityId = $request->cityId;
         $hospitalTypeId = $request->hospitalTypeId;
-        $category = $request->category;
+        $categoryId = $request->category;
         $status = $request->status;
         //For all inputs
         if (isset($hospitalName) && isset($cityId) && isset($hospitalTypeId) && isset($category) && isset($status)) {
@@ -448,6 +448,7 @@ class AdminHospitalController extends Controller
                 ->paginate(20);
             $doctorcount = count($doctor);
         }
+        // Doctor sec end.
         //-------------------------------------------------------------------------
 
         //For Gallery
@@ -481,8 +482,9 @@ class AdminHospitalController extends Controller
                 ->paginate(20);
             $gallerycount = count($gallery);
         }
+        // gallery end.
 
-        //For Facility
+        //For Facility 
 
         $facilityTitle = $request->title;
         $facilityStatus = $request->status;
@@ -512,7 +514,7 @@ class AdminHospitalController extends Controller
                 ->paginate(20);
             $facilitycount = count($facility);
         }
-
+        // Facility end.
         //For Social Link.
         $socialtitle = $request->title;
         $socialstatus = $request->status;
@@ -542,25 +544,50 @@ class AdminHospitalController extends Controller
                 ->paginate(20);
             $socialcount = count($sociallink);
         } else {
-            $sociallink = SocialLink::where('hospitalId', $hospitalId)
+            $sociallink = SocialLink::orderBy('title', 'ASC')
+                ->where('hospitalId', $hospitalId)
                 ->with('hospital')
                 ->paginate(20);
             $socialcount = count($sociallink);
         }
+        //  Social Link end.
 
         // For Leads
         $leadUserName = $request->name;
-        $phone = $request->phone;
-        $age = $request->age;
-        if (isset($leadUserName)) {
-            $lead = Lead::orderBy('title', 'ASC')
+        $status = $request->status;
+
+        //For both input data
+        if (isset($leadUserName) && isset($status)) {
+            $lead = Lead::orderBy('name', 'ASC')
                 ->where('hospitalId', '=', $hospitalId)
                 ->where('name', '=', "%$leadUserName%")
-                ->get();
-        } else {
-            $lead = Lead::where('hospitalId', '=', $hospitalId)->paginate(10);
+                ->where('status', '=', $status)
+                ->paginate(20);
             $leadcount = count($lead);
         }
+        // For only leadUserName
+        else if (isset($leadUserName) && !isset($status)) {
+            $lead = Lead::orderBy('name', 'ASC')
+                ->where('hospitalId', $hospitalId)
+                ->where('name', 'like', "%$leadUserName%")
+                ->paginate(20);
+            $leadcount = count($lead);
+        }
+        // FOr only status
+        else if (!isset($leadUserName) && isset($status)) {
+            $lead = Lead::orderBy('name', 'ASC')
+                ->where('hospitalId', '=', $hospitalId)
+                ->where('status', '=', $status)
+                ->paginate(20);
+            $leadcount = count($lead);
+        } else {
+            $lead = Lead::orderBy('name', 'ASC')
+                ->where('hospitalId', $hospitalId)
+                ->with('hospital')
+                ->paginate(20);
+            $leadcount = count($lead);
+        }
+        // lead end
 
         // apppointment start
         $name = $request->name;
@@ -573,31 +600,38 @@ class AdminHospitalController extends Controller
                 ->where('status', '=', $status)
                 ->paginate(20);
             $appointmentCount = count($appointment);
+
         } else if (isset($name) && !isset($status)) {
             $appointment = Appointment::orderBy('name', 'ASC')
                 ->where('hospitalId', "=", $hospitalId)
-                ->where('name', "=", "%$name%")
+                ->where('name', 'LIKE', '%' . $name . '%')
                 ->paginate(20);
             $appointmentCount = count($appointment);
+
         } else if (!isset($name) && isset($status)) {
             $appointment = Appointment::orderBy('name', 'ASC')
                 ->where('hospitalId', '=', $hospitalId)
                 ->where('status', '=', $status)
                 ->paginate(20);
             $appointmentCount = count($appointment);
+            
         } else {
             $appointment = Appointment::where('hospitalId', $hospitalId)
                 ->with('hospital')
                 ->paginate(20);
             $appointmentCount = count($appointment);
         }
-
-        $appointment = Appointment::with('hospital')->where('hospitalId', '=', $hospital->id)->paginate(10);
+        // appointment end
 
         return view('admin.hospital.viewdetails', compact('lead', 'hospital', 'doctor', 'gallery', 'facility', 'specialist', 'gallerycount', 'facilitycount', 'sociallink', 'doctorcount', 'socialcount', 'leadcount', 'appointment', 'appointmentCount'));
     }
 
-
+    public function appointmentDelete($id)
+    {
+        $appointment =  Appointment::find($id);
+        $appointment->delete();
+        return redirect()->back();
+    }
 
 
     private function generateSlug($hospitalName)

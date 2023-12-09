@@ -40,7 +40,7 @@ use App\Http\Controllers\Hospital\LeadController;
 */
 
 // Route::get('/', function () {
-//     return view('welcome');
+//     return view('visitor.SelectDropdown');
 // });
 
 // ------------------ Visitor Side  -----------------------------------------
@@ -94,6 +94,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('users-export',[UserController::class,'export'] )->name('users.export');
     Route::post('users-import', [UserController::class,'import'])->name('users.import');
     Route::get('contact/index', [VisitorController::class, 'viewContact'])->name('visitor.viewContact');
+    
     // Admin State
     Route::controller(AdminStateController::class)->group(function () {
         Route::get('admin/state-index', 'index')->name('state.index');
@@ -126,6 +127,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     // Admin Hospital
+    // APPOINTMENT INDEX CODE AND DELETE CODE PRESENT IN AdminHospialController inside viewdetails
     Route::controller(AdminHospitalController::class)->group(function () {
         Route::get('admin/hospital-index', 'index')->name('hospital.index');
         Route::get('admin/hospital-create', 'create')->name('hospital.create');
@@ -134,6 +136,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('admin/hospital-update', 'update')->name('hospital.update');
         Route::get('admin/hospital-delete-{id?}', 'delete')->name('hospital.delete');
         Route::get('admin/hospital-viewdetails-{id?}', 'viewDetails')->name('admin.hospital.viewdetails');
+        Route::get('admin/hospital-appointmentDelete-{id?}', 'appointmentDelete')->name('admin.hospital.appointment.delete');
     });
 
     // Admin HospitalType
@@ -249,9 +252,12 @@ Route::group(['middleware' => ['auth']], function () {
     // view appointments
     // Route::get('viewAppointment', [AdminHospitalController::class, 'viewAppointment'])->name('appointment.index');
 
+    Route::get('index', [AppointmentController::class, 'index'])->name('appointment.index');
     // Hospital Leads
     Route::controller(LeadController::class)->group(function(){
         Route::get('hospital/lead-index','index')->name('hospital.lead.index');
+        Route::get('hospital/lead-delete-{id?}','leadsDelete')->name('hospital.lead.delete');
+        
     });
     //Route::get('/', 'HomeController@index')->name('home');
 

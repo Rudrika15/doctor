@@ -11,11 +11,12 @@
 
             <div class="col-lg-4">
                 <div class="form-group">
-                    <input type="text" autocomplete="off" id="searchInput" onkeyup="filterList()" onfocus="showItems()" name="hospitalName" class="form-control @error('hospitalName') is-invalid @enderror" placeholder="Enter Hospital Name">
+                    <select  name="hospitalName" class="search-dropdown form-control @error('hospitalName') is-invalid @enderror" placeholder="Enter Hospital Name">
+                   <option selected disabled>--Select HospitalName--</option>
                     @foreach ($hospital as $hspitalsearch)
-                        <div class="item text-center p-2 border" style="display: none;">{{$hspitalsearch->hospitalName}}</div>
+                        <option class="item text-center p-2 border" style="display: none;">{{$hspitalsearch->hospitalName}}</option>
                     @endforeach
-                        
+                    </select>
                     @error('hospitalName')
                     <sapn class="text-danger">{{ $message }}</sapn>
                     @enderror
@@ -25,7 +26,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
 
-                    <select class="form-select form-control-user @error('cityId') is-invalid @enderror" name="cityId" id="cityId" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;" aria-label="Default select example">
+                    <select class="form-select search-dropdown form-control-user @error('cityId') is-invalid @enderror" name="cityId" id="cityId" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;" aria-label="Default select example">
                         <option selected disabled>---Select City---</option>
                         @foreach ($city as $city)
                         <option value={{$city->id}}>{{$city->name}}</option>
@@ -42,7 +43,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
 
-                    <select class="form-select form-control-user @error('hospitalTypeId') is-invalid @enderror" name="hospitalTypeId" id="hospitalTypeId" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;" aria-label="Default select example">
+                    <select class="form-select search-dropdown form-control-user @error('hospitalTypeId') is-invalid @enderror" name="hospitalTypeId" id="hospitalTypeId" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;" aria-label="Default select example">
                         <option selected disabled>---Select Hospital Type---</option>
                         @foreach ($hospitaltype as $hospitaltype)
                         <option value={{$hospitaltype->id}}>{{$hospitaltype->typeName}}</option>
@@ -59,7 +60,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
 
-                    <select class="form-select form-control-user @error('category') is-invalid @enderror" name="category" id="category" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;" aria-label="Default select example">
+                    <select class="form-select search-dropdown form-control-user @error('category') is-invalid @enderror" name="category" id="category" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;" aria-label="Default select example">
                         <option selected disabled>---Select Category---</option>
                         <option value="Alopethi">Alopethi</option>
                         <option value="Homiopethi">Homiopethi</option>
@@ -76,7 +77,7 @@
 
             <div class="col-lg-4">
                 <div class="form-group">
-                    <select class="form-select form-control-user @error('status') is-invalid @enderror" name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;" aria-label="Default select example">
+                    <select class="form-select search-dropdown form-control-user @error('status') is-invalid @enderror" name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;" aria-label="Default select example">
                         <option selected disabled>---Select Status---</option>
                         <option value="Active">Active</option>
                         <option value="Delete">Delete</option>
@@ -172,7 +173,7 @@
         {{-- {!! $data->render() !!} --}}
     </div>
 </div>
-<script>
+<!-- <script>
     function showItems() {
        
       var items = document.getElementsByClassName("item");
@@ -203,6 +204,6 @@
         }
       }
     }
-  </script>
+  </script> -->
 
 @endsection

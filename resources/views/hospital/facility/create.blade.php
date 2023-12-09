@@ -82,7 +82,7 @@
                 hospitalId:"required",
                 title:{
                     required:true,
-                    maxlength:15,
+                    minlength:4,
                 },
                 photo:"required",
         },messages:{

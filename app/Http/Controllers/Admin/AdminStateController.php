@@ -18,21 +18,21 @@ class AdminStateController extends Controller
             $state = State::orderBy('stateName', 'ASC')
                 ->where('stateName', 'like', "%$stateName%")
                 ->where('status', '=', $status)
-                ->paginate(5);
+                ->paginate(10);
             $count = count($state);
         } else if (!isset($stateName) && isset($status)) {
             $state = State::orderBy('stateName', 'ASC')
                 ->where('status', '=', $status)
-                ->paginate(5);
+                ->paginate(10);
             $count = count($state);
         } else if (isset($stateName) && !isset($status)) {
             $state = State::orderBy('stateName', 'ASC')
                 ->where('stateName', 'like', "%$stateName%")
-                ->paginate(5);
+                ->paginate(10);
             $count = count($state);
         } else {
             $state = State::orderBy('stateName', 'ASC')
-                ->paginate(5);
+                ->paginate(10);
             $count = count($state);
         }
         return view('admin.state.index', compact('state', 'count'));

@@ -28,24 +28,24 @@ class AdminCityController extends Controller
                 ->where('name', 'like', "%$cityName%")
                 ->where('status', '=', $status)
 
-                ->paginate(5);
+                ->paginate(10);
             $count = count($city);
         } else if (!isset($cityName) && isset($status)) {
             $city = City::orderBy('name', 'ASC')
                 ->where('status', '=', $status)
 
-                ->paginate(5);
+                ->paginate(10);
             $count = count($city);
         } else if (isset($cityName) && !isset($status)) {
             $city = City::orderBy('name', 'ASC')
                 ->where('name', 'like', "%$cityName%")
 
-                ->paginate(5);
+                ->paginate(10);
             $count = count($city);
         } else {
             $city = City::orderBy('name', 'ASC')
                 ->with('state')
-                ->paginate(5);
+                ->paginate(10);
             $count = count($city);
         }
 

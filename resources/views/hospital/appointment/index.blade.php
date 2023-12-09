@@ -7,7 +7,7 @@
 
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
-        <h2 class="p-3">Schedule</h2>
+        <h2 class="p-3">Appointment</h2>
         <div class="pt-2"><a class="btn addbtn" href="{{route('appointment.index')}}"> Back</a></div>
     </div>
     <div class="card-body">

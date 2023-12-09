@@ -154,23 +154,8 @@
                 minlength:5,
                 maxlength:200
             },
-            contactNo:{
-                required:true,
-                minlength:10,
-                maxlength:12,
-            },
-            specialistId:{
-                required:true, 
-            },
-            userId:{
-                required:true, 
-            },
-            photo:{
-                required:true,
-            },
-            experience:{
-                required:true,
-            },
+           
+            
             registerNumber:{
                 required:true,
                 minlength:12,
@@ -205,6 +190,7 @@
             }
         },
         submitHandler:function(form){
+            form.preventDefault();
             form.submit();
         }
     });

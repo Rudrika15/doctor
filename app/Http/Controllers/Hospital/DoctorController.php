@@ -18,7 +18,7 @@ class DoctorController extends Controller
     {
         $hospitalId=Auth::user()->id;
 
-        $doctor = Doctor::with('hospital')->where('hospitalId','=',$hospitalId)->paginate(5);
+        $doctor = Doctor::with('hospital')->where('hospitalId','=',$hospitalId)->paginate(10);
         return view('hospital.doctor.index', compact('doctor'));
     }
 
@@ -38,10 +38,7 @@ class DoctorController extends Controller
             'email' => 'required',
             'password' => 'required',
             'contactNo' => 'required',
-            'specialistId' => 'required',
-            'photo' => 'required',
-            'experience' => 'required',
-            'registerNumber' => 'required|unique:doctors,registerNumber,'
+            
         ]);
 
         $user=new User();
@@ -56,6 +53,7 @@ class DoctorController extends Controller
         $doctor = new Doctor();
         $doctor->hospitalId = $hospitalId;
         $doctor->doctorName = $request->doctorName;
+        $doctor->slug = $request->doctorName;
         $doctor->contactNo = $request->contactNo;
         $doctor->specialistId = $request->specialistId;
         $doctor->userId = $user->id;
@@ -69,7 +67,7 @@ class DoctorController extends Controller
         
 
         if ($doctor) {
-            return redirect()->back()->with('success', 'Record Added successfully!');
+            return redirect('hospital/doctor-index')->with('success', 'Record Added successfully!');
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }

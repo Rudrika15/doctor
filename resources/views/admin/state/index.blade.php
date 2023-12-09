@@ -11,20 +11,21 @@
     
         <div class="col-lg-4">
                 <div class="form-group">
-                    <input type="text" autocomplete="off" id="searchInput" onkeyup="filterList()" onfocus="showItems()" name="stateName" class="form-control @error('stateName') is-invalid @enderror" placeholder="Enter State Name">
-                        @foreach ($state as $stateName)
-                        <div class="item text-center p-2 border" style="display: none;">{{$stateName->name}}</div>
+                    <select name="stateName" class="search-dropdown form-control @error('stateName') is-invalid @enderror" >
+                        <option selected disabled>--Select State--</option>
+                    @foreach ($state as $stateName)
+                        <option class="item text-center p-2 border" style="display: none;">{{$stateName->stateName}}</option>
                         @endforeach
-                        
+                    </select>
                     @error('stateName')
-                    <sapn class="text-danger">{{ $message }}</sapn>
+                    <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
         </div> 
        
         <div class="col-lg-4">
             <div class="form-group">
-                    <select class="form-select form-control-user  @error('status') is-invalid @enderror"
+                    <select class="search-dropdown form-select form-control-user  @error('status') is-invalid @enderror"
                         name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
                              <option selected disabled class="text-center">---Select status---</option>

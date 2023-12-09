@@ -12,10 +12,12 @@
 
     <div class="col-lg-4">
       <div class="form-group">
-        <input type="text" autocomplete="off" id="searchInput" onkeyup="filterList()" onfocus="showItems()" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Enter Person Name">
+        <select  name="name" class="search-dropdown form-control @error('name') is-invalid @enderror" placeholder="Enter Person Name">
+        <option selected disabled>--Select Name--</option>
         @foreach ($contact as $PersonName)
-        <div class="item text-center p-2 border" style="display: none;">{{$PersonName->name}}</div>
+        <option class="item text-center p-2 border" style="display: none;">{{$PersonName->name}}</option>
         @endforeach
+        </select>
         @error('name')
         <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -24,7 +26,7 @@
 
     <div class="col-lg-4">
       <div class="form-group">
-        <select class="form-select form-control-user  @error('status') is-invalid @enderror" name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;" aria-label="Default select example">
+        <select class="search-dropdown form-select form-control-user  @error('status') is-invalid @enderror" name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;" aria-label="Default select example">
           <option selected disabled class="text-center">---Select status---</option>
           <option value="Active">Active</option>
           <option value="Delete">Delete</option>
@@ -67,9 +69,13 @@
         @endforeach
         @if ($count==0)
                     <td colspan="3" class="display-3 text-center text-danger">Record Not Found</td>
-                @endif
+        @endif
       </table>
+      {!! $contact->withQueryString()->links('pagination::bootstrap-5') !!}
+
     </div>
+    {{-- {!! $data->render() !!}  --}}
+
   </div>
   <script>
     function showItems() {

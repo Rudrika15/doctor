@@ -11,11 +11,12 @@
 
       <div class="col-lg-4">
         <div class="form-group">
-            <input type="text" autocomplete="off" id="searchInput" onkeyup="filterList()" onfocus="showItems()" name="title" class="form-control @error('title') is-invalid @enderror" placeholder="Enter Title ">
+            <select  name="title" class="search-dropdown form-control @error('title') is-invalid @enderror">
+            <option selected disabled >--Select Title--</option>
             @foreach ($slider as $searchslider)
-            <div class="item text-center p-2 border" style="display: none;">{{$searchslider->title}}</div>
+            <option class="item text-center p-2 border" style="display: none;">{{$searchslider->title}}</option>
             @endforeach
-                
+            </select>  
             @error('title')
             <sapn class="text-danger">{{ $message }}</sapn>
             @enderror
@@ -24,7 +25,7 @@
 
       <div class="col-lg-4">
         <div class="form-group">
-                <select class="form-select form-control-user  @error('place') is-invalid @enderror"
+                <select class="form-select search-dropdown form-control-user  @error('place') is-invalid @enderror"
                     name="place" id="place" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;"
                      aria-label="Default select example">
                          <option selected disabled class="text-center">---Select place---</option>
@@ -41,7 +42,7 @@
 
         <div class="col-lg-4">
             <div class="form-group">
-                    <select class="form-select form-control-user  @error('status') is-invalid @enderror"
+                    <select class="form-select search-dropdown form-control-user  @error('status') is-invalid @enderror"
                         name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
                              <option selected disabled class="text-center">---Select status---</option>
@@ -112,7 +113,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
   
-<script>
+<!-- <script>
   function showItems() { 
     var items = document.getElementsByClassName("item");
     for (var i = 0; i < items.length; i++) {
@@ -142,9 +143,7 @@
       }
     }
   }
-</script>
 
-<script>
   function showPlace() { 
     var itemPlaces = document.getElementsByClassName("itemPlace");
     for (var i = 0; i < itemPlaces.length; i++) {
@@ -153,7 +152,7 @@
       
     }
   }
-
+  </script> -->
 @endsection
 
 

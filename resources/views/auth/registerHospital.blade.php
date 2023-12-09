@@ -104,11 +104,11 @@
                             <div class="col-md-4 mt-3">
                                 <label for="category"><b>{{_('Category')}}<span class="text-danger">*</span></b></label>
 
-                                <select name="category" id="category" class="form-control mt-2 @error('category') is-invalid @enderror">
+                                <select name="categoryId" id="categoryId" class="form-control mt-2 @error('categoryId') is-invalid @enderror">
                                     <option selected>--Select Category--</option>
-                                    <option value="Alopethi">Alopethi</option>
-                                    <option value="Homiopethi">Homiopethi</option>
-                                    <option value="Aayurvedi">Aayurvedi</option>
+                                    @foreach($category as $category)
+                                    <option value="{{$category->id}}">{{$category->categoryName}}</option>
+                                    @endforeach
                                 </select>
                                 @error('category')
                                     <span class="text-danger">{{$message}}</span>
@@ -117,7 +117,7 @@
                             <div class="col-md-4 mt-3">
                                 <label for="hospitalTime"><b>{{_('Hospital Time')}}<span class="text-danger">*</span></b></label>
 
-                                <input type="time" class="form-control mt-2 @error('hospitalTime') is-invalid @enderror" name="hospitalTime" id="hospitalTime">
+                                <input type="text" class="form-control mt-2 @error('hospitalTime') is-invalid @enderror" name="hospitalTime" id="hospitalTime">
                                 @error('hospitalTime')
                                   <span class="text-danger">{{$message}}</span>  
                                 @enderror
@@ -261,6 +261,7 @@
             }
         },
         submitHandler:function(form){
+            form.preventDefault();
             form.submit();
         }
     });
