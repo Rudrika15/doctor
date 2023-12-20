@@ -85,20 +85,19 @@
 </main>
 @endsection
 <script>
-    function toggleReadMore(personId) {
-        var content = document.getElementById("testimonial-content-" + personId);
-        var fullContent = document.querySelector("#testimonial-content-" + personId + " + .full-content");
-        var button = document.getElementById("read-more-btn-" + personId);
+  function toggleReadMore(personId) {
+    var content = document.getElementById("testimonial-content-" + personId);
+    var fullContent = document.querySelector("#testimonial-content-" + personId + " + .full-content");
+    var button = document.getElementById("read-more-btn-" + personId);
 
-        if (content.style.display !== "none") {
-            content.style.display = "none";
-            fullContent.style.display = "block";
-            button.innerHTML = "Read Less";
-        } else {
-            content.style.display = "block";
-            fullContent.style.display = "none";
-            button.innerHTML = "Read More";
-        }
+    if (content.style.display !== "none") {
+      content.style.display = "none";
+      fullContent.style.display = "block";
+      button.innerHTML = "Read Less";
+    } else {
+      content.style.display = "block";
+      fullContent.style.display = "none";
+      button.innerHTML = "Read More";
     }
+  }
 </script>
-

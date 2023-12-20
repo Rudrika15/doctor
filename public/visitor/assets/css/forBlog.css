@@ -1,3 +1,10 @@
+.drName{
+ margin-left: 5%;
+}
+.drspName{
+  margin-left: 5%;
+}
+
 .container-list {
     display: flex;
     flex-wrap: wrap;
@@ -21,7 +28,14 @@
       width: calc(50% - 20px);
       /* 2 columnas en tablet */
     }
+    .drName{  
+      margin-left: 0% !important;
+     }
+     .drspName{
+       margin-left: 0% !important;
+     }
   }
+
 
 @media screen and (max-width: 768px) {
     .container {
@@ -33,5 +47,8 @@
       width: 100%;
       margin: 10px 0;
     }
+
+
    
   }
+

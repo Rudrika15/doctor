@@ -22,8 +22,8 @@
                 <section id="testimonials" class="testimonials">
 
                     <!-- ======= Testimonials Section ======= -->
-                    <h2 class="ms-5">{{$blog->doctor->doctorName}}</h2>
-                    <h4 class="ms-5">{{$blog->doctor->specialist->specialistName}}</h4>
+                    <h2 class="drName">{{$blog->doctor->doctorName}}</h2>
+                    <h4 class="drspName">{{$blog->doctor->specialist->specialistName}}</h4>
                     <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
                         <div class="swiper-wrapper">
 
@@ -35,16 +35,16 @@
                                         <h1 class="mt-2">{{$blog->title}}</h1>
 
                                         <p>
-                      <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    <p class="testimonial-content" id="testimonial-content-{{ $blog->id }}">
-                      {{ substr($blog->detail, 0, 250) }}{{ strlen($blog->detail) > 250 ? '...' : '' }}
-                    </p>
-                    <p class="full-content" style="display: none;">{{ $blog->detail }}</p>
+                                            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                        <p class="testimonial-content" id="testimonial-content-{{ $blog->id }}">
+                                            {{ substr($blog->detail, 0, 250) }}{{ strlen($blog->detail) > 250 ? '...' : '' }}
+                                        </p>
+                                        <p class="full-content" style="display: none;">{{ $blog->detail }}</p>
 
-                    <a onclick="toggleReadMore({{$blog->id}})" class="text-primary" id="read-more-btn-"><u>Read More</u></a>
-                    <br>
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                    </p>
+                                        <a onclick="toggleReadMore({{$blog->id}})" class="text-primary" id="read-more-btn-"><u>Read More</u></a>
+                                        <br>
+                                        <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                        </p>
 
                                     </div>
                                 </div>
