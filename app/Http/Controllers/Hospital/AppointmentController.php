@@ -15,7 +15,9 @@ class AppointmentController extends Controller
     {
         $user=Auth::user()->id;
         $hospital=Hospital::where('userId',$user)->first();
-        $appointment=Appointment::where('hospitalId',$hospital->id)->paginate(5);
+      return  $appointment=Appointment::where('hospitalId',$hospital->id)
+        ->whereHas('schedule')
+        ->paginate(5);
         return view('hospital.appointment.index',compact('appointment'));
 
     }

@@ -20,14 +20,14 @@
 
         <form id="frm" action="{{route('gallery.store')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" name="hospitalId" value="{{$hospital->id}}">
+            <input type="hidden" name="hospitalId" value="{{$hospital->userId}}">
           
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Title </strong>
                     <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror">
                     @error('title')
-                    <sapn class="text-danger">{{ $message }}</sapn>
+                    <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
             </div>
@@ -38,7 +38,7 @@
                     <div class="col-md-4">
                         <input type="file" accept='image/*' onchange="readURL(this,'#img1')" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo">
                         @error('photo')
-                        <sapn class="text-danger">{{ $message }}</sapn>
+                        <span class="text-danger">{{ $message }}</sapn>
                         @enderror
                     </div>
 

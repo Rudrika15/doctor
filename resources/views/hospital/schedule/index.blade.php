@@ -21,7 +21,6 @@
                 <th>Session</th>
                 <th>Time</th>
                 <th>Status</th>
-               
                 <th width="280px">Action</th>
             </tr>
             @foreach ($schedule as $schedules)

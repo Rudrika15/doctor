@@ -3,6 +3,10 @@
 
   <!-- ======= Hero Section ======= -->
 
+  @php
+    $cityId = session('cityId');
+@endphp
+
 {{-- Slider Section  --}}
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
@@ -270,22 +274,21 @@
         <div class="row gy-4">
           <div class="col-lg-3">
             <ul class="nav nav-tabs flex-column">
-              @foreach ($departments as $departments)
+              @foreach ($departments as $dept)
               <li class="nav-item {{ $loop->first ? 'active' : '' }}">
-                <a class="nav-link " data-bs-toggle="tab" href="#tab-{{$departments->id}}">{{$departments->categoryName}}</a>
+                <a class="nav-link " data-bs-toggle="tab" href="#tab-{{$dept->id}}">{{$dept->categoryName}}</a>
               </li>
               @endforeach
             </ul>
           </div>
           <div class="col-lg-9">
             <div class="tab-content">
-              @foreach ($departmentsDetails as $departmentsDetails)
+              @foreach ($departments as $departmentsDetails)
                 <div class="tab-pane {{ $loop->first ? 'active' : '' }}" id="tab-{{$departmentsDetails->id}}">
                   <div class="row gy-4">
                     <div class="col-lg-8 details order-2 order-lg-1">
                       <h3>{{$departmentsDetails->categoryName}}</h3>
-                      <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
-                      <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero</p>
+                      <p class="fst-italic">{{$departmentsDetails->details}}</p>
                     </div>
                     <div class="col-lg-4 text-center order-1 order-lg-2">
                       <img src="assets/img/departments-1.jpg" alt="" class="img-fluid">
@@ -312,6 +315,8 @@
         
         <div class="row">
           @foreach ($hospital as $hospital)
+          @if ($hospital->cityId == $cityId)
+
           <div class="col-md-6 mt-4 lg-0">
             <div class="member d-flex align-items-start">
               <div class="">
@@ -327,18 +332,18 @@
                 <h4>{{$hospital->hospitalName}}</h4>
                 <span>Chief Medical Officer</span>
                 <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
-                <a href="{{route('visitor.hospitalDetails')}}/{{$hospital->slug}}" class="btn text-white mt-2" style="background-color:#1977CC;">SeeDetails</a>
+                <a href="{{route('visitor.hospitalDetails')}}/{{$hospital->slug}}" class="btn text-white mt-2 see-detail-btn" >SeeDetails</a>
 
                 <div class="social">
-                  <a href="" style="background-color: #022B53;"><i class="ri-twitter-fill"></i></a>
-                  <a href="" style="background-color: #022B53;"><i class="ri-facebook-fill"></i></a>
-                  <a href="" style="background-color: #022B53;"><i class="ri-instagram-fill"></i></a>
-                  <a href="" style="background-color: #022B53;"> <i class="ri-linkedin-box-fill"></i> </a>
+                  <a href=""><i class="ri-twitter-fill"></i></a>
+                  <a href=""><i class="ri-facebook-fill"></i></a>
+                  <a href=""><i class="ri-instagram-fill"></i></a>
+                  <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
                 </div>
               </div>
             </div>
           </div>
-
+      @endif
           @endforeach
           
           {{-- <div class="col-lg-6 mt-4 mt-lg-0">
@@ -475,22 +480,24 @@
 
         <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
           <div class="swiper-wrapper">
-            @foreach ($doctor as $doctor)
+            @if(isset($testimonial))
+            @foreach ($testimonial as $testimonials)
               <div class="swiper-slide">
                 <div class="testimonial-wrap">
                   <div class="testimonial-item">
                     <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                    <h3>{{$doctor->doctorName}}</h3>
-                    <h4>{{$doctor->specialist->specialistName}}</h4>
-                    <p>
+                    <h3>{{$testimonials->title}}</h3>
+                    <h4>{{$testimonials->subTitle}}</h4>
+                    <p class="fst-italic">
                       <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                      Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                      {{$testimonials->details}}
                       <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                     </p>
                   </div>
                 </div>
               </div><!-- End testimonial item -->
             @endforeach
+            @endif
             {{-- <div class="swiper-slide">
               <div class="testimonial-wrap">
                 <div class="testimonial-item">

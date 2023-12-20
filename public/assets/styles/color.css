@@ -278,13 +278,14 @@ a .logo {
 }
 
 .btnsubmit {
-    background-color: var(--darkblue) !important;
+    background-color: var(--levendar) !important;
     color: var(--white) !important;
+   
 }
 
 .btnsubmit:hover {
-    background-color: var(--levendar) !important;
-    color: var(--white) !important;
+    background-color: var(--darkblue) !important;
+    color: var(--black) !important;
     font-weight: 600 !important;
 }
 

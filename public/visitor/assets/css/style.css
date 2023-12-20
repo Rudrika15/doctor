@@ -1230,9 +1230,14 @@ section {
     border-radius: 50px;
     width: 32px;
     height: 32px;
-    background: #a0bcd5;
+    background: #022B53;
 }
-
+.see-detail-btn{
+    background:#0B9890;
+}
+.see-detail-btn:hover{
+    background: #1977CC;
+}
 .doctors .member .social a i {
     color: #fff;
     font-size: 16px;
@@ -1457,6 +1462,7 @@ section {
 .contact .info {
     width: 100%;
     background: #fff;
+
 }
 
 .contact .info i {

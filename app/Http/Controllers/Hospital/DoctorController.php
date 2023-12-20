@@ -41,6 +41,7 @@ class DoctorController extends Controller
             
         ]);
 
+        $hospitalId= Auth::user()->id;
         $user=new User();
         $user->name=$request->doctorName;
         $user->email=$request->email;
@@ -49,7 +50,6 @@ class DoctorController extends Controller
         $user->assignRole('Doctor');
         $user->save();
 
-        $hospitalId= Auth::user()->id;
         $doctor = new Doctor();
         $doctor->hospitalId = $hospitalId;
         $doctor->doctorName = $request->doctorName;
@@ -64,7 +64,50 @@ class DoctorController extends Controller
         $doctor->registerNumber = $request->registerNumber;
         $doctor->save();
 
+
+        // save into schedule
+        $sc1 = new Schedule();
+        $sc1->hospitalId = $hospitalId;
+        $sc1->doctorId = $doctor->id;
+        $sc1->day ="Sunday";
+        $sc1->save();
         
+        $sc2 = new Schedule();
+        $sc2->hospitalId = $hospitalId;
+        $sc2->doctorId = $doctor->id;
+        $sc2->day ="Monday";
+        $sc2->save();
+
+        $sc3 = new Schedule();
+        $sc3->hospitalId = $hospitalId;
+        $sc3->doctorId = $doctor->id;
+        $sc3->day ="Tuesday";
+        $sc3->save();
+
+        $sc4 = new Schedule();
+        $sc4->hospitalId = $hospitalId;
+        $sc4->doctorId = $doctor->id;
+        $sc4->day ="Wednesday";
+        $sc4->save();
+
+        $sc5 = new Schedule();
+        $sc5->hospitalId = $hospitalId;
+        $sc5->doctorId = $doctor->id;
+        $sc5->day ="Thursday";
+        $sc5->save();
+
+        $sc6 = new Schedule();
+        $sc6->hospitalId = $hospitalId;
+        $sc6->doctorId = $doctor->id;
+        $sc6->day ="Friday";
+        $sc6->save();
+
+        $sc7 = new Schedule();
+        $sc7->hospitalId = $hospitalId;
+        $sc7->doctorId = $doctor->id;
+        $sc7->day ="Saturday";
+        $sc7->save();
+
 
         if ($doctor) {
             return redirect('hospital/doctor-index')->with('success', 'Record Added successfully!');

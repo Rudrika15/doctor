@@ -9,19 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('schedules', function (Blueprint $table) {
-            $table->id();
-            $table->integer('hospitalId');
-            $table->integer('doctorId');
-            $table->string('day');
-            $table->string('session');
-            $table->string('time');
-            $table->string('status')->default('Active');
-            $table->timestamps();
-        });
-    }
+        public function up(): void
+        {
+            Schema::create('schedules', function (Blueprint $table) {
+                $table->id();
+                $table->integer('hospitalId');
+                $table->integer('doctorId');
+                $table->string('day');
+                $table->string('beforeLunchInTime')->nullable();
+                $table->string('beforeLunchOutTime')->nullable();
+                $table->string('afterLunchInTime')->nullable();
+                $table->string('afterLunchOutTime')->nullable();
+                $table->string('holiday')->default('No');
+                $table->string('status')->default('Active');
+                $table->timestamps();
+            });
+        }
 
     /**
      * Reverse the migrations.

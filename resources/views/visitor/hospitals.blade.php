@@ -46,7 +46,7 @@
           {{-- <h1>Hello{{ request()->route('hospitalTypeId') }}</h1> --}}
          
           @foreach ($hospital as $hospital)
-            {{-- @if ($hospital->cityId == $cityId) --}}
+            @if ($hospital->cityId == $cityId)
               <div class="col-lg-6 mt-4 lg-0">
                 <div class="member d-flex align-items-start">
                   <div class="">
@@ -62,9 +62,10 @@
                     <span>Chief Medical Officer</span>
                     
                     <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
-                    <a href="{{route('visitor.hospitalDetails')}}/{{$hospital->slug}}" class="btn text-white mt-2" style="background-color:#A1BDD6;">SeeDetails</a>
+                    <a href="{{route('visitor.hospitalDetails')}}/{{$hospital->slug}}" class="btn text-white mt-2 see-detail-btn" >SeeDetails</a>
 
                     <div class="social">
+                      
                       <a href=""><i class="ri-twitter-fill"></i></a>
                       <a href=""><i class="ri-facebook-fill"></i></a>
                       <a href=""><i class="ri-instagram-fill"></i></a>
@@ -75,7 +76,7 @@
                 </div>
               </div>
             
-            {{-- @endif --}}
+             @endif
           @endforeach
          
         </div>

@@ -84,7 +84,7 @@
             @endif
 
           </div>
-          <div class="col-md-4 form-group mt-3">
+          <div class="col-md-6 form-group mt-3">
             <select name="hospitalId" id="hospitalId" class="form-select p-3 @error('hospitalId') is-invalid @enderror" value="{{old('hospitalId')}}" style="border-radius: 0px;">
               <option value="">-- Select Hospital --</option>
             </select>
@@ -94,7 +94,7 @@
             @endif
 
           </div>
-          <div class="col-md-4 form-group mt-3">
+          <div class="col-md-6 form-group mt-3">
             <select name="doctorId" id="doctorId" class="form-select p-3 @error('doctorId') is-invalid @enderror" value="{{old('doctorId')}}" style="border-radius: 0px;">
               <option value="">-- Select Doctor --</option>
             </select>
@@ -103,29 +103,8 @@
             <span class="text-danger">{{$errors->first('doctorId')}}</span>
             @endif
           </div>
-          <div class="col-md-4 form-group mt-3">
-            <select name="scheduleId" id="scheduleId" class="form-select p-3 @error('scheduleId') is-invalid @enderror" value="{{old('scheduleId')}}" style="border-radius: 0px;">
-              <option value="">Select Schedule</option>
-            </select>
-
-            @if($errors->has('scheduleId'))
-            <span class="text-danger">{{$errors->first('scheduleId')}}</span>
-            @endif
-          </div>
-          <div class="col-md-12 form-group mt-3">
-            <div class="row">
-              <div class="col-md-2">
-                <label for="Appoinment">Appoinment (date and time):</label>
-
-              </div>
-              <div class="col-md-10">
-                <input type="datetime-local" name="appointmentDate" class="form-control p-3 datepicker @error('appointmentDate') is-invalid @enderror" value="{{old('appointmentDate')}}" id="appointmentDate" placeholder="Appointment Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars" style="border-radius: 0px;">
-              </div>
-            </div>
-            @if($errors->has('appointmentDate'))
-            <span class="text-danger">{{$errors->first('appointmentDate')}}</span>
-            @endif
-          </div>
+          
+         
         </div>
 
         <div class="form-group mt-3">
@@ -242,10 +221,10 @@
         },
         dataType: 'json',
         success: function(res) {
-          console.log('Success Response');
+          console.log('Success Response', res);
           $('#scheduleId').html('<option value="">-- Select Schedule --</option>');
           $.each(res.schedules, function(key, value) {
-            $("#scheduleId").append('<option value="' + value.id + '">' + 'Date:-' + value.day + '</option>');
+            $("#scheduleId").append('<option value="' + value.id + '">' + 'Day:-' + value.day + '</option>');
           });
         },
         error: function(xhr, status, error) {

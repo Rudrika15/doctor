@@ -1,0 +1,11 @@
+
+.dashboard-icon-rounded{
+   width: 22% !important;
+    height: 90% !important;
+    border-radius: 50%;
+    background-color: #0CA798;
+}
+.dashboard-icon-rounded h1{
+    padding: 20%;
+    padding-top: 30%;
+}

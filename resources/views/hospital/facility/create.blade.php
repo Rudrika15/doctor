@@ -20,7 +20,7 @@
 
         <form id="frm" action="{{route('facility.store')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
             @csrf
-          <input type="hidden" name="hospitalId" value="{{$hospital->id}}">
+          <input type="hidden" name="hospitalId" value="{{$hospital->userId}}">
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">

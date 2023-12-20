@@ -24,6 +24,9 @@ class Doctor extends Model
     public function specialist(){
         return $this->hasOne(Specialist::class,'id','specialistId');
     }
+    public function schedule(){
+        return $this->hasMany(Schedule::class, 'id', 'scheduleId');
+    }
     
     
 }

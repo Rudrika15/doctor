@@ -24,6 +24,7 @@ use App\Http\Controllers\Hospital\ScheduleController;
 use Spatie\Permission\Contracts\Role;
 use App\Http\Controllers\Visitor\VisitorController;
 use App\Http\Controllers\Admin\AdminStateController;
+use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Doctor\ProfileUpdateController;
 use App\Http\Controllers\Hospital\LeadController;
@@ -52,10 +53,16 @@ Route::get('hospitalDetails/{slug?}', [VisitorController::class, 'hospitalDetail
 Route::get('specialist', [VisitorController::class, 'specialist'])->name('visitor.specialist');
 Route::get('visitorDetail/{slug?}', [VisitorController::class, 'visitorsDetail'])->name('visitor.visitorsDetail');
 Route::post('storVisitorsDetail', [VisitorController::class, 'storVisitorsDetail'])->name('visitor.storVisitorsDetail');
+Route::get('visitorDetailForDoctorDetailView/{slug?}', [VisitorController::class, 'visitorDetalfordoctor'])->name('visitor.visitorDetailForDoctorDetail');
+Route::post('storVisitorsDetailForDoctor', [VisitorController::class, 'storeVisitorDetailfordoctor'])->name('visitor.storeVisitorsDetailForDoctorDetail');
+
 Route::get('doctorList/{slug?}', [VisitorController::class, 'doctorList'])->name('visitor.doctorList');
 Route::get('contact', [VisitorController::class, 'createContact'])->name('visitor.contact');
 Route::post('contact/store', [VisitorController::class, 'storeContact'])->name('visitor.storeContact');
-
+// BLOG VIEW
+Route::get('blogs', [VisitorController::class, 'blogview'])->name('visitor.blogView');
+Route::get('blog-view-single/{id?}', [VisitorController::class, 'blogViewSingle'])->name('visitor.blogViewSingle');
+// BLOG END
 Route::get('doctorDetails/{slug?}', [VisitorController::class, 'doctorDetails'])->name('visitor.doctorDetails');
 Route::get('makeAnApoinment', [VisitorController::class, 'makeAnApoinment'])->name('visitor.makeAnApoinment');
 Route::post('/fetchCity', [VisitorController::class, 'fetchCity'])->name('fetchCity');
@@ -208,6 +215,16 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
 
+    Route::controller(AdminTestimonialController::class)->group(function () {
+        Route::get('admin/testimonial-index', 'testimonialIndex')->name('admin.testimonial.index');
+        Route::get('admin/testimonial-create', 'testimonialCreate')->name('admin.testimonial.create');
+        Route::post('admin/testimonial-store', 'testimonialStore')->name('admin.testimonial.store');
+        Route::get('admin/testimonial-edit/{id?}', 'testimonialEdit')->name('admin.testimonial.edit');
+        Route::post('admin/testimonial-update', 'testimonialUpdate')->name('admin.testimonial.update');
+        Route::get('admin/testimonial-delete-{id?}', 'testimonialDelete')->name('admin.testimonial.delete');
+    });
+
+    
 
 
     //-------------------------------------- Hospital Side------------------------------------------
@@ -243,7 +260,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::controller(ScheduleController::class)->group(function () {
 
         Route::get('hospital/schedule-index', 'index')->name('schedule.index');
-        Route::get('hospital/schedule-create', 'create')->name('schedule.create');
+        Route::get('hospital/schedule-create-{id?}', 'create')->name('schedule.create');
         Route::post('schedule-store', 'store')->name('schedule.store');
         Route::get('hospital/schedule.edit-{id?}', 'edit')->name('schedule.edit');
         Route::post('hospital/schedule-update', 'update')->name('schedule.update');
@@ -272,7 +289,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('doctor/blog-update', 'update')->name('blog.update');
         Route::get('doctor/blog-destroy-{id?}', 'destroy')->name('blog.destroy');
     });
-
+ 
     Route::controller(EducationController::class)->group(function () {
         Route::get('doctor/education-index', 'index')->name('education.index');
         Route::get('doctor/education-create', 'create')->name('education.create');

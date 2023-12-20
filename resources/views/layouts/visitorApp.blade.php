@@ -46,6 +46,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{{asset('visitor/assets/css/style.css')}}" rel="stylesheet">
+  <link href="{{asset('visitor/assets/css/forBlog.css')}}" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Medilab
@@ -67,11 +68,12 @@
        
           <i class="bi bi-geo-alt-fill"></i>
           <select class="form-select" name="cityId" id="cityIdData" aria-label="Default select example" style="border:0px;outline:0px;">
-            <option selected>Location</option>
+            <option disabled selected>Location</option>
             @foreach ($city as $city)
-                <option value="{{$city->id}}">{{$city->name}}</option>  
+                <option value="{{$city->id}}" {{session('cityId') == $city->id ? 'selected' : ''}}>{{$city->name}}</option>  
             @endforeach
           </select>
+       
           <button type="submit" class="btn appointment-btn scrollto" style="background-color:#1977CC;">Search</button>
         
       </div>
@@ -82,7 +84,7 @@
        @if (Route::has('login'))
        @auth
        
-       <a href="{{route('visitor.profile')}}//{{Auth::user()->id}}"><i class="fa fa-user"></i>&nbsp;&nbsp;Profile</a>
+       <!-- <a href="{{route('visitor.profile')}}//{{Auth::user()->id}}"><i class="fa fa-user"></i>&nbsp;&nbsp;Profile</a> -->
        <a class="dropdown" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
                                 <i class="fa fa-sign-out"></i>&nbsp;&nbsp;{{ __('Logout') }}
@@ -124,15 +126,17 @@
             <a class="nav-link" href="{{route('visitor.index')}}" <?php if($currentPage =='Home'){echo 'active';}?>>Home</a>
           </li>
           <li>
-            <a class="nav-link" href="{{route('visitor.specialist')}}" <?php if($currentPage =='Specialist'){echo 'active';}?>>Specialist</a>
-          </li>
-          <li>
             <a class="nav-link scrollto " href="{{route('visitor.hospitalList')}}" <?php if($currentPage =='Hospital'){echo 'active';}?>>Hospital</a>
          </li> 
           <li>
+            <a class="nav-link" href="{{route('visitor.specialist')}}" <?php if($currentPage =='Specialist'){echo 'active';}?>>Specialist</a>
+  </li>
+          <li>
             <a class="nav-link scrollto" href="{{route('visitor.contact')}}" <?php if($currentPage =='Contact'){echo 'active';}?>>Contact</a>
           </li>
-          
+          <li>
+            <a class="nav-link scrollto" href="{{route('visitor.blogView')}}" <?php if($currentPage =='Blogs'){echo 'active';}?>>Blogs</a>
+          </li>
           {{-- @if (Route::has('login'))
                 
           @auth

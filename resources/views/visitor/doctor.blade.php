@@ -2,7 +2,9 @@
 @section('content')
 
 {{-- Hospital Sectoion --}}
-
+@php
+    $cityId = session('cityId');
+@endphp
 <main id="main">
 
     <!-- ======= Breadcrumbs Section ======= -->
@@ -24,12 +26,12 @@
             
           </div>
         <div class="section-title">
-          <h2>Doctors</h2>
-            
+          <h2>Doctors</h2>    
         </div>
        
         <div class="d-flex justify-content-start gap-4 ms-lg-3">
                     @foreach ($doctor as $doctor)
+
                         <div class=" mt-5">
                           <a href="{{route('visitor.doctorDetails')}}/{{$doctor->slug}}">
                             <div class="card h-100"  style="width: 18rem;box-shadow: 0 5px 10px rgba(0,0,0,.2);">
@@ -40,6 +42,7 @@
                                         box-shadow: 0 0 10px rgba(0,0,0,.2);">
                               <div class="card-body">
                                 <h5 class="card-title text-center">{{$doctor->doctorName}}</h5>
+
                                 <hr>
                                 
                                 <h4 class="card-text text-center" style="color: #2c4964;">{{$doctor->specialist->specialistName}}</p>

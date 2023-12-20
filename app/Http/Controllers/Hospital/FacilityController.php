@@ -13,7 +13,7 @@ class FacilityController extends Controller
     {
         $user=Auth::user()->id;
         $hospital=Hospital::where('userId','=',$user)->first();
-        $facility = Facility::where('hospitalId','=',$hospital->id)->paginate(10);
+        $facility = Facility::where('hospitalId','=',$hospital->userId)->paginate(10);
         return view('hospital.facility.index', compact('facility'));
     }
 

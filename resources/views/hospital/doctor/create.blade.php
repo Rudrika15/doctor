@@ -8,6 +8,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
         <h2 class="p-3">Doctor Management</h2>
+    
         <div class="pt-2"><a class="btn addbtn" href="{{route('doctor.index')}}"> Back</a></div>
     </div>
     <div class="card-body">
@@ -98,7 +99,7 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong> Experiance</strong>
+                    <strong> Experience</strong>
                     <textarea class="form-control @error('experience')is-invalid @enderror" name="experience" id="experience" rows="3"></textarea>
                     @error('experience')
                     <sapn class="text-danger">{{ $message }}</sapn>

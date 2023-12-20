@@ -50,8 +50,7 @@
                 <td>{{ $appointments->status}}</td>
                 <td>
                     <a class="btn btn-success" href="">Confirm</a>
-                    <a onclick="return confirm('Are you sure want to delete ?')" class="btn btn-danger mt-1" href="">Delete</a>
-                    
+                    <a onclick="return confirm('Are you sure want to delete ?')" class="btn btn-danger mt-1" href="">Delete</a>  
                 </td>
                 
             </tr>

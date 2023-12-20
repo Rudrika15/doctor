@@ -13,6 +13,7 @@
     {{-- For Search List Designing --}}
 
     <link rel="stylesheet" href="/search/style.css">
+    <link rel="stylesheet" href="{{asset('assets/styles/dashboard.css')}}">
 
 
     {{-- ------------------- --}}
@@ -70,14 +71,15 @@
 
     <link rel="icon" href="{{ asset('asset/img/favicon.png') }}">
     {{-- For Icon  --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<style>
-    span.select2.select2-container.select2-container--classic{
-        width: 100% !important;
-        
-    }
-</style>
+    <style>
+        span.select2.select2-container.select2-container--classic {
+            width: 100% !important;
+
+        }
+    </style>
 
 
 </head>
@@ -181,14 +183,46 @@
 
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-  $(document).ready(function() {
-    $('.search-dropdown').select2({
-      theme: "classic"
-    });
-  });
-</script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.search-dropdown').select2({
+                theme: "classic"
+            });
+        });
+    </script>
+    <!-- for switching tab on refresh tab shouldnt change -->
+    <script>
+        function getActivetab() {
+            return localStorage.getItem('activeTab') || 'doctor';
+        }
+
+        function setActiveTab(tab) {
+            return localStorage.setItem('activeTab', tab)
+        }
+
+        function switchTab(tab) {
+            $('#myTabs a[href="#' + tab + '"]').tab('show');
+
+        }
+    </script>
+
+    <script>
+        jQuery(document).ready(function() {
+            var storedTab = localStorage.getItem('activeTab');
+            if (storedTab) {
+                $('#myTabs a[href="#' + storedTab + '"]').tab('show');
+            }
+            $('#myTabs a').on('shown.bs.tab', function(e) {
+                var newlyActivatedTab = $(e.target).attr('href').substring(1);
+                console.log('Newly Activated Tab:', newlyActivatedTab);
+
+                setActiveTab(newlyActivatedTab);
+                
+            });
+
+        });
+    </script>
     <script src="{{ asset('assets/scripts/modernizr.min.js') }}"></script>
     <script src="{{ asset('assets/plugin/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>

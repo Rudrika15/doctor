@@ -39,3 +39,6 @@
     <li>
         <a class="text-white waves-effect" href="{{route('visitor.viewContact')}}"><i class="text-white menu-icon bi bi-telephone-plus"></i><span>Contact Us</span></a>
     </li>
+    <li>
+        <a class="text-white waves-effect" href="{{route('admin.testimonial.index')}}"><i class="text-white menu-icon bi bi-journal-bookmark-fill"></i><span>Testimonials</span></a>
+    </li>

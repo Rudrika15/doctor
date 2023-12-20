@@ -60,7 +60,7 @@
                     <button class="btn text-white mt-4 mb-5" style="border-radius:25px;background-color:#1977CC;">Read More</button>
               </div>
               <div class="col-lg-6">
-                <img src="{{url('/hospital')}}/{{$hospital->hospitalLogo}}" alt="" class="img-fluid">
+                <img src="{{url('/hospital')}}/{{$hospital->hospitalLogo}}" alt="" height="800px" width="800px" class="img-fluid">
               </div>
 
               <section id="contact" class="contact mt-5">

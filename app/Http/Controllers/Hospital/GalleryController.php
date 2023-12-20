@@ -13,8 +13,7 @@ class GalleryController extends Controller
     {
         $user=Auth::user()->id;
         $hospital=Hospital::where('userId','=',$user)->first();
-
-        $gallery = Gallery::where('hospitalId','=',$hospital->id)->paginate(10);
+         $gallery = Gallery::where('hospitalId','=',$hospital->userId)->paginate(10);
         return view('hospital.gallery.index', compact('gallery'));
     }
 

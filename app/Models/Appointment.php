@@ -21,7 +21,7 @@ class Appointment extends Model
        
    //   }
      function  schedule(){
-        return $this->hasOne(Schedule::class,'id','scheduleId');
+        return $this->hasMany(Schedule::class,'id','scheduleId');
        
      }
      function  category(){

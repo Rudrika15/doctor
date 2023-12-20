@@ -9,8 +9,8 @@
                             <div class="col-8 mt-3">
                                 <h1>Blog</h1>
                             </div>
-                            <div class="col-4 p-3 rounded-circle text-center" style="background-color:#0CA798;">
-                                <h1 class="fw-bold text-white pt-3">{{$blogcount}}</h1>
+                            <div class="col-4 dashboard-icon-rounded text-center">
+                                <h1 class="fw-bold text-white  fs-1">{{$blogcount}}</h1>
                             </div>
                         </div> 
                     </div>
@@ -25,8 +25,8 @@
                         <div class="col-8 mt-3">
                             <h1>Education</h1>
                         </div>
-                        <div class="col-4 p-3 rounded-circle text-center" style="background-color:#0CA798;">
-                            <h1 class="fw-bold text-white pt-3">{{$educationcount}}</h1>
+                        <div class="col-4 dashboard-icon-rounded text-center">
+                            <h1 class="fw-bold text-white  fs-1">{{$educationcount}}</h1>
                         </div>
                     </div> 
                 </div>
