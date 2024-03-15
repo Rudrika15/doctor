@@ -11,18 +11,22 @@
 
             <div class="col-lg-4">
                 <div class="form-group">
-
-                    <input type="text" name="hospitalName" id="hospitalName" class="form-control @error('hospitalName') is-invalid @enderror" placeholder="Enter Hoapital Name">
+                    <select  name="hospitalName" class="search-dropdown form-control @error('hospitalName') is-invalid @enderror" placeholder="Enter Hospital Name">
+                   <option selected disabled>--Select HospitalName--</option>
+                    @foreach ($hospital as $hspitalsearch)
+                        <option class="item text-center p-2 border" style="display: none;">{{$hspitalsearch->hospitalName}}</option>
+                    @endforeach
+                    </select>
                     @error('hospitalName')
                     <sapn class="text-danger">{{ $message }}</sapn>
                     @enderror
                 </div>
-            </div>
-
+            </div> 
+            
             <div class="col-lg-4">
                 <div class="form-group">
 
-                    <select class="form-select form-control-user @error('cityId') is-invalid @enderror" name="cityId" id="cityId" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;" aria-label="Default select example">
+                    <select class="form-select search-dropdown form-control-user @error('cityId') is-invalid @enderror" name="cityId" id="cityId" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;" aria-label="Default select example">
                         <option selected disabled>---Select City---</option>
                         @foreach ($city as $city)
                         <option value={{$city->id}}>{{$city->name}}</option>
@@ -39,7 +43,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
 
-                    <select class="form-select form-control-user @error('hospitalTypeId') is-invalid @enderror" name="hospitalTypeId" id="hospitalTypeId" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;" aria-label="Default select example">
+                    <select class="form-select search-dropdown form-control-user @error('hospitalTypeId') is-invalid @enderror" name="hospitalTypeId" id="hospitalTypeId" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;" aria-label="Default select example">
                         <option selected disabled>---Select Hospital Type---</option>
                         @foreach ($hospitaltype as $hospitaltype)
                         <option value={{$hospitaltype->id}}>{{$hospitaltype->typeName}}</option>
@@ -56,7 +60,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
 
-                    <select class="form-select form-control-user @error('category') is-invalid @enderror" name="category" id="category" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;" aria-label="Default select example">
+                    <select class="form-select search-dropdown form-control-user @error('category') is-invalid @enderror" name="category" id="category" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;" aria-label="Default select example">
                         <option selected disabled>---Select Category---</option>
                         <option value="Alopethi">Alopethi</option>
                         <option value="Homiopethi">Homiopethi</option>
@@ -73,7 +77,7 @@
 
             <div class="col-lg-4">
                 <div class="form-group">
-                    <select class="form-select form-control-user @error('status') is-invalid @enderror" name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;" aria-label="Default select example">
+                    <select class="form-select search-dropdown form-control-user @error('status') is-invalid @enderror" name="status" id="status" style="padding:11px;border:1px solid #D1D3E2;font-size:15px;" aria-label="Default select example">
                         <option selected disabled>---Select Status---</option>
                         <option value="Active">Active</option>
                         <option value="Delete">Delete</option>
@@ -107,6 +111,7 @@
 
 
                     <th>Hospital Name</th>
+                    <th>Slug</th>
                     <th>Address</th>
                     <th>City</th>
                     <th>Contact No</th>
@@ -122,9 +127,10 @@
 
                 </tr>
                 @foreach ($hospital as $hospitals)
-                @if($hospitals)
+                
                 <tr>
                     <td>{{$hospitals->hospitalName}}</td>
+                    <td>{{$hospitals->slug}}</td>
                     <td>{{$hospitals->address}}</td>
 
                     <td>{{$hospitals->city->name}}</td>
@@ -138,7 +144,7 @@
 
 
                     <td>{{$hospitals->siteUrl}}</td>
-                    <td>{{$hospitals->category}}</td>
+                    <td>{{$hospitals->category->categoryName}}</td>
                     <td><img src="{{url('/hospital')}}/{{$hospitals->hospitalLogo}}"></td>
 
 
@@ -154,15 +160,50 @@
                         <a class="btn btn-danger mt-2" onclick="return confirm('Are you sure want to delete?')" href="{{route('hospital.delete')}}{{$hospitals->id}}">Delete</a>
                     </td>
                 </tr>
-                @else
-                no record found
-                @endif
+                
                 @endforeach
+
+                @if ($count==0)
+                 <td colspan="13" class="display-3 text-center text-danger">Record Not Found</td>
+                @endif
+            
             </table>
             {!! $hospital->withQueryString()->links('pagination::bootstrap-5') !!}
         </div>
         {{-- {!! $data->render() !!} --}}
     </div>
 </div>
+<!-- <script>
+    function showItems() {
+       
+      var items = document.getElementsByClassName("item");
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        item.style.display = "";
+        
+      }
+    }
+  
+    function filterList() {
+      var input = document.getElementById("searchInput").value.toLowerCase();
+      var items = document.getElementsByClassName("item");
+      
+      if (input === "") {
+        showItems();
+      } else {
+        for (var i = 0; i < items.length; i++) {
+          var item = items[i];
+          var text = item.textContent.toLowerCase();
+          
+          if (text.indexOf(input) > -1) {
+            item.style.display = "";
+          } else {
+            item.style.display = "none";
+            
+          }
+        }
+      }
+    }
+  </script> -->
 
 @endsection

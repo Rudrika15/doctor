@@ -1,9 +1,5 @@
 @extends('layouts.app')
-
-
 @section('content')
-
-
 
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
@@ -20,22 +16,15 @@
 <div class="table-responsive">
         <table class="table table-bordered">
             <tr>
-                <th>Hospital Name</th>
                 <th>Doctor Name</th>
                 <th>Day</th>
                 <th>Session</th>
                 <th>Time</th>
                 <th>Status</th>
-               
                 <th width="280px">Action</th>
             </tr>
             @foreach ($schedule as $schedules)
             <tr>
-                @foreach ($schedules->hospital as $hospital)
-                    
-                <td>{{ $hospital->hospitalName }}</td>
-                @endforeach
-
                 @foreach ($schedules->doctor as $doctor)
                     
                 <td>{{ $doctor->doctorName }}</td>

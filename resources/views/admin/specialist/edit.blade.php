@@ -16,7 +16,7 @@
 
         <form id="frm" action="{{route('specialist.update')}}" method="POST" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="specialistId" value="{{$specialist->id}}">
+        <input type="hidden" name="slug" value="{{$specialist->slug}}">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Specialist Name:</strong>
@@ -27,7 +27,15 @@
             </div>
         </div>
 
-        
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Details:</strong>
+                <textarea name="details" class="form-control @error('details') is-invalid @enderror">{{$specialist->details}}</textarea>
+                @error('details')
+                <sapn class="text-danger">{{ $message }}</sapn>
+                @enderror
+            </div>
+        </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btnsubmit">Submit</button>
         </div>
@@ -51,12 +59,20 @@
                 minlength:5,
                 maxlength:200
             },
+            details:{
+                required:true,
+                minlength:10,
+            },
             	
         },
         messages:{
             specialistName:{
                 required:"Please Enter Specialist Name",
                 minlength:"Title Minimum of 5 Character Long"
+            },
+            details:{
+                required:"Please Enter Details",
+                minlength:"Details Minimum of 10 Character Long"
             },
         },
         submitHandler:function(form){

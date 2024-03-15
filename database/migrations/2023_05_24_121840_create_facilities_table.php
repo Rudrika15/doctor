@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('facilities', function (Blueprint $table) {
             $table->id();
             $table->integer('hospitalId');
+            $table->string('slug');
             $table->string('title');
             $table->string('photo');
             $table->string('status')->default('Active');

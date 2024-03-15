@@ -26,7 +26,6 @@
                 </tr>
                 @foreach ($facility as $facilitys)
                     <tr>
-                        asdsad
                         <td>{{$facilitys->hospital->hospitalName}}</td>
                         <td>{{$facilitys->title}}</td>
                         <td>

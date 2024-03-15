@@ -6,25 +6,27 @@ use App\Http\Controllers\Controller;
 use App\Models\Gallery;
 use App\Models\Hospital;
 use Illuminate\Http\Request;
-
+use Auth;
 class GalleryController extends Controller
 {
     public function index()
     {
-        $gallery = Gallery::paginate(5);
+        $user=Auth::user()->id;
+        $hospital=Hospital::where('userId','=',$user)->first();
+         $gallery = Gallery::where('hospitalId','=',$hospital->userId)->paginate(10);
         return view('hospital.gallery.index', compact('gallery'));
     }
 
     public function create()
     {
-        $hospital=Hospital::all();
+        $user=Auth::user()->id;
+        $hospital=Hospital::where('userId','=',$user)->first();
         return view('hospital.gallery.create',compact('hospital'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'hospitalId' => 'required',
             'title' => 'required',
             'photo' => 'required'
         ]);
@@ -32,12 +34,14 @@ class GalleryController extends Controller
         $gallery = new Gallery();
         $gallery->hospitalId = $request->hospitalId;
         $gallery->title = $request->title;
+        $gallery->slug = $request->title;
+
         $photo = $request->photo;
         $gallery->photo = time() . '.' . $request->photo->extension();
         $request->photo->move(public_path('gallery'), $gallery->photo);
 
         if ($gallery->save()) {
-            return redirect()->back()->with('success', 'Record Added successfully!');
+            return redirect('hospital/gallery-index')->with('success', 'Record Added successfully!');
         } else {
             return back()->with('error', 'You have no permission for this page!');
         }
@@ -53,16 +57,14 @@ class GalleryController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'hospitalId' => 'required',
             'title' => 'required',
-            'photo' => 'required'
         ]);
 
         $id = $request->Id;
         $gallery = Gallery::find($id);
-        $gallery->hospitalId = $request->hospitalId;
         $gallery->title = $request->title;
-        $gallery->photo = $request->photo;
+        $gallery->slug = $request->title;
+
         if ($request->photo) {
             $photo = $request->photo;
             $gallery->photo = time() . '.' . $request->photo->extension();

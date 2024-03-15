@@ -18,7 +18,7 @@
 
         <form id="frm" action="{{route('city.update')}}" method="POST" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="id" value="{{$city->id}}">
+        <input type="hidden" name="slug" value="{{$city->slug}}">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>
@@ -28,8 +28,26 @@
                 @enderror
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Select State</strong>
+                    <br>
+                    <select class="form-select form-control-user @error('specialistId') is-invalid @enderror"
+                        name="stateId"  id="stateId" value="{{$city->stateId}}" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
+                         aria-label="Default select example">
+                         <option selected disabled>Select Specialist</option>
+                          @foreach ($state as $stateName)
+                                <option value="{{$stateName->id}}" {{$stateName->id == old('stateId',$city->stateId)? 'selected':''}}>{{$stateName->stateName}}</option>
+                             @endforeach
+                    </select>
+                    @error('stateId')
+                        <span class="invalid-feedback" role="alert">
+                        {{$message}}
+                        </span>
+                    @enderror
+            </div>
+        </div>
 
-        
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btnsubmit">Submit</button>
         </div>

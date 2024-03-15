@@ -8,6 +8,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
         <h2 class="p-3">Doctor Management</h2>
+    
         <div class="pt-2"><a class="btn addbtn" href="{{route('doctor.index')}}"> Back</a></div>
     </div>
     <div class="card-body">
@@ -20,20 +21,6 @@
 
         <form id="frm" action="{{route('doctor.store')}}" enctype="multipart/form-data" method="POST" enctype="multipart/form-data">
             @csrf
-          <div class="col-xs-12 col-sm-12 col-md-12">
-              <div class="form-group">
-                      <strong>Hospital Name </strong> 
-                    <select type="text" name="hospitalId" id="hospitalId" class="form-control @error('hospitalId') is-invalid @enderror">
-                    <option selected disabled><strong >Select here...  </strong></option>
-                   @foreach ($hospital as $hospital)
-                <option value="{{$hospital->id}}">{{$hospital->hospitalName}}</option>
-                   @endforeach
-                    </select>
-                    @error('hospitalId')
-                    <sapn class="text-danger">{{ $message }}</sapn>
-                    @enderror
-                </div>
-            </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -45,6 +32,24 @@
                 </div>
             </div>
 
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Email </strong>
+                    <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror">
+                    @error('email')
+                    <sapn class="text-danger">{{ $message }}</sapn>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Password </strong>
+                    <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror">
+                    @error('password')
+                    <sapn class="text-danger">{{ $message }}</sapn>
+                    @enderror
+                </div>
+            </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Contact No.  </strong>
@@ -94,7 +99,7 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong> Experiance</strong>
+                    <strong> Experience</strong>
                     <textarea class="form-control @error('experience')is-invalid @enderror" name="experience" id="experience" rows="3"></textarea>
                     @error('experience')
                     <sapn class="text-danger">{{ $message }}</sapn>
@@ -104,7 +109,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Register No.  </strong>
-                    <input type="number" name="registerNumber" id="registerNumber" class="form-control @error('registerNumber') is-invalid @enderror">
+                    <input type="text" name="registerNumber" id="registerNumber" class="form-control @error('registerNumber') is-invalid @enderror">
                     @error('registerNumber')
                     <sapn class="text-danger">{{ $message }}</sapn>
                     @enderror
@@ -126,8 +131,15 @@
         hospitalId:"required",
         doctorName:{
         required:true,
-        maxlength:15
+        minlength:5
     },
+    email:{
+        required:true,
+    }, 
+    password:{
+        required:true,
+        minlength:6,
+    }, 
         contactNo:{
             required:true,
             minlength:10,
@@ -138,10 +150,13 @@
         photo:"required",
         experience:{
                 required:true,
-                maxlength:25,
+               
 
         },
-        registerNumber:"required",
+        registerNumber:{
+            required:true,
+            minlength:12,
+        },
           
            
        },messages:{
@@ -149,6 +164,14 @@
         doctorName:{
         required:"Please Enter Doctor Name",
     },
+        email:{
+            required:"Please Enter Email",
+        },
+        password:{
+            required:"Please Enter Password",
+            minlength:"Please Enter Minimum of 6 Charatcres"
+
+        },
         contactNo:{
             required:"Please Enter Contact Number",
            
@@ -158,7 +181,10 @@
           experience:{
             required:"Please Enter Your Experiance",
           },
-          registerNumber:"Please Enter Register Number",
+          registerNumber:{
+            required:"Please Enter Register Number",
+            minlength:"Please Enter Minimum of 12 Digit Or Charatcres"
+          }
            
        },
        submitHandler:function(form){

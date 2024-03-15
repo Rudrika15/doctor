@@ -17,4 +17,6 @@ class Schedule extends Model
        
 
      }
+     protected $fillable = ['beforeLunchInTime']; // Make sure 'beforeLunchInTime' is included in fillable
+
 }

@@ -16,6 +16,7 @@
 
         <form id="frm" action="{{route('hospital.update')}}" method="POST" enctype="multipart/form-data">
         @csrf
+
         <input type="hidden" name="hospitalId" value="{{$hospital->id}}">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -84,9 +85,8 @@
                     @enderror
             </div>
         </div>
-{{-- Auth User --}}
-<input type="hidden" name="userId" value="{{Auth::User()->id}}">
-{{--  --}}  
+        {{-- Auth User --}}
+        {{--  --}}  
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Site Url</strong>
@@ -101,16 +101,14 @@
             <div class="form-group">
                 <strong>Select Category</strong>
                     <br>
-                    <select class="form-select form-control-user @error('category') is-invalid @enderror"
-                        name="category" id="category" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
+                    <select class="form-select form-control-user @error('categoryId') is-invalid @enderror"
+                        name="categoryId" id="categoryId" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
-                             <option value="{{$hospital->category}}">{{$hospital->category}}</option>
-                             <option value="Alopethi">Alopethi</option>
-                             <option value="Homiopethi">Homiopethi</option>
-                             <option value="Aayurvedi">Aayurvedi</option>
-                             
+                             @foreach ($category as $categoryData)
+                                <option value="{{$categoryData->id}}" {{$categoryData->id == old('categoryId',$hospital->categoryId) ? 'selected':''}}>{{$categoryData->categoryName}}</option>
+                             @endforeach
                     </select>
-                    @error('category')
+                    @error('categoryId')
                         <span class="invalid-feedback" role="alert">
                         {{$message}}
                         </span>

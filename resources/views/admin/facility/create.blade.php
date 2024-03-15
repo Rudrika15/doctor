@@ -82,8 +82,7 @@
         rules:{
             title:{
                 required:true,
-                minlength:5,
-                maxlength:200
+                
             },
             photo:{
                 required:true,
@@ -93,7 +92,6 @@
         messages:{
             title:{
                 required:"Please Enter Title",
-                minlength:"Title Minimum of 5 Character Long"
             },
             photo:{
                 required:"Please Select Photo"

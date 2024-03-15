@@ -7,7 +7,7 @@
 
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
-        <h2 class="p-3">Schedule</h2>
+        <h2 class="p-3">Appointment</h2>
         <div class="pt-2"><a class="btn addbtn" href="{{route('appointment.index')}}"> Back</a></div>
     </div>
     <div class="card-body">
@@ -20,51 +20,39 @@
 
         <table class="table table-bordered">
             <tr>
-                <th>Hospital Name</th>
-                <th>Doctor Name</th>
-                <th>Patient Name</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact No</th>
+                <th>Message</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Hospital</th>
+                <th>Doctor</th>
                 <th>Schedule</th>
-               
+                <th>Category</th>
                 <th>Status</th>
+                <th>Action</th>
                
                 {{-- <th width="280px">Action</th> --}}
             </tr>
             @foreach ($appointment as $appointments)
             <tr>
-                {{-- @foreach ($schedules->hospital as $hospital)
-                    
-                <td>{{ $hospital->hospitalName }}</td>
-                @endforeach
-
-                @foreach ($schedules->doctor as $doctor)
-                    
-                <td>{{ $doctor->doctorName }}</td>
-                @endforeach --}}
-
+                <td>{{$appointments->name}}</td>
+                <td>{{$appointments->email}}</td>
+                <td>{{$appointments->contactNo}}</td>
+                <td>{{$appointments->message}}</td>
+                <td>{{$appointments->state->stateName}}</td>
+                <td>{{$appointments->city->name}}</td>
                 <td>{{ $appointments->hospital->hospitalName }}</td>
                 <td>{{ $appointments->doctor->doctorName }}</td>
-                <td>{{ $appointments->patient}}</td>
-                <td>{{ $appointments->schedule}}</td>
+                <td>{{ $appointments->schedule->day}}</td>
+                <td>{{ $appointments->category->categoryName}}</td>
                 <td>{{ $appointments->status}}</td>
+                <td>
+                    <a class="btn btn-success" href="">Confirm</a>
+                    <a onclick="return confirm('Are you sure want to delete ?')" class="btn btn-danger mt-1" href="">Delete</a>  
+                </td>
                 
-                {{-- <td>
-                    @if(!empty($user->getRoleNames()))
-                    @foreach($user->getRoleNames() as $v)
-                    <label class="badge badge-success">{{ $v }}</label>
-                    @endforeach
-                    @endif
-                </td> --}}
-                {{-- <td> --}}
-                    {{-- <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a> --}}
-                    {{-- <a class="btn btn-success" href="{{route('schedule.edit')}}{{$schedules->id}}">Edit</a>  --}}
-
-
-                    {{-- <a onclick="return confirm('Are you sure want to delete  ?')" class="btn btn-danger" href="{{route('schedule.destroy')}}{{$schedules->id}}">Delete</a> --}}
-
-                    {{-- {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                    {!! Form::close() !!} --}}
-                {{-- </td> --}}
             </tr>
             @endforeach
         </table>

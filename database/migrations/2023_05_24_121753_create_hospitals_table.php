@@ -14,16 +14,17 @@ return new class extends Migration
         Schema::create('hospitals', function (Blueprint $table) {
             $table->id();
             $table->string('hospitalName');
+            $table->string('slug');
             $table->longText('address');
             $table->integer('cityId');
             $table->string('contactNo');
             $table->integer('hospitalTypeId');
             $table->integer('userId');
             $table->string('siteUrl');
-            $table->string('category');
+            $table->integer('categoryId');
             $table->string('hospitalLogo');
-            $table->string('time');
-            $table->string('service');
+            $table->string('hospitalTime');
+            $table->string('services');
             $table->string('status')->default('Active');
             $table->timestamps();
         });

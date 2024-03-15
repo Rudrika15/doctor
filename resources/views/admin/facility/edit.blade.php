@@ -29,8 +29,6 @@
             </div>
         </div>
        
-       
-        
         <div class="col-xs-12 col-sm-12 col-md-12">
             <strong>Select Image </strong>
             <div class="row">
@@ -82,15 +80,13 @@
         rules:{
             title:{
                 required:true,
-                minlength:5,
-                maxlength:200
+                
             },
             	
         },
         messages:{
             title:{
                 required:"Please Enter Title",
-                minlength:"Title Minimum of 5 Character Long"
             },
             
         },

@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
             $table->integer('hospitalId');
-            $table->string('doctorName');
-            $table->string('contactNo');
-            $table->integer('specialistId');
+            $table->string('slug');
+            $table->string('doctorName')->nullable();
+            $table->string('contactNo')->nullable();
+            $table->integer('specialistId')->nullable();
             $table->integer('userId');
-            $table->string('photo');
-            $table->string('experience');
-            $table->string('registerNumber');
+            $table->string('photo')->nullable();
+            $table->string('experience')->nullable();
+            $table->string('registerNumber')->nullable();
             $table->string('status')->default('Active');
             $table->timestamps();
         });

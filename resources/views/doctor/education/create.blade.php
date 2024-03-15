@@ -1,10 +1,5 @@
 @extends('layouts.app')
-
-
 @section('content')
-
-
-
 <div class="card">
     <div class="card-header d-flex justify-content-between ">
         <h2 class="p-3">Education</h2>

@@ -27,10 +27,28 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
+                <strong>Email </strong>
+                <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror">
+                @error('email')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Password </strong>
+                <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror">
+                @error('password')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
                 <strong>Address:</strong>
                 <textarea name="address" id="address" class="form-control @error('address') is-invalid @enderror" cols="10" rows="5"></textarea>
                 @error('address')
-                <sapn class="text-danger">{{ $message }}</sapn>
+                <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
         </div>
@@ -43,7 +61,7 @@
                          aria-label="Default select example">
                              <option selected disabled>Select City</option>
                              @foreach ($city as $city)
-                                <option value={{$city->id}}>{{$city->name}}</option> 
+                                <option value="{{$city->id}}">{{$city->name}}</option> 
                              @endforeach
                     </select>
                     @error('cityId')
@@ -59,7 +77,7 @@
                 <strong>Contact No</strong>
                 <input type="text" name="contactNo" id="contactNo" class="form-control @error('contactNo') is-invalid @enderror">
                 @error('contactNo')
-                    <sapn class="text-danger">{{ $message }}</sapn>
+                    <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
         </div>
@@ -73,7 +91,7 @@
                          aria-label="Default select example">
                              <option selected disabled>Select Hospital Type</option>
                              @foreach ($hospitaltype as $hospitaltype)
-                                <option value={{$hospitaltype->id}}>{{$hospitaltype->typeName}}</option>
+                                <option value="{{$hospitaltype->id}}">{{$hospitaltype->typeName}}</option>
                              @endforeach
                     </select>
                     @error('hospitalTypeId')
@@ -84,7 +102,7 @@
             </div>
         </div>
         {{-- Auth User --}}
-        <input type="hidden" name="userId" value="{{Auth::User()->id}}">
+        
         {{--  --}}
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -100,16 +118,15 @@
             <div class="form-group">
                 <strong>Select Category</strong>
                     <br>
-                    <select class="form-select form-control-user @error('category') is-invalid @enderror"
-                        name="category" id="category" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
+                    <select class="form-select form-control-user @error('categoryId') is-invalid @enderror"
+                        name="categoryId" id="categoryId" style="padding:15px;border:1px solid #D1D3E2;font-size:15px;"
                          aria-label="Default select example">
-                             <option selected disabled>Select Category</option>
-                             <option value="Alopethi">Alopethi</option>
-                             <option value="Homiopethi">Homiopethi</option>
-                             <option value="Aayurvedi">Aayurvedi</option>
-                             
+                            <option selected disabled>Select Category</option> 
+                            @foreach ($category as $category)
+                                <option value="{{$category->id}}">{{$category->categoryName}}</option>
+                            @endforeach
                     </select>
-                    @error('category')
+                    @error('categoryId')
                         <span class="invalid-feedback" role="alert">
                         {{$message}}
                         </span>
@@ -123,7 +140,7 @@
                 <div class="col-md-4">
                     <input type="file" accept='image/*' onchange="readURL(this,'#img1')" class="form-control @error('hospitalLogo') is-invalid @enderror" id="hospitalLogo" name="hospitalLogo">
                     @error('hospitalLogo')
-                    <sapn class="text-danger">{{ $message }}</sapn>
+                        <span class="text-danger">{{ $message }}</sapn>
                     @enderror
                 </div>
 
@@ -140,7 +157,7 @@
                 <strong>Hospital Time:</strong>
                 <input type="text" name="hospitalTime" id="hospitalTime" class="form-control @error('hospitalTime') is-invalid @enderror">
                 @error('hospitalTime')
-                    <sapn class="text-danger">{{ $message }}</sapn>
+                        <span class="text-danger">{{ $message }}</sapn>
                 @enderror
             </div>
         </div>
@@ -150,7 +167,7 @@
                 <strong>Services:</strong>
                 <input type="text" name="services" id="services" class="form-control @error('services') is-invalid @enderror">
                 @error('services')
-                    <sapn class="text-danger">{{ $message }}</sapn>
+                    <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
         </div>
@@ -188,6 +205,13 @@
                 minlength:5,
                 maxlength:200
             },
+            email:{
+                required:true,
+            },
+            password:{
+                required:true,
+                minlength:6,
+            },
             address:{
                 required:true,
                 minlength:10,
@@ -224,6 +248,13 @@
             hospitalName:{
                 required:"Please Enter Hospital Name",
                 minlength:"Enter Title Minimum of 5 Characters"
+            },
+            email:{
+                required:"Please Enter Email",
+            },
+            password:{
+                required:"Please Enter password",
+                minlength:"Enter Title Minimum of 6 Characters"
             },
             address:{
                 required:"Please Enter Address",
